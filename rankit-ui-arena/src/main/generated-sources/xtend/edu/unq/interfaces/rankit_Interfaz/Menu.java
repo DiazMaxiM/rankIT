@@ -1,8 +1,6 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_Interfaz.AdmUsuarioWindow;
 import edu.unq.interfaces.rankit_dominio.RankIT;
-import edu.unq.interfaces.rankit_dominio.Usuario;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -11,7 +9,6 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
-import org.uqbar.lacar.ui.model.Action;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 
 @SuppressWarnings("all")
@@ -70,49 +67,8 @@ public class Menu extends MainWindow<RankIT> {
   }
   
   private Button contenedorBotonera(final Panel mainPanel) {
-    Button _xblockexpression = null;
-    {
-      final Panel botoneraPanel = new Panel(mainPanel);
-      ColumnLayout _columnLayout = new ColumnLayout(4);
-      botoneraPanel.setLayout(_columnLayout);
-      Button _button = new Button(botoneraPanel);
-      final Procedure1<Button> _function = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Adm. Usuarios");
-          final Action _function = new Action() {
-            public void execute() {
-              Usuario _usuario = new Usuario();
-              AdmUsuarioWindow _admUsuarioWindow = new AdmUsuarioWindow(Menu.this, _usuario);
-              _admUsuarioWindow.open();
-            }
-          };
-          it.onClick(_function);
-        }
-      };
-      ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-      Button _button_1 = new Button(botoneraPanel);
-      final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Adm. Calificaciones");
-        }
-      };
-      ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
-      Button _button_2 = new Button(botoneraPanel);
-      final Procedure1<Button> _function_2 = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Adm. Servicios");
-        }
-      };
-      ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_2);
-      Button _button_3 = new Button(botoneraPanel);
-      final Procedure1<Button> _function_3 = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Adm. Lugares");
-        }
-      };
-      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_3, _function_3);
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nLugar cannot be resolved.");
   }
   
   private Label contenedorMensaje(final Panel mainPanel) {

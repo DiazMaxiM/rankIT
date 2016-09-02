@@ -1,6 +1,7 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
 import edu.unq.interfaces.rankit_dominio.Lugar;
+import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -14,10 +15,27 @@ public class AdmLugarWindow extends SimpleWindow<Lugar> {
   }
   
   protected void createFormPanel(final Panel panelPrincipal) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method primerLayout(Panel) is undefined for the type AdmLugarWindow"
-      + "\nThe method segundoLayout(Panel) is undefined for the type AdmLugarWindow"
-      + "\nThe method tercerLayout(Panel) is undefined for the type AdmLugarWindow");
+    this.primerLayout(panelPrincipal);
+    this.segundoLayout(panelPrincipal);
+    this.tercerLayout(panelPrincipal);
+  }
+  
+  public Panel primerLayout(final Panel panel) {
+    Panel _xblockexpression = null;
+    {
+      final Panel panelDeEdicion = new Panel(panel);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      _xblockexpression = panelDeEdicion.setLayout(_horizontalLayout);
+    }
+    return _xblockexpression;
+  }
+  
+  public Object segundoLayout(final Panel panel) {
+    return null;
+  }
+  
+  public Object tercerLayout(final Panel panel) {
+    return null;
   }
   
   protected void addActions(final Panel arg0) {
