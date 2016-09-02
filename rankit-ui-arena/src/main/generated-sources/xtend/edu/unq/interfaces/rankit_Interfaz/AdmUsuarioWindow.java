@@ -7,18 +7,13 @@ import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.windows.Dialog;
+import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
 @SuppressWarnings("all")
-public class NuevaAdmUsuarioWindow extends Dialog<Usuario> {
-  public NuevaAdmUsuarioWindow(final WindowOwner owner, final Usuario model) {
-    super(owner, model);
-  }
-  
-  protected void createFormPanel(final Panel mainPanel) {
-    this.setTitle("Rank-IT --> Adm Usuarios");
-    this.contenedorSituacion(mainPanel);
+public class AdmUsuarioWindow extends SimpleWindow<Usuario> {
+  public AdmUsuarioWindow(final WindowOwner parent, final Usuario model) {
+    super(parent, new Usuario());
   }
   
   public Label contenedorSituacion(final Panel mainPanel) {
@@ -59,5 +54,13 @@ public class NuevaAdmUsuarioWindow extends Dialog<Usuario> {
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_3, _function_3);
     }
     return _xblockexpression;
+  }
+  
+  protected void addActions(final Panel actionsPanel) {
+  }
+  
+  protected void createFormPanel(final Panel mainPanel) {
+    this.setTitle("Rank-IT --> Adm Usuarios");
+    this.contenedorSituacion(mainPanel);
   }
 }

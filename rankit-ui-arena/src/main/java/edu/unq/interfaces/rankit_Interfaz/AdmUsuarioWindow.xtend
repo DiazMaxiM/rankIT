@@ -7,20 +7,15 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.windows.SimpleWindow
+import org.uqbar.arena.windows.MainWindow
 
-class NuevaAdmUsuarioWindow extends Dialog<Usuario> {
+class AdmUsuarioWindow extends SimpleWindow<Usuario> {
 	
-	new(WindowOwner owner, Usuario model) {
-		super(owner, model)
-	}
 	
-	override protected createFormPanel(Panel mainPanel) {
-		this.title="Rank-IT --> Adm Usuarios"
-		contenedorSituacion (mainPanel)
-		//contenedorBusqueda (mainPanel)
-		//contenedorTabla (mainPanel)
-		//contenedorOpciones (mainPanel)
-		
+	
+	new(WindowOwner parent, Usuario model) {
+		super(parent, new Usuario())
 	}
 	
 	def contenedorSituacion(Panel mainPanel) {
@@ -47,5 +42,19 @@ class NuevaAdmUsuarioWindow extends Dialog<Usuario> {
 		]	
 		
 	}
+	
+	override protected addActions(Panel actionsPanel) {
+		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override protected createFormPanel(Panel mainPanel) {
+	this.title="Rank-IT --> Adm Usuarios"
+		contenedorSituacion (mainPanel)
+		//contenedorBusqueda (mainPanel)
+		//contenedorTabla (mainPanel)
+		//contenedorOpciones (mainPanel)
+	}
+	
+	
 	
 }

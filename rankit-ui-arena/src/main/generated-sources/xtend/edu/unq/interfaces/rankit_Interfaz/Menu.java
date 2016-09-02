@@ -1,6 +1,6 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_Interfaz.NuevaAdmUsuarioWindow;
+import edu.unq.interfaces.rankit_Interfaz.AdmUsuarioWindow;
 import edu.unq.interfaces.rankit_dominio.RankIT;
 import edu.unq.interfaces.rankit_dominio.Usuario;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -82,8 +82,8 @@ public class Menu extends MainWindow<RankIT> {
           final Action _function = new Action() {
             public void execute() {
               Usuario _usuario = new Usuario();
-              NuevaAdmUsuarioWindow _nuevaAdmUsuarioWindow = new NuevaAdmUsuarioWindow(Menu.this, _usuario);
-              _nuevaAdmUsuarioWindow.open();
+              AdmUsuarioWindow _admUsuarioWindow = new AdmUsuarioWindow(Menu.this, _usuario);
+              _admUsuarioWindow.open();
             }
           };
           it.onClick(_function);
@@ -94,12 +94,6 @@ public class Menu extends MainWindow<RankIT> {
       final Procedure1<Button> _function_1 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Adm. Calificaciones");
-          final Action _function = new Action() {
-            public void execute() {
-              Menu.this.close();
-            }
-          };
-          it.onClick(_function);
         }
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
@@ -107,12 +101,6 @@ public class Menu extends MainWindow<RankIT> {
       final Procedure1<Button> _function_2 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Adm. Servicios");
-          final Action _function = new Action() {
-            public void execute() {
-              Menu.this.close();
-            }
-          };
-          it.onClick(_function);
         }
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_2);
@@ -120,12 +108,6 @@ public class Menu extends MainWindow<RankIT> {
       final Procedure1<Button> _function_3 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Adm. Lugares");
-          final Action _function = new Action() {
-            public void execute() {
-              Menu.this.close();
-            }
-          };
-          it.onClick(_function);
         }
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_3, _function_3);

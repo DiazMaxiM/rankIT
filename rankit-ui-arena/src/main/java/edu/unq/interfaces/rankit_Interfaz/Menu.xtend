@@ -52,19 +52,19 @@ class Menu extends MainWindow<RankIT> {
 		
 		new Button(botoneraPanel) => [
 				caption = "Adm. Usuarios"
-				onClick [ | new NuevaAdmUsuarioWindow(this,new Usuario()).open ]
+				onClick [ | new AdmUsuarioWindow(this,new Usuario()).open ]
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
-				onClick [|this.close]
+				//onClick [|new AdmCalificaionWindow(this,new Usuario()).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"
-				onClick [|this.close]
+				//onClick [|new AdmLugarWindow(this,new Usuario()).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Lugares"
-				onClick [|this.close]
+				//onClick [|new AdmLugarWindow(this,new Usuario()).open ]
 			]
 	}
 	
