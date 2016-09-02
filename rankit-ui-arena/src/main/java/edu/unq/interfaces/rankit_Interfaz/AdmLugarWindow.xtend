@@ -6,6 +6,7 @@ import edu.unq.interfaces.rankit_dominio.Lugar
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
+import java.awt.Label
 
 class AdmLugarWindow extends SimpleWindow<Lugar>{
 	
@@ -17,23 +18,23 @@ class AdmLugarWindow extends SimpleWindow<Lugar>{
 	}
 	
 	override protected createFormPanel(Panel panelPrincipal) {
-	   	this.primerLayout(panelPrincipal)
-	   	this.segundoLayout(panelPrincipal)
-	    this.tercerLayout(panelPrincipal)
+	   	this.resumenDeSituacion(panelPrincipal)
+	   	this.busqueda(panelPrincipal)
+	    this.datosYEdicion(panelPrincipal)
 
 	}
 	
-	def primerLayout(Panel panel) {
-		val panelDeEdicion = new Panel(panel)
-		panelDeEdicion.layout=new HorizontalLayout()
-		
+	def resumenDeSituacion(Panel panel) {
+	   val panelEstadisticas = new Panel(panel)  // panel es el panel padre que contiene al nuevo panel
+       panelEstadisticas.layout = new HorizontalLayout
+	   new Label(panelEstadisticas).text = ""
 	}
 	
-	def segundoLayout(Panel panel) {
-		
+	def busqueda(Panel panel) {
+	     	
 	}
 	
-	def tercerLayout(Panel panel) {
+	def datosYEdicion(Panel panel) {
 		
 	}
 	
