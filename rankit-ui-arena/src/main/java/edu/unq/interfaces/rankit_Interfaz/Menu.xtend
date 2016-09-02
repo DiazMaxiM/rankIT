@@ -56,7 +56,7 @@ class Menu extends MainWindow<RankIT> {
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
-				//onClick [|new AdmCalificaionWindow(this,new Usuario()).open ]
+				onClick [|new AdmCalificacionWindow(this,null).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"
@@ -64,7 +64,7 @@ class Menu extends MainWindow<RankIT> {
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Lugares"
-				//onClick [|new AdmLugarWindow(this,new Usuario()).open ]
+				onClick [|new AdmLugarWindow(this,new Lugar()).open ]
 			]
 	}
 	

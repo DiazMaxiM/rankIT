@@ -10,13 +10,15 @@ class Calificacion {
 	private boolean contenidoOfensivo
 	private String detalle
 	private Puntuable evaluado 
+	private Usuario usuario
 	
 	new(Usuario usuario){
 		this.contenidoOfensivo=false
-		this.detalle="prueba"
+		this.detalle=""
 		this.fecha=new DateTime 
 		this.puntos=0
 		this.evaluado=null
+		this.usuario = usuario
 	}
 	def boolean esCalificacionOfensiva() {
 		contenidoOfensivo.equals(true)
