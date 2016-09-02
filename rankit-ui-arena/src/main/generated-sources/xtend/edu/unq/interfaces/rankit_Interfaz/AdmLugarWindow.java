@@ -2,6 +2,7 @@ package edu.unq.interfaces.rankit_Interfaz;
 
 import edu.unq.interfaces.rankit_dominio.Lugar;
 import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -15,26 +16,28 @@ public class AdmLugarWindow extends SimpleWindow<Lugar> {
   }
   
   protected void createFormPanel(final Panel panelPrincipal) {
-    this.primerLayout(panelPrincipal);
-    this.segundoLayout(panelPrincipal);
-    this.tercerLayout(panelPrincipal);
+    this.resumenDeSituacion(panelPrincipal);
+    this.busqueda(panelPrincipal);
+    this.datosYEdicion(panelPrincipal);
   }
   
-  public Panel primerLayout(final Panel panel) {
-    Panel _xblockexpression = null;
+  public Label resumenDeSituacion(final Panel panel) {
+    Label _xblockexpression = null;
     {
-      final Panel panelDeEdicion = new Panel(panel);
+      final Panel panelEstadisticas = new Panel(panel);
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      _xblockexpression = panelDeEdicion.setLayout(_horizontalLayout);
+      panelEstadisticas.setLayout(_horizontalLayout);
+      Label _label = new Label(panelEstadisticas);
+      _xblockexpression = _label.setText("");
     }
     return _xblockexpression;
   }
   
-  public Object segundoLayout(final Panel panel) {
+  public Object busqueda(final Panel panel) {
     return null;
   }
   
-  public Object tercerLayout(final Panel panel) {
+  public Object datosYEdicion(final Panel panel) {
     return null;
   }
   

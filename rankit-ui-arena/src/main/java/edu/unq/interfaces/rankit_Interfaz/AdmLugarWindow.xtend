@@ -6,7 +6,7 @@ import edu.unq.interfaces.rankit_dominio.Lugar
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.layout.HorizontalLayout
-import java.awt.Label
+import org.uqbar.arena.widgets.Label
 
 class AdmLugarWindow extends SimpleWindow<Lugar>{
 	

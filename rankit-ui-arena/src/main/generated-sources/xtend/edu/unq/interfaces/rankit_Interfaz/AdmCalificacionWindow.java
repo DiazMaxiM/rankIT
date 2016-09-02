@@ -95,6 +95,7 @@ public class AdmCalificacionWindow extends SimpleWindow<Calificacion> {
           public void apply(final Column<ResultadoCalificacion> it) {
             it.setTitle("Lotería");
             it.setFixedSize(150);
+            it.bindContentsToProperty("nombre");
           }
         };
         ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column, _function);
@@ -103,9 +104,37 @@ public class AdmCalificacionWindow extends SimpleWindow<Calificacion> {
           public void apply(final Column<ResultadoCalificacion> it) {
             it.setTitle("Ganador");
             it.setFixedSize(150);
+            it.bindContentsToProperty("puntos");
           }
         };
         ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_1, _function_1);
+        Column<ResultadoCalificacion> _column_2 = new Column<ResultadoCalificacion>(it);
+        final Procedure1<Column<ResultadoCalificacion>> _function_2 = new Procedure1<Column<ResultadoCalificacion>>() {
+          public void apply(final Column<ResultadoCalificacion> it) {
+            it.setTitle("Lotería");
+            it.setFixedSize(150);
+            it.bindContentsToProperty("fecha");
+          }
+        };
+        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_2, _function_2);
+        Column<ResultadoCalificacion> _column_3 = new Column<ResultadoCalificacion>(it);
+        final Procedure1<Column<ResultadoCalificacion>> _function_3 = new Procedure1<Column<ResultadoCalificacion>>() {
+          public void apply(final Column<ResultadoCalificacion> it) {
+            it.setTitle("Ganador");
+            it.setFixedSize(150);
+            it.bindContentsToProperty("user");
+          }
+        };
+        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_3, _function_3);
+        Column<ResultadoCalificacion> _column_4 = new Column<ResultadoCalificacion>(it);
+        final Procedure1<Column<ResultadoCalificacion>> _function_4 = new Procedure1<Column<ResultadoCalificacion>>() {
+          public void apply(final Column<ResultadoCalificacion> it) {
+            it.setTitle("Ganador");
+            it.setFixedSize(150);
+            it.bindContentsToProperty("ofensiva");
+          }
+        };
+        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_4, _function_4);
       }
     };
     ObjectExtensions.<Table<ResultadoCalificacion>>operator_doubleArrow(_table, _function);

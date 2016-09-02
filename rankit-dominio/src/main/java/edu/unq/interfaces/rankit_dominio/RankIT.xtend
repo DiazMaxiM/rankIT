@@ -28,10 +28,10 @@ class RankIT {
 	def obtenerUsuario(String nombre){
 		usuarios.findFirst[usuarios | usuarios.isNombre(nombre)]
 	}
-	def String getEstadoUsuario(){
+	def getEstadoUsuario(){
 		cantidadUsuariosActivos().toString + " / " + usuarios.size.toString + "( " + cantidadUsuariosBaneados().toString + " )"
 	}
-	def String getEstadoCalificacion(){
+	def getEstadoCalificacion(){
 		cantidadDeCalificacionesNoOfensivas().toString + " / " + cantidadDeCalificacionesTotales().toString
 	}
 	

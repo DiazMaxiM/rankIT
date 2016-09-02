@@ -100,6 +100,13 @@ class Menu extends MainWindow<RankIT> {
 	}
 	
 	def static main(String[] args) {
-		new Menu().startApplication
+		
+		val prueba = new RankIT()
+		val usuario=new Usuario()
+		usuario.activo=true
+		prueba.usuarios.add(usuario)
+		
+		
+		new Menu(prueba).startApplication
 	}
 }

@@ -81,13 +81,29 @@ class AdmCalificacionWindow extends SimpleWindow<Calificacion>{
 			new Column<ResultadoCalificacion>(it) => [
 				title = "Lotería" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
-				//bindContentsToProperty("nombreLoteria") //la propiedad que mostramos del objeto que está atrás de la fila 
+				bindContentsToProperty("nombre") //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
 			new Column<ResultadoCalificacion>(it) => [
 				title = "Ganador"
 				fixedSize = 150
-				//bindContentsToProperty("numeroGanador")
+				bindContentsToProperty("puntos")
+			]
+			new Column<ResultadoCalificacion>(it) => [
+				title = "Lotería" //el nombre de la columna
+				fixedSize = 150   //el tamaño que va a tener
+				bindContentsToProperty("fecha") //la propiedad que mostramos del objeto que está atrás de la fila 
+			]   
+			//el numero que salió en la loteria 
+			new Column<ResultadoCalificacion>(it) => [
+				title = "Ganador"
+				fixedSize = 150
+				bindContentsToProperty("user")
+			] 
+			new Column<ResultadoCalificacion>(it) => [
+				title = "Ganador"
+				fixedSize = 150
+				bindContentsToProperty("ofensiva")
 			] 
 		]
 	}
