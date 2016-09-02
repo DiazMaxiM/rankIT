@@ -42,7 +42,7 @@ class AdmLugarWindow extends SimpleWindow<Lugar>{
 	
 	
 	override protected addActions(Panel arg0) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	//	throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 }

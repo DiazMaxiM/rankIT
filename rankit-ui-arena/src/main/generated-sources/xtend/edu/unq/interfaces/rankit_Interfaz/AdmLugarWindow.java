@@ -42,6 +42,5 @@ public class AdmLugarWindow extends SimpleWindow<Lugar> {
   }
   
   protected void addActions(final Panel arg0) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
 }
