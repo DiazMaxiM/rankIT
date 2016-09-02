@@ -8,6 +8,7 @@ import org.uqbar.arena.windows.MainWindow
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Button
 import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.Lugar
 
 class Menu extends MainWindow<RankIT> {
 	
