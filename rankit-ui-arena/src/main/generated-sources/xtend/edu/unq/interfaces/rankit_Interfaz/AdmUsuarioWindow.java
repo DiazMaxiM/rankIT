@@ -48,10 +48,42 @@ public class AdmUsuarioWindow extends SimpleWindow<Usuario> {
       Label _label_3 = new Label(SituacionEstadoSituacionPanel);
       final Procedure1<Label> _function_3 = new Procedure1<Label>() {
         public void apply(final Label it) {
-          it.setText("Resumen de situación:");
+          it.setText("Activos:");
         }
       };
-      _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_3, _function_3);
+      ObjectExtensions.<Label>operator_doubleArrow(_label_3, _function_3);
+      Label _label_4 = new Label(SituacionEstadoSituacionPanel);
+      final Procedure1<Label> _function_4 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_4, _function_4);
+      Label _label_5 = new Label(SituacionEstadoSituacionPanel);
+      final Procedure1<Label> _function_5 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("Inactivos:");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_5, _function_5);
+      Label _label_6 = new Label(SituacionEstadoSituacionPanel);
+      final Procedure1<Label> _function_6 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_6, _function_6);
+      Label _label_7 = new Label(SituacionEstadoSituacionPanel);
+      final Procedure1<Label> _function_7 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("Baneados:");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_7, _function_7);
+      Label _label_8 = new Label(SituacionEstadoSituacionPanel);
+      final Procedure1<Label> _function_8 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_8, _function_8);
     }
     return _xblockexpression;
   }
