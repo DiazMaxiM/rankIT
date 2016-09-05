@@ -2,8 +2,10 @@ package edu.unq.interfaces.rankit_dominio
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.DateTime
+import org.uqbar.commons.utils.Observable
 
 @Accessors 
+@Observable
 abstract class Puntuable {
 	 
 	 private var DateTime fechaDeRegistro 

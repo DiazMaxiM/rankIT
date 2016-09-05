@@ -3,7 +3,6 @@ package edu.unq.interfaces.rankit_Interfaz;
 import edu.unq.interfaces.rankit_Interfaz.AdmCalificacionWindow;
 import edu.unq.interfaces.rankit_Interfaz.AdmLugarWindow;
 import edu.unq.interfaces.rankit_Interfaz.AdmUsuarioWindow;
-import edu.unq.interfaces.rankit_dominio.Lugar;
 import edu.unq.interfaces.rankit_dominio.RankIT;
 import edu.unq.interfaces.rankit_dominio.Usuario;
 import java.util.List;
@@ -121,8 +120,8 @@ public class Menu extends MainWindow<RankIT> {
           it.setCaption("Adm. Lugares");
           final Action _function = new Action() {
             public void execute() {
-              Lugar _lugar = new Lugar();
-              AdmLugarWindow _admLugarWindow = new AdmLugarWindow(Menu.this, _lugar);
+              RankIT _rankIT = new RankIT();
+              AdmLugarWindow _admLugarWindow = new AdmLugarWindow(Menu.this, _rankIT);
               _admLugarWindow.open();
             }
           };

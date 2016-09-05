@@ -65,7 +65,7 @@ class Menu extends MainWindow<RankIT> {
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Lugares"
-				onClick [|new AdmLugarWindow(this,new Lugar()).open ]
+				onClick [|new AdmLugarWindow(this,new RankIT()).open ]
 			]
 	}
 	
