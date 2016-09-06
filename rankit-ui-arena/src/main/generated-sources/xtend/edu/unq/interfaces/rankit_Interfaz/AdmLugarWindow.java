@@ -1,22 +1,18 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_dominio.Lugar;
 import edu.unq.interfaces.rankit_dominio.RankIT;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
-import org.uqbar.arena.widgets.tables.Column;
-import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.arena.xtend.ArenaXtendExtensions;
-import org.uqbar.lacar.ui.model.TableBuilder;
-import org.uqbar.lacar.ui.model.bindings.ViewObservable;
 
 @SuppressWarnings("all")
 public class AdmLugarWindow extends SimpleWindow<RankIT> {
@@ -28,8 +24,8 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
   
   protected void createFormPanel(final Panel panelPrincipal) {
     this.resumenDeSituacion(panelPrincipal);
-    this.busqueda(panelPrincipal);
-    this.resultadosYEdicion(panelPrincipal);
+    this.crearListadoDeServicios(panelPrincipal);
+    this.crearEdicionDeServicioSeleccionado(panelPrincipal);
   }
   
   public Label resumenDeSituacion(final Panel panel) {
@@ -48,7 +44,7 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
     return _xblockexpression;
   }
   
-  public Button busqueda(final Panel panel) {
+  public Button crearListadoDeServicios(final Panel panel) {
     Button _xblockexpression = null;
     {
       final Panel panelBusqueda = new Panel(panel);
@@ -76,8 +72,8 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
     return _xblockexpression;
   }
   
-  public Label resultadosYEdicion(final Panel panel) {
-    Label _xblockexpression = null;
+  public Button crearEdicionDeServicioSeleccionado(final Panel panel) {
+    Button _xblockexpression = null;
     {
       final Panel panelDatos = new Panel(panel);
       ColumnLayout _columnLayout = new ColumnLayout(2);
@@ -88,34 +84,72 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
     return _xblockexpression;
   }
   
-  public Label panelDerecho(final Panel panel) {
-    Label _label = new Label(panel);
-    return _label.setText("PanelDerecho");
-  }
-  
-  public Column<Lugar> panelIzquierdo(final Panel panel) {
-    Column<Lugar> _xblockexpression = null;
+  public Button panelDerecho(final Panel panel) {
+    Button _xblockexpression = null;
     {
-      Table<Lugar> _table = new Table<Lugar>(panel, Lugar.class);
-      final Procedure1<Table<Lugar>> _function = new Procedure1<Table<Lugar>>() {
-        public void apply(final Table<Lugar> it) {
-          ViewObservable<Table<Lugar>, TableBuilder<Lugar>> _items = it.items();
-          ArenaXtendExtensions.operator_spaceship(_items, "lugares");
+      final Panel materiaCompletaPanel = new Panel(panel);
+      VerticalLayout _verticalLayout = new VerticalLayout();
+      materiaCompletaPanel.setLayout(_verticalLayout);
+      Label _label = new Label(materiaCompletaPanel);
+      _label.setText("Nombre:");
+      Button _button = new Button(materiaCompletaPanel);
+      final Procedure1<Button> _function = new Procedure1<Button>() {
+        public void apply(final Button it) {
+          it.setCaption("Edita la información");
         }
       };
-      final Table<Lugar> table = ObjectExtensions.<Table<Lugar>>operator_doubleArrow(_table, _function);
-      Column<Lugar> _column = new Column<Lugar>(table);
-      final Procedure1<Column<Lugar>> _function_1 = new Procedure1<Column<Lugar>>() {
-        public void apply(final Column<Lugar> it) {
-          it.setTitle("Nombre");
-          it.setFixedSize(200);
+      ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+      Label _label_1 = new Label(materiaCompletaPanel);
+      _label_1.setText("Nombre:");
+      TextBox _textBox = new TextBox(materiaCompletaPanel);
+      final Procedure1<TextBox> _function_1 = new Procedure1<TextBox>() {
+        public void apply(final TextBox it) {
+          it.setWidth(200);
         }
       };
-      _xblockexpression = ObjectExtensions.<Column<Lugar>>operator_doubleArrow(_column, _function_1);
+      ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function_1);
+      Label _label_2 = new Label(materiaCompletaPanel);
+      _label_2.setText("Habilitado");
+      new CheckBox(materiaCompletaPanel);
+      Label _label_3 = new Label(materiaCompletaPanel);
+      _label_3.setText("Rankin promedio");
+      Label _label_4 = new Label(materiaCompletaPanel);
+      _label_4.setText("Calificaciones");
+      Button _button_1 = new Button(materiaCompletaPanel);
+      final Procedure1<Button> _function_2 = new Procedure1<Button>() {
+        public void apply(final Button it) {
+          it.setCaption("Revisar Publicaciones");
+        }
+      };
+      ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_2);
+      Button _button_2 = new Button(materiaCompletaPanel);
+      final Procedure1<Button> _function_3 = new Procedure1<Button>() {
+        public void apply(final Button it) {
+          it.setCaption("Eliminar");
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_3);
     }
     return _xblockexpression;
   }
   
-  protected void addActions(final Panel arg0) {
+  public Button panelIzquierdo(final Panel panel) {
+    Button _xblockexpression = null;
+    {
+      final Panel panelDeListadoDeServicios = new Panel(panel);
+      Label _label = new Label(panelDeListadoDeServicios);
+      _label.setText("Nombre:");
+      Button _button = new Button(panelDeListadoDeServicios);
+      final Procedure1<Button> _function = new Procedure1<Button>() {
+        public void apply(final Button it) {
+          it.setCaption("Nuevo");
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  protected void addActions(final Panel panel) {
   }
 }

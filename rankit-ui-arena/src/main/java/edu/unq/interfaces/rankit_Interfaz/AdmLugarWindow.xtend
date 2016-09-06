@@ -13,6 +13,8 @@ import edu.unq.interfaces.rankit_dominio.RankIT
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.widgets.CheckBox
+import org.uqbar.arena.layout.VerticalLayout
 
 class AdmLugarWindow extends SimpleWindow<RankIT>{
 	
@@ -25,8 +27,8 @@ class AdmLugarWindow extends SimpleWindow<RankIT>{
 	
 	override protected createFormPanel(Panel panelPrincipal) {
 	   	this.resumenDeSituacion(panelPrincipal)
-	   	this.busqueda(panelPrincipal)
-	    this.resultadosYEdicion(panelPrincipal)
+	   	this.crearListadoDeServicios(panelPrincipal)
+	    this.crearEdicionDeServicioSeleccionado(panelPrincipal)
 
 	}
 	
@@ -37,7 +39,7 @@ class AdmLugarWindow extends SimpleWindow<RankIT>{
        new Label(panelEstadisticas).text = "Habilitados:"
 	   new Label(panelEstadisticas).text = "Deshabilitados:"
 	}
-	def busqueda(Panel panel){
+	def crearListadoDeServicios(Panel panel){
 	    val panelBusqueda = new Panel(panel)  // panel es el panel padre que contiene al nuevo panel
         panelBusqueda.layout = new HorizontalLayout
 	    new Label(panelBusqueda).text = "Servicios"
@@ -49,21 +51,45 @@ class AdmLugarWindow extends SimpleWindow<RankIT>{
 	      caption = "Buscar"
          ]
 	}
-	def resultadosYEdicion(Panel panel) {
+	def crearEdicionDeServicioSeleccionado(Panel panel) {
 		val panelDatos= new Panel(panel)  // panel es el panel padre que contiene al nuevo panel
         panelDatos.layout = new ColumnLayout(2)
+   
         this.panelIzquierdo(panelDatos)
         this.panelDerecho(panelDatos)
 	}
 	
 	def panelDerecho(Panel panel) {
-		new Label(panel).text = "PanelDerecho"
-		
+		val materiaCompletaPanel = new Panel(panel)
+		materiaCompletaPanel.layout = new VerticalLayout
+		new Label(materiaCompletaPanel).text = "Nombre:"
+		new Button(materiaCompletaPanel) => [
+	      caption = "Edita la información"
+	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
+         ]
+		 new Label(materiaCompletaPanel).text = "Nombre:"
+		 new TextBox(materiaCompletaPanel) => [
+           width = 200 
+         ]  
+	     new Label(materiaCompletaPanel).text = "Habilitado"
+	     new CheckBox(materiaCompletaPanel)
+	     new Label(materiaCompletaPanel).text = "Rankin promedio"
+	     new Label(materiaCompletaPanel).text = "Calificaciones"
+	     new Button(materiaCompletaPanel) => [
+	      caption = "Revisar Publicaciones"
+	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
+         ]
+         new Button(materiaCompletaPanel) => [
+	      caption = "Eliminar"
+	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
+         ]
 	}
 	
 	
 	def panelIzquierdo(Panel panel) {
-		val table = new Table<Lugar>(panel, typeof(Lugar)) => [
+	  val  panelDeListadoDeServicios = new Panel(panel)
+	  /**
+	   * val table = new Table<Lugar>(panel, typeof(Lugar)) => [
         items <=> "lugares"
        ]
        new Column<Lugar>(table) => [
@@ -71,14 +97,21 @@ class AdmLugarWindow extends SimpleWindow<RankIT>{
        fixedSize = 200
     ]
 		
+	   * 
+	   * 
+	   */
+	   new Label(panelDeListadoDeServicios).text = "Nombre:"
+	   new Button(panelDeListadoDeServicios) =>[
+			caption = "Nuevo"
+			//onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
+		] 
 	}
 	
 	
 	
 	
 	
-	override protected addActions(Panel arg0) {
-	//	throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override protected addActions(Panel panel) {
 	}
 	
 }
