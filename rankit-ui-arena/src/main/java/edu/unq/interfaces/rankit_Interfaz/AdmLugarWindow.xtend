@@ -60,30 +60,37 @@ class AdmLugarWindow extends SimpleWindow<RankIT>{
 	}
 	
 	def panelDerecho(Panel panel) {
-		val materiaCompletaPanel = new Panel(panel)
-		materiaCompletaPanel.layout = new VerticalLayout
-		new Label(materiaCompletaPanel).text = "Nombre:"
-		new Button(materiaCompletaPanel) => [
+		val servicioCompletaPanel = new Panel(panel)
+		servicioCompletaPanel.layout = new VerticalLayout
+		new Label(servicioCompletaPanel).text = "Nombre:"
+		new Button(servicioCompletaPanel) => [
 	      caption = "Edita la información"
 	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
          ]
-		 new Label(materiaCompletaPanel).text = "Nombre:"
-		 new TextBox(materiaCompletaPanel) => [
+		 new Label(servicioCompletaPanel).text = "Nombre:"
+		 new TextBox(servicioCompletaPanel) => [
            width = 200 
          ]  
-	     new Label(materiaCompletaPanel).text = "Habilitado"
-	     new CheckBox(materiaCompletaPanel)
-	     new Label(materiaCompletaPanel).text = "Rankin promedio"
-	     new Label(materiaCompletaPanel).text = "Calificaciones"
-	     new Button(materiaCompletaPanel) => [
+         this.datosEnFormaHorizontal(servicioCompletaPanel)
+          new Label(servicioCompletaPanel).text = "Rankin promedio"
+	     new Label(servicioCompletaPanel).text = "Calificaciones"
+	     new Button(servicioCompletaPanel) => [
 	      caption = "Revisar Publicaciones"
 	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
          ]
-         new Button(materiaCompletaPanel) => [
+         new Button(servicioCompletaPanel) => [
 	      caption = "Eliminar"
 	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
          ]
 	}
+	
+	def datosEnFormaHorizontal(Panel panel) {
+		val panelDatos=new Panel(panel)
+		panelDatos.layout=new HorizontalLayout
+	     new CheckBox(panelDatos)
+	     new Label(panelDatos).text = "Habilitado"
+	}
+	
 	
 	
 	def panelIzquierdo(Panel panel) {
@@ -100,7 +107,7 @@ class AdmLugarWindow extends SimpleWindow<RankIT>{
 	   * 
 	   * 
 	   */
-	   new Label(panelDeListadoDeServicios).text = "Nombre:"
+
 	   new Button(panelDeListadoDeServicios) =>[
 			caption = "Nuevo"
 			//onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]

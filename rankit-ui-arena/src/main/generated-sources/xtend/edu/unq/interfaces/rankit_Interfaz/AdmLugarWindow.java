@@ -87,42 +87,40 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
   public Button panelDerecho(final Panel panel) {
     Button _xblockexpression = null;
     {
-      final Panel materiaCompletaPanel = new Panel(panel);
+      final Panel servicioCompletaPanel = new Panel(panel);
       VerticalLayout _verticalLayout = new VerticalLayout();
-      materiaCompletaPanel.setLayout(_verticalLayout);
-      Label _label = new Label(materiaCompletaPanel);
+      servicioCompletaPanel.setLayout(_verticalLayout);
+      Label _label = new Label(servicioCompletaPanel);
       _label.setText("Nombre:");
-      Button _button = new Button(materiaCompletaPanel);
+      Button _button = new Button(servicioCompletaPanel);
       final Procedure1<Button> _function = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Edita la información");
         }
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-      Label _label_1 = new Label(materiaCompletaPanel);
+      Label _label_1 = new Label(servicioCompletaPanel);
       _label_1.setText("Nombre:");
-      TextBox _textBox = new TextBox(materiaCompletaPanel);
+      TextBox _textBox = new TextBox(servicioCompletaPanel);
       final Procedure1<TextBox> _function_1 = new Procedure1<TextBox>() {
         public void apply(final TextBox it) {
           it.setWidth(200);
         }
       };
       ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function_1);
-      Label _label_2 = new Label(materiaCompletaPanel);
-      _label_2.setText("Habilitado");
-      new CheckBox(materiaCompletaPanel);
-      Label _label_3 = new Label(materiaCompletaPanel);
-      _label_3.setText("Rankin promedio");
-      Label _label_4 = new Label(materiaCompletaPanel);
-      _label_4.setText("Calificaciones");
-      Button _button_1 = new Button(materiaCompletaPanel);
+      this.datosEnFormaHorizontal(servicioCompletaPanel);
+      Label _label_2 = new Label(servicioCompletaPanel);
+      _label_2.setText("Rankin promedio");
+      Label _label_3 = new Label(servicioCompletaPanel);
+      _label_3.setText("Calificaciones");
+      Button _button_1 = new Button(servicioCompletaPanel);
       final Procedure1<Button> _function_2 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Revisar Publicaciones");
         }
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_2);
-      Button _button_2 = new Button(materiaCompletaPanel);
+      Button _button_2 = new Button(servicioCompletaPanel);
       final Procedure1<Button> _function_3 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Eliminar");
@@ -133,12 +131,23 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
     return _xblockexpression;
   }
   
+  public Label datosEnFormaHorizontal(final Panel panel) {
+    Label _xblockexpression = null;
+    {
+      final Panel panelDatos = new Panel(panel);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      panelDatos.setLayout(_horizontalLayout);
+      new CheckBox(panelDatos);
+      Label _label = new Label(panelDatos);
+      _xblockexpression = _label.setText("Habilitado");
+    }
+    return _xblockexpression;
+  }
+  
   public Button panelIzquierdo(final Panel panel) {
     Button _xblockexpression = null;
     {
       final Panel panelDeListadoDeServicios = new Panel(panel);
-      Label _label = new Label(panelDeListadoDeServicios);
-      _label.setText("Nombre:");
       Button _button = new Button(panelDeListadoDeServicios);
       final Procedure1<Button> _function = new Procedure1<Button>() {
         public void apply(final Button it) {
