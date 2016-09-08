@@ -15,6 +15,8 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import edu.unq.interfaces.rankit_dominio.Puntuable
+import edu.unq.interfaces.rankit_dominio.Usuario
 
 class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
@@ -44,21 +46,19 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		val SituacionEstadoSituacionPanel = new Panel(mainPanel)
 		SituacionEstadoSituacionPanel.layout = new ColumnLayout(4)
 		
-		
-		
 		new Label(SituacionEstadoSituacionPanel)=> [
 			text = "Calificaciones Registradas:" 
 		]	
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
-			//bindValueToProperty("")
+			bindValueToProperty("administradorCalificacion.calificacionesRegistradas")
 		]	
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
 			text = "Ofensivas:" 
 		]	
 		new Label(SituacionEstadoSituacionPanel)=> [
-			//bindValueToProperty("")
+			bindValueToProperty("administradorCalificacion.calificacionesOfensivas")
 		]	
 		
 	}
@@ -72,15 +72,16 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
 		contenedorTabla (contenedorTablaYOpcionesPanel)
 		contenedorOpciones (contenedorTablaYOpcionesPanel)
+		new Label(contenedorTablaYOpcionesPanel)
 	}
 	
 	def void contenedorTabla(Panel mainPanel) {
 		val contenedorTabla = new Panel(mainPanel)
-		contenedorTabla.layout = new HorizontalLayout
+		//contenedorTabla.layout = new Ver
 		
 		new Table<Calificacion>(contenedorTabla, typeof(Calificacion)) => [
 			//bindeamos el contenido de la tabla
-			items <=> "administradorCalificacion.listaCalificaciones"
+			(items <=> "administradorCalificacion.listaCalificaciones")
 			value <=> "calificacionSeleccionada"
 			//le definimos el alto y ancho, esto es opcional
 			width=200
@@ -92,7 +93,8 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			new Column<Calificacion>(it) => [
 				title = "Evaluado" //el nombre de la columna
 				//fixedSize = 150   //el tamaño que va a tener
-				bindContentsToProperty("evaluado") //la propiedad que mostramos del objeto que está atrás de la fila 
+				bindContentsToProperty("evaluado").transformer = [ Puntuable puntuable | puntuable.nombre]
+		 //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
@@ -109,7 +111,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			new Column<Calificacion>(it) => [
 				title = "User"
 //				fixedSize = 150
-				bindContentsToProperty("usuario")
+				bindContentsToProperty("usuario").transformer = [ Usuario usuario | usuario.nombre]
 			] 
 			new Column<Calificacion>(it) => [
 				title = "Es Ofensiva"
@@ -121,7 +123,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
 	def contenedorOpciones(Panel panel) {
 		val contenedorOpciones = new Panel(panel)
-		contenedorOpciones.layout = new HorizontalLayout
+		//contenedorOpciones.layout = new HorizontalLayout
 		new Label(contenedorOpciones)=> [
 			text = "jajajajajjajajaj:" 
 		]	

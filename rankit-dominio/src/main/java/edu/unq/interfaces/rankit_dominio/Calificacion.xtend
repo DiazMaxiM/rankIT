@@ -23,7 +23,12 @@ class Calificacion {
 		this.usuario = usuario
 	}
 	
-	new() {  
+	new() {
+		this.contenidoOfensivo=false
+		this.detalle=""
+		this.fecha=new DateTime 
+		this.puntos=0
+		this.evaluado=null  
 		  }
 	
 	def boolean esCalificacionOfensiva() {

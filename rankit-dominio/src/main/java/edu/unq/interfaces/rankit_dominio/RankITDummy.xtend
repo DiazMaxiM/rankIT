@@ -9,7 +9,7 @@ class RankITDummy {
 	
 	RankIT rankit
 	
-	def RankITDummy(){
+	new (){
 		val calificacion1 = new Calificacion()
 		
 		
