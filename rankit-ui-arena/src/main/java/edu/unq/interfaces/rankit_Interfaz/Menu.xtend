@@ -1,6 +1,6 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.Lugar
+import edu.unq.interfaces.rankit_dominio.RankIT
 import edu.unq.interfaces.rankit_dominio.RankITAppModel
 import edu.unq.interfaces.rankit_dominio.Usuario
 import org.uqbar.arena.layout.ColumnLayout
@@ -9,6 +9,8 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
 
 class Menu extends SimpleWindow<RankITAppModel> {
 	
@@ -55,7 +57,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
-		//		onClick [|new AdmCalificacionWindow(this,this.modelObject.).open ]
+				onClick [|new AdmCalificacionWindow(this,new CalificacionAppModel(new AdmCalificaciones())).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"

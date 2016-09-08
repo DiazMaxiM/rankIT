@@ -18,6 +18,8 @@
   <semanticResources>src/main/java/edu/unq/interfaces/rankit_dominio/Servicio.xtend</semanticResources>
   <semanticResources>src/main/java/edu/unq/interfaces/rankit_dominio/Usuario.xtend</semanticResources>
   <semanticResources>src/main/java/edu/unq/interfaces/rankit_dominio/RankITAppModel.xtend</semanticResources>
+  <semanticResources>src/main/java/edu/unq/interfaces/rankit_dominio/CalificacionAppModel.xtend</semanticResources>
+  <semanticResources>src/main/java/edu/unq/interfaces/rankit_dominio/AdmCalificaciones.xtend</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_SrFNcHVhEeaUb_SCYVp8MQ">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Reused']"/>
   </ownedViews>

@@ -1,6 +1,7 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.RankIT
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.RankITAppModel
 import edu.unq.interfaces.rankit_dominio.Usuario
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
@@ -12,13 +13,13 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import edu.unq.interfaces.rankit_dominio.Calificacion
-import edu.unq.interfaces.rankit_dominio.RankITAppModel
 
-class AdmCalificacionWindow extends SimpleWindow<RankITAppModel>{
+class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
-	new(WindowOwner parent, RankITAppModel model) {
+	new(WindowOwner parent, CalificacionAppModel model) {
 		super(parent, model)
 	}
 	
@@ -64,50 +65,51 @@ class AdmCalificacionWindow extends SimpleWindow<RankITAppModel>{
 	
 	def void contenedorTablaYOpciones(Panel mainPanel) {
 		val contenedorTablaYOpcionesPanel = new Panel(mainPanel)
-		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
+		//contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
+		contenedorTablaYOpcionesPanel.layout = new HorizontalLayout
 		contenedorTabla (contenedorTablaYOpcionesPanel)
 		//contenedorOpciones (contenedorTablaYOpcionesPanel)
 	}
 	
 	def void contenedorTabla(Panel mainPanel) {
 		
-		new Table<Usuario>(mainPanel, typeof(Usuario)) => [
+		new Table<Calificacion>(mainPanel, typeof(Calificacion)) => [
 			//bindeamos el contenido de la tabla
-			items <=> "usuarios"
+			items <=> "administradorCalificacion.listaCalificaciones"
+			value <=> "calificacionSeleccionada"
 			//le definimos el alto y ancho, esto es opcional
-			//height = 200
-			
+			width=200
 			// describimos cada fila
 			// para esto definimos las celdas de cada fila
 		
 			// la lotería de la que vamos a hablar
 			// it es la grilla de resultados 
-			new Column<Usuario>(it) => [
+			new Column<Calificacion>(it) => [
 				title = "Evaluado" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
-				//bindContentsToProperty("nombre") //la propiedad que mostramos del objeto que está atrás de la fila 
+				bindContentsToProperty("evaluado") //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
-			new Column<Usuario>(it) => [
+			new Column<Calificacion>(it) => [
 				title = "Ptos"
 				fixedSize = 150
-				//bindContentsToProperty("puntos")
+				bindContentsToProperty("puntos")
 			]
-			new Column<Usuario>(it) => [
+			new Column<Calificacion>(it) => [
 				title = "Fecha" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
-				//bindContentsToProperty("fecha") //la propiedad que mostramos del objeto que está atrás de la fila 
+				bindContentsToProperty("fecha") //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
-			new Column<Usuario>(it) => [
+			new Column<Calificacion>(it) => [
 				title = "User"
 				fixedSize = 150
-				//bindContentsToProperty("user")
+				bindContentsToProperty("usuario")
 			] 
-			new Column<Usuario>(it) => [
+			new Column<Calificacion>(it) => [
 				title = "Es Ofensiva"
 				fixedSize = 150
-				//bindContentsToProperty("ofensiva")
+				bindContentsToProperty("contenidoOfensivo")
 			] 
 		]
 	}
