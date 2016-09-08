@@ -1,13 +1,13 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import org.uqbar.arena.Application
-import edu.unq.interfaces.rankit_dominio.RankIT
 import edu.unq.interfaces.rankit_dominio.RankITAppModel
+import edu.unq.interfaces.rankit_dominio.RankITDummy
+import org.uqbar.arena.Application
 
 class RankITApplication extends  Application{
 	
 	override protected createMainWindow() {
-	val rankit = new RankIT()
+	val rankit = new RankITDummy().getRankit
 	val model = new RankITAppModel(rankit)	
 	
 	

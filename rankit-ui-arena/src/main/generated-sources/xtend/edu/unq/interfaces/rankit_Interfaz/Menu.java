@@ -97,7 +97,9 @@ public class Menu extends SimpleWindow<RankITAppModel> {
           it.setCaption("Adm. Calificaciones");
           final Action _function = new Action() {
             public void execute() {
-              AdmCalificaciones _admCalificaciones = new AdmCalificaciones();
+              RankITAppModel _modelObject = Menu.this.getModelObject();
+              RankIT _rankit = _modelObject.getRankit();
+              AdmCalificaciones _admCalificaciones = _rankit.getAdmCalificaciones();
               CalificacionAppModel _calificacionAppModel = new CalificacionAppModel(_admCalificaciones);
               AdmCalificacionWindow _admCalificacionWindow = new AdmCalificacionWindow(Menu.this, _calificacionAppModel);
               _admCalificacionWindow.open();

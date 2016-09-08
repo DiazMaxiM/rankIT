@@ -18,7 +18,9 @@ def  getCalificacionesRegistradas(){
 def getCalificacionesOfensivas(){
 	listaCalificaciones.filter[calificacion | calificacion.isContenidoOfensivo].toList.size
 }
-
+def agregarCalificacion( Calificacion calificacion){
+	listaCalificaciones.add(calificacion)
+}
 
 
 }

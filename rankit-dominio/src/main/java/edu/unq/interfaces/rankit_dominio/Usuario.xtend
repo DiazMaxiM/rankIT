@@ -11,7 +11,6 @@ class Usuario {
 	private var String password
 	private boolean activo
 	private boolean baneado
-	private List<Calificacion> calificaciones
 	new() {
 		this.fechaDeRegistro= new DateTime
 		this.nombre="NN"
@@ -49,14 +48,5 @@ class Usuario {
 	
 	def boolean isActivo() {
 		activo
-	}
-	
-	def cantidadCalificaciones() {
-		calificaciones.size	
-	}
-	
-	def cantidadCalificacionesNoOfensiva() {
-		calificaciones.filter[calificacion | ! calificacion.esCalificacionOfensiva].size
-	}
-	
+	}	
 }

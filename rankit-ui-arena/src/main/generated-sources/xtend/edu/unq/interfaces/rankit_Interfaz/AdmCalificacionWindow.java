@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.bindings.ObservableValue;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Control;
 import org.uqbar.arena.widgets.Label;
@@ -27,15 +28,22 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
     super(parent, model);
   }
   
+  protected void createFormPanel(final Panel mainPanel) {
+    this.setTitle("Rank-IT --> Adm Usuarios");
+    final Panel panel = new Panel(mainPanel);
+    VerticalLayout _verticalLayout = new VerticalLayout();
+    panel.setLayout(_verticalLayout);
+    this.contenedorSituacion(panel);
+    this.contenedorBusqueda(panel);
+    this.contenedorTablaYOpciones(panel);
+  }
+  
   public Label contenedorSituacion(final Panel mainPanel) {
     Label _xblockexpression = null;
     {
       final Panel SituacionTituloPanel = new Panel(mainPanel);
-      final Panel SituacionEstadoSituacionPanel = new Panel(mainPanel);
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
       SituacionTituloPanel.setLayout(_horizontalLayout);
-      ColumnLayout _columnLayout = new ColumnLayout(8);
-      SituacionEstadoSituacionPanel.setLayout(_columnLayout);
       Label _label = new Label(SituacionTituloPanel);
       final Procedure1<Label> _function = new Procedure1<Label>() {
         public void apply(final Label it) {
@@ -43,6 +51,9 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         }
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+      final Panel SituacionEstadoSituacionPanel = new Panel(mainPanel);
+      ColumnLayout _columnLayout = new ColumnLayout(4);
+      SituacionEstadoSituacionPanel.setLayout(_columnLayout);
       Label _label_1 = new Label(SituacionEstadoSituacionPanel);
       final Procedure1<Label> _function_1 = new Procedure1<Label>() {
         public void apply(final Label it) {
@@ -76,22 +87,19 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
   protected void addActions(final Panel actionsPanel) {
   }
   
-  protected void createFormPanel(final Panel mainPanel) {
-    this.setTitle("Rank-IT --> Adm Usuarios");
-    this.contenedorSituacion(mainPanel);
-    this.contenedorBusqueda(mainPanel);
-    this.contenedorTablaYOpciones(mainPanel);
-  }
-  
   public void contenedorTablaYOpciones(final Panel mainPanel) {
     final Panel contenedorTablaYOpcionesPanel = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout = new HorizontalLayout();
-    contenedorTablaYOpcionesPanel.setLayout(_horizontalLayout);
+    ColumnLayout _columnLayout = new ColumnLayout(2);
+    contenedorTablaYOpcionesPanel.setLayout(_columnLayout);
     this.contenedorTabla(contenedorTablaYOpcionesPanel);
+    this.contenedorOpciones(contenedorTablaYOpcionesPanel);
   }
   
   public void contenedorTabla(final Panel mainPanel) {
-    Table<Calificacion> _table = new Table<Calificacion>(mainPanel, Calificacion.class);
+    final Panel contenedorTabla = new Panel(mainPanel);
+    HorizontalLayout _horizontalLayout = new HorizontalLayout();
+    contenedorTabla.setLayout(_horizontalLayout);
+    Table<Calificacion> _table = new Table<Calificacion>(contenedorTabla, Calificacion.class);
     final Procedure1<Table<Calificacion>> _function = new Procedure1<Table<Calificacion>>() {
       public void apply(final Table<Calificacion> it) {
         ViewObservable<Table<Calificacion>, TableBuilder<Calificacion>> _items = it.items();
@@ -103,7 +111,6 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("Evaluado");
-            it.setFixedSize(150);
             it.bindContentsToProperty("evaluado");
           }
         };
@@ -112,7 +119,6 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function_1 = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("Ptos");
-            it.setFixedSize(150);
             it.bindContentsToProperty("puntos");
           }
         };
@@ -121,7 +127,6 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function_2 = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("Fecha");
-            it.setFixedSize(150);
             it.bindContentsToProperty("fecha");
           }
         };
@@ -130,7 +135,6 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function_3 = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("User");
-            it.setFixedSize(150);
             it.bindContentsToProperty("usuario");
           }
         };
@@ -139,7 +143,6 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function_4 = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("Es Ofensiva");
-            it.setFixedSize(150);
             it.bindContentsToProperty("contenidoOfensivo");
           }
         };
@@ -149,19 +152,29 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
     ObjectExtensions.<Table<Calificacion>>operator_doubleArrow(_table, _function);
   }
   
-  public Object contenedorOpciones(final Panel panel) {
-    return null;
+  public Label contenedorOpciones(final Panel panel) {
+    Label _xblockexpression = null;
+    {
+      final Panel contenedorOpciones = new Panel(panel);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      contenedorOpciones.setLayout(_horizontalLayout);
+      Label _label = new Label(contenedorOpciones);
+      final Procedure1<Label> _function = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("jajajajajjajajaj:");
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+    }
+    return _xblockexpression;
   }
   
   public Button contenedorBusqueda(final Panel mainPanel) {
     Button _xblockexpression = null;
     {
       final Panel contenedorTituloPanel = new Panel(mainPanel);
-      final Panel contenedorParametrosPanel = new Panel(mainPanel);
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
       contenedorTituloPanel.setLayout(_horizontalLayout);
-      ColumnLayout _columnLayout = new ColumnLayout(5);
-      contenedorParametrosPanel.setLayout(_columnLayout);
       Label _label = new Label(contenedorTituloPanel);
       final Procedure1<Label> _function = new Procedure1<Label>() {
         public void apply(final Label it) {
@@ -169,6 +182,9 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         }
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+      final Panel contenedorParametrosPanel = new Panel(mainPanel);
+      ColumnLayout _columnLayout = new ColumnLayout(5);
+      contenedorParametrosPanel.setLayout(_columnLayout);
       Label _label_1 = new Label(contenedorParametrosPanel);
       final Procedure1<Label> _function_1 = new Procedure1<Label>() {
         public void apply(final Label it) {

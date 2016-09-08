@@ -1,10 +1,10 @@
 package edu.unq.interfaces.rankit_Interfaz
 
+import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
-import edu.unq.interfaces.rankit_dominio.RankITAppModel
-import edu.unq.interfaces.rankit_dominio.Usuario
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
+import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
@@ -15,7 +15,6 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import edu.unq.interfaces.rankit_dominio.Calificacion
 
 class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
@@ -23,17 +22,29 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		super(parent, model)
 	}
 	
+	override protected createFormPanel(Panel mainPanel) {
+	this.title="Rank-IT --> Adm Usuarios"
+	val panel = new Panel(mainPanel)
+	panel.layout = new VerticalLayout
+		contenedorSituacion      (panel)
+		contenedorBusqueda       (panel)
+		contenedorTablaYOpciones (panel)
+		}
+	
 	
 	def contenedorSituacion(Panel mainPanel) {
 		val SituacionTituloPanel = new Panel(mainPanel)
-		val SituacionEstadoSituacionPanel = new Panel(mainPanel)
-			
 		SituacionTituloPanel.layout = new HorizontalLayout
-		SituacionEstadoSituacionPanel.layout = new ColumnLayout(8)
+		
+		
 		
 		new Label(SituacionTituloPanel)=> [
 			text = "Resumen de situación:" 
-		]	
+		]		
+		val SituacionEstadoSituacionPanel = new Panel(mainPanel)
+		SituacionEstadoSituacionPanel.layout = new ColumnLayout(4)
+		
+		
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
 			text = "Calificaciones Registradas:" 
@@ -56,24 +67,18 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-	override protected createFormPanel(Panel mainPanel) {
-	this.title="Rank-IT --> Adm Usuarios"
-		contenedorSituacion (mainPanel)
-		contenedorBusqueda (mainPanel)
-		contenedorTablaYOpciones (mainPanel)
-		}
-	
 	def void contenedorTablaYOpciones(Panel mainPanel) {
 		val contenedorTablaYOpcionesPanel = new Panel(mainPanel)
-		//contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
-		contenedorTablaYOpcionesPanel.layout = new HorizontalLayout
+		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
 		contenedorTabla (contenedorTablaYOpcionesPanel)
-		//contenedorOpciones (contenedorTablaYOpcionesPanel)
+		contenedorOpciones (contenedorTablaYOpcionesPanel)
 	}
 	
 	def void contenedorTabla(Panel mainPanel) {
+		val contenedorTabla = new Panel(mainPanel)
+		contenedorTabla.layout = new HorizontalLayout
 		
-		new Table<Calificacion>(mainPanel, typeof(Calificacion)) => [
+		new Table<Calificacion>(contenedorTabla, typeof(Calificacion)) => [
 			//bindeamos el contenido de la tabla
 			items <=> "administradorCalificacion.listaCalificaciones"
 			value <=> "calificacionSeleccionada"
@@ -86,48 +91,54 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			// it es la grilla de resultados 
 			new Column<Calificacion>(it) => [
 				title = "Evaluado" //el nombre de la columna
-				fixedSize = 150   //el tamaño que va a tener
+				//fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("evaluado") //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
 				title = "Ptos"
-				fixedSize = 150
+				//fixedSize = 150
 				bindContentsToProperty("puntos")
 			]
 			new Column<Calificacion>(it) => [
 				title = "Fecha" //el nombre de la columna
-				fixedSize = 150   //el tamaño que va a tener
+//				fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("fecha") //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
 				title = "User"
-				fixedSize = 150
+//				fixedSize = 150
 				bindContentsToProperty("usuario")
 			] 
 			new Column<Calificacion>(it) => [
 				title = "Es Ofensiva"
-				fixedSize = 150
+//				fixedSize = 150
 				bindContentsToProperty("contenidoOfensivo")
 			] 
 		]
 	}
 	
 	def contenedorOpciones(Panel panel) {
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
+		val contenedorOpciones = new Panel(panel)
+		contenedorOpciones.layout = new HorizontalLayout
+		new Label(contenedorOpciones)=> [
+			text = "jajajajajjajajaj:" 
+		]	
+		
+		}
 	
 	def contenedorBusqueda(Panel mainPanel) {
 		val contenedorTituloPanel = new Panel(mainPanel)
-		val contenedorParametrosPanel = new Panel(mainPanel)
-			
 		contenedorTituloPanel.layout = new HorizontalLayout
-		contenedorParametrosPanel.layout = new ColumnLayout(5)
+		
 		
 		new Label(contenedorTituloPanel)=> [
 			text = "Calificaciones:" 
 		]	
+		
+		val contenedorParametrosPanel = new Panel(mainPanel)
+		contenedorParametrosPanel.layout = new ColumnLayout(5)
 		
 		new Label(contenedorParametrosPanel)=> [
 			text = "Usuario:" 

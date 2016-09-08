@@ -22,6 +22,10 @@ class Calificacion {
 		this.evaluado=null
 		this.usuario = usuario
 	}
+	
+	new() {  
+		  }
+	
 	def boolean esCalificacionOfensiva() {
 		contenidoOfensivo.equals(true)
 	}
