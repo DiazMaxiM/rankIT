@@ -1,12 +1,11 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_Interfaz.AdmCalificacionWindow;
 import edu.unq.interfaces.rankit_Interfaz.AdmLugarWindow;
 import edu.unq.interfaces.rankit_Interfaz.AdmUsuarioWindow;
+import edu.unq.interfaces.rankit_Interfaz.RankITApplication;
 import edu.unq.interfaces.rankit_dominio.Lugar;
-import edu.unq.interfaces.rankit_dominio.RankIT;
+import edu.unq.interfaces.rankit_dominio.RankITAppModel;
 import edu.unq.interfaces.rankit_dominio.Usuario;
-import java.util.List;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -14,25 +13,20 @@ import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.lacar.ui.model.Action;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 
 @SuppressWarnings("all")
-public class Menu extends MainWindow<RankIT> {
-  public Menu() {
-    super(new RankIT());
-  }
-  
-  public Menu(final RankIT rankit) {
-    super(rankit);
+public class Menu extends SimpleWindow<RankITAppModel> {
+  public Menu(final RankITApplication application, final RankITAppModel model) {
+    super(application, model);
   }
   
   public void createContents(final Panel mainPanel) {
     this.setTitle("Rank-IT");
     this.contenedorMensaje(mainPanel);
     this.contenedorBotonera(mainPanel);
-    this.contenedorEstado(mainPanel);
   }
   
   public Label contenedorEstado(final Panel mainPanel) {
@@ -98,13 +92,6 @@ public class Menu extends MainWindow<RankIT> {
       final Procedure1<Button> _function_1 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Adm. Calificaciones");
-          final Action _function = new Action() {
-            public void execute() {
-              AdmCalificacionWindow _admCalificacionWindow = new AdmCalificacionWindow(Menu.this, null);
-              _admCalificacionWindow.open();
-            }
-          };
-          it.onClick(_function);
         }
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
@@ -176,13 +163,9 @@ public class Menu extends MainWindow<RankIT> {
     return _xblockexpression;
   }
   
-  public static void main(final String[] args) {
-    final RankIT prueba = new RankIT();
-    final Usuario usuario = new Usuario();
-    usuario.setActivo(true);
-    List<Usuario> _usuarios = prueba.getUsuarios();
-    _usuarios.add(usuario);
-    Menu _menu = new Menu(prueba);
-    _menu.startApplication();
+  protected void addActions(final Panel actionsPanel) {
+  }
+  
+  protected void createFormPanel(final Panel mainPanel) {
   }
 }

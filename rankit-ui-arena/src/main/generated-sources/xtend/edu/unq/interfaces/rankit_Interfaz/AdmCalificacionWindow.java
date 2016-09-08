@@ -1,7 +1,6 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_Interfaz.ResultadoCalificacion;
-import edu.unq.interfaces.rankit_dominio.Calificacion;
+import edu.unq.interfaces.rankit_dominio.RankITAppModel;
 import edu.unq.interfaces.rankit_dominio.Usuario;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -15,11 +14,14 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.arena.xtend.ArenaXtendExtensions;
+import org.uqbar.lacar.ui.model.TableBuilder;
+import org.uqbar.lacar.ui.model.bindings.ViewObservable;
 
 @SuppressWarnings("all")
-public class AdmCalificacionWindow extends SimpleWindow<Calificacion> {
-  public AdmCalificacionWindow(final WindowOwner parent, final Calificacion model) {
-    super(parent, new Calificacion(new Usuario()));
+public class AdmCalificacionWindow extends SimpleWindow<RankITAppModel> {
+  public AdmCalificacionWindow(final WindowOwner parent, final RankITAppModel model) {
+    super(parent, model);
   }
   
   public Label contenedorSituacion(final Panel mainPanel) {
@@ -86,58 +88,54 @@ public class AdmCalificacionWindow extends SimpleWindow<Calificacion> {
   }
   
   public void contenedorTabla(final Panel mainPanel) {
-    Table<ResultadoCalificacion> _table = new Table<ResultadoCalificacion>(mainPanel, ResultadoCalificacion.class);
-    final Procedure1<Table<ResultadoCalificacion>> _function = new Procedure1<Table<ResultadoCalificacion>>() {
-      public void apply(final Table<ResultadoCalificacion> it) {
-        it.setHeight(200);
-        Column<ResultadoCalificacion> _column = new Column<ResultadoCalificacion>(it);
-        final Procedure1<Column<ResultadoCalificacion>> _function = new Procedure1<Column<ResultadoCalificacion>>() {
-          public void apply(final Column<ResultadoCalificacion> it) {
-            it.setTitle("Lotería");
+    Table<Usuario> _table = new Table<Usuario>(mainPanel, Usuario.class);
+    final Procedure1<Table<Usuario>> _function = new Procedure1<Table<Usuario>>() {
+      public void apply(final Table<Usuario> it) {
+        ViewObservable<Table<Usuario>, TableBuilder<Usuario>> _items = it.items();
+        ArenaXtendExtensions.operator_spaceship(_items, "usuarios");
+        Column<Usuario> _column = new Column<Usuario>(it);
+        final Procedure1<Column<Usuario>> _function = new Procedure1<Column<Usuario>>() {
+          public void apply(final Column<Usuario> it) {
+            it.setTitle("Evaluado");
             it.setFixedSize(150);
-            it.bindContentsToProperty("nombre");
           }
         };
-        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column, _function);
-        Column<ResultadoCalificacion> _column_1 = new Column<ResultadoCalificacion>(it);
-        final Procedure1<Column<ResultadoCalificacion>> _function_1 = new Procedure1<Column<ResultadoCalificacion>>() {
-          public void apply(final Column<ResultadoCalificacion> it) {
-            it.setTitle("Ganador");
+        ObjectExtensions.<Column<Usuario>>operator_doubleArrow(_column, _function);
+        Column<Usuario> _column_1 = new Column<Usuario>(it);
+        final Procedure1<Column<Usuario>> _function_1 = new Procedure1<Column<Usuario>>() {
+          public void apply(final Column<Usuario> it) {
+            it.setTitle("Ptos");
             it.setFixedSize(150);
-            it.bindContentsToProperty("puntos");
           }
         };
-        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_1, _function_1);
-        Column<ResultadoCalificacion> _column_2 = new Column<ResultadoCalificacion>(it);
-        final Procedure1<Column<ResultadoCalificacion>> _function_2 = new Procedure1<Column<ResultadoCalificacion>>() {
-          public void apply(final Column<ResultadoCalificacion> it) {
-            it.setTitle("Lotería");
+        ObjectExtensions.<Column<Usuario>>operator_doubleArrow(_column_1, _function_1);
+        Column<Usuario> _column_2 = new Column<Usuario>(it);
+        final Procedure1<Column<Usuario>> _function_2 = new Procedure1<Column<Usuario>>() {
+          public void apply(final Column<Usuario> it) {
+            it.setTitle("Fecha");
             it.setFixedSize(150);
-            it.bindContentsToProperty("fecha");
           }
         };
-        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_2, _function_2);
-        Column<ResultadoCalificacion> _column_3 = new Column<ResultadoCalificacion>(it);
-        final Procedure1<Column<ResultadoCalificacion>> _function_3 = new Procedure1<Column<ResultadoCalificacion>>() {
-          public void apply(final Column<ResultadoCalificacion> it) {
-            it.setTitle("Ganador");
+        ObjectExtensions.<Column<Usuario>>operator_doubleArrow(_column_2, _function_2);
+        Column<Usuario> _column_3 = new Column<Usuario>(it);
+        final Procedure1<Column<Usuario>> _function_3 = new Procedure1<Column<Usuario>>() {
+          public void apply(final Column<Usuario> it) {
+            it.setTitle("User");
             it.setFixedSize(150);
-            it.bindContentsToProperty("user");
           }
         };
-        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_3, _function_3);
-        Column<ResultadoCalificacion> _column_4 = new Column<ResultadoCalificacion>(it);
-        final Procedure1<Column<ResultadoCalificacion>> _function_4 = new Procedure1<Column<ResultadoCalificacion>>() {
-          public void apply(final Column<ResultadoCalificacion> it) {
-            it.setTitle("Ganador");
+        ObjectExtensions.<Column<Usuario>>operator_doubleArrow(_column_3, _function_3);
+        Column<Usuario> _column_4 = new Column<Usuario>(it);
+        final Procedure1<Column<Usuario>> _function_4 = new Procedure1<Column<Usuario>>() {
+          public void apply(final Column<Usuario> it) {
+            it.setTitle("Es Ofensiva");
             it.setFixedSize(150);
-            it.bindContentsToProperty("ofensiva");
           }
         };
-        ObjectExtensions.<Column<ResultadoCalificacion>>operator_doubleArrow(_column_4, _function_4);
+        ObjectExtensions.<Column<Usuario>>operator_doubleArrow(_column_4, _function_4);
       }
     };
-    ObjectExtensions.<Table<ResultadoCalificacion>>operator_doubleArrow(_table, _function);
+    ObjectExtensions.<Table<Usuario>>operator_doubleArrow(_table, _function);
   }
   
   public Object contenedorOpciones(final Panel panel) {

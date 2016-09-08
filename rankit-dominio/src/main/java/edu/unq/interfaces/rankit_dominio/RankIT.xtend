@@ -57,5 +57,11 @@ class RankIT {
 	def int cantidadUsuariosActivos() {
 		usuarios.filter[ usuario | usuario.isActivo ].size	
 	}
+def  getCalificaciones() {
+	val lista = newArrayList
+		usuarios.forEach[ usuario | lista.addAll( usuario.calificaciones) ]
+	return lista
+	}
 
 }
+		

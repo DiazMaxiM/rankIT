@@ -1,29 +1,27 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.RankIT
+import edu.unq.interfaces.rankit_dominio.Lugar
+import edu.unq.interfaces.rankit_dominio.RankITAppModel
+import edu.unq.interfaces.rankit_dominio.Usuario
+import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.VerticalLayout
+import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
-import org.uqbar.arena.windows.MainWindow
-import org.uqbar.arena.layout.ColumnLayout
-import org.uqbar.arena.widgets.Button
-import edu.unq.interfaces.rankit_dominio.Usuario
-import edu.unq.interfaces.rankit_dominio.Lugar
+import org.uqbar.arena.windows.SimpleWindow
 
-class Menu extends MainWindow<RankIT> {
+class Menu extends SimpleWindow<RankITAppModel> {
 	
-	new() {
-		super(new RankIT)
-	}
-	new(RankIT rankit) {
-		super(rankit)
-	}
+	
+	new(RankITApplication application, RankITAppModel model) {
+		super(application,model)
+		}
 	
 	override createContents(Panel mainPanel) {
 		this.title = "Rank-IT"
 		contenedorMensaje  (mainPanel)			
 		contenedorBotonera (mainPanel)			
-		contenedorEstado   (mainPanel)
+		//contenedorEstado   (mainPanel)
 	}
 	
 	def contenedorEstado(Panel mainPanel) {
@@ -57,7 +55,7 @@ class Menu extends MainWindow<RankIT> {
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
-				onClick [|new AdmCalificacionWindow(this,null).open ]
+		//		onClick [|new AdmCalificacionWindow(this,this.modelObject.).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"
@@ -99,14 +97,11 @@ class Menu extends MainWindow<RankIT> {
 			]
 	}
 	
-	def static main(String[] args) {
-		
-		val prueba = new RankIT()
-		val usuario=new Usuario()
-		usuario.activo=true
-		prueba.usuarios.add(usuario)
-		
-		
-		new Menu(prueba).startApplication
+	
+	override protected addActions(Panel actionsPanel) {
 	}
+	
+	override protected createFormPanel(Panel mainPanel) {
+	}
+	
 }
