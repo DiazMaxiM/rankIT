@@ -49,4 +49,9 @@ class Calificacion {
 	def  void indicarEvaluado(Puntuable evaluado){
 		this.evaluado=evaluado 
 	}
+	
+	def isPuntuableBuscado(Puntuable puntuable) {
+	    this.evaluado.nombre.equals(puntuable.nombre)
+	}
+	
 }
