@@ -1,27 +1,29 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.Lugar
-import edu.unq.interfaces.rankit_dominio.RankITAppModel
-import edu.unq.interfaces.rankit_dominio.Usuario
-import org.uqbar.arena.layout.ColumnLayout
+import edu.unq.interfaces.rankit_dominio.RankIT
 import org.uqbar.arena.layout.VerticalLayout
-import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
-import org.uqbar.arena.windows.SimpleWindow
+import org.uqbar.arena.windows.MainWindow
+import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.widgets.Button
+import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.Lugar
 
-class Menu extends SimpleWindow<RankITAppModel> {
+class Menu extends MainWindow<RankIT> {
 	
-	
-	new(RankITApplication application, RankITAppModel model) {
-		super(application,model)
-		}
+	new() {
+		super(new RankIT)
+	}
+	new(RankIT rankit) {
+		super(rankit)
+	}
 	
 	override createContents(Panel mainPanel) {
 		this.title = "Rank-IT"
 		contenedorMensaje  (mainPanel)			
 		contenedorBotonera (mainPanel)			
-		//contenedorEstado   (mainPanel)
+		contenedorEstado   (mainPanel)
 	}
 	
 	def contenedorEstado(Panel mainPanel) {
@@ -55,7 +57,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
-		//		onClick [|new AdmCalificacionWindow(this,this.modelObject.).open ]
+				onClick [|new AdmCalificacionWindow(this,null).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"
@@ -63,7 +65,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Lugares"
-				onClick [|new AdmLugarWindow(this,new RankIT()).open ]
+				onClick [|new AdmLugarWindow(this,new Lugar()).open ]
 			]
 	}
 	
@@ -97,11 +99,14 @@ class Menu extends SimpleWindow<RankITAppModel> {
 			]
 	}
 	
-	
-	override protected addActions(Panel actionsPanel) {
+	def static main(String[] args) {
+		
+		val prueba = new RankIT()
+		val usuario=new Usuario()
+		usuario.activo=true
+		prueba.usuarios.add(usuario)
+		
+		
+		new Menu(prueba).startApplication
 	}
-	
-	override protected createFormPanel(Panel mainPanel) {
-	}
-	
 }

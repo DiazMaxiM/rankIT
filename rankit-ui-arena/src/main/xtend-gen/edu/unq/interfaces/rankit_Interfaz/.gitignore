@@ -6,3 +6,11 @@
 /.Menu.xtendbin
 /.ResultadoCalificacion.java._trace
 /Menu.java
+/.AdmCalificacionWindow.xtendbin
+/.AdmLugarWindow.xtendbin
+/.AdmUsuarioWindow.xtendbin
+/.ResultadoCalificacion.xtendbin
+/AdmCalificacionWindow.java
+/AdmLugarWindow.java
+/AdmUsuarioWindow.java
+/ResultadoCalificacion.java

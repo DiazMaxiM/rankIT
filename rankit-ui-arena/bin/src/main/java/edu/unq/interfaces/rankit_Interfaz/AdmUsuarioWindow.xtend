@@ -25,31 +25,21 @@ class AdmUsuarioWindow extends SimpleWindow<Usuario> {
 		SituacionTituloPanel.layout = new HorizontalLayout
 		SituacionEstadoSituacionPanel.layout = new ColumnLayout(8)
 		
-		new Label(SituacionTituloPanel)=> [text = "Resumen de situación:" ]	
+		new Label(SituacionTituloPanel)=> [
+			text = "Resumen de situación:" 
+		]	
 		
-		new Label(SituacionEstadoSituacionPanel)=> [ text = "Usuarios Registrados:" ]	
+		new Label(SituacionEstadoSituacionPanel)=> [
+			text = "Usuarios Registrados:" 
+		]	
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
 			//bindValueToProperty("")
-		]
-		
-		new Label(SituacionEstadoSituacionPanel)=> [ text = "Activos:" ]
+		]	
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
-			//bindValueToProperty("")
-		]
-		
-		new Label(SituacionEstadoSituacionPanel)=> [ text = "Inactivos:" ]
-		
-		new Label(SituacionEstadoSituacionPanel)=> [
-			//bindValueToProperty("")
-		]
-		
-		new Label(SituacionEstadoSituacionPanel)=> [ text = "Baneados:" ]
-		
-		new Label(SituacionEstadoSituacionPanel)=> [
-			//bindValueToProperty("")
-		]
+			text = "Resumen de situación:" 
+		]	
 		
 	}
 	
