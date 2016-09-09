@@ -29,6 +29,7 @@ class Calificacion {
 		this.fecha=new Date() 
 		this.puntos=0
 		this.evaluado=null  
+		
 		  }
 	
 	def boolean esCalificacionOfensiva() {
