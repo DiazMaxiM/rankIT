@@ -108,7 +108,10 @@ public class Menu extends SimpleWindow<RankITAppModel> {
               RankITAppModel _modelObject_2 = Menu.this.getModelObject();
               RankIT _rankit_2 = _modelObject_2.getRankit();
               List<Puntuable> _servicios = _rankit_2.getServicios();
-              CalificacionAppModel _calificacionAppModel = new CalificacionAppModel(_admCalificaciones, _lugares, _servicios);
+              RankITAppModel _modelObject_3 = Menu.this.getModelObject();
+              RankIT _rankit_3 = _modelObject_3.getRankit();
+              Usuario _usuarioLogeado = _rankit_3.getUsuarioLogeado();
+              CalificacionAppModel _calificacionAppModel = new CalificacionAppModel(_admCalificaciones, _lugares, _servicios, _usuarioLogeado);
               AdmCalificacionWindow _admCalificacionWindow = new AdmCalificacionWindow(Menu.this, _calificacionAppModel);
               _admCalificacionWindow.open();
             }

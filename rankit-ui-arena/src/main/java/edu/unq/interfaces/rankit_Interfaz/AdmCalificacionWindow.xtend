@@ -56,7 +56,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]	
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
-			bindValueToProperty("administradorCalificacion.calificacionesRegistradas")
+			bindValueToProperty("calificacionesRegistradas")
 		]	
 		
 		new Label(SituacionEstadoSituacionPanel)=> [
@@ -89,7 +89,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			(items <=> "administradorCalificacion.listaCalificaciones")
 			value <=> "calificacionSeleccionada"
 			//le definimos el alto y ancho, esto es opcional
-			width=200
+			width=400
 			height=400
 			// describimos cada fila
 			// para esto definimos las celdas de cada fila
@@ -127,7 +127,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]
 		new Button(contenedorTabla)=>[
 			caption = "Nuevo"
-			onClick [ | this.modelObject.administradorCalificacion.agregarCalificacion(new Calificacion(this.modelObject.usuarioLogeado)) ]
+			onClick [ | this.modelObject.administradorCalificacion.agregarCalificacion(new Calificacion(this.modelObject.usuarioLogeado)); ]
 	
 		]
 	}
@@ -201,7 +201,11 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		] 
 		new Button(contenedorOpciones)=> [
 		caption = "Eliminar"
-			onClick [ | this.modelObject.administradorCalificacion.eliminarCalificacion(this.modelObject.calificacionSeleccionada) ]
+		    bindEnabledToProperty("hayCalificacionSeleccionada")
+			onClick [ | this.modelObject.administradorCalificacion.eliminarCalificacion(this.modelObject.calificacionSeleccionada);
+				
+					
+			]
 		]
 		
 		
