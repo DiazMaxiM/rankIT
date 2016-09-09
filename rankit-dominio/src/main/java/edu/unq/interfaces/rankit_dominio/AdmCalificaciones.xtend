@@ -21,6 +21,9 @@ def getCalificacionesOfensivas(){
 def agregarCalificacion( Calificacion calificacion){
 	listaCalificaciones.add(calificacion)
 }
+def eliminarCalificacion( Calificacion calificacion){
+	listaCalificaciones.remove(calificacion)
+}
 
 
 }

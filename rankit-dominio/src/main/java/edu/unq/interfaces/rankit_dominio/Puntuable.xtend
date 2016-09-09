@@ -1,14 +1,14 @@
 package edu.unq.interfaces.rankit_dominio
 
+import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.joda.time.DateTime
 import org.uqbar.commons.utils.Observable
 
 @Accessors 
 @Observable
 abstract class Puntuable {
 	 
-	 private var DateTime fechaDeRegistro 
+	 private var Date fechaDeRegistro 
 	 private var String nombre
 	 private var boolean habilitado 
 
@@ -17,7 +17,7 @@ abstract class Puntuable {
  * y la fecha de registro es la fecha en que se creo 
  */ 
 	 new(){
-	 	this.fechaDeRegistro=new DateTime
+	 	this.fechaDeRegistro=new Date()
 	 	this.nombre=""
 	 	this.habilitado=false
 	 }

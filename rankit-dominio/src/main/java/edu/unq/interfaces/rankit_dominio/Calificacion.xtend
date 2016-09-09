@@ -1,6 +1,6 @@
 package edu.unq.interfaces.rankit_dominio
 
-import org.joda.time.DateTime
+import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 
@@ -8,7 +8,7 @@ import org.uqbar.commons.utils.Observable
 @Accessors
 class Calificacion {
 	private int puntos
-	private DateTime fecha
+	private Date fecha
 	private boolean contenidoOfensivo
 	private String detalle
 	private Puntuable evaluado 
@@ -17,7 +17,7 @@ class Calificacion {
 	new(Usuario usuario){
 		this.contenidoOfensivo=false
 		this.detalle=""
-		this.fecha=new DateTime 
+		this.fecha=new Date() 
 		this.puntos=0
 		this.evaluado=null
 		this.usuario = usuario
@@ -26,7 +26,7 @@ class Calificacion {
 	new() {
 		this.contenidoOfensivo=false
 		this.detalle=""
-		this.fecha=new DateTime 
+		this.fecha=new Date() 
 		this.puntos=0
 		this.evaluado=null  
 		  }

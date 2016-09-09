@@ -5,7 +5,7 @@ import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.Puntuable
 import edu.unq.interfaces.rankit_dominio.Usuario
-import org.uqbar.arena.bindings.PropertyAdapter
+import java.text.SimpleDateFormat
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -15,10 +15,13 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
+import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import java.awt.TextArea
+import org.uqbar.arena.widgets.CheckBox
 
 class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
@@ -27,13 +30,13 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	}
 	
 	override protected createFormPanel(Panel mainPanel) {
-	this.title="Rank-IT --> Adm Usuarios"
-	val panel = new Panel(mainPanel)
-	panel.layout = new VerticalLayout
+		this.title="Rank-IT --> Adm Usuarios"
+		val panel    = new Panel(mainPanel)
+		panel.layout = new VerticalLayout
 		contenedorSituacion      (panel)
 		contenedorBusqueda       (panel)
 		contenedorTablaYOpciones (panel)
-		}
+	}
 	
 	
 	def contenedorSituacion(Panel mainPanel) {
@@ -71,7 +74,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
 	def void contenedorTablaYOpciones(Panel mainPanel) {
 		val contenedorTablaYOpcionesPanel = new Panel(mainPanel)
-		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(3)
+		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
 		contenedorTabla (contenedorTablaYOpcionesPanel)
 		contenedorOpciones (contenedorTablaYOpcionesPanel)
 		new Label(contenedorTablaYOpcionesPanel)
@@ -118,22 +121,83 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			new Column<Calificacion>(it) => [
 				title = "Es Ofensiva"
 //				fixedSize = 150
-				bindContentsToProperty("contenidoOfensivo")
+				bindContentsToProperty("contenidoOfensivo").transformer = [ esOfensivo | if (esOfensivo) "Si" else "No"]
 			] 
 		]
 	}
 	
 	def contenedorOpciones(Panel panel) {
 		val contenedorOpciones = new Panel(panel)
-		contenedorOpciones.layout = new HorizontalLayout
+		contenedorOpciones.layout = new VerticalLayout
+		
+		new ErrorsPanel(contenedorOpciones,"")
+		
 		new Label(contenedorOpciones)=> [
 			text = "Evaluado" 
 		]	
-			new LabeledSelector(contenedorOpciones)=>[
-			text = "calificacionSeleccionada.nombre"
+		new LabeledSelector(contenedorOpciones)=>[
 			bindItemsToProperty("listaPuntuables")
 			bindValueToProperty("calificacionSeleccionada.evaluado")
 		]
+		
+		val contenedorFechaYUsuario = new Panel(contenedorOpciones)
+		contenedorFechaYUsuario.layout = new VerticalLayout
+		
+		val contenedorFecha = new Panel(contenedorFechaYUsuario)
+		contenedorFecha.layout = new HorizontalLayout
+		val contenedorFechaColumna= new Panel(contenedorFecha)
+		contenedorFechaColumna.layout = new ColumnLayout(2)
+		
+		
+		new Label(contenedorFechaColumna)=> [
+			text = "Fecha:" 
+		]
+		new Label(contenedorFechaColumna)=> [
+			bindValueToProperty("calificacionSeleccionada.evaluado.fechaDeRegistro")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+		]
+		
+		val contenedorUsuarioColumna= new Panel(contenedorFecha)
+		contenedorUsuarioColumna.layout = new ColumnLayout(2)
+		
+		new Label(contenedorFechaColumna)=> [
+			text = "Usuario:" 
+		]
+		new Label(contenedorFechaColumna)=> [
+			bindValueToProperty("calificacionSeleccionada.evaluado.nombre")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+		]
+		new Label(contenedorOpciones)=> [
+		text ="Puntaje:"	
+		]
+		new TextBox(contenedorOpciones)=> [
+		bindValueToProperty("calificacionSeleccionada.puntos")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+		]
+		new Label(contenedorOpciones)=> [
+		text ="Detalle:"	
+		]
+		new TextBox(contenedorOpciones)=> [
+		bindValueToProperty("calificacionSeleccionada.detalle")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+		height = 50
+		]
+		
+		val contenedorContOfensivo = new Panel(contenedorOpciones)
+		contenedorContOfensivo.layout = new VerticalLayout
+		
+		val contenedorContOfensivoHorizontal = new Panel(contenedorContOfensivo)
+		contenedorFecha.layout = new HorizontalLayout
+		val contenedorContOfensivoHorizontalColumna= new Panel(contenedorContOfensivoHorizontal)
+		contenedorContOfensivoHorizontalColumna.layout = new ColumnLayout(2)
+		new CheckBox(contenedorContOfensivoHorizontalColumna)=> [
+		bindValueToProperty("calificacionSeleccionada.contenidoOfensivo")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+		
+		]
+		new Label(contenedorContOfensivoHorizontalColumna)=> [
+		text ="Contenido Ofensivo"	
+		]
+		new Button(contenedorOpciones)=> [
+		caption = "Eliminar"
+			onClick [ | this.modelObject.administradorCalificacion.eliminarCalificacion(this.modelObject.calificacionSeleccionada) ]
+		]
+		
 		
 		}
 	

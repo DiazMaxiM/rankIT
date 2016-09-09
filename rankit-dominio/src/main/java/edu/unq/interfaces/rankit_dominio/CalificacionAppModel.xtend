@@ -23,6 +23,7 @@ class CalificacionAppModel {
 	this.lugares=lugares
 	this.servicios=servicios	
 	}
+	
 	def getListaPuntuables(){
 		val nuevaLista= newArrayList
 		nuevaLista.addAll(lugares)
