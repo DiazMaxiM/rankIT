@@ -19,7 +19,7 @@ class Calificacion {
 		this.detalle=""
 		this.fecha=new Date() 
 		this.puntos=0
-		this.evaluado=null
+		this.evaluado= new PuntuableNull()
 		this.usuario = usuario
 	}
 	

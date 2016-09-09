@@ -12,6 +12,7 @@ class RankIT {
 	private var List<Puntuable>servicios
 	private var List<Usuario>usuarios
 	private var AdmCalificaciones admCalificaciones;
+	private var Usuario usuarioLogeado;
  //Constructor
 	 new(){
 		this.lugares = newArrayList

@@ -10,18 +10,16 @@ class CalificacionAppModel {
 	
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
-	
+	Usuario usuarioLogeado
 	List<Puntuable> lugares;
 	List<Puntuable> servicios;
 	
-	new(AdmCalificaciones it) {
-	administradorCalificacion = it
-	}
-	
-	new(AdmCalificaciones calificaciones, List<Puntuable> lugares, List<Puntuable> servicios) {
+		
+	new(AdmCalificaciones calificaciones, List<Puntuable> lugares, List<Puntuable> servicios,Usuario usuario) {
 	administradorCalificacion = calificaciones
 	this.lugares=lugares
-	this.servicios=servicios	
+	this.servicios=servicios
+	usuarioLogeado=	usuario
 	}
 	
 	def getListaPuntuables(){

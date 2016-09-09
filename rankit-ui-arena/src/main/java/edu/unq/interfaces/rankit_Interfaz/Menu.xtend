@@ -60,7 +60,8 @@ class Menu extends SimpleWindow<RankITAppModel> {
 				onClick [|new AdmCalificacionWindow(this,new CalificacionAppModel(
 															this.modelObject.rankit.admCalificaciones,
 															this.modelObject.rankit.lugares,
-															this.modelObject.rankit.servicios
+															this.modelObject.rankit.servicios,
+															this.modelObject.rankit.usuarioLogeado
 																		   		)
 													).open ]
 			]

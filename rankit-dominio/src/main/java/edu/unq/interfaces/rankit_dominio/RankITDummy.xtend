@@ -82,7 +82,7 @@ class RankITDummy {
 		rankit.agregarLugar(lugar2)
 		rankit.agregarServicio(servicioParaCalificacion1)
 		rankit.agregarServicio(servicio2)
-		
+		rankit.usuarioLogeado= usuarioMaxi
 		rankit.agregarUsuario(usuarioMaxi) 
 		rankit.agregarUsuario(usuarioLiza) 
 		rankit.agregarUsuario(usuarioRosali) 

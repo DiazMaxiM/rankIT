@@ -90,6 +90,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			value <=> "calificacionSeleccionada"
 			//le definimos el alto y ancho, esto es opcional
 			width=200
+			height=400
 			// describimos cada fila
 			// para esto definimos las celdas de cada fila
 		
@@ -123,6 +124,11 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 //				fixedSize = 150
 				bindContentsToProperty("contenidoOfensivo").transformer = [ esOfensivo | if (esOfensivo) "Si" else "No"]
 			] 
+		]
+		new Button(contenedorTabla)=>[
+			caption = "Nuevo"
+			onClick [ | this.modelObject.administradorCalificacion.agregarCalificacion(new Calificacion(this.modelObject.usuarioLogeado)) ]
+	
 		]
 	}
 	
