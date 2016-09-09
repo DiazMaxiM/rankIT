@@ -6,9 +6,11 @@ import edu.unq.interfaces.rankit_Interfaz.AdmUsuarioWindow;
 import edu.unq.interfaces.rankit_Interfaz.RankITApplication;
 import edu.unq.interfaces.rankit_dominio.AdmCalificaciones;
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel;
+import edu.unq.interfaces.rankit_dominio.Puntuable;
 import edu.unq.interfaces.rankit_dominio.RankIT;
 import edu.unq.interfaces.rankit_dominio.RankITAppModel;
 import edu.unq.interfaces.rankit_dominio.Usuario;
+import java.util.List;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -100,7 +102,13 @@ public class Menu extends SimpleWindow<RankITAppModel> {
               RankITAppModel _modelObject = Menu.this.getModelObject();
               RankIT _rankit = _modelObject.getRankit();
               AdmCalificaciones _admCalificaciones = _rankit.getAdmCalificaciones();
-              CalificacionAppModel _calificacionAppModel = new CalificacionAppModel(_admCalificaciones);
+              RankITAppModel _modelObject_1 = Menu.this.getModelObject();
+              RankIT _rankit_1 = _modelObject_1.getRankit();
+              List<Puntuable> _lugares = _rankit_1.getLugares();
+              RankITAppModel _modelObject_2 = Menu.this.getModelObject();
+              RankIT _rankit_2 = _modelObject_2.getRankit();
+              List<Puntuable> _servicios = _rankit_2.getServicios();
+              CalificacionAppModel _calificacionAppModel = new CalificacionAppModel(_admCalificaciones, _lugares, _servicios);
               AdmCalificacionWindow _admCalificacionWindow = new AdmCalificacionWindow(Menu.this, _calificacionAppModel);
               _admCalificacionWindow.open();
             }

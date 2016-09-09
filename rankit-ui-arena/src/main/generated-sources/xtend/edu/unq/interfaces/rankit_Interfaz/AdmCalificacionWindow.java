@@ -1,7 +1,11 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
+import edu.unq.interfaces.component.LabeledSelector;
 import edu.unq.interfaces.rankit_dominio.Calificacion;
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel;
+import edu.unq.interfaces.rankit_dominio.Puntuable;
+import edu.unq.interfaces.rankit_dominio.Usuario;
+import org.apache.commons.collections15.Transformer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.bindings.ObservableValue;
@@ -15,6 +19,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.widgets.tables.labelprovider.PropertyLabelProvider;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.xtend.ArenaXtendExtensions;
@@ -64,6 +69,7 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
       Label _label_2 = new Label(SituacionEstadoSituacionPanel);
       final Procedure1<Label> _function_2 = new Procedure1<Label>() {
         public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("administradorCalificacion.calificacionesRegistradas");
         }
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label_2, _function_2);
@@ -77,6 +83,7 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
       Label _label_4 = new Label(SituacionEstadoSituacionPanel);
       final Procedure1<Label> _function_4 = new Procedure1<Label>() {
         public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("administradorCalificacion.calificacionesOfensivas");
         }
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_4, _function_4);
@@ -89,16 +96,15 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
   
   public void contenedorTablaYOpciones(final Panel mainPanel) {
     final Panel contenedorTablaYOpcionesPanel = new Panel(mainPanel);
-    ColumnLayout _columnLayout = new ColumnLayout(2);
+    ColumnLayout _columnLayout = new ColumnLayout(3);
     contenedorTablaYOpcionesPanel.setLayout(_columnLayout);
     this.contenedorTabla(contenedorTablaYOpcionesPanel);
     this.contenedorOpciones(contenedorTablaYOpcionesPanel);
+    new Label(contenedorTablaYOpcionesPanel);
   }
   
   public void contenedorTabla(final Panel mainPanel) {
     final Panel contenedorTabla = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout = new HorizontalLayout();
-    contenedorTabla.setLayout(_horizontalLayout);
     Table<Calificacion> _table = new Table<Calificacion>(contenedorTabla, Calificacion.class);
     final Procedure1<Table<Calificacion>> _function = new Procedure1<Table<Calificacion>>() {
       public void apply(final Table<Calificacion> it) {
@@ -111,7 +117,13 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("Evaluado");
-            it.bindContentsToProperty("evaluado");
+            PropertyLabelProvider<Calificacion> _bindContentsToProperty = it.bindContentsToProperty("evaluado");
+            final Transformer<Puntuable, String> _function = new Transformer<Puntuable, String>() {
+              public String transform(final Puntuable puntuable) {
+                return puntuable.getNombre();
+              }
+            };
+            _bindContentsToProperty.setTransformer(_function);
           }
         };
         ObjectExtensions.<Column<Calificacion>>operator_doubleArrow(_column, _function);
@@ -135,7 +147,13 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
         final Procedure1<Column<Calificacion>> _function_3 = new Procedure1<Column<Calificacion>>() {
           public void apply(final Column<Calificacion> it) {
             it.setTitle("User");
-            it.bindContentsToProperty("usuario");
+            PropertyLabelProvider<Calificacion> _bindContentsToProperty = it.bindContentsToProperty("usuario");
+            final Transformer<Usuario, String> _function = new Transformer<Usuario, String>() {
+              public String transform(final Usuario usuario) {
+                return usuario.getNombre();
+              }
+            };
+            _bindContentsToProperty.setTransformer(_function);
           }
         };
         ObjectExtensions.<Column<Calificacion>>operator_doubleArrow(_column_3, _function_3);
@@ -152,8 +170,8 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
     ObjectExtensions.<Table<Calificacion>>operator_doubleArrow(_table, _function);
   }
   
-  public Label contenedorOpciones(final Panel panel) {
-    Label _xblockexpression = null;
+  public LabeledSelector<Object> contenedorOpciones(final Panel panel) {
+    LabeledSelector<Object> _xblockexpression = null;
     {
       final Panel contenedorOpciones = new Panel(panel);
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
@@ -161,10 +179,19 @@ public class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel> {
       Label _label = new Label(contenedorOpciones);
       final Procedure1<Label> _function = new Procedure1<Label>() {
         public void apply(final Label it) {
-          it.setText("jajajajajjajajaj:");
+          it.setText("Evaluado");
         }
       };
-      _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+      ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+      LabeledSelector<Object> _labeledSelector = new LabeledSelector<Object>(contenedorOpciones);
+      final Procedure1<LabeledSelector<Object>> _function_1 = new Procedure1<LabeledSelector<Object>>() {
+        public void apply(final LabeledSelector<Object> it) {
+          it.setText("calificacionSeleccionada.nombre");
+          it.bindItemsToProperty("listaPuntuables");
+          it.bindValueToProperty("calificacionSeleccionada.evaluado");
+        }
+      };
+      _xblockexpression = ObjectExtensions.<LabeledSelector<Object>>operator_doubleArrow(_labeledSelector, _function_1);
     }
     return _xblockexpression;
   }

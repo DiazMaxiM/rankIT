@@ -21,8 +21,15 @@ class RankIT {
 	}
 
 	
+	
 	def void agregarUsuario(Usuario usuario){
 		usuarios.add(usuario);
+	}
+def void agregarLugar(Lugar lugar){
+		lugares.add(lugar);
+	}
+def void agregarServicio(Servicio servicio){
+		servicios.add(servicio);
 	}
 
 }

@@ -57,7 +57,12 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
-				onClick [|new AdmCalificacionWindow(this,new CalificacionAppModel(this.modelObject.rankit.admCalificaciones)).open ]
+				onClick [|new AdmCalificacionWindow(this,new CalificacionAppModel(
+															this.modelObject.rankit.admCalificaciones,
+															this.modelObject.rankit.lugares,
+															this.modelObject.rankit.servicios
+																		   		)
+													).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"

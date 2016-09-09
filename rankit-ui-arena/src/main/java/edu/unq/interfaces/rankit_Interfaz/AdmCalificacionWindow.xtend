@@ -1,7 +1,11 @@
 package edu.unq.interfaces.rankit_Interfaz
 
+import edu.unq.interfaces.component.LabeledSelector
 import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.Puntuable
+import edu.unq.interfaces.rankit_dominio.Usuario
+import org.uqbar.arena.bindings.PropertyAdapter
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -15,8 +19,6 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import edu.unq.interfaces.rankit_dominio.Puntuable
-import edu.unq.interfaces.rankit_dominio.Usuario
 
 class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
@@ -69,7 +71,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
 	def void contenedorTablaYOpciones(Panel mainPanel) {
 		val contenedorTablaYOpcionesPanel = new Panel(mainPanel)
-		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
+		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(3)
 		contenedorTabla (contenedorTablaYOpcionesPanel)
 		contenedorOpciones (contenedorTablaYOpcionesPanel)
 		new Label(contenedorTablaYOpcionesPanel)
@@ -123,10 +125,15 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
 	def contenedorOpciones(Panel panel) {
 		val contenedorOpciones = new Panel(panel)
-		//contenedorOpciones.layout = new HorizontalLayout
+		contenedorOpciones.layout = new HorizontalLayout
 		new Label(contenedorOpciones)=> [
-			text = "jajajajajjajajaj:" 
+			text = "Evaluado" 
 		]	
+			new LabeledSelector(contenedorOpciones)=>[
+			text = "calificacionSeleccionada.nombre"
+			bindItemsToProperty("listaPuntuables")
+			bindValueToProperty("calificacionSeleccionada.evaluado")
+		]
 		
 		}
 	
