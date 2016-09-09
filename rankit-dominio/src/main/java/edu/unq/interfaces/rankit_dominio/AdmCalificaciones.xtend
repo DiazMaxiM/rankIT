@@ -21,7 +21,7 @@ def getCalificacionesOfensivas(){
 def agregarCalificacion( Calificacion calificacion){
 	listaCalificaciones.add(calificacion)
 }
-<<<<<<< HEAD
+
 def ratingPromedio(Puntuable puntuable){
    
    puntajeDelPuntuable(puntuable)/cantidadDeCalificacionesDelPuntuable(puntuable)
@@ -35,11 +35,10 @@ def cantidadDeCalificacionesDelPuntuable(Puntuable puntuable){
 def puntajeDelPuntuable(Puntuable puntuable){
 	calificacionesDelPutuable(puntuable).fold(0, [ acumulador, calificacion | acumulador + calificacion.puntos])
 }
-=======
+
 def eliminarCalificacion( Calificacion calificacion){
 	listaCalificaciones.remove(calificacion)
 }
 
->>>>>>> 7e1cf24355b7bafc27640e14f741a0a1a745b35c
 
 }

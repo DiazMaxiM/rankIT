@@ -124,11 +124,6 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 				bindContentsToProperty("contenidoOfensivo").transformer = [ esOfensivo | if (esOfensivo) "Si" else "No"]
 			] 
 		]
-		new Button(contenedorTabla)=>[
-			caption = "Nuevo"
-			onClick [ | this.modelObject.administradorCalificacion.agregarCalificacion(new Calificacion()) ]
-		
-		]
 	}
 	
 	def contenedorOpciones(Panel panel) {
