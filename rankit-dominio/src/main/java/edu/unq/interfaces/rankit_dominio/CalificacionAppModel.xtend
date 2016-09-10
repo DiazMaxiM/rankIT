@@ -12,14 +12,12 @@ class CalificacionAppModel {
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
 	Usuario usuarioLogeado
-	List<Puntuable> lugares;
-	List<Puntuable> servicios;
+	AdmPuntuables admPuntuables;
 	
 		
-	new(AdmCalificaciones calificaciones, List<Puntuable> lugares, List<Puntuable> servicios,Usuario usuario) {
+	new(AdmCalificaciones calificaciones, AdmPuntuables puntuables,Usuario usuario) {
 	administradorCalificacion = calificaciones
-	this.lugares=lugares
-	this.servicios=servicios
+	admPuntuables= puntuables
 	usuarioLogeado=	usuario
 	}
 	
@@ -30,15 +28,7 @@ class CalificacionAppModel {
 	@Dependencies("calificacionSeleccionada") 
 	def Boolean isCalificacionSeleccionada(){
 		calificacionSeleccionada != null
-	}
-	
-	
-	def getListaPuntuables(){
-		val nuevaLista= newArrayList
-		nuevaLista.addAll(lugares)
-		nuevaLista.addAll(servicios)
-		nuevaLista
-	}
+	}	
 	
 	def int getCalificacionesRegistradas(){
 		administradorCalificacion.getCalificacionesRegistradas()

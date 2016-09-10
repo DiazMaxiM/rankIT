@@ -22,7 +22,7 @@ abstract class Puntuable {
 	 	this.habilitado=false
 	 }
 	def boolean isHabiltado(){
-		habilitado
+		habilitado.equals(true)
 	}
 	
 	def void habilitarPuntuable(){

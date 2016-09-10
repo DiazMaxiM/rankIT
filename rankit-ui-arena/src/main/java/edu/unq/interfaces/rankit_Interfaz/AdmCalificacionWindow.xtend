@@ -140,7 +140,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			text = "Evaluado" 
 		]	
 		new LabeledSelector(contenedorOpciones)=>[
-			bindItemsToProperty("listaPuntuables")
+			bindItemsToProperty("admPuntuables.todosLosPuntuables")
 			bindValueToProperty("calificacionSeleccionada.evaluado")
 		]
 		
@@ -200,9 +200,8 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		new Button(contenedorOpciones)=> [
 		caption = "Eliminar"
 		    bindEnabledToProperty("calificacionSeleccionada")
-			onClick [ | this.modelObject.eliminarCalificacionSeleccionada();
-				
-				
+			
+			onClick [ | this.modelObject.eliminarCalificacionSeleccionada()		
 					
 			]
 		]

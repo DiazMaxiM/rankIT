@@ -22,18 +22,19 @@ def agregarCalificacion( Calificacion calificacion){
 	listaCalificaciones.add(calificacion)
 }
 
-def ratingPromedio(Puntuable puntuable){
-   
-   puntajeDelPuntuable(puntuable)/cantidadDeCalificacionesDelPuntuable(puntuable)
+
+def getRatingPromedio(Puntuable puntuable){   
+   getPuntajeDelPuntuable(puntuable)/cantidadDeCalificacionesDelPuntuable(puntuable)
+
 }
-def calificacionesDelPutuable(Puntuable puntuable){
+def getCalificacionesDelPutuable(Puntuable puntuable){
 	listaCalificaciones.filter[calificacion | calificacion.isPuntuableBuscado(puntuable)] 
 }
 def cantidadDeCalificacionesDelPuntuable(Puntuable puntuable){
-	calificacionesDelPutuable(puntuable).size
+	getCalificacionesDelPutuable(puntuable).size
 }
-def puntajeDelPuntuable(Puntuable puntuable){
-	calificacionesDelPutuable(puntuable).fold(0, [ acumulador, calificacion | acumulador + calificacion.puntos])
+def getPuntajeDelPuntuable(Puntuable puntuable){
+	getCalificacionesDelPutuable(puntuable).fold(0, [ acumulador, calificacion | acumulador + calificacion.puntos])
 }
 
 def eliminarCalificacion( Calificacion calificacion){
