@@ -5,11 +5,11 @@ import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.Puntuable
 import edu.unq.interfaces.rankit_dominio.Usuario
-import java.text.SimpleDateFormat
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
@@ -20,8 +20,6 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import java.awt.TextArea
-import org.uqbar.arena.widgets.CheckBox
 
 class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
@@ -201,8 +199,9 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		] 
 		new Button(contenedorOpciones)=> [
 		caption = "Eliminar"
-		    bindEnabledToProperty("hayCalificacionSeleccionada")
-			onClick [ | this.modelObject.administradorCalificacion.eliminarCalificacion(this.modelObject.calificacionSeleccionada);
+		    bindEnabledToProperty("calificacionSeleccionada")
+			onClick [ | this.modelObject.eliminarCalificacionSeleccionada();
+				
 				
 					
 			]

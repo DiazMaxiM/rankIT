@@ -14,8 +14,7 @@ class CalificacionAppModel {
 	Usuario usuarioLogeado
 	List<Puntuable> lugares;
 	List<Puntuable> servicios;
-	Boolean hayCalificacionSeleccionada;
-
+	
 		
 	new(AdmCalificaciones calificaciones, List<Puntuable> lugares, List<Puntuable> servicios,Usuario usuario) {
 	administradorCalificacion = calificaciones
@@ -24,14 +23,15 @@ class CalificacionAppModel {
 	usuarioLogeado=	usuario
 	}
 	
-	@Dependencies("hayCalificacionSeleccionada") 
 	def void setCalificacionSeleccionada(Calificacion calificacionSel){
 		calificacionSeleccionada = calificacionSel
-	  
 	}
-	def Boolean isHayCalificacionSeleccionada(){
+	
+	@Dependencies("calificacionSeleccionada") 
+	def Boolean isCalificacionSeleccionada(){
 		calificacionSeleccionada != null
 	}
+	
 	
 	def getListaPuntuables(){
 		val nuevaLista= newArrayList
@@ -44,9 +44,9 @@ class CalificacionAppModel {
 		administradorCalificacion.getCalificacionesRegistradas()
 	}
 	@Dependencies("calificacionesRegistradas") 
-	def eliminarCalificacion(Calificacion ca)
+	def eliminarCalificacionSeleccionada()
 	{
-	administradorCalificacion.eliminarCalificacion(ca)
+	administradorCalificacion.eliminarCalificacion(calificacionSeleccionada)
 	}
 	
 }
