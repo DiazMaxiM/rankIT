@@ -31,4 +31,8 @@ abstract class Puntuable {
 	def boolean isNombre(String nombre)	{
 		this.nombre.equals(nombre)
 	}
+	def Boolean contieneLasLetras(String letras){
+		nombre.contains(letras)
+	}
+	 
 }

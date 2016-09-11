@@ -4,6 +4,8 @@ package edu.unq.interfaces.rankit_dominio
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Dependencies
+import org.uqbar.commons.model.UserException
 
 @Observable
 @Accessors
@@ -11,6 +13,7 @@ class PuntuableAppModel {
 	 AdmPuntuables administradorDePuntuables
 	 AdmCalificaciones administradorCalificacion
 	 Puntuable    puntuableSeleccionado
+	 String  nombreDelPuntuableBuscado=""
 	
 	new(AdmPuntuables adm1, AdmCalificaciones adm2){
 		this.administradorDePuntuables= adm1
@@ -21,7 +24,12 @@ class PuntuableAppModel {
 	def setPuntuableSeleccionado(Puntuable seleccionado){
 		puntuableSeleccionado = seleccionado
 		ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
-		ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
+		ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)	
+	}
+	
+	def setNombreDelPuntuableBuscado(String nombre){
+		 nombreDelPuntuableBuscado=nombre
+		 ObservableUtils.firePropertyChanged(this," buscarPorNombreDeLugar", buscarPorNombreDeLugar)
 	}
 	
 	def nuevoLugar() {
@@ -49,7 +57,28 @@ class PuntuableAppModel {
 	def getCantidadDeCalificacionesDelPuntuable(){
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(puntuableSeleccionado)
 	}
+	@Dependencies("puntuableSeleccionado")
+	def getHayPuntuableSeleccionado(){
+		puntuableSeleccionado!=null
+	}
 	
-
+	@Dependencies("puntuableSeleccionado")
+    def void setHabilitado(Boolean habilitado){
+		puntuableSeleccionado.habilitado = habilitado
+		administradorDePuntuables.avisarCambiosDeLugares()
+		
+	}
+	@Dependencies("puntuableSeleccionado")
+	def setNombrePuntuable(String nombreNuevo){
+		if(administradorDePuntuables.isLugaresDuplicados(nombreNuevo)){
+			throw new UserException("Ya existe otro Lugar con el mismo nombre "+ nombreNuevo)
+		}
+	    this.puntuableSeleccionado.nombre=nombreNuevo
+	}
+	def buscarPorNombreDeLugar(){
+		administradorDePuntuables.buscarLugares(nombreDelPuntuableBuscado)
+		
+		
+	}
 	
 }

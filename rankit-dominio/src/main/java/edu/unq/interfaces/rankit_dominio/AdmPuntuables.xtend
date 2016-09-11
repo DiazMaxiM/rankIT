@@ -12,8 +12,9 @@ import org.uqbar.commons.model.ObservableUtils
 class AdmPuntuables {
 	List<Puntuable> lugares = new ArrayList
 	List<Puntuable> servicios = new ArrayList
+	List<Puntuable> lugaresCopia = lugares
 	
-	def todosLosPuntuables()
+def todosLosPuntuables()
 	{
 		val nuevaLista = newArrayList
 		nuevaLista.addAll(lugares)
@@ -58,5 +59,29 @@ class AdmPuntuables {
 		ObservableUtils.firePropertyChanged(this,"lugaresDeshabilitados",lugaresDeshabilitados)
 		
 	}
-
+	def isLugaresDuplicados(String nombre) {
+       this.lugarConElnombre(nombre)!=null
+    
+}
+	
+	def lugarConElnombre(String nombre) {
+		lugares.findFirst[lugar|lugar.isNombre(nombre)]
+	}
+	
+	def buscarLugares(String letrasDelNombreBuscado) {
+		if(letrasDelNombreBuscado!=""){
+		   var lugaresBuscados=this.lugaresConLasLetras(letrasDelNombreBuscado).toList
+		   
+		   lugares=lugaresBuscados
+		}
+		else{
+			lugares=lugaresCopia
+		}
+		
+	}
+	
+	def lugaresConLasLetras(String letras) {
+		lugares.filter[lugar|lugar.contieneLasLetras(letras)]
+	}
+   
 }

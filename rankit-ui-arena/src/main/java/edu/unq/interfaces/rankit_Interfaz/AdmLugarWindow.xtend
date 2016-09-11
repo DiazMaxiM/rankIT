@@ -17,6 +17,8 @@ import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
 import edu.unq.interfaces.component.Titulo
 import org.uqbar.arena.windows.ErrorsPanel
 import edu.unq.interfaces.component.LabeledCheckBox
+import java.text.SimpleDateFormat
+import org.uqbar.arena.widgets.CheckBox
 
 class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
@@ -66,10 +68,15 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
         panelBusqueda.layout = new HorizontalLayout
 	    new Label(panelBusqueda).text = "Buscar por nombre de servicio"
 	    new TextBox(panelBusqueda) => [
+	       bindValueToProperty("nombreDelPuntuableBuscado")
+	       
            width = 200 
          ]  
         new Button(panelBusqueda) => [
 	      caption = "Buscar"
+	      onClick([|modelObject.buscarPorNombreDeLugar])
+	      .setAsDefault
+          .disableOnError
          ]
 	}
 	def crearEdicionDeServicioSeleccionado(Panel panel) {
@@ -90,28 +97,36 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		]
 	    new ErrorsPanel(servicioCompletaPanel, "Edita la información")
 		new Label(servicioCompletaPanel).text = "Nombre:"
-		new TextBox(servicioCompletaPanel).value <=> "puntuableSeleccionado.nombre"
-		new LabeledCheckBox(servicioCompletaPanel) => [
-			text = "Habilitado"
-			bindValueToProperty("puntuableSeleccionado.habilitado")
+		new TextBox(servicioCompletaPanel)=> [
+			bindEnabledToProperty("hayPuntuableSeleccionado")
+		    bindValueToProperty("nombrePuntuable")
+		]
+		new Label(servicioCompletaPanel).text= "Habilitado"
+		new CheckBox(servicioCompletaPanel)=> [
+			bindEnabledToProperty("hayPuntuableSeleccionado")
+		    bindValueToProperty("habilitado")
 		]
         new Label(servicioCompletaPanel).text = "Ranting promedio:"
         new Label(servicioCompletaPanel)=> [
+        	bindEnabledToProperty("hayPuntuableSeleccionado")
 		    bindValueToProperty("ratingPromedio")
 		]
 	    new Label(servicioCompletaPanel).text = "Calificaciones:"
 	    new Label(servicioCompletaPanel)=> [
+	        bindEnabledToProperty("hayPuntuableSeleccionado")
 			bindValueToProperty("cantidadDeCalificacionesDelPuntuable")
 		]
 	     new Button(servicioCompletaPanel) => [
 	      caption = "Revisar Publicaciones"
+	      bindEnabledToProperty("hayPuntuableSeleccionado")
 	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
          ]
          new Button(servicioCompletaPanel) => [
 	      caption = "Eliminar"
-	      //  onClick [| 
-		 //		this.modelObject.eliminarLugar
-		//	]
+	      bindEnabledToProperty("hayPuntuableSeleccionado")
+	      onClick [| 
+		 	this.modelObject.eliminarLugar
+		 ]
 	      
          ]
 	}
@@ -141,7 +156,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 			new Column<Lugar>(it) => [
 				title = "Fecha De Registro" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
-				bindContentsToProperty("fechaDeRegistro")
+				bindContentsToProperty("fechaDeRegistro").transformer = [fecha | new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fecha)]
 		 //la propiedad que mostramos del objeto que está atrás de la fila 
 			] 
 			
