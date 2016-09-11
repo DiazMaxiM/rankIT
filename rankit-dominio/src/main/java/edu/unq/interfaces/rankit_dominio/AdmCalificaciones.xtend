@@ -21,25 +21,28 @@ def getCalificacionesOfensivas(){
 def agregarCalificacion( Calificacion calificacion){
 	listaCalificaciones.add(calificacion)
 }
-
-
-def getRatingPromedio(Puntuable puntuable){   
-   getPuntajeDelPuntuable(puntuable)/cantidadDeCalificacionesDelPuntuable(puntuable)
-
+def ratingPromedio(Puntuable puntuable){  
+	if(!cantidadDeCalificacionesDelPuntuable(puntuable).equals(0)) {
+     puntajeDelPuntuable(puntuable)/cantidadDeCalificacionesDelPuntuable(puntuable)
+    }
+    else{
+       cantidadDeCalificacionesDelPuntuable(puntuable)
+    }
 }
-def getCalificacionesDelPutuable(Puntuable puntuable){
+def calificacionesDelPutuable(Puntuable puntuable){
 	listaCalificaciones.filter[calificacion | calificacion.isPuntuableBuscado(puntuable)] 
 }
 def cantidadDeCalificacionesDelPuntuable(Puntuable puntuable){
-	getCalificacionesDelPutuable(puntuable).size
+	calificacionesDelPutuable(puntuable).size
 }
-def getPuntajeDelPuntuable(Puntuable puntuable){
-	getCalificacionesDelPutuable(puntuable).fold(0, [ acumulador, calificacion | acumulador + calificacion.puntos])
+def puntajeDelPuntuable(Puntuable puntuable){
+	calificacionesDelPutuable(puntuable).fold(0, [ acumulador, calificacion | acumulador + calificacion.puntos])
 }
 
 def eliminarCalificacion( Calificacion calificacion){
 	listaCalificaciones.remove(calificacion)
 }
+	
 
 
 }

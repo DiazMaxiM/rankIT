@@ -5,6 +5,7 @@ import java.util.ArrayList
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.ObservableUtils
 
 @Observable
 @Accessors
@@ -23,10 +24,12 @@ class AdmPuntuables {
 	
 	def agregarLugar(Puntuable lugar) {
 		lugares.add(lugar)
-	}
+		this.avisarCambiosDeLugares()
+		}
 	
 	def eliminarLugar(Puntuable lugar) {
 		lugares.remove(lugar)
+		this.avisarCambiosDeLugares()
 	}
 	
 	def agregarServicio(Puntuable servicio){
@@ -47,6 +50,13 @@ class AdmPuntuables {
 	}
 	def getLugaresDeshabilitados(){
 		getLugaresInscriptos()-getLugaresHabilitados()
+	}
+	
+	def avisarCambiosDeLugares(){
+		ObservableUtils.firePropertyChanged(this,"lugaresInscriptos",lugaresInscriptos)
+		ObservableUtils.firePropertyChanged(this,"lugaresHabilitados",lugaresHabilitados)
+		ObservableUtils.firePropertyChanged(this,"lugaresDeshabilitados",lugaresDeshabilitados)
+		
 	}
 
 }
