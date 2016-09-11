@@ -1,12 +1,12 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.component.LabeledSelector
 import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.Puntuable
 import edu.unq.interfaces.rankit_dominio.Usuario
 import java.text.SimpleDateFormat
 import org.uqbar.arena.bindings.DateTransformer
+import org.uqbar.arena.bindings.PropertyAdapter
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -14,6 +14,7 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
@@ -22,8 +23,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.widgets.Selector
-import org.uqbar.arena.bindings.PropertyAdapter
+import org.uqbar.arena.widgets.NumericField
 
 class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
@@ -33,23 +33,24 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	
 	override protected createFormPanel(Panel mainPanel) {
 		this.title="Rank-IT --> Adm Calificacion"
+		
 		val panel    = new Panel(mainPanel)
 		panel.layout = new VerticalLayout
+		
 		contenedorSituacion      (panel)
 		contenedorBusqueda       (panel)
 		contenedorTablaYOpciones (panel)
 	}
 	
-	
 	def contenedorSituacion(Panel mainPanel) {
+	
 		val SituacionTituloPanel = new Panel(mainPanel)
 		SituacionTituloPanel.layout = new HorizontalLayout
-		
-		
-		
+
 		new Label(SituacionTituloPanel)=> [
 			text = "Resumen de situación:" 
 		]		
+
 		val SituacionEstadoSituacionPanel = new Panel(mainPanel)
 		SituacionEstadoSituacionPanel.layout = new ColumnLayout(4)
 		
@@ -71,15 +72,17 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 	}
 	
 	override protected addActions(Panel actionsPanel) {
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	def void contenedorTablaYOpciones(Panel mainPanel) {
+
 		val contenedorTablaYOpcionesPanel = new Panel(mainPanel)
 		contenedorTablaYOpcionesPanel.layout = new ColumnLayout(2)
+
 		contenedorTabla (contenedorTablaYOpcionesPanel)
 		contenedorOpciones (contenedorTablaYOpcionesPanel)
-		new Label(contenedorTablaYOpcionesPanel)
+
+//		new Label(contenedorTablaYOpcionesPanel)
 	}
 	
 	def void contenedorTabla(Panel mainPanel) {
@@ -147,7 +150,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			bindItemsToProperty("admPuntuables.todosLosPuntuables").adapter = new PropertyAdapter(Puntuable, "nombre")
 			bindValueToProperty("calificacionSeleccionada.evaluado")
 		]
-		
+	 
 		val contenedorFechaYUsuario = new Panel(contenedorOpciones)
 		contenedorFechaYUsuario.layout = new VerticalLayout
 		
@@ -176,12 +179,13 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			bindEnabledToProperty("hayCalificacionSeleccionada")
 			bindValueToProperty("calificacionSeleccionada.evaluado.nombre")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
 		]
+		
 		new Label(contenedorOpciones)=> [
 		text ="Puntaje:"	
 		]
-		new TextBox(contenedorOpciones)=> [
+		new NumericField(contenedorOpciones)=> [
 		bindEnabledToProperty("hayCalificacionSeleccionada")
-		bindValueToProperty("calificacionSeleccionada.puntos")//.transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+		bindValueToProperty("puntos")
 		]
 		new Label(contenedorOpciones)=> [
 		text ="Detalle:"	

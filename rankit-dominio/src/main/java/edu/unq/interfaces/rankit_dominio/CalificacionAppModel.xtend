@@ -21,6 +21,21 @@ class CalificacionAppModel {
 	admPuntuables= puntuables
 	usuarioLogeado=	usuario
 	}
+	@Dependencies("calificacionSeleccionada")
+	def getPuntos(){
+		if (hayCalificacionSeleccionada){
+			return calificacionSeleccionada.puntos
+		}
+		""
+	}
+	def setPuntos(Integer numero){
+		var Integer valor=0;
+		if (numero != null)
+		{
+			valor=numero
+		}
+		 calificacionSeleccionada.puntos=valor
+	}
 	
 	def actualizarLista(){
 		listaCalificacionesFiltradas
@@ -35,10 +50,8 @@ class CalificacionAppModel {
 	}
 	def listaCalificacionesFiltradas(){
 	
-	
-	
-	administradorCalificacion.listaCalificaciones.filter
-	[calificacion |
+		administradorCalificacion.listaCalificaciones.filter
+		[calificacion |
 		
 		(isNombreEvaluadoVacio && isNombreUsuarioVacio)
 		||
@@ -97,6 +110,7 @@ class CalificacionAppModel {
 	}
 	
 	def actualizarEstadoSituacion(){	
+	ObservableUtils.firePropertyChanged(this,"puntos",puntos)
 	ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)
 	ObservableUtils.firePropertyChanged(this,"calificacionesRegistradas",calificacionesRegistradas)
 	ObservableUtils.firePropertyChanged(this,"calificacionesOfensivas",calificacionesOfensivas)	
