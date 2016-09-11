@@ -1,31 +1,46 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_dominio.RankIT;
+import edu.unq.interfaces.component.LabeledCheckBox;
+import edu.unq.interfaces.component.Titulo;
+import edu.unq.interfaces.rankit_dominio.Lugar;
+import edu.unq.interfaces.rankit_dominio.PuntuableAppModel;
+import org.apache.commons.collections15.Transformer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.uqbar.arena.bindings.ObservableValue;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
-import org.uqbar.arena.widgets.CheckBox;
+import org.uqbar.arena.widgets.Control;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
+import org.uqbar.arena.widgets.tables.Column;
+import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.widgets.tables.labelprovider.PropertyLabelProvider;
+import org.uqbar.arena.windows.ErrorsPanel;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.arena.xtend.ArenaXtendExtensions;
+import org.uqbar.lacar.ui.model.Action;
+import org.uqbar.lacar.ui.model.ControlBuilder;
+import org.uqbar.lacar.ui.model.TableBuilder;
+import org.uqbar.lacar.ui.model.bindings.ViewObservable;
 
 @SuppressWarnings("all")
-public class AdmLugarWindow extends SimpleWindow<RankIT> {
-  public AdmLugarWindow(final WindowOwner parent, final RankIT model) {
+public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
+  public AdmLugarWindow(final WindowOwner parent, final PuntuableAppModel model) {
     super(parent, model);
     this.setTitle("Rank-IT -->Adm Servicios");
     this.setTaskDescription("Resumen de situación");
   }
   
   protected void createFormPanel(final Panel panelPrincipal) {
-    this.resumenDeSituacion(panelPrincipal);
-    this.crearListadoDeServicios(panelPrincipal);
-    this.crearEdicionDeServicioSeleccionado(panelPrincipal);
+    final Panel panel = new Panel(panelPrincipal);
+    this.resumenDeSituacion(panel);
+    this.crearListadoDeServicios(panel);
+    this.crearEdicionDeServicioSeleccionado(panel);
   }
   
   public Label resumenDeSituacion(final Panel panel) {
@@ -35,11 +50,47 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
       panelEstadisticas.setLayout(_horizontalLayout);
       Label _label = new Label(panelEstadisticas);
-      _label.setText("Lugares inscriptos:");
+      final Procedure1<Label> _function = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("Lugares Inscriptos: ");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
       Label _label_1 = new Label(panelEstadisticas);
-      _label_1.setText("Habilitados:");
+      final Procedure1<Label> _function_1 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("administradorDePuntuables.lugaresInscriptos");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function_1);
       Label _label_2 = new Label(panelEstadisticas);
-      _xblockexpression = _label_2.setText("Deshabilitados:");
+      final Procedure1<Label> _function_2 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("Habilitados: ");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_2, _function_2);
+      Label _label_3 = new Label(panelEstadisticas);
+      final Procedure1<Label> _function_3 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("administradorDePuntuables.lugaresHabilitados");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_3, _function_3);
+      Label _label_4 = new Label(panelEstadisticas);
+      final Procedure1<Label> _function_4 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("Deshabilitados: ");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_4, _function_4);
+      Label _label_5 = new Label(panelEstadisticas);
+      final Procedure1<Label> _function_5 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("administradorDePuntuables.lugaresDeshabilitados");
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_5, _function_5);
     }
     return _xblockexpression;
   }
@@ -47,13 +98,12 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
   public Button crearListadoDeServicios(final Panel panel) {
     Button _xblockexpression = null;
     {
+      new Titulo(panel, "Servicios");
       final Panel panelBusqueda = new Panel(panel);
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
       panelBusqueda.setLayout(_horizontalLayout);
       Label _label = new Label(panelBusqueda);
-      _label.setText("Servicios");
-      Label _label_1 = new Label(panelBusqueda);
-      _label_1.setText("Buscar por nombre de servicio");
+      _label.setText("Buscar por nombre de servicio");
       TextBox _textBox = new TextBox(panelBusqueda);
       final Procedure1<TextBox> _function = new Procedure1<TextBox>() {
         public void apply(final TextBox it) {
@@ -92,54 +142,61 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
       servicioCompletaPanel.setLayout(_verticalLayout);
       Label _label = new Label(servicioCompletaPanel);
       _label.setText("Nombre:");
-      Button _button = new Button(servicioCompletaPanel);
-      final Procedure1<Button> _function = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Edita la información");
-        }
-      };
-      ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
       Label _label_1 = new Label(servicioCompletaPanel);
-      _label_1.setText("Nombre:");
-      TextBox _textBox = new TextBox(servicioCompletaPanel);
-      final Procedure1<TextBox> _function_1 = new Procedure1<TextBox>() {
-        public void apply(final TextBox it) {
-          it.setWidth(200);
+      final Procedure1<Label> _function = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          ObservableValue<Control, ControlBuilder> _value = it.<ControlBuilder>value();
+          ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado.nombre");
+          it.setFontSize(13);
         }
       };
-      ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function_1);
-      this.datosEnFormaHorizontal(servicioCompletaPanel);
+      ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function);
+      new ErrorsPanel(servicioCompletaPanel, "Edita la información");
       Label _label_2 = new Label(servicioCompletaPanel);
-      _label_2.setText("Rankin promedio");
+      _label_2.setText("Nombre:");
+      TextBox _textBox = new TextBox(servicioCompletaPanel);
+      ObservableValue<Control, ControlBuilder> _value = _textBox.<ControlBuilder>value();
+      ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado.nombre");
+      LabeledCheckBox _labeledCheckBox = new LabeledCheckBox(servicioCompletaPanel);
+      final Procedure1<LabeledCheckBox> _function_1 = new Procedure1<LabeledCheckBox>() {
+        public void apply(final LabeledCheckBox it) {
+          it.setText("Habilitado");
+          it.bindValueToProperty("puntuableSeleccionado.habilitado");
+        }
+      };
+      ObjectExtensions.<LabeledCheckBox>operator_doubleArrow(_labeledCheckBox, _function_1);
       Label _label_3 = new Label(servicioCompletaPanel);
-      _label_3.setText("Calificaciones");
-      Button _button_1 = new Button(servicioCompletaPanel);
-      final Procedure1<Button> _function_2 = new Procedure1<Button>() {
+      _label_3.setText("Ranting promedio:");
+      Label _label_4 = new Label(servicioCompletaPanel);
+      final Procedure1<Label> _function_2 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("ratingPromedio");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_4, _function_2);
+      Label _label_5 = new Label(servicioCompletaPanel);
+      _label_5.setText("Calificaciones:");
+      Label _label_6 = new Label(servicioCompletaPanel);
+      final Procedure1<Label> _function_3 = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("cantidadDeCalificacionesDelPuntuable");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label_6, _function_3);
+      Button _button = new Button(servicioCompletaPanel);
+      final Procedure1<Button> _function_4 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Revisar Publicaciones");
         }
       };
-      ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_2);
-      Button _button_2 = new Button(servicioCompletaPanel);
-      final Procedure1<Button> _function_3 = new Procedure1<Button>() {
+      ObjectExtensions.<Button>operator_doubleArrow(_button, _function_4);
+      Button _button_1 = new Button(servicioCompletaPanel);
+      final Procedure1<Button> _function_5 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Eliminar");
         }
       };
-      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_3);
-    }
-    return _xblockexpression;
-  }
-  
-  public Label datosEnFormaHorizontal(final Panel panel) {
-    Label _xblockexpression = null;
-    {
-      final Panel panelDatos = new Panel(panel);
-      HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      panelDatos.setLayout(_horizontalLayout);
-      new CheckBox(panelDatos);
-      Label _label = new Label(panelDatos);
-      _xblockexpression = _label.setText("Habilitado");
+      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_5);
     }
     return _xblockexpression;
   }
@@ -148,10 +205,85 @@ public class AdmLugarWindow extends SimpleWindow<RankIT> {
     Button _xblockexpression = null;
     {
       final Panel panelDeListadoDeServicios = new Panel(panel);
-      Button _button = new Button(panelDeListadoDeServicios);
+      this.contenedorTabla(panelDeListadoDeServicios);
+      _xblockexpression = this.panelBotones(panelDeListadoDeServicios);
+    }
+    return _xblockexpression;
+  }
+  
+  public Table<Lugar> contenedorTabla(final Panel panel) {
+    Table<Lugar> _xblockexpression = null;
+    {
+      final Panel panelTabla = new Panel(panel);
+      Table<Lugar> _table = new Table<Lugar>(panelTabla, Lugar.class);
+      final Procedure1<Table<Lugar>> _function = new Procedure1<Table<Lugar>>() {
+        public void apply(final Table<Lugar> it) {
+          ViewObservable<Table<Lugar>, TableBuilder<Lugar>> _items = it.items();
+          ArenaXtendExtensions.operator_spaceship(_items, "administradorDePuntuables.lugares");
+          ObservableValue<Control, ControlBuilder> _value = it.<ControlBuilder>value();
+          ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado");
+          it.setWidth(200);
+          Column<Lugar> _column = new Column<Lugar>(it);
+          final Procedure1<Column<Lugar>> _function = new Procedure1<Column<Lugar>>() {
+            public void apply(final Column<Lugar> it) {
+              it.setTitle("Fecha De Registro");
+              it.setFixedSize(150);
+              it.bindContentsToProperty("fechaDeRegistro");
+            }
+          };
+          ObjectExtensions.<Column<Lugar>>operator_doubleArrow(_column, _function);
+          Column<Lugar> _column_1 = new Column<Lugar>(it);
+          final Procedure1<Column<Lugar>> _function_1 = new Procedure1<Column<Lugar>>() {
+            public void apply(final Column<Lugar> it) {
+              it.setTitle("Nombre");
+              it.setFixedSize(150);
+              it.bindContentsToProperty("nombre");
+            }
+          };
+          ObjectExtensions.<Column<Lugar>>operator_doubleArrow(_column_1, _function_1);
+          Column<Lugar> _column_2 = new Column<Lugar>(it);
+          final Procedure1<Column<Lugar>> _function_2 = new Procedure1<Column<Lugar>>() {
+            public void apply(final Column<Lugar> it) {
+              it.setTitle("Habilitado");
+              it.setFixedSize(150);
+              PropertyLabelProvider<Lugar> _bindContentsToProperty = it.bindContentsToProperty("habilitado");
+              final Transformer<Boolean, String> _function = new Transformer<Boolean, String>() {
+                public String transform(final Boolean isHabilitado) {
+                  String _xifexpression = null;
+                  if ((isHabilitado).booleanValue()) {
+                    _xifexpression = "SI";
+                  } else {
+                    _xifexpression = "NO";
+                  }
+                  return _xifexpression;
+                }
+              };
+              _bindContentsToProperty.setTransformer(_function);
+            }
+          };
+          ObjectExtensions.<Column<Lugar>>operator_doubleArrow(_column_2, _function_2);
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Table<Lugar>>operator_doubleArrow(_table, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  public Button panelBotones(final Panel panel) {
+    Button _xblockexpression = null;
+    {
+      final Panel panelBotones = new Panel(panel);
+      Button _button = new Button(panelBotones);
       final Procedure1<Button> _function = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Nuevo");
+          final Action _function = new Action() {
+            public void execute() {
+              PuntuableAppModel _modelObject = AdmLugarWindow.this.getModelObject();
+              _modelObject.nuevoLugar();
+            }
+          };
+          it.onClick(_function);
         }
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button, _function);

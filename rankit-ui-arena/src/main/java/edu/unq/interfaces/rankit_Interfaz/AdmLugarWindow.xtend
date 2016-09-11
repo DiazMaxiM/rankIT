@@ -16,6 +16,7 @@ import org.uqbar.arena.layout.VerticalLayout
 import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
 import edu.unq.interfaces.component.Titulo
 import org.uqbar.arena.windows.ErrorsPanel
+import edu.unq.interfaces.component.LabeledCheckBox
 
 class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
@@ -83,16 +84,24 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		val servicioCompletaPanel = new Panel(panel)
 		servicioCompletaPanel.layout = new VerticalLayout
 		new Label(servicioCompletaPanel).text = "Nombre:"
+		 new Label(servicioCompletaPanel)=>[
+			value <=> "puntuableSeleccionado.nombre"
+			fontSize = 13
+		]
 	    new ErrorsPanel(servicioCompletaPanel, "Edita la información")
 		new Label(servicioCompletaPanel).text = "Nombre:"
 		new TextBox(servicioCompletaPanel).value <=> "puntuableSeleccionado.nombre"
-          new Label(servicioCompletaPanel).text = "Ranting promedio:"
-          new Label(servicioCompletaPanel)=> [
-			//bindValueToProperty("administradorCalificacion.ratingPromedio")
+		new LabeledCheckBox(servicioCompletaPanel) => [
+			text = "Habilitado"
+			bindValueToProperty("puntuableSeleccionado.habilitado")
 		]
-	     new Label(servicioCompletaPanel).text = "Calificaciones:"
-	      new Label(servicioCompletaPanel)=> [
-			//bindValueToProperty("administradorCalificacion.calificacionesDelPutuable")
+        new Label(servicioCompletaPanel).text = "Ranting promedio:"
+        new Label(servicioCompletaPanel)=> [
+		    bindValueToProperty("ratingPromedio")
+		]
+	    new Label(servicioCompletaPanel).text = "Calificaciones:"
+	    new Label(servicioCompletaPanel)=> [
+			bindValueToProperty("cantidadDeCalificacionesDelPuntuable")
 		]
 	     new Button(servicioCompletaPanel) => [
 	      caption = "Revisar Publicaciones"
@@ -100,7 +109,10 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
          ]
          new Button(servicioCompletaPanel) => [
 	      caption = "Eliminar"
-	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
+	      //  onClick [| 
+		 //		this.modelObject.eliminarLugar
+		//	]
+	      
          ]
 	}
 	
@@ -143,7 +155,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 			new Column<Lugar>(it) => [
 				title = "Habilitado" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
-				bindContentsToProperty("habilitado")
+				bindContentsToProperty("habilitado").transformer = [ Boolean isHabilitado | if (isHabilitado) "SI" else "NO" ]
 		 //la propiedad que mostramos del objeto que está atrás de la fila 
 			] 
 			]  
@@ -153,7 +165,9 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		val panelBotones=new Panel(panel)
 		new Button(panelBotones) =>[
 			caption = "Nuevo"
-			//onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
+			onClick [| 
+				this.modelObject.nuevoLugar
+			]
 		] 
 	}
 	
