@@ -26,13 +26,5 @@ class LabeledSelector<T> extends AbstractLabeledWidget {
 		selector.bindValueToProperty(property)
 		this
 	}
-	/**
-	 * @autor Diaz Maximiliano
-	 * 
-	 */
-	def bindEnabledToProperty(String property) {
-		selector.bindEnabledToProperty(property)
-		this
-	}
 	
 }

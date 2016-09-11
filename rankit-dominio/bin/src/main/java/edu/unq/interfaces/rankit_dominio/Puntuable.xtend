@@ -1,13 +1,14 @@
 package edu.unq.interfaces.rankit_dominio
 
+import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.List
-import org.joda.time.DateTime
+import org.uqbar.commons.utils.Observable
 
 @Accessors 
+@Observable
 abstract class Puntuable {
 	 
-	 private var DateTime fechaDeRegistro 
+	 private var Date fechaDeRegistro 
 	 private var String nombre
 	 private var boolean habilitado 
 
@@ -16,46 +17,18 @@ abstract class Puntuable {
  * y la fecha de registro es la fecha en que se creo 
  */ 
 	 new(){
-	 	this.fechaDeRegistro=new DateTime
+	 	this.fechaDeRegistro=new Date()
 	 	this.nombre=""
 	 	this.habilitado=false
 	 }
-	
-    def void cambiarNombre(String nuevoNombre){
-    	this.nombre=nuevoNombre
-    }
-  
-	def boolean esPuntuableHabiltado(){
-		habilitado
+	def boolean isHabiltado(){
+		habilitado.equals(true)
 	}
 	
 	def void habilitarPuntuable(){
 		this.habilitado=true
 	}
-  	
-	
-	def Boolean estaDeshabilitado(){
-		habilitado.equals(false)
-	}
-	
-	def Boolean estaHabilitado(){
-		habilitado.equals(true)
-	}
-	
-	def Boolean tieneEsteNombre(String nombre){
+	def boolean isNombre(String nombre)	{
 		this.nombre.equals(nombre)
 	}
-	
-	def void deshabilitarPuntuable(){
-		habilitado=false
-	}
-	
-	def Boolean noTieneNombreAsignado(){
-		nombre.equals("")
-	}
-	
-	def String nombreDelPuntuable(){
-		nombre
-	}
-	
 }

@@ -60,7 +60,7 @@ class RankITDummy {
 		val calificacion1 = new Calificacion()=>[
 		
 		usuario = usuarioMaxi
-		contenidoOfensivo=true
+		contenidoOfensivo=false
 		puntos=15
 		detalle="Detalle Calififcacion Lugar 1"
 		evaluado = lugarParaCalificacion1
@@ -73,21 +73,10 @@ class RankITDummy {
 		detalle="Detalle Calififcacion Servicio 1"
 		evaluado = servicioParaCalificacion1
 		]
-		val calificacion3 = new Calificacion()=>[
-		
-		usuario = usuarioLiza
-		contenidoOfensivo=false
-		puntos=5
-		detalle="Detalle Calififcacion Servicio 1"
-		evaluado = servicioParaCalificacion1
-		]
 		
 		admCalificaciones.agregarCalificacion(calificacion1)
 		admCalificaciones.agregarCalificacion(calificacion2)
-		admCalificaciones.agregarCalificacion(calificacion3)
 		
-		admPuntuables.agregarServicio(servicioParaCalificacion1)
-		admPuntuables.agregarServicio(servicio2)
 		admPuntuables.agregarLugar(lugar2)
 		admPuntuables.agregarLugar(lugarParaCalificacion1)
 		
