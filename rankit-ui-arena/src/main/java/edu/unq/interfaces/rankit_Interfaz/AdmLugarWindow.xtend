@@ -19,6 +19,9 @@ import org.uqbar.arena.windows.ErrorsPanel
 import edu.unq.interfaces.component.LabeledCheckBox
 import java.text.SimpleDateFormat
 import org.uqbar.arena.widgets.CheckBox
+import edu.unq.interfaces.rankit_dominio.PuntuableSeleccionadoAppModel
+import org.uqbar.arena.windows.Dialog
+import edu.unq.interfaces.rankit_dominio.Puntuable
 
 class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
@@ -40,39 +43,59 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	def resumenDeSituacion(Panel panel) {
 	   val panelEstadisticas = new Panel(panel) 
        panelEstadisticas.layout = new HorizontalLayout
-       new Label(panelEstadisticas)=>[
-	   	    text="Lugares Inscriptos: "
-		]
-	    new Label(panelEstadisticas)=> [
-			bindValueToProperty("administradorDePuntuables.lugaresInscriptos")
-		]	
-			
-	   new Label(panelEstadisticas)=>[
-	   	    text="Habilitados: "
-			
-		]
-		new Label(panelEstadisticas)=> [
-			bindValueToProperty("administradorDePuntuables.lugaresHabilitados")
-		]
-	   new Label(panelEstadisticas)=>[
+       this.puntuablesInscriptos(panelEstadisticas)
+       this.puntuablesHabilitados(panelEstadisticas)
+       this.puntuablesDesHabilitados(panelEstadisticas)
+	}
+	
+	def puntuablesDesHabilitados(Panel panel) {
+		new Label(panel)=>[
 	   	    text="Deshabilitados: "
 		]
 		
-		new Label(panelEstadisticas)=> [
+		new Label(panel)=> [
 			bindValueToProperty("administradorDePuntuables.lugaresDeshabilitados")
 		]
 	}
+	
+	def puntuablesHabilitados(Panel panel) {
+		new Label(panel)=>[
+	   	    text="Habilitados: "
+			
+		]
+		new Label(panel)=> [
+			bindValueToProperty("administradorDePuntuables.lugaresHabilitados")
+		]
+	}
+	
+	def puntuablesInscriptos(Panel panel) {
+		new Label(panel)=>[
+	   	    text="Lugares Inscriptos: "
+		]
+	    new Label(panel)=> [
+			bindValueToProperty("administradorDePuntuables.lugaresInscriptos")
+		]
+	}
+	
 	def crearListadoDeServicios(Panel panel){
 		new Titulo(panel,"Servicios")
 	    val panelBusqueda = new Panel(panel)
         panelBusqueda.layout = new HorizontalLayout
-	    new Label(panelBusqueda).text = "Buscar por nombre de servicio"
-	    new TextBox(panelBusqueda) => [
-	       bindValueToProperty("nombreDelPuntuableBuscado")
+        this.ingresarDatos(panelBusqueda)
+        this.buscar(panelBusqueda)
+	}
+	
+	def ingresarDatos(Panel panel){
+		new Label(panel).text = "Buscar por nombre de servicio"
+	    new TextBox(panel) => [
+	       bindValueToProperty("nombreDelLugarBuscado")
 	       
            width = 200 
          ]  
-        new Button(panelBusqueda) => [
+	}
+	
+	def buscar(Panel panel){
+		 new Button(panel) => [
 	      caption = "Buscar"
 	      onClick([|modelObject.buscarPorNombreDeLugar])
 	      .setAsDefault
@@ -90,48 +113,63 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	def panelDerecho(Panel panel) {
 		val servicioCompletaPanel = new Panel(panel)
 		servicioCompletaPanel.layout = new VerticalLayout
-		new Label(servicioCompletaPanel).text = "Nombre:"
-		 new Label(servicioCompletaPanel)=>[
+		this.nombreYPanelDeError(servicioCompletaPanel)
+		this.cambiarNombreYHabilitar(servicioCompletaPanel)
+		this.estadisticasDelPuntuable(servicioCompletaPanel)
+		this.revisarYEliminar(servicioCompletaPanel)
+	}
+	
+	def nombreYPanelDeError(Panel panel) {
+		 new Label(panel).text = "Nombre:"
+		 new Label(panel)=>[
 			value <=> "puntuableSeleccionado.nombre"
 			fontSize = 13
 		]
-	    new ErrorsPanel(servicioCompletaPanel, "Edita la información")
-		new Label(servicioCompletaPanel).text = "Nombre:"
-		new TextBox(servicioCompletaPanel)=> [
+	    new ErrorsPanel(panel, "Edita la información")
+	}
+	
+	def cambiarNombreYHabilitar(Panel panel) {
+		new Label(panel).text = "Nombre:"
+		new TextBox(panel)=> [
 			bindEnabledToProperty("hayPuntuableSeleccionado")
-		    bindValueToProperty("nombrePuntuable")
+		    bindValueToProperty("nombreLugar")
 		]
-		new Label(servicioCompletaPanel).text= "Habilitado"
-		new CheckBox(servicioCompletaPanel)=> [
+		new Label(panel).text= "Habilitado"
+		new CheckBox(panel)=> [
 			bindEnabledToProperty("hayPuntuableSeleccionado")
-		    bindValueToProperty("habilitado")
+		    bindValueToProperty("habilitadoLugar")
 		]
-        new Label(servicioCompletaPanel).text = "Ranting promedio:"
-        new Label(servicioCompletaPanel)=> [
+	}
+	
+	def estadisticasDelPuntuable(Panel panel) {
+		 new Label(panel).text = "Ranting promedio:"
+        new Label(panel)=> [
         	bindEnabledToProperty("hayPuntuableSeleccionado")
 		    bindValueToProperty("ratingPromedio")
 		]
-	    new Label(servicioCompletaPanel).text = "Calificaciones:"
-	    new Label(servicioCompletaPanel)=> [
+	    new Label(panel).text = "Calificaciones:"
+	    new Label(panel)=> [
 	        bindEnabledToProperty("hayPuntuableSeleccionado")
 			bindValueToProperty("cantidadDeCalificacionesDelPuntuable")
 		]
-	     new Button(servicioCompletaPanel) => [
-	      caption = "Revisar Publicaciones"
-	      bindEnabledToProperty("hayPuntuableSeleccionado")
-	      //onClick [ | new NuevoPuntuableWindow(this, this.modelObject..open ]
-         ]
-         new Button(servicioCompletaPanel) => [
-	      caption = "Eliminar"
-	      bindEnabledToProperty("hayPuntuableSeleccionado")
-	      onClick [| 
-		 	this.modelObject.eliminarLugar
-		 ]
-	      
-         ]
+		
+		}
+		
+		def revisarYEliminar(Panel panel){
+		     new Button(panel) => [
+		      caption = "Revisar Publicaciones"
+		      bindEnabledToProperty("hayPuntuableSeleccionado")
+		       onClick[|this.mostrarPuntuableSeleccionado]
+	         ]
+	         new Button(panel) => [
+		      caption = "Eliminar"
+		      bindEnabledToProperty("hayPuntuableSeleccionado")
+		      onClick [| 
+			 	this.modelObject.eliminarLugar
+			 ]
+		      
+	         ]
 	}
-	
-	
 	
 	
 	def panelIzquierdo(Panel panel) {
@@ -143,7 +181,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	def contenedorTabla(Panel panel) {
 	
 		val panelTabla=new Panel(panel)
-		new Table<Lugar>(panelTabla, typeof(Lugar)) => [
+		new Table<Puntuable>(panelTabla, typeof(Puntuable)) => [
 			//bindeamos el contenido de la tabla
 			(items <=> "administradorDePuntuables.lugares")
 			value <=> "puntuableSeleccionado"
@@ -153,21 +191,21 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 			// para esto definimos las celdas de cada filar
 			// it es la grilla de resultados 
 			 
-			new Column<Lugar>(it) => [
+			new Column<Puntuable>(it) => [
 				title = "Fecha De Registro" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("fechaDeRegistro").transformer = [fecha | new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fecha)]
 		 //la propiedad que mostramos del objeto que está atrás de la fila 
 			] 
 			
-			new Column<Lugar>(it) => [
+			new Column<Puntuable>(it) => [
 				title = "Nombre" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("nombre")
 		 //la propiedad que mostramos del objeto que está atrás de la fila 
 			] 
 			
-			new Column<Lugar>(it) => [
+			new Column<Puntuable>(it) => [
 				title = "Habilitado" //el nombre de la columna
 				fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("habilitado").transformer = [ Boolean isHabilitado | if (isHabilitado) "SI" else "NO" ]
@@ -175,6 +213,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 			] 
 			]  
     }
+	
 	
 	def panelBotones(Panel panel) {
 		val panelBotones=new Panel(panel)
@@ -189,6 +228,16 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
 	
 	override protected addActions(Panel panel) {
+	}
+	
+	//Acciones 
+	def mostrarPuntuableSeleccionado(){
+		this.openDialog(new MostrarPuntuableWindow(this, modelObject.puntuableSeleccionado))
+	}
+
+	def openDialog(Dialog<?> dialog) {
+		dialog.onAccept[|modelObject.buscarPorNombreDeLugar]
+		dialog.open
 	}
 	
 }

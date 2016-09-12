@@ -13,7 +13,8 @@ class PuntuableAppModel {
 	 AdmPuntuables administradorDePuntuables
 	 AdmCalificaciones administradorCalificacion
 	 Puntuable    puntuableSeleccionado
-	 String  nombreDelPuntuableBuscado=""
+	 String  nombreDelLugarBuscado=""
+	 String  nombreDelServicioBuscado=""
 	
 	new(AdmPuntuables adm1, AdmCalificaciones adm2){
 		this.administradorDePuntuables= adm1
@@ -24,12 +25,18 @@ class PuntuableAppModel {
 	def setPuntuableSeleccionado(Puntuable seleccionado){
 		puntuableSeleccionado = seleccionado
 		ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
-		ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)	
+		ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
+		
 	}
 	
-	def setNombreDelPuntuableBuscado(String nombre){
-		 nombreDelPuntuableBuscado=nombre
+	def setNombreDelLugarBuscado(String nombre){
+		 nombreDelLugarBuscado=nombre
 		 ObservableUtils.firePropertyChanged(this," buscarPorNombreDeLugar", buscarPorNombreDeLugar)
+	}
+	
+	def setNombreDelServicioBuscado(String nombre){
+		 nombreDelServicioBuscado=nombre
+		 ObservableUtils.firePropertyChanged(this," buscarPorNombreDeServicio", buscarPorNombreDeServicio)
 	}
 	
 	def nuevoLugar() {
@@ -63,22 +70,39 @@ class PuntuableAppModel {
 	}
 	
 	@Dependencies("puntuableSeleccionado")
-    def void setHabilitado(Boolean habilitado){
+    def void setHabilitadoLugar(Boolean habilitado){
 		puntuableSeleccionado.habilitado = habilitado
 		administradorDePuntuables.avisarCambiosDeLugares()
-		
-	}
+	}	
+	
 	@Dependencies("puntuableSeleccionado")
-	def setNombrePuntuable(String nombreNuevo){
-		if(administradorDePuntuables.isLugaresDuplicados(nombreNuevo)){
-			throw new UserException("Ya existe otro Lugar con el mismo nombre "+ nombreNuevo)
-		}
-	    this.puntuableSeleccionado.nombre=nombreNuevo
+    def void setHabilitadoServicio(Boolean habilitado){
+		puntuableSeleccionado.habilitado = habilitado
+		administradorDePuntuables.avisarCambiosDeServicios()
+		
 	}
+	
+	@Dependencies("puntuableSeleccionado")
+	def setNombreLugar(String nombreNuevo){
+		administradorDePuntuables.verificarLugaresDuplicados(nombreNuevo)
+	    this.puntuableSeleccionado.nombre=nombreNuevo
+		
+	}
+	
+	
+	@Dependencies("puntuableSeleccionado")
+	def setNombreServicio(String nombreNuevo){
+		administradorDePuntuables.verificarServiciosDuplicados(nombreNuevo)
+	    this.puntuableSeleccionado.nombre=nombreNuevo
+		
+	}
+	
 	def buscarPorNombreDeLugar(){
-		administradorDePuntuables.buscarLugares(nombreDelPuntuableBuscado)
-		
-		
+		administradorDePuntuables.buscarLugares(nombreDelLugarBuscado)
+	}
+	
+	def buscarPorNombreDeServicio() {
+		administradorDePuntuables.buscarServicios(nombreDelServicioBuscado)
 	}
 	
 }
