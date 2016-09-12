@@ -27,44 +27,44 @@ def todosLosPuntuables()
 	
 	def agregarLugar(Puntuable lugar) {
 		lugares.add(lugar)
-		this.avisarCambiosDeLugares()
 		}
 	
 	def eliminarLugar(Puntuable lugar) {
 		lugares.remove(lugar)
-		this.avisarCambiosDeLugares()
 	}
 	
 	def agregarServicio(Puntuable servicio){
 		servicios.add(servicio)
-		this.avisarCambiosDeServicios()
 	}
 	def eliminarServicio(Puntuable servicio){
 		servicios.remove(servicio)
-	    this.avisarCambiosDeServicios()
 	}
 	
-	def getLugaresInscriptos(){
+	def lugaresInscriptos(){
 		puntuablesInscriptos(lugares)
 	
 	}
 	
-	def getServiciosInscriptos(){
+	def serviciosInscriptos(){
 		puntuablesInscriptos(servicios)
 	
 	}
 	
-	def puntuablesInscriptos(List<Puntuable>puntuables){
+	def puntuablesInscriptos(List<Puntuable> puntuables) {
 		puntuables.size
 	}
 	
-	def getLugaresHabilitados(){
+	def inscriptos(List<Puntuable>puntuables){
+		puntuables.size
+	}
+	
+	def lugaresHabilitados(){
 		puntuablesHabilitados(lugares)
 	    
 	}
 	
 	
-	def getServiciosHabilitados(){
+	def serviciosHabilitados(){
 	   puntuablesHabilitados(servicios)
 	}
 	
@@ -73,11 +73,11 @@ def todosLosPuntuables()
 		
 	}
 	def getLugaresDeshabilitados(){
-		getLugaresInscriptos()-getLugaresHabilitados()
+		lugaresInscriptos()-lugaresHabilitados()
 	}
 	
 	def getServiciosDeshabilitados(){
-		getServiciosInscriptos()-getServiciosHabilitados()
+		serviciosInscriptos()-serviciosHabilitados()
 	}
 	
 	def puntuablesDeshabilitados(List<Puntuable>puntuables){
@@ -133,18 +133,5 @@ def todosLosPuntuables()
 		}
 	}
 	
-	def avisarCambiosDeLugares(){
-		ObservableUtils.firePropertyChanged(this,"lugaresInscriptos",lugaresInscriptos)
-		ObservableUtils.firePropertyChanged(this,"lugaresHabilitados",lugaresHabilitados)
-		ObservableUtils.firePropertyChanged(this,"lugaresDeshabilitados",lugaresDeshabilitados)
-		
-	}
-	
-	def avisarCambiosDeServicios() {
-		ObservableUtils.firePropertyChanged(this,"serviciosInscriptos",serviciosInscriptos)
-		ObservableUtils.firePropertyChanged(this,"serviciosHabilitados",serviciosHabilitados)
-		ObservableUtils.firePropertyChanged(this,"serviciosDeshabilitados",serviciosDeshabilitados)
-		
-	}
 	
 }

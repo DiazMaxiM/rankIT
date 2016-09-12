@@ -2,7 +2,6 @@ package edu.unq.interfaces.rankit_Interfaz
 
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import edu.unq.interfaces.rankit_dominio.Lugar
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Label
@@ -14,14 +13,11 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.VerticalLayout
 import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
-import edu.unq.interfaces.component.Titulo
 import org.uqbar.arena.windows.ErrorsPanel
-import edu.unq.interfaces.component.LabeledCheckBox
 import java.text.SimpleDateFormat
 import org.uqbar.arena.widgets.CheckBox
-import edu.unq.interfaces.rankit_dominio.PuntuableSeleccionadoAppModel
-import org.uqbar.arena.windows.Dialog
 import edu.unq.interfaces.rankit_dominio.Puntuable
+
 
 class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
@@ -54,7 +50,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		]
 		
 		new Label(panel)=> [
-			bindValueToProperty("administradorDePuntuables.lugaresDeshabilitados")
+			bindValueToProperty("lugaresDeshabilitados")
 		]
 	}
 	
@@ -64,7 +60,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 			
 		]
 		new Label(panel)=> [
-			bindValueToProperty("administradorDePuntuables.lugaresHabilitados")
+			bindValueToProperty("lugaresHabilitados")
 		]
 	}
 	
@@ -73,34 +69,43 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	   	    text="Lugares Inscriptos: "
 		]
 	    new Label(panel)=> [
-			bindValueToProperty("administradorDePuntuables.lugaresInscriptos")
+			bindValueToProperty("lugaresInscriptos")
 		]
 	}
 	
 	def crearListadoDeServicios(Panel panel){
-		new Titulo(panel,"Servicios")
-	    val panelBusqueda = new Panel(panel)
-        panelBusqueda.layout = new HorizontalLayout
-        this.ingresarDatos(panelBusqueda)
-        this.buscar(panelBusqueda)
+		var panelBusqueda= new Panel(panel)
+		this.titulo(panelBusqueda)
+		 this.ingresarDatosYBuscar(panelBusqueda)
+    
 	}
 	
-	def ingresarDatos(Panel panel){
-		new Label(panel).text = "Buscar por nombre de servicio"
-	    new TextBox(panel) => [
+	def titulo(Panel panel){
+		var panelTitulo=new Panel(panel)
+		panelTitulo.layout=new ColumnLayout(2)
+		new Label(panelTitulo) => [
+		text = "Lugares"
+		fontSize = 15
+        ]
+	}
+	
+	def ingresarDatosYBuscar(Panel panel){
+		var panelDatos=new Panel(panel)
+		panelDatos.layout=new ColumnLayout(3)
+		new Label(panelDatos).text = "Buscar por nombre de Lugar:"
+	    new TextBox(panelDatos) => [
 	       bindValueToProperty("nombreDelLugarBuscado")
 	       
-           width = 200 
+           width = 100
          ]  
-	}
-	
-	def buscar(Panel panel){
-		 new Button(panel) => [
+         
+		 new Button(panelDatos) => [
 	      caption = "Buscar"
-	      onClick([|modelObject.buscarPorNombreDeLugar])
-	      .setAsDefault
+	      width = 100
+	       onClick([|modelObject.buscarPorNombreDeLugar])
+	       .setAsDefault
           .disableOnError
-         ]
+        ]
 	}
 	def crearEdicionDeServicioSeleccionado(Panel panel) {
 		val panelDatos= new Panel(panel)
@@ -113,57 +118,86 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	def panelDerecho(Panel panel) {
 		val servicioCompletaPanel = new Panel(panel)
 		servicioCompletaPanel.layout = new VerticalLayout
-		this.nombreYPanelDeError(servicioCompletaPanel)
-		this.cambiarNombreYHabilitar(servicioCompletaPanel)
-		this.estadisticasDelPuntuable(servicioCompletaPanel)
-		this.revisarYEliminar(servicioCompletaPanel)
+		this.mostrarNombre(servicioCompletaPanel)
+		this.panelErrores(servicioCompletaPanel)
+		this.editarNombre(servicioCompletaPanel)
+		this.habilitarPuntuable(servicioCompletaPanel)
+		this.calificacionesPuntuable(servicioCompletaPanel)
+		this.botones(servicioCompletaPanel)
 	}
 	
-	def nombreYPanelDeError(Panel panel) {
-		 new Label(panel).text = "Nombre:"
-		 new Label(panel)=>[
+	
+	def mostrarNombre(Panel panel){
+		var panelNombre=new Panel(panel)
+		panelNombre.layout = new  ColumnLayout(2)
+		new Label(panelNombre)=>[
+			text="Nombre: "
+			fontSize = 13
+		]
+		 new Label(panelNombre)=>[
 			value <=> "puntuableSeleccionado.nombre"
 			fontSize = 13
 		]
+	}
+	
+	def panelErrores(Panel panel) {
 	    new ErrorsPanel(panel, "Edita la información")
 	}
 	
-	def cambiarNombreYHabilitar(Panel panel) {
+	def editarNombre(Panel panel){
 		new Label(panel).text = "Nombre:"
 		new TextBox(panel)=> [
-			bindEnabledToProperty("hayPuntuableSeleccionado")
-		    bindValueToProperty("nombreLugar")
+		  bindEnabledToProperty("hayPuntuableSeleccionado")
+		  bindValueToProperty("puntuableSeleccionado.nombre")
 		]
-		new Label(panel).text= "Habilitado"
-		new CheckBox(panel)=> [
-			bindEnabledToProperty("hayPuntuableSeleccionado")
-		    bindValueToProperty("habilitadoLugar")
-		]
+		
 	}
 	
-	def estadisticasDelPuntuable(Panel panel) {
-		 new Label(panel).text = "Ranting promedio:"
-        new Label(panel)=> [
-        	bindEnabledToProperty("hayPuntuableSeleccionado")
-		    bindValueToProperty("ratingPromedio")
+	def habilitarPuntuable(Panel panel) {
+		var panelHabilitar=new Panel(panel)
+		panelHabilitar.layout = new HorizontalLayout
+		new CheckBox(panel)=> [
+		  bindEnabledToProperty("hayPuntuableSeleccionado")
+		  bindValueToProperty("puntuableSeleccionado.habilitado")
 		]
-	    new Label(panel).text = "Calificaciones:"
-	    new Label(panel)=> [
-	        bindEnabledToProperty("hayPuntuableSeleccionado")
-			bindValueToProperty("cantidadDeCalificacionesDelPuntuable")
+		new Label(panel).text= "Habilitado"
+	}
+	
+	def  calificacionesPuntuable(Panel panel) {
+		this. rating(panel)
+		this.calificaciones(panel)
+		
+	}
+	def rating(Panel panel){
+		var panelRating=new Panel(panel)
+		panelRating.layout = new HorizontalLayout
+		new Label(panelRating).text = "Ranting promedio:"
+        new Label(panelRating)=> [
+           bindEnabledToProperty("hayPuntuableSeleccionado")
+		   bindValueToProperty("ratingPromedio")
+		]
+		
+	}
+	def calificaciones(Panel panel){
+		var panelCalificaciones=new Panel(panel)
+		panelCalificaciones.layout = new HorizontalLayout
+	    new Label(panelCalificaciones).text = "Calificaciones:"
+	    new Label(panelCalificaciones)=> [
+	       bindEnabledToProperty("hayPuntuableSeleccionado")
+		   bindValueToProperty("cantidadDeCalificacionesDelPuntuable")
 		]
 		
 		}
 		
-		def revisarYEliminar(Panel panel){
+		def botones(Panel panel){
 		     new Button(panel) => [
 		      caption = "Revisar Publicaciones"
-		      bindEnabledToProperty("hayPuntuableSeleccionado")
-		       onClick[|this.mostrarPuntuableSeleccionado]
-	         ]
+		       bindEnabledToProperty("hayPuntuableSeleccionado")
+		       onClick [ | editarPuntuable("Adm Lugares", this.modelObject.puntuableSeleccionado)]
+		]
 	         new Button(panel) => [
 		      caption = "Eliminar"
-		      bindEnabledToProperty("hayPuntuableSeleccionado")
+		     bindEnabledToProperty("hayPuntuableSeleccionado")
 		      onClick [| 
 			 	this.modelObject.eliminarLugar
 			 ]
@@ -225,19 +259,18 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		] 
 	}
 	
+	def editarPuntuable(String titulo, Puntuable puntuable) {
+		
+		new EditarPuntuableWindow(this, puntuable) => [
+			title = titulo
+			open
+		]
+	}
 	
 	
 	override protected addActions(Panel panel) {
 	}
 	
-	//Acciones 
-	def mostrarPuntuableSeleccionado(){
-		this.openDialog(new MostrarPuntuableWindow(this, modelObject.puntuableSeleccionado))
-	}
 
-	def openDialog(Dialog<?> dialog) {
-		dialog.onAccept[|modelObject.buscarPorNombreDeLugar]
-		dialog.open
-	}
 	
 }

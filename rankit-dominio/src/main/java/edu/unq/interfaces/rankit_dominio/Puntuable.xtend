@@ -3,6 +3,7 @@ package edu.unq.interfaces.rankit_dominio
 import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.UserException
 
 @Accessors 
 @Observable
@@ -35,4 +36,11 @@ abstract class Puntuable {
 		nombre.contains(letras)
 	}
 	 
+	def void verificarSiTieneNombre(){
+		if(this.nombre.equals("")){
+			throw new UserException("Por favor defina un nombre" )
+			
+		}
+	}
+	
 }
