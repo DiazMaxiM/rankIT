@@ -17,7 +17,12 @@ import org.uqbar.arena.windows.ErrorsPanel
 import java.text.SimpleDateFormat
 import org.uqbar.arena.widgets.CheckBox
 import edu.unq.interfaces.rankit_dominio.Puntuable
-
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
+import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import java.util.List
 
 class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
@@ -148,7 +153,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		new Label(panel).text = "Nombre:"
 		new TextBox(panel)=> [
 		  bindEnabledToProperty("hayPuntuableSeleccionado")
-		  bindValueToProperty("puntuableSeleccionado.nombre")
+		  bindValueToProperty("nombre")
 		]
 		
 	}
@@ -158,7 +163,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		panelHabilitar.layout = new HorizontalLayout
 		new CheckBox(panel)=> [
 		  bindEnabledToProperty("hayPuntuableSeleccionado")
-		  bindValueToProperty("puntuableSeleccionado.habilitado")
+		  bindValueToProperty("habilitado")
 		]
 		new Label(panel).text= "Habilitado"
 	}
@@ -193,7 +198,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		     new Button(panel) => [
 		      caption = "Revisar Publicaciones"
 		       bindEnabledToProperty("hayPuntuableSeleccionado")
-		       onClick [ | editarPuntuable("Adm Lugares", this.modelObject.puntuableSeleccionado)]
+		       onClick [ |mostrarCalificacionesDelPuntuable(this.modelObject.calificacionesDelPuntuable,this.modelObject.puntuableSeleccionado)]
 		]
 	         new Button(panel) => [
 		      caption = "Eliminar"
@@ -204,6 +209,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		      
 	         ]
 	}
+
 	
 	
 	def panelIzquierdo(Panel panel) {
@@ -259,13 +265,19 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		] 
 	}
 	
-	def editarPuntuable(String titulo, Puntuable puntuable) {
 		
-		new EditarPuntuableWindow(this, puntuable) => [
-			title = titulo
+	def mostrarCalificacionesDelPuntuable(List<Calificacion>calificacionesDelPuntuable,Puntuable lugar){  
+		 var admPuntuables=new AdmPuntuables
+		 admPuntuables.agregarLugar(lugar)
+		 var admCalificaciones=new AdmCalificaciones
+		 admCalificaciones.agregarTodasLasCalificaciones(calificacionesDelPuntuable)
+		 var usuario=new Usuario
+		 var appModel= new CalificacionAppModel(admCalificaciones,admPuntuables,usuario)
+         new AdmCalificacionWindow(this,appModel) => [
 			open
 		]
 	}
+	
 	
 	
 	override protected addActions(Panel panel) {

@@ -13,6 +13,12 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.CheckBox
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
+import java.util.List
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
+import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 
 class AdmServicioWindow extends AdmLugarWindow{
 	
@@ -85,7 +91,7 @@ class AdmServicioWindow extends AdmLugarWindow{
 		     new Button(panel) => [
 		     caption = "Revisar Publicaciones"
 		      bindEnabledToProperty("hayPuntuableSeleccionado")
-		      onClick [ | editarPuntuable("Adm Servicios", this.modelObject.puntuableSeleccionado)]
+		      onClick [ |mostrarCalificacionesDelPuntuable(this.modelObject.calificacionesDelPuntuable,this.modelObject.puntuableSeleccionado)]
 		]
 	         new Button(panel) => [
 		      caption = "Eliminar"
@@ -132,6 +138,19 @@ class AdmServicioWindow extends AdmLugarWindow{
 			] 
 			]  
     }
+	
+	override mostrarCalificacionesDelPuntuable(List<Calificacion>calificacionesDelPuntuable,Puntuable servicio){  
+		 var admPuntuables=new AdmPuntuables
+		 admPuntuables.agregarServicio(servicio)
+		 var admCalificaciones=new AdmCalificaciones
+		 admCalificaciones.agregarTodasLasCalificaciones(calificacionesDelPuntuable)
+		 var usuario=new Usuario
+		 var appModel= new CalificacionAppModel(admCalificaciones,admPuntuables,usuario)
+         new AdmCalificacionWindow(this,appModel) => [
+			open
+		]
+	}
+	
 	
 	
 	override panelBotones(Panel panel) {

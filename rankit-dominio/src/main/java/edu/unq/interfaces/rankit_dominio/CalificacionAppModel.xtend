@@ -11,7 +11,7 @@ class CalificacionAppModel {
 	
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
-	Usuario usuarioLogeado
+	Usuario usuarioLogeado;
 	AdmPuntuables admPuntuables;
 	String nombreUsuarioBusqueda;
 	String nombreEvaluadoBusqueda;

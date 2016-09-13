@@ -1,10 +1,16 @@
 package edu.unq.interfaces.rankit_Interfaz;
 
-import edu.unq.interfaces.rankit_Interfaz.EditarPuntuableWindow;
+import edu.unq.interfaces.rankit_Interfaz.AdmCalificacionWindow;
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones;
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables;
+import edu.unq.interfaces.rankit_dominio.Calificacion;
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel;
 import edu.unq.interfaces.rankit_dominio.Puntuable;
 import edu.unq.interfaces.rankit_dominio.PuntuableAppModel;
+import edu.unq.interfaces.rankit_dominio.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import org.apache.commons.collections15.Transformer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -254,7 +260,7 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       final Procedure1<TextBox> _function = new Procedure1<TextBox>() {
         public void apply(final TextBox it) {
           it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          it.<Object, ControlBuilder>bindValueToProperty("puntuableSeleccionado.nombre");
+          it.<Object, ControlBuilder>bindValueToProperty("nombre");
         }
       };
       _xblockexpression = ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function);
@@ -272,7 +278,7 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       final Procedure1<CheckBox> _function = new Procedure1<CheckBox>() {
         public void apply(final CheckBox it) {
           it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          it.<Object, ControlBuilder>bindValueToProperty("puntuableSeleccionado.habilitado");
+          it.<Object, ControlBuilder>bindValueToProperty("habilitado");
         }
       };
       ObjectExtensions.<CheckBox>operator_doubleArrow(_checkBox, _function);
@@ -342,8 +348,10 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
           final Action _function = new Action() {
             public void execute() {
               PuntuableAppModel _modelObject = AdmLugarWindow.this.getModelObject();
-              Puntuable _puntuableSeleccionado = _modelObject.getPuntuableSeleccionado();
-              AdmLugarWindow.this.editarPuntuable("Adm Lugares", _puntuableSeleccionado);
+              List<Calificacion> _calificacionesDelPuntuable = _modelObject.getCalificacionesDelPuntuable();
+              PuntuableAppModel _modelObject_1 = AdmLugarWindow.this.getModelObject();
+              Puntuable _puntuableSeleccionado = _modelObject_1.getPuntuableSeleccionado();
+              AdmLugarWindow.this.mostrarCalificacionesDelPuntuable(_calificacionesDelPuntuable, _puntuableSeleccionado);
             }
           };
           it.onClick(_function);
@@ -466,15 +474,24 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     return _xblockexpression;
   }
   
-  public EditarPuntuableWindow editarPuntuable(final String titulo, final Puntuable puntuable) {
-    EditarPuntuableWindow _editarPuntuableWindow = new EditarPuntuableWindow(this, puntuable);
-    final Procedure1<EditarPuntuableWindow> _function = new Procedure1<EditarPuntuableWindow>() {
-      public void apply(final EditarPuntuableWindow it) {
-        it.setTitle(titulo);
-        it.open();
-      }
-    };
-    return ObjectExtensions.<EditarPuntuableWindow>operator_doubleArrow(_editarPuntuableWindow, _function);
+  public AdmCalificacionWindow mostrarCalificacionesDelPuntuable(final List<Calificacion> calificacionesDelPuntuable, final Puntuable lugar) {
+    AdmCalificacionWindow _xblockexpression = null;
+    {
+      AdmPuntuables admPuntuables = new AdmPuntuables();
+      admPuntuables.agregarLugar(lugar);
+      AdmCalificaciones admCalificaciones = new AdmCalificaciones();
+      admCalificaciones.agregarTodasLasCalificaciones(calificacionesDelPuntuable);
+      Usuario usuario = new Usuario();
+      CalificacionAppModel appModel = new CalificacionAppModel(admCalificaciones, admPuntuables, usuario);
+      AdmCalificacionWindow _admCalificacionWindow = new AdmCalificacionWindow(this, appModel);
+      final Procedure1<AdmCalificacionWindow> _function = new Procedure1<AdmCalificacionWindow>() {
+        public void apply(final AdmCalificacionWindow it) {
+          it.open();
+        }
+      };
+      _xblockexpression = ObjectExtensions.<AdmCalificacionWindow>operator_doubleArrow(_admCalificacionWindow, _function);
+    }
+    return _xblockexpression;
   }
   
   protected void addActions(final Panel panel) {

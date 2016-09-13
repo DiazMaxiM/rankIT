@@ -42,7 +42,10 @@ def puntajeDelPuntuable(Puntuable puntuable){
 def eliminarCalificacion( Calificacion calificacion){
 	listaCalificaciones.remove(calificacion)
 }
-	
 
+def agregarTodasLasCalificaciones(List<Calificacion>calificaciones){
+     	listaCalificaciones.addAll(calificaciones)
+     	
+    }
 
 }
