@@ -1,6 +1,4 @@
 package test
-
-import org.junit.Before
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 import edu.unq.interfaces.rankit_dominio.Lugar
 import edu.unq.interfaces.rankit_dominio.Servicio

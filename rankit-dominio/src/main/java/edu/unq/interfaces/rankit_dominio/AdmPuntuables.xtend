@@ -5,7 +5,6 @@ import java.util.ArrayList
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
-import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.model.UserException
 
 @Observable
@@ -13,8 +12,8 @@ import org.uqbar.commons.model.UserException
 class AdmPuntuables {
 	List<Puntuable> lugares = new ArrayList
 	List<Puntuable> servicios = new ArrayList
-	List<Puntuable> lugaresCopia = lugares
-   List<Puntuable> serviciosCopia = servicios
+	List<Puntuable> lugaresCopia = new ArrayList
+   List<Puntuable> serviciosCopia = new ArrayList
 	
 def todosLosPuntuables()
 	{
@@ -27,17 +26,21 @@ def todosLosPuntuables()
 	
 	def agregarLugar(Puntuable lugar) {
 		lugares.add(lugar)
-		}
+		lugaresCopia.add(lugar)
+	 }
 	
 	def eliminarLugar(Puntuable lugar) {
 		lugares.remove(lugar)
+		lugaresCopia.remove(lugar)
 	}
 	
 	def agregarServicio(Puntuable servicio){
 		servicios.add(servicio)
+		serviciosCopia.add(servicio)
 	}
 	def eliminarServicio(Puntuable servicio){
 		servicios.remove(servicio)
+		serviciosCopia.remove(servicio)
 	}
 	
 	def lugaresInscriptos(){
@@ -95,7 +98,7 @@ def todosLosPuntuables()
 	
 	def buscarLugares(String letrasDelNombreBuscado) {
 		if(letrasDelNombreBuscado!=""){
-		   var lugaresBuscados=this.puntuablesConLasLetras(lugares,letrasDelNombreBuscado).toList
+		   var lugaresBuscados=this.puntuablesConLasLetras(lugaresCopia,letrasDelNombreBuscado).toList
 		   
 		   lugares=lugaresBuscados
 		}

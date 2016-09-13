@@ -343,7 +343,7 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       Button _button = new Button(panel);
       final Procedure1<Button> _function = new Procedure1<Button>() {
         public void apply(final Button it) {
-          it.setCaption("Revisar Publicaciones");
+          it.setCaption("Revisar Calificaciones");
           it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
           final Action _function = new Action() {
             public void execute() {
@@ -355,6 +355,7 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
             }
           };
           it.onClick(_function);
+          it.setWidth(200);
         }
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
@@ -370,6 +371,7 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
             }
           };
           it.onClick(_function);
+          it.setWidth(200);
         }
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);

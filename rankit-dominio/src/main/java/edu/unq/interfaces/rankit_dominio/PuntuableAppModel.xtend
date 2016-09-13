@@ -146,5 +146,5 @@ class PuntuableAppModel {
 	def getCalificacionesDelPuntuable() {
         administradorCalificacion.calificacionesDelPutuable(puntuableSeleccionado).toList
 	}
-	
+
 }

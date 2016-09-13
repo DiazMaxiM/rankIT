@@ -196,9 +196,10 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		
 		def botones(Panel panel){
 		     new Button(panel) => [
-		      caption = "Revisar Publicaciones"
+		       caption = "Revisar Calificaciones"
 		       bindEnabledToProperty("hayPuntuableSeleccionado")
 		       onClick [ |mostrarCalificacionesDelPuntuable(this.modelObject.calificacionesDelPuntuable,this.modelObject.puntuableSeleccionado)]
+		       width = 200
 		]
 	         new Button(panel) => [
 		      caption = "Eliminar"
@@ -206,7 +207,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 		      onClick [| 
 			 	this.modelObject.eliminarLugar
 			 ]
-		      
+		       width = 200
 	         ]
 	}
 

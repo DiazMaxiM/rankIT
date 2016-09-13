@@ -89,9 +89,10 @@ class AdmServicioWindow extends AdmLugarWindow{
 		
 		override botones(Panel panel){
 		     new Button(panel) => [
-		     caption = "Revisar Publicaciones"
+		     caption = "Revisar Calificaciones"
 		      bindEnabledToProperty("hayPuntuableSeleccionado")
 		      onClick [ |mostrarCalificacionesDelPuntuable(this.modelObject.calificacionesDelPuntuable,this.modelObject.puntuableSeleccionado)]
+		      width = 200
 		]
 	         new Button(panel) => [
 		      caption = "Eliminar"
@@ -99,7 +100,7 @@ class AdmServicioWindow extends AdmLugarWindow{
 		      onClick [| 
 			 	this.modelObject.eliminarServicio
 			 ]
-		      
+		      width = 200
 	         ]
 	}
 	
