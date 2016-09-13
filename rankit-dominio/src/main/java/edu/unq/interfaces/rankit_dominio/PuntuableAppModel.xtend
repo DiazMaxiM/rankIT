@@ -34,6 +34,11 @@ class PuntuableAppModel {
 		
 	}
 	
+	@Dependencies("puntuableSeleccionado")
+	def getHayPuntuableSeleccionado(){
+		puntuableSeleccionado!=null
+	}
+	
 	def setNombreDelLugarBuscado(String nombre){
 		 nombreDelLugarBuscado=nombre
 		 ObservableUtils.firePropertyChanged(this," buscarPorNombreDeLugar", buscarPorNombreDeLugar)
@@ -74,10 +79,6 @@ class PuntuableAppModel {
 	def getCantidadDeCalificacionesDelPuntuable(){
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(puntuableSeleccionado)
 	}
-	@Dependencies("puntuableSeleccionado")
-	def getHayPuntuableSeleccionado(){
-		puntuableSeleccionado!=null
-	}
 	
 	def getFechaDeRegistro(){
 		puntuableSeleccionado.fechaDeRegistro
@@ -87,19 +88,16 @@ class PuntuableAppModel {
 		puntuableSeleccionado.nombre
 	}
     @Dependencies("puntuableSeleccionado")
+    def setHabilitado(boolean bool){
+    	puntuableSeleccionado.habilitado=bool
+    	avisarCambiosDeServicios()
+    	avisarCambiosDeLugares()
+    }
+	@Dependencies("puntuableSeleccionado")
 	def getHabilitado(){
 		puntuableSeleccionado.habilitado
 	}
-	
-	@Dependencies("puntuableSeleccionado")
-    def void setHabilitado(Boolean bool){
-		puntuableSeleccionado.habilitado = bool
-		avisarCambiosDeServicios
-		avisarCambiosDeLugares
-	}
-	def getTieneNombreAsignado(){
-		puntuableSeleccionado.nombre!=""
-	}
+
 	@Dependencies("puntuableSeleccionado")
 	def setNombre(String nombreNuevo){
 		administradorDePuntuables.verificarLugaresDuplicados(nombreNuevo)
@@ -155,7 +153,7 @@ class PuntuableAppModel {
 		ObservableUtils.firePropertyChanged(this,"serviciosDeshabilitados",serviciosDeshabilitados)
 		
 	}
-	
+	@Dependencies("puntuableSeleccionado")
 	def verificarSiTieneNombreAsignado(){
 		puntuableSeleccionado.verificarSiTieneNombre
 	}
@@ -163,6 +161,8 @@ class PuntuableAppModel {
 	def getCalificacionesDelPuntuable() {
         administradorCalificacion.calificacionesDelPutuable(puntuableSeleccionado).toList
 	}
+	
+	
 	
 
 }
