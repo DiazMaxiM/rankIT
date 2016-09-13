@@ -126,13 +126,13 @@ def todosLosPuntuables()
 	
 	def verificarLugaresDuplicados(String nombre) {
 		if(isPuntuablesDuplicados(lugares,nombre)){
-			throw new UserException("Ya existe otro Lugar con el mismo nombre "+ nombre)
+			throw new UserException("Ya existe otro Lugar con el nombre "+ nombre)
 		}
 	}
 	
 	def verificarServiciosDuplicados(String nombre) {
 		if(isPuntuablesDuplicados(servicios,nombre)){
-			throw new UserException("Ya existe otro Servicio con el mismo nombre "+ nombre)
+			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
 		}
 	}
 	
