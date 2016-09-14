@@ -1,9 +1,10 @@
 package edu.unq.interfaces.rankit_dominio
 
-import org.joda.time.DateTime
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.List
+import org.joda.time.DateTime
+import org.uqbar.commons.utils.Observable
 
+@Observable
 @Accessors
 class Usuario {
 	private var DateTime fechaDeRegistro
