@@ -22,13 +22,13 @@ class CalificacionAppModel {
 	usuarioLogeado=	usuario
 	}
 	@Dependencies("calificacionSeleccionada")
-	def getPuntos(){
+	def Integer getPuntos(){
 		if (hayCalificacionSeleccionada){
 			return calificacionSeleccionada.puntos
 		}
-		""
+		null
 	}
-	def setPuntos(Integer numero){
+	def void setPuntos(Integer numero){
 		var Integer valor=0;
 		if (numero != null)
 		{
