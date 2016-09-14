@@ -28,18 +28,15 @@ class CalificacionAppModel {
 		}
 		null
 	}
+	
 	def void setPuntos(Integer numero){
 		var Integer valor=0;
-		if (numero != null)
-		{
+		if (numero != null){
 			valor=numero
 		}
 		 calificacionSeleccionada.puntos=valor
 	}
 	
-	def actualizarLista(){
-		listaCalificacionesFiltradas
-}
 	def setNombreUsuarioBusqueda(String nombre){
 		nombreUsuarioBusqueda= nombre
 		ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)		
@@ -49,41 +46,21 @@ class CalificacionAppModel {
 		ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)		
 	}
 	def listaCalificacionesFiltradas(){
-	
-		administradorCalificacion.listaCalificaciones.filter
-		[calificacion |
-		
-		(isNombreEvaluadoVacio && isNombreUsuarioVacio)
-		||
-		(( !isNombreUsuarioVacio && isNombreEvaluadoVacio) && calificacion.usuario.nombre.equals(nombreUsuarioBusqueda))
-		||
-		(( isNombreUsuarioVacio && !isNombreEvaluadoVacio)  && calificacion.evaluado.nombre.equals(nombreEvaluadoBusqueda))
-		||
-		(( !isNombreUsuarioVacio && !isNombreEvaluadoVacio ) && 
-		(calificacion.evaluado.nombre.equals(nombreEvaluadoBusqueda)
-		&& calificacion.usuario.nombre.equals(nombreUsuarioBusqueda)))
-				
-	].toList
-	
-	}
-	def isNombreEvaluadoVacio(){
-		nombreEvaluadoBusqueda == null || nombreEvaluadoBusqueda ==""
-	}
-	def isNombreUsuarioVacio(){
-		nombreUsuarioBusqueda == null || nombreUsuarioBusqueda ==""
+		administradorCalificacion.filtrarCalificaciones(nombreEvaluadoBusqueda,nombreUsuarioBusqueda)
 	}
 	
 	def void setCalificacionSeleccionada(Calificacion calificacionSel){
 		calificacionSeleccionada = calificacionSel
 		if (calificacionSel!=null){
-		ObservableUtils.firePropertyChanged(this,"contenidoOfensivo",contenidoOfensivo)		}		
+			ObservableUtils.firePropertyChanged(this,"contenidoOfensivo",contenidoOfensivo)
+		}		
 	}
 	def Boolean getContenidoOfensivo(){
 		calificacionSeleccionada.contenidoOfensivo
 	}
 
 	def void setContenidoOfensivo(Boolean bool){
-		calificacionSeleccionada.contenidoOfensivo = bool
+		administradorCalificacion.contenidoOfensivo(calificacionSeleccionada,bool) 
 		actualizarEstadoSituacion
 	}
 	@Dependencies("calificacionSeleccionada")
@@ -98,10 +75,9 @@ class CalificacionAppModel {
  		administradorCalificacion.getCalificacionesOfensivas()
 	}
 	
-	def eliminarCalificacionSeleccionada()
-	{
-	administradorCalificacion.eliminarCalificacion(calificacionSeleccionada)
-	actualizarEstadoSituacion
+	def eliminarCalificacionSeleccionada(){
+		administradorCalificacion.eliminarCalificacion(calificacionSeleccionada)
+		actualizarEstadoSituacion
 	}
 
 	def agregarCalificacion(Calificacion nuevaCalificacion){
@@ -110,9 +86,9 @@ class CalificacionAppModel {
 	}
 	
 	def actualizarEstadoSituacion(){	
-	ObservableUtils.firePropertyChanged(this,"puntos",puntos)
-	ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)
-	ObservableUtils.firePropertyChanged(this,"calificacionesRegistradas",calificacionesRegistradas)
-	ObservableUtils.firePropertyChanged(this,"calificacionesOfensivas",calificacionesOfensivas)	
+		ObservableUtils.firePropertyChanged(this,"puntos",puntos)
+		ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)
+		ObservableUtils.firePropertyChanged(this,"calificacionesRegistradas",calificacionesRegistradas)
+		ObservableUtils.firePropertyChanged(this,"calificacionesOfensivas",calificacionesOfensivas)	
 	}
 }

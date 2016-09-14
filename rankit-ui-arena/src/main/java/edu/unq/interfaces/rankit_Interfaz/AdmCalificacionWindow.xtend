@@ -250,7 +250,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]
 		new Button(contenedorParametrosPanel)=> [
 			caption = "Buscar"
-			onClick [this.modelObject.actualizarLista()]
+			onClick [this.modelObject.listaCalificacionesFiltradas()]
 		]	
 	}	
 	
