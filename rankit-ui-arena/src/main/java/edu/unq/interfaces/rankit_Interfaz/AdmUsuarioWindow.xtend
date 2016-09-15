@@ -211,7 +211,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	
 	def revisarPublicaciones() 
 	{
-		new AdmCalificacionWindow(this, this.modelObject.administradorDeCalificaciones)
+		//new AdmCalificacionWindow(this, this.modelObject.administradorDeCalificaciones)
 	}
 	
 	

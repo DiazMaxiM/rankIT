@@ -11,11 +11,12 @@ class UsuarioAppModel
 {
 	private AdmUsuarios todosLosUsuarios
 	private Usuario usuarioSeleccionado
-	private CalificacionAppModel administradorDeCalificaciones
+	private AdmCalificaciones administradorDeCalificaciones
 	
-	new (AdmUsuarios usuarios)
+	new (AdmCalificaciones admCalificaciones,AdmUsuarios admUsuarios)
 	{
-		setTodosLosUsuarios(usuarios)
+		this.todosLosUsuarios= admUsuarios
+		this.administradorDeCalificaciones =admCalificaciones
 	}
 	
 	def cantidadDeUsuariosRegistrados()
