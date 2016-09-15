@@ -23,6 +23,7 @@ import edu.unq.interfaces.rankit_dominio.Usuario
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 import edu.unq.interfaces.rankit_dominio.Calificacion
 import java.util.List
+import edu.unq.interfaces.component.LabelCheckBox
 
 class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	
@@ -161,11 +162,12 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel>{
 	def habilitarPuntuable(Panel panel) {
 		var panelHabilitar=new Panel(panel)
 		panelHabilitar.layout = new HorizontalLayout
-		new CheckBox(panel)=> [
-		  bindEnabledToProperty("hayPuntuableSeleccionado")
-		  bindValueToProperty("habilitado")
-		]
-		new Label(panel).text= "Habilitado"
+	     new LabelCheckBox(panelHabilitar)
+	     .setText("Habilitado")
+	     .bindEnabledToProperty("hayPuntuableSeleccionado")
+		 .bindValueToProperty("habilitado")
+	
+	
 	}
 	
 	def  calificacionesPuntuable(Panel panel) {
