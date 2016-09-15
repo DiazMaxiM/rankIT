@@ -11,11 +11,6 @@ class AdmUsuarios
 {
 	private List<Usuario> usuarios = new ArrayList<Usuario>()
 	
-	
-	def getUsuarios(){
-		usuarios
-	}
-	
 	def void agregarUsuarioNuevo(Usuario usuarioNuevo) 
 	{
 		getUsuarios.add (usuarioNuevo)
@@ -35,7 +30,7 @@ class AdmUsuarios
 	
 	def cantidadTotalDeUsuarios()
 	{
-		getUsuarios.size()
+		usuarios.size()
 	}
 	
 	def usuariosActivos() 
@@ -66,6 +61,11 @@ class AdmUsuarios
 	def usuariosBaneados() 
 	{
 		getUsuarios.filter[usuario | usuario.baneado].toList
+	}
+	
+	def buscarUsuarioDeNombre (String nombreABuscar) 
+	{
+		usuarios.filter[usuario | usuario.seLlama(nombreABuscar)].toList
 	}
 	
 }
