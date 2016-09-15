@@ -16,6 +16,7 @@ import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.widgets.CheckBox
 import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 
 class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel> 
 {
@@ -70,7 +71,18 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new Button(opcionesDeEdicion)=> 
 		[
 			caption = "Revisar Publicaciones"
-			onClick([|this.revisarPublicaciones])
+			onClick([|
+				new AdmCalificacionWindow(
+					this,
+					new CalificacionAppModel(
+											this.modelObject.administradorDeCalificaciones,
+											this.modelObject.admDePuntuables,
+											this.modelObject.usuarioLogeado).
+											 filtradoObligatorioPorUsuario(this.modelObject.usuarioSeleccionado)).open
+												
+				
+				
+			])
 //			bindEnabled(getUsuarioSeleccionado)
 //			
 //			caption = "Revisar publicaciones"
@@ -209,15 +221,10 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	//  Acciones
 	// ********************************************************
 	
-	def revisarPublicaciones() 
-	{
-		new AdmCalificacionWindow(this, this.modelObject.administradorDeCalificaciones)
-	}
 	
 	
 	override protected addActions(Panel actionsPanel) 
 	{
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 //	override protected createFormPanel(Panel mainPanel) {

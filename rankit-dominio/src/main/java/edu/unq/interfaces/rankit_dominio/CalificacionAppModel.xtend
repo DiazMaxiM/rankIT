@@ -15,6 +15,9 @@ class CalificacionAppModel {
 	AdmPuntuables admPuntuables;
 	String nombreUsuarioBusqueda;
 	String nombreEvaluadoBusqueda;
+	Boolean habilitadoEvaluadoBusqueda=true;
+	Boolean habilitadoUsuarioBusqueda=true;
+	
 
 	new(AdmCalificaciones calificaciones, AdmPuntuables puntuables, Usuario usuario) {
 		administradorCalificacion = calificaciones
@@ -101,5 +104,17 @@ class CalificacionAppModel {
 	def crearCalificacion() {
 		agregarCalificacion(new Calificacion(this.usuarioLogeado))
 	}
+	
+	def  filtradoObligatorioPorPuntuable(Puntuable puntuable) {
+		nombreEvaluadoBusqueda = puntuable.nombre
+		habilitadoEvaluadoBusqueda=false
+		this
+	}
+	def  filtradoObligatorioPorUsuario(Usuario usuario) {
+		nombreEvaluadoBusqueda = usuario.nombre
+		habilitadoUsuarioBusqueda=false
+		this
+	}
+
 	
 }

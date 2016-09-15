@@ -165,15 +165,7 @@ class PuntuableAppModel {
 	}
 	
 	def mostrarCalificacionesDelPuntuable() {
-		var admPuntuables = new AdmPuntuables
-		admPuntuables.agregarLugar(puntuableSeleccionado)
-		var admCalificaciones = new AdmCalificaciones
-		admCalificaciones.agregarTodasLasCalificaciones(calificacionesDelPuntuable)
-		var usuario = new Usuario
-		var appModel = new CalificacionAppModel(admCalificaciones, admPuntuables, usuario)
-		new AdmCalificacionWindow(this, appModel) => [
-			open
-		]
+		
 	}
 	
 	

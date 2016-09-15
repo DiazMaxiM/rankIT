@@ -240,6 +240,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		
 		new TextBox(contenedorParametrosPanel)=> [
 			bindValueToProperty("nombreUsuarioBusqueda")
+			bindEnabledToProperty("habilitadoUsuarioBusqueda")
 		]	
 		
 		new Label(contenedorParametrosPanel)=> [
@@ -247,6 +248,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]	
 		new TextBox(contenedorParametrosPanel)=> [
 			bindValueToProperty("nombreEvaluadoBusqueda")
+			bindEnabledToProperty("habilitadoEvaluadoBusqueda")
 		]
 		new Button(contenedorParametrosPanel)=> [
 			caption = "Buscar"

@@ -198,7 +198,12 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 			caption = "Revisar Calificaciones"
 			bindEnabledToProperty("hayPuntuableSeleccionado")
 			onClick [ |
-				this.modelObject.mostrarCalificacionesDelPuntuable()
+				new AdmCalificacionWindow(
+					this,
+					new CalificacionAppModel(this.modelObject.administradorCalificacion,
+											 this.modelObject.administradorDePuntuables,
+											 this.modelObject.usuarioLogeado).
+											 filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)).open
 			]
 			width = 200
 		]
