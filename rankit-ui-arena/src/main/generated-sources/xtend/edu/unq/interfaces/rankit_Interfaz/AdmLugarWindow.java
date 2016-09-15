@@ -44,6 +44,7 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     this.setTaskDescription("Resumen de situación");
   }
   
+  @Override
   protected void createFormPanel(final Panel panelPrincipal) {
     final Panel panel = new Panel(panelPrincipal);
     this.resumenDeSituacion(panel);
@@ -68,17 +69,13 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     Label _xblockexpression = null;
     {
       Label _label = new Label(panel);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.setText("Deshabilitados: ");
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.setText("Deshabilitados: ");
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
       Label _label_1 = new Label(panel);
-      final Procedure1<Label> _function_1 = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.<Object, ControlBuilder>bindValueToProperty("lugaresDeshabilitados");
-        }
+      final Procedure1<Label> _function_1 = (Label it) -> {
+        it.<Object, ControlBuilder>bindValueToProperty("lugaresDeshabilitados");
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function_1);
     }
@@ -89,17 +86,13 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     Label _xblockexpression = null;
     {
       Label _label = new Label(panel);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.setText("Habilitados: ");
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.setText("Habilitados: ");
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
       Label _label_1 = new Label(panel);
-      final Procedure1<Label> _function_1 = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.<Object, ControlBuilder>bindValueToProperty("lugaresHabilitados");
-        }
+      final Procedure1<Label> _function_1 = (Label it) -> {
+        it.<Object, ControlBuilder>bindValueToProperty("lugaresHabilitados");
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function_1);
     }
@@ -110,17 +103,13 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     Label _xblockexpression = null;
     {
       Label _label = new Label(panel);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.setText("Lugares Inscriptos: ");
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.setText("Lugares Inscriptos: ");
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
       Label _label_1 = new Label(panel);
-      final Procedure1<Label> _function_1 = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.<Object, ControlBuilder>bindValueToProperty("lugaresInscriptos");
-        }
+      final Procedure1<Label> _function_1 = (Label it) -> {
+        it.<Object, ControlBuilder>bindValueToProperty("lugaresInscriptos");
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function_1);
     }
@@ -144,11 +133,9 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       ColumnLayout _columnLayout = new ColumnLayout(2);
       panelTitulo.setLayout(_columnLayout);
       Label _label = new Label(panelTitulo);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.setText("Lugares");
-          it.setFontSize(15);
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.setText("Lugares");
+        it.setFontSize(15);
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
     }
@@ -164,28 +151,22 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       Label _label = new Label(panelDatos);
       _label.setText("Buscar por nombre de Lugar:");
       TextBox _textBox = new TextBox(panelDatos);
-      final Procedure1<TextBox> _function = new Procedure1<TextBox>() {
-        public void apply(final TextBox it) {
-          it.<Object, ControlBuilder>bindValueToProperty("nombreDelLugarBuscado");
-          it.setWidth(100);
-        }
+      final Procedure1<TextBox> _function = (TextBox it) -> {
+        it.<Object, ControlBuilder>bindValueToProperty("nombreDelLugarBuscado");
+        it.setWidth(100);
       };
       ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function);
       Button _button = new Button(panelDatos);
-      final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Buscar");
-          it.setWidth(100);
-          final Action _function = new Action() {
-            public void execute() {
-              PuntuableAppModel _modelObject = AdmLugarWindow.this.getModelObject();
-              _modelObject.buscarPorNombreDeLugar();
-            }
-          };
-          Button _onClick = it.onClick(_function);
-          Button _setAsDefault = _onClick.setAsDefault();
-          _setAsDefault.disableOnError();
-        }
+      final Procedure1<Button> _function_1 = (Button it) -> {
+        it.setCaption("Buscar");
+        it.setWidth(100);
+        final Action _function_2 = () -> {
+          PuntuableAppModel _modelObject = this.getModelObject();
+          _modelObject.buscarPorNombreDeLugar();
+        };
+        Button _onClick = it.onClick(_function_2);
+        Button _setAsDefault = _onClick.setAsDefault();
+        _setAsDefault.disableOnError();
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
     }
@@ -227,20 +208,16 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       ColumnLayout _columnLayout = new ColumnLayout(2);
       panelNombre.setLayout(_columnLayout);
       Label _label = new Label(panelNombre);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.setText("Nombre: ");
-          it.setFontSize(13);
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.setText("Nombre: ");
+        it.setFontSize(13);
       };
       ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
       Label _label_1 = new Label(panelNombre);
-      final Procedure1<Label> _function_1 = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          ObservableValue<Control, ControlBuilder> _value = it.<ControlBuilder>value();
-          ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado.nombre");
-          it.setFontSize(13);
-        }
+      final Procedure1<Label> _function_1 = (Label it) -> {
+        ObservableValue<Control, ControlBuilder> _value = it.<ControlBuilder>value();
+        ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado.nombre");
+        it.setFontSize(13);
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function_1);
     }
@@ -257,11 +234,9 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       Label _label = new Label(panel);
       _label.setText("Nombre:");
       TextBox _textBox = new TextBox(panel);
-      final Procedure1<TextBox> _function = new Procedure1<TextBox>() {
-        public void apply(final TextBox it) {
-          it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          it.<Object, ControlBuilder>bindValueToProperty("nombre");
-        }
+      final Procedure1<TextBox> _function = (TextBox it) -> {
+        it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
+        it.<Object, ControlBuilder>bindValueToProperty("nombre");
       };
       _xblockexpression = ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function);
     }
@@ -275,11 +250,9 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
       panelHabilitar.setLayout(_horizontalLayout);
       CheckBox _checkBox = new CheckBox(panel);
-      final Procedure1<CheckBox> _function = new Procedure1<CheckBox>() {
-        public void apply(final CheckBox it) {
-          it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          it.<Object, ControlBuilder>bindValueToProperty("habilitado");
-        }
+      final Procedure1<CheckBox> _function = (CheckBox it) -> {
+        it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
+        it.<Object, ControlBuilder>bindValueToProperty("habilitado");
       };
       ObjectExtensions.<CheckBox>operator_doubleArrow(_checkBox, _function);
       Label _label = new Label(panel);
@@ -306,11 +279,9 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       Label _label = new Label(panelRating);
       _label.setText("Ranting promedio:");
       Label _label_1 = new Label(panelRating);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          it.<Object, ControlBuilder>bindValueToProperty("ratingPromedio");
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
+        it.<Object, ControlBuilder>bindValueToProperty("ratingPromedio");
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function);
     }
@@ -326,11 +297,9 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       Label _label = new Label(panelCalificaciones);
       _label.setText("Calificaciones:");
       Label _label_1 = new Label(panelCalificaciones);
-      final Procedure1<Label> _function = new Procedure1<Label>() {
-        public void apply(final Label it) {
-          it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          it.<Object, ControlBuilder>bindValueToProperty("cantidadDeCalificacionesDelPuntuable");
-        }
+      final Procedure1<Label> _function = (Label it) -> {
+        it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
+        it.<Object, ControlBuilder>bindValueToProperty("cantidadDeCalificacionesDelPuntuable");
       };
       _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label_1, _function);
     }
@@ -341,38 +310,30 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     Button _xblockexpression = null;
     {
       Button _button = new Button(panel);
-      final Procedure1<Button> _function = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Revisar Calificaciones");
-          it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          final Action _function = new Action() {
-            public void execute() {
-              PuntuableAppModel _modelObject = AdmLugarWindow.this.getModelObject();
-              List<Calificacion> _calificacionesDelPuntuable = _modelObject.getCalificacionesDelPuntuable();
-              PuntuableAppModel _modelObject_1 = AdmLugarWindow.this.getModelObject();
-              Puntuable _puntuableSeleccionado = _modelObject_1.getPuntuableSeleccionado();
-              AdmLugarWindow.this.mostrarCalificacionesDelPuntuable(_calificacionesDelPuntuable, _puntuableSeleccionado);
-            }
-          };
-          it.onClick(_function);
-          it.setWidth(200);
-        }
+      final Procedure1<Button> _function = (Button it) -> {
+        it.setCaption("Revisar Calificaciones");
+        it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
+        final Action _function_1 = () -> {
+          PuntuableAppModel _modelObject = this.getModelObject();
+          List<Calificacion> _calificacionesDelPuntuable = _modelObject.getCalificacionesDelPuntuable();
+          PuntuableAppModel _modelObject_1 = this.getModelObject();
+          Puntuable _puntuableSeleccionado = _modelObject_1.getPuntuableSeleccionado();
+          this.mostrarCalificacionesDelPuntuable(_calificacionesDelPuntuable, _puntuableSeleccionado);
+        };
+        it.onClick(_function_1);
+        it.setWidth(200);
       };
       ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
       Button _button_1 = new Button(panel);
-      final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Eliminar");
-          it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
-          final Action _function = new Action() {
-            public void execute() {
-              PuntuableAppModel _modelObject = AdmLugarWindow.this.getModelObject();
-              _modelObject.eliminarLugar();
-            }
-          };
-          it.onClick(_function);
-          it.setWidth(200);
-        }
+      final Procedure1<Button> _function_1 = (Button it) -> {
+        it.setCaption("Eliminar");
+        it.<ControlBuilder>bindEnabledToProperty("hayPuntuableSeleccionado");
+        final Action _function_2 = () -> {
+          PuntuableAppModel _modelObject = this.getModelObject();
+          _modelObject.eliminarLugar();
+        };
+        it.onClick(_function_2);
+        it.setWidth(200);
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
     }
@@ -394,60 +355,48 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     {
       final Panel panelTabla = new Panel(panel);
       Table<Puntuable> _table = new Table<Puntuable>(panelTabla, Puntuable.class);
-      final Procedure1<Table<Puntuable>> _function = new Procedure1<Table<Puntuable>>() {
-        public void apply(final Table<Puntuable> it) {
-          ViewObservable<Table<Puntuable>, TableBuilder<Puntuable>> _items = it.items();
-          ArenaXtendExtensions.operator_spaceship(_items, "administradorDePuntuables.lugares");
-          ObservableValue<Control, ControlBuilder> _value = it.<ControlBuilder>value();
-          ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado");
-          it.setWidth(200);
-          Column<Puntuable> _column = new Column<Puntuable>(it);
-          final Procedure1<Column<Puntuable>> _function = new Procedure1<Column<Puntuable>>() {
-            public void apply(final Column<Puntuable> it) {
-              it.setTitle("Fecha De Registro");
-              it.setFixedSize(150);
-              PropertyLabelProvider<Puntuable> _bindContentsToProperty = it.bindContentsToProperty("fechaDeRegistro");
-              final Transformer<Date, String> _function = new Transformer<Date, String>() {
-                public String transform(final Date fecha) {
-                  SimpleDateFormat _simpleDateFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm");
-                  return _simpleDateFormat.format(fecha);
-                }
-              };
-              _bindContentsToProperty.setTransformer(_function);
-            }
+      final Procedure1<Table<Puntuable>> _function = (Table<Puntuable> it) -> {
+        ViewObservable<Table<Puntuable>, TableBuilder<Puntuable>> _items = it.items();
+        ArenaXtendExtensions.operator_spaceship(_items, "administradorDePuntuables.lugares");
+        ObservableValue<Control, ControlBuilder> _value = it.<ControlBuilder>value();
+        ArenaXtendExtensions.operator_spaceship(_value, "puntuableSeleccionado");
+        it.setWidth(200);
+        Column<Puntuable> _column = new Column<Puntuable>(it);
+        final Procedure1<Column<Puntuable>> _function_1 = (Column<Puntuable> it_1) -> {
+          it_1.setTitle("Fecha De Registro");
+          it_1.setFixedSize(150);
+          PropertyLabelProvider<Puntuable> _bindContentsToProperty = it_1.bindContentsToProperty("fechaDeRegistro");
+          final Transformer<Date, String> _function_2 = (Date fecha) -> {
+            SimpleDateFormat _simpleDateFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+            return _simpleDateFormat.format(fecha);
           };
-          ObjectExtensions.<Column<Puntuable>>operator_doubleArrow(_column, _function);
-          Column<Puntuable> _column_1 = new Column<Puntuable>(it);
-          final Procedure1<Column<Puntuable>> _function_1 = new Procedure1<Column<Puntuable>>() {
-            public void apply(final Column<Puntuable> it) {
-              it.setTitle("Nombre");
-              it.setFixedSize(150);
-              it.bindContentsToProperty("nombre");
+          _bindContentsToProperty.setTransformer(_function_2);
+        };
+        ObjectExtensions.<Column<Puntuable>>operator_doubleArrow(_column, _function_1);
+        Column<Puntuable> _column_1 = new Column<Puntuable>(it);
+        final Procedure1<Column<Puntuable>> _function_2 = (Column<Puntuable> it_1) -> {
+          it_1.setTitle("Nombre");
+          it_1.setFixedSize(150);
+          it_1.bindContentsToProperty("nombre");
+        };
+        ObjectExtensions.<Column<Puntuable>>operator_doubleArrow(_column_1, _function_2);
+        Column<Puntuable> _column_2 = new Column<Puntuable>(it);
+        final Procedure1<Column<Puntuable>> _function_3 = (Column<Puntuable> it_1) -> {
+          it_1.setTitle("Habilitado");
+          it_1.setFixedSize(150);
+          PropertyLabelProvider<Puntuable> _bindContentsToProperty = it_1.bindContentsToProperty("habilitado");
+          final Transformer<Boolean, String> _function_4 = (Boolean isHabilitado) -> {
+            String _xifexpression = null;
+            if ((isHabilitado).booleanValue()) {
+              _xifexpression = "SI";
+            } else {
+              _xifexpression = "NO";
             }
+            return _xifexpression;
           };
-          ObjectExtensions.<Column<Puntuable>>operator_doubleArrow(_column_1, _function_1);
-          Column<Puntuable> _column_2 = new Column<Puntuable>(it);
-          final Procedure1<Column<Puntuable>> _function_2 = new Procedure1<Column<Puntuable>>() {
-            public void apply(final Column<Puntuable> it) {
-              it.setTitle("Habilitado");
-              it.setFixedSize(150);
-              PropertyLabelProvider<Puntuable> _bindContentsToProperty = it.bindContentsToProperty("habilitado");
-              final Transformer<Boolean, String> _function = new Transformer<Boolean, String>() {
-                public String transform(final Boolean isHabilitado) {
-                  String _xifexpression = null;
-                  if ((isHabilitado).booleanValue()) {
-                    _xifexpression = "SI";
-                  } else {
-                    _xifexpression = "NO";
-                  }
-                  return _xifexpression;
-                }
-              };
-              _bindContentsToProperty.setTransformer(_function);
-            }
-          };
-          ObjectExtensions.<Column<Puntuable>>operator_doubleArrow(_column_2, _function_2);
-        }
+          _bindContentsToProperty.setTransformer(_function_4);
+        };
+        ObjectExtensions.<Column<Puntuable>>operator_doubleArrow(_column_2, _function_3);
       };
       _xblockexpression = ObjectExtensions.<Table<Puntuable>>operator_doubleArrow(_table, _function);
     }
@@ -459,17 +408,13 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
     {
       final Panel panelBotones = new Panel(panel);
       Button _button = new Button(panelBotones);
-      final Procedure1<Button> _function = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Nuevo");
-          final Action _function = new Action() {
-            public void execute() {
-              PuntuableAppModel _modelObject = AdmLugarWindow.this.getModelObject();
-              _modelObject.nuevoLugar();
-            }
-          };
-          it.onClick(_function);
-        }
+      final Procedure1<Button> _function = (Button it) -> {
+        it.setCaption("Nuevo");
+        final Action _function_1 = () -> {
+          PuntuableAppModel _modelObject = this.getModelObject();
+          _modelObject.nuevoLugar();
+        };
+        it.onClick(_function_1);
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
     }
@@ -486,16 +431,15 @@ public class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
       Usuario usuario = new Usuario();
       CalificacionAppModel appModel = new CalificacionAppModel(admCalificaciones, admPuntuables, usuario);
       AdmCalificacionWindow _admCalificacionWindow = new AdmCalificacionWindow(this, appModel);
-      final Procedure1<AdmCalificacionWindow> _function = new Procedure1<AdmCalificacionWindow>() {
-        public void apply(final AdmCalificacionWindow it) {
-          it.open();
-        }
+      final Procedure1<AdmCalificacionWindow> _function = (AdmCalificacionWindow it) -> {
+        it.open();
       };
       _xblockexpression = ObjectExtensions.<AdmCalificacionWindow>operator_doubleArrow(_admCalificacionWindow, _function);
     }
     return _xblockexpression;
   }
   
+  @Override
   protected void addActions(final Panel panel) {
   }
 }

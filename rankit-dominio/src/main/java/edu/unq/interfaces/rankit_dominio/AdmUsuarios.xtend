@@ -11,10 +11,10 @@ class AdmUsuarios
 {
 	private List<Usuario> usuarios = new ArrayList<Usuario>()
 	
-//	new (List<Usuario> usuarios)
-//	{
-//		usuarios.addAll(usuarios)
-//	}
+	new (List<Usuario> usuarios)
+	{
+		usuarios.addAll(usuarios)
+	}
 	
 	
 	def void agregarUsuarioNuevo(Usuario usuarioNuevo) 

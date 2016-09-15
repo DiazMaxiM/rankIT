@@ -38,7 +38,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		val panel= new Panel(panelPrincipal)
 	   	this.panelDeSituacionActual(panel)
 	   	this.panelDeBusqueda(panel)
-	    this.crearEdicionDeServicioSeleccionado(panel)
+	    this.panelDeTablaYEdicion(panel)
 	}
 	
 	def panelDeSituacionActual(Panel panelPrincipal) 
@@ -79,7 +79,6 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	def panelDeBusqueda (Panel panelPrincipal)
 	{
 		var busqueda= new Panel(panelPrincipal)
-//		this.titulo(panelDeBusqueda)
 		new Label(busqueda)=> [ text = "Usuarios" fontSize = 15 ]
 		
 		busqueda.layout=new ColumnLayout(3)
@@ -92,25 +91,16 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
         ]
 	}
 	
-//	def titulo(Panel panel){
-//		var panelTitulo=new Panel(panel)
-//		panelTitulo.layout=new ColumnLayout(2)
-//		new Label(panelTitulo) => [
-//		text = "Usuarios"
-//		fontSize = 15
-//        ]
-//	}
-	
-	def crearEdicionDeServicioSeleccionado(Panel panelPrincipal) 
+	def panelDeTablaYEdicion(Panel panelPrincipal) 
 	{
 		val tablaYEdicion= new Panel(panelPrincipal)
        tablaYEdicion.layout = new ColumnLayout(2)
    
         this.panelDeTablaDeResultado(tablaYEdicion)
-        this.panelDerecho(tablaYEdicion)
+        this.panelDeEdicionDeUsuario(tablaYEdicion)
 	}
 	
-	def panelDerecho(Panel panelDeTablaYEdicion) 
+	def panelDeEdicionDeUsuario(Panel panelDeTablaYEdicion) 
 	{
 		val panelDeEdicion = new Panel(panelDeTablaYEdicion)
 		panelDeEdicion.layout = new VerticalLayout
@@ -278,12 +268,11 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		 todasLasPublicaciones.agregarTodasLasCalificaciones(publicaciones)
 		 var usuarioNuevo = new Usuario
 		 var appModel= new CalificacionAppModel(todasLasPublicaciones, todosLosUsuarios, usuarioNuevo)
+         // Necesito un CalificacionAppModel que tome un AdmUsuarios como parametro
          new AdmCalificacionWindow(this,appModel) => [open]
 	}
 
 	override protected addActions(Panel panel) {
 	}
-	
-
 	
 }
