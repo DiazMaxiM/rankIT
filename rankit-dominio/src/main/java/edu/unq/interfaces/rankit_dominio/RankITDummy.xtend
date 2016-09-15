@@ -57,25 +57,20 @@ class RankITDummy {
 			nombre="Servicio 2"
 		]
 		
-		val calificacion1 = new Calificacion()=>[
+		val calificacion1 = new Calificacion(usuarioMaxi)=>[
 		
-		usuario = usuarioMaxi
 		contenidoOfensivo=true
 		puntos=15
 		detalle="Detalle Calififcacion Lugar 1"
 		evaluado = lugarParaCalificacion1
 		]
-		val calificacion2 = new Calificacion()=>[
-		
-		usuario = usuarioMaxi
+		val calificacion2 = new Calificacion(usuarioMaxi)=>[
 		contenidoOfensivo=false
 		puntos=15
 		detalle="Detalle Calififcacion Servicio 1"
 		evaluado = servicioParaCalificacion1
 		]
-		val calificacion3 = new Calificacion()=>[
-		
-		usuario = usuarioLiza
+		val calificacion3 = new Calificacion(usuarioLiza)=>[
 		contenidoOfensivo=false
 		puntos=5
 		detalle="Detalle Calififcacion Servicio 1"

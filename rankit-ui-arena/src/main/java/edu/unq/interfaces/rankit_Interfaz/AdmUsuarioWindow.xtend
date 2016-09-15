@@ -217,7 +217,6 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	
 	override protected addActions(Panel actionsPanel) 
 	{
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 //	override protected createFormPanel(Panel mainPanel) {

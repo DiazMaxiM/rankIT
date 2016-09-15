@@ -16,8 +16,6 @@ class RankIT {
 	 new(){
 		this.usuarios= newArrayList	
 	}
-
-	
 	
 	def void agregarUsuario(Usuario usuario){
 		usuarios.add(usuario);

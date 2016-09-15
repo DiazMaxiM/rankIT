@@ -4,6 +4,14 @@ import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 
+/**
+ * @author Maximiliano Diaz
+ * @version 1.0
+ * 
+ * Esta clase representa a una Calificacion de un Usuario
+ * 
+ */
+
 @Observable
 @Accessors
 class Calificacion {
@@ -14,6 +22,12 @@ class Calificacion {
 	private Puntuable evaluado 
 	private Usuario usuario
 	
+	/**
+	 * @param usuario Usuario que Califica
+	 * 
+	 * Constructor de una nueva calificacion
+	 */
+	
 	new(Usuario usuario){
 		this.contenidoOfensivo=false
 		this.detalle=""
@@ -22,15 +36,9 @@ class Calificacion {
 		this.evaluado= new PuntuableNull()
 		this.usuario = usuario
 	}
-	
-	new() {
-		this.contenidoOfensivo=false
-		this.detalle=""
-		this.fecha=new Date() 
-		this.puntos=0
-		this.evaluado=null  
-		
-		  }
+	/**
+	 * TODO : REVISAR TODO ESTO XQ ES RARO
+	 */
 	
 	def boolean esCalificacionOfensiva() {
 		contenidoOfensivo.equals(true)
