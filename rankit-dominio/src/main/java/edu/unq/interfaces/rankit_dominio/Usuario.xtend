@@ -3,17 +3,19 @@ package edu.unq.interfaces.rankit_dominio
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.DateTime
 import org.uqbar.commons.utils.Observable
+import java.util.Date
 
 @Observable
 @Accessors
 class Usuario {
-	private var DateTime fechaDeRegistro
+	private var Date fechaDeRegistro
 	private var String nombre 
 	private var String password
 	private boolean activo
 	private boolean baneado
+	
 	new() {
-		this.fechaDeRegistro= new DateTime
+		this.fechaDeRegistro= new Date
 		this.nombre="NN"
 		this.password="123"
 		this.activo=false
@@ -49,5 +51,16 @@ class Usuario {
 	
 	def boolean isActivo() {
 		activo
-	}	
+	}
+	
+	def seLlama(String nombreAComparar) 
+	{
+		nombre.equals(nombreAComparar)
+	}
+	
+	def isBaneado ()
+	{
+		baneado
+	}
+	
 }
