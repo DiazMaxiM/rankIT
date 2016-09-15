@@ -20,6 +20,7 @@ class PuntuableAppModel {
 	new(AdmPuntuables adm1, AdmCalificaciones adm2){
 		this.administradorDePuntuables= adm1
 		this.administradorCalificacion=adm2
+	
 		
 	}
 	@Dependencies("puntuableSeleccionado")
@@ -50,7 +51,7 @@ class PuntuableAppModel {
 	}
 	
 	def nuevoLugar() {
-		var lugar = new Lugar
+		var lugar = new Puntuable
 		administradorDePuntuables.agregarLugar(lugar)
 		avisarCambiosDeLugares
 		lugar
@@ -62,7 +63,7 @@ class PuntuableAppModel {
 	}
 	
 	def nuevoServicio() {
-		var servicio = new Servicio
+		var servicio = new Puntuable
 		administradorDePuntuables.agregarServicio(servicio)
 		avisarCambiosDeServicios
 		servicio

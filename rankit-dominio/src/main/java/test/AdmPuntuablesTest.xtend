@@ -1,9 +1,8 @@
 package test
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
-import edu.unq.interfaces.rankit_dominio.Lugar
-import edu.unq.interfaces.rankit_dominio.Servicio
 import org.junit.Test
 import static org.junit.Assert.*;
+import edu.unq.interfaces.rankit_dominio.Puntuable
 
 class AdmPuntuablesTest {
 	
@@ -14,9 +13,9 @@ class AdmPuntuablesTest {
 	 @Test
 	 def lugaresInscriptos(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	 	admPuntuables.agregarLugar(lugar1)
 	 	admPuntuables.agregarLugar(lugar2)
 	 	admPuntuables.agregarLugar(lugar3)
@@ -31,9 +30,9 @@ class AdmPuntuablesTest {
 	 @Test
 	 def serviciosInscriptos(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -47,9 +46,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def lugaresHabilitados(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	 	admPuntuables.agregarLugar(lugar1)
 	 	admPuntuables.agregarLugar(lugar2)
 	 	admPuntuables.agregarLugar(lugar3)
@@ -64,9 +63,9 @@ class AdmPuntuablesTest {
 	 @Test
 	 def serviciosHabilitados(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -82,9 +81,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def lugaresDeshabilitados(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	 	admPuntuables.agregarLugar(lugar1)
 	 	admPuntuables.agregarLugar(lugar2)
 	 	admPuntuables.agregarLugar(lugar3)
@@ -99,9 +98,9 @@ class AdmPuntuablesTest {
 	 @Test
 	 def serviciosDeshabilitados(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -116,9 +115,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def habilitarLugares(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	 	admPuntuables.agregarLugar(lugar1)
 	 	admPuntuables.agregarLugar(lugar2)
 	 	admPuntuables.agregarLugar(lugar3)
@@ -135,9 +134,9 @@ class AdmPuntuablesTest {
 	 @Test
 	 def habilitarServicios(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	    var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -154,9 +153,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def habilitarLugaresYSeActualizaLosLugaresDeshabilitados(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	 	admPuntuables.agregarLugar(lugar1)
 	 	admPuntuables.agregarLugar(lugar2)
 	 	admPuntuables.agregarLugar(lugar3)
@@ -174,9 +173,9 @@ class AdmPuntuablesTest {
 	 @Test
 	 def habilitarServiciosYSeActualizanServiciosDeshabilitados(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	    var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -192,9 +191,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def buscarLugarPorNombre(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	    var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	 	admPuntuables.agregarLugar(lugar1)
 	 	admPuntuables.agregarLugar(lugar2)
 	 	admPuntuables.agregarLugar(lugar3)
@@ -210,9 +209,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def buscarServicioPorNombre(){
 	    var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -228,9 +227,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def buscarLugaresPorLetras(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
@@ -251,9 +250,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def buscarServiciosPorLetras(){
 	    var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -273,9 +272,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def noHayLugarConElNombre(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
@@ -293,9 +292,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def noHayServicioConElNombre(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -313,9 +312,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def noHayLugaresConLasLetras(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
@@ -333,9 +332,9 @@ class AdmPuntuablesTest {
 	 @Test 
 	 def noHayServiciosConElNombre(){
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+        var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
@@ -354,9 +353,9 @@ class AdmPuntuablesTest {
 	 def hayLugaresDuplicados(){
 	 	
 	 	var admPuntuables= new AdmPuntuables()
-	 	var lugar1= new Lugar
-	    var lugar2= new Lugar
-	    var lugar3= new Lugar
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
@@ -376,9 +375,9 @@ class AdmPuntuablesTest {
 	 def hayServiciosDupplicados(){
 	 	
 	 	var admPuntuables= new AdmPuntuables()
-	 	var servicio1= new Servicio
-	    var servicio2= new Servicio
-	    var servicio3= new Servicio
+	 	var servicio1= new Puntuable
+	    var servicio2= new Puntuable
+	    var servicio3= new Puntuable
 	 	admPuntuables.agregarServicio(servicio1)
 	 	admPuntuables.agregarServicio(servicio2)
 	 	admPuntuables.agregarServicio(servicio3)
