@@ -7,7 +7,7 @@ import org.uqbar.commons.model.UserException
 
 @Accessors 
 @Observable
-abstract class Puntuable {
+class Puntuable {
 	 
 	 private var Date fechaDeRegistro 
 	 private var String nombre

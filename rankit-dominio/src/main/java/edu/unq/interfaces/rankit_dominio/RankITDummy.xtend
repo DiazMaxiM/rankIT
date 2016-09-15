@@ -40,19 +40,19 @@ class RankITDummy {
 			password = "Rosali"
 			
 		];
-		val lugarParaCalificacion1 = new Lugar =>[
+		val lugarParaCalificacion1 = new Puntuable =>[
 			habilitado=true
 			nombre="Lugar 1"
 		]
-		val lugar2 = new Lugar =>[
+		val lugar2 = new Puntuable =>[
 			habilitado=true
 			nombre="Lugar 2"
 		]
-		val servicioParaCalificacion1 = new Servicio =>[
+		val servicioParaCalificacion1 = new Puntuable =>[
 			habilitado=true
 			nombre="Servicio 1"
 		]
-		val servicio2 = new Servicio =>[
+		val servicio2 = new Puntuable =>[
 			habilitado=true
 			nombre="Servicio 2"
 		]
