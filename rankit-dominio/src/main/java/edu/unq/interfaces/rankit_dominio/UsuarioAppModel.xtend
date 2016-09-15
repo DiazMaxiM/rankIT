@@ -3,83 +3,61 @@ package edu.unq.interfaces.rankit_dominio
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import edu.unq.interfaces.rankit_dominio.Usuario
-import org.uqbar.commons.model.ObservableUtils
-import org.uqbar.commons.utils.Dependencies
 
 @Observable
 @Accessors
 
 class UsuarioAppModel 
 {
-	AdmUsuarios todosLosUsuarios
-	Usuario usuarioSeleccionado
-	String  nombreDeUsuarioABuscar = ""
+	private AdmUsuarios todosLosUsuarios
+	private Usuario usuarioSeleccionado
+	private AdmCalificaciones administradorDeCalificaciones
 	
-	new (AdmUsuarios usuarios)
+	new (AdmCalificaciones admCalificaciones,AdmUsuarios admUsuarios)
 	{
-		setTodosLosUsuarios(usuarios)
+		this.todosLosUsuarios= admUsuarios
+		this.administradorDeCalificaciones =admCalificaciones
 	}
-	
-	def publicacionesDelUsuario() 
-	{
-        usuarioSeleccionado.getPublicaciones
-	}
-	
-	def buscarPorNombreDeUsuario()
-	{
-		todosLosUsuarios.buscarUsuarioConNombre(nombreDeUsuarioABuscar)
-	}
-	
-	def cantidadDeUsuariosRegistrados()
-	{
-		todosLosUsuarios.cantidadTotalDeUsuarios
-	}
-	
-	def cantidadDeUsuariosActivos()
-	{
-		todosLosUsuarios.cantidadTotalDeUsuariosActivos
-	}
-	
-	def cantidadDeUsuariosInactivos()
-	{
-		todosLosUsuarios.cantidadTotalDeUsuariosInactivos
-	}
-	
-	def cantidadDeUsuariosBaneados()
-	{
-		todosLosUsuarios.cantidadTotalDeUsuariosBaneados
-	}
-	
-	def eliminarUsuario() 
-	{
-		todosLosUsuarios.eliminarUsuario(usuarioSeleccionado)
-		// avisarCambiosDeLugares
-	}
-	
-	def void blanquearContrasenha()
-	{
-		todosLosUsuarios.blanquearContrasenha(usuarioSeleccionado)
-		// avisarCambiosDeLugares
-	}
-	
-	def agregarUsuario(Usuario usuarioNuevo) 
-	{
-		todosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
-	}
-	
-	def agregarNuevoUsuario() 
-	{
-		var usuarioNuevo = new Usuario
-		todosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
-		//avisarCambiosDeLugares
-		usuarioNuevo
-	}
-	
-@Dependencies("usuarioSeleccionado")
-
-	def hayUsuarioSeleccionado()
-	{
-		usuarioSeleccionado!=null
-	}
+//	
+//	def cantidadDeUsuariosRegistrados()
+//	{
+//		getTodosLosUsuarios.cantidadTotalDeUsuarios
+//	}
+//	
+//	def cantidadDeUsuariosActivos()
+//	{
+//		getTodosLosUsuarios.cantidadTotalDeUsuariosActivos
+//	}
+//	
+//	def cantidadDeUsuariosInactivos()
+//	{
+//		getTodosLosUsuarios.cantidadTotalDeUsuariosInactivos
+//	}
+//	
+//	def cantidadDeUsuariosBaneados()
+//	{
+//		getTodosLosUsuarios.cantidadTotalDeUsuariosBaneados
+//	}
+//	
+//	def eliminarUsuario() 
+//	{
+//		getTodosLosUsuarios.eliminarUsuario(getUsuarioSeleccionado)
+//	}
+//	
+//	def abrirVentanaDeCalificaciones()
+//	{
+//		// Se pide crear una nueva ventana de calificaciones con el usuario seleccionado como filtro
+//
+//	}
+//	
+//	def void blanquearContrasenha()
+//	{
+//		getTodosLosUsuarios.blanquearContrasenha(getUsuarioSeleccionado)
+//	}
+//	
+//	def agregarUsuario(Usuario usuarioNuevo) 
+//	{
+//		getTodosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+//	}
 
 }

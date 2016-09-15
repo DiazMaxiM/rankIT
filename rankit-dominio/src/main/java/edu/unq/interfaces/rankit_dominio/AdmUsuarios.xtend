@@ -16,6 +16,10 @@ class AdmUsuarios
 		usuarios.addAll(usuarios)
 	}
 	
+	new() {
+		
+	}
+	
 	
 	def void agregarUsuarioNuevo(Usuario usuarioNuevo) 
 	{
