@@ -3,6 +3,8 @@ import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 import org.junit.Test
 import static org.junit.Assert.*;
 import edu.unq.interfaces.rankit_dominio.Puntuable
+import javassist.expr.Cast
+import org.uqbar.commons.model.UserException
 
 class AdmPuntuablesTest {
 	
@@ -12,14 +14,14 @@ class AdmPuntuablesTest {
 	  */
 	 @Test
 	 def lugaresInscriptos(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
-        assertEquals(admPuntuables.lugaresInscriptos,3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
+        assertEquals(admLugares.inscriptos,3)
 	 	
 	 }
 	 
@@ -29,14 +31,14 @@ class AdmPuntuablesTest {
 	  */
 	 @Test
 	 def serviciosInscriptos(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
-        assertEquals(admPuntuables.serviciosInscriptos,3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
+        assertEquals(admServicios.inscriptos,3)
 	 	
 	 }
 	 /**
@@ -45,14 +47,14 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def lugaresHabilitados(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
-        assertEquals(admPuntuables.lugaresHabilitados,0)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
+        assertEquals(admLugares.habilitados,0)
 	 	
 	 }
 	 
@@ -62,14 +64,14 @@ class AdmPuntuablesTest {
 	  */
 	 @Test
 	 def serviciosHabilitados(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
-        assertEquals(admPuntuables.serviciosHabilitados,0)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
+        assertEquals(admServicios.habilitados,0)
 	 	
 	 }
 	 
@@ -80,14 +82,14 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def lugaresDeshabilitados(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
-        assertEquals(admPuntuables.lugaresDeshabilitados,3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
+        assertEquals(admLugares.deshabilitados,3)
 	 	
 	 }
 	 
@@ -97,14 +99,14 @@ class AdmPuntuablesTest {
 	  */
 	 @Test
 	 def serviciosDeshabilitados(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
-        assertEquals(admPuntuables.serviciosDeshabilitados,3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
+        assertEquals(admServicios.deshabilitados,3)
 	 	
 	 }
 	 
@@ -114,16 +116,16 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def habilitarLugares(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	lugar1.habilitado=true
 	 	lugar3.habilitado=true
-        assertEquals(admPuntuables.lugaresHabilitados,2)
+        assertEquals(admLugares.habilitados,2)
 	 	
 	 }
 	 
@@ -133,16 +135,16 @@ class AdmPuntuablesTest {
 	  */
 	 @Test
 	 def habilitarServicios(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	    var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	servicio1.habilitado=true
 	 	servicio3.habilitado=true
-        assertEquals(admPuntuables.serviciosHabilitados,2)
+        assertEquals(admServicios.habilitados,2)
 	 	
 	 }
 	 
@@ -152,16 +154,16 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def habilitarLugaresYSeActualizaLosLugaresDeshabilitados(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	lugar1.habilitado=true
 	 	lugar3.habilitado=true
-        assertEquals(admPuntuables.lugaresDeshabilitados,1)
+        assertEquals(admLugares.deshabilitados,1)
 	 	
 	 }
 	 
@@ -172,16 +174,16 @@ class AdmPuntuablesTest {
 	  */
 	 @Test
 	 def habilitarServiciosYSeActualizanServiciosDeshabilitados(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	    var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	servicio1.habilitado=true
 	 	servicio3.habilitado=true
-        assertEquals(admPuntuables.serviciosDeshabilitados,1)
+        assertEquals(admServicios.deshabilitados,1)
 	 	
 	 }
 	 /**
@@ -190,15 +192,15 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def buscarLugarPorNombre(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	    var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admPuntuables.buscarLugares("").size,3)
+	 	assertEquals(admLugares.buscar("").size,3)
 	 	
 	 }
 	 
@@ -208,15 +210,15 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def buscarServicioPorNombre(){
-	    var admPuntuables= new AdmPuntuables()
+	    var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	
-	 	assertEquals(admPuntuables.buscarServicios("").size,3)
+	 	assertEquals(admServicios.buscar("").size,3)
 	 	
 	 }
 	 
@@ -226,21 +228,21 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def buscarLugaresPorLetras(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admPuntuables.buscarLugares("n").size,2)
-	 	assertTrue(admPuntuables.buscarLugares("n").contains(lugar2))
-	 	assertTrue(admPuntuables.buscarLugares("n").contains(lugar1))
-	 	assertFalse(admPuntuables.buscarLugares("n").contains(lugar3))
+	 	assertEquals(admLugares.buscar("n").size,2)
+	 	assertTrue(admLugares.buscar("n").contains(lugar2))
+	 	assertTrue(admLugares.buscar("n").contains(lugar1))
+	 	assertFalse(admLugares.buscar("n").contains(lugar3))
 	 }
 	 
 	 /**
@@ -249,21 +251,21 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def buscarServiciosPorLetras(){
-	    var admPuntuables= new AdmPuntuables()
+	    var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	servicio1.nombre="Metrogas"
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"
 	 	
-	 	assertEquals(admPuntuables.buscarServicios("e").size,2)
-	 	assertTrue(admPuntuables.buscarServicios("e").contains(servicio1))
-	 	assertTrue(admPuntuables.buscarServicios("e").contains(servicio2))
-	 	assertFalse(admPuntuables.buscarServicios("e").contains(servicio3))
+	 	assertEquals(admServicios.buscar("e").size,2)
+	 	assertTrue(admServicios.buscar("e").contains(servicio1))
+	 	assertTrue(admServicios.buscar("e").contains(servicio2))
+	 	assertFalse(admServicios.buscar("e").contains(servicio3))
 	 }
 	 /**
 	  * En este test quiero probar que cuando busco un lugar que no esta inscripto 
@@ -271,18 +273,18 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def noHayLugarConElNombre(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admPuntuables.buscarLugares("Garbarino").size,0)
+	 	assertEquals(admLugares.buscar("Garbarino").size,0)
 	 }
 	 
 	  /**
@@ -291,18 +293,18 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def noHayServicioConElNombre(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	servicio1.nombre="Metrogas"
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"
 	 	
-	 	assertEquals(admPuntuables.buscarServicios("Edenor").size,0)
+	 	assertEquals(admServicios.buscar("Edenor").size,0)
 	 }
 	 
 	  /**
@@ -311,18 +313,18 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def noHayLugaresConLasLetras(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admPuntuables.buscarLugares("h").size,0)
+	 	assertEquals(admLugares.buscar("h").size,0)
 	 }
 	 
 	   /**
@@ -331,38 +333,39 @@ class AdmPuntuablesTest {
 	  */
 	 @Test 
 	 def noHayServiciosConElNombre(){
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
         var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	servicio1.nombre="Metrogas"
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"
 	 	
-	 	assertEquals(admPuntuables.buscarServicios("z").size,0)
+	 	assertEquals(admServicios.buscar("z").size,0)
 	 }
 	 
 	 /**
 	  * En este test quiero probar que cuando pregunto por un nombre que ya esta registrado 
 	  * tira una excepcion 
 	  */
-	 @Test 
+	 @Test(expected=UserException )
 	 def hayLugaresDuplicados(){
 	 	
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
 	    lugar3.nombre="Fravega"
 	    lugar2.nombre="Yona"
-	    lugar1.nombre="San Cayetano"
-	 	admPuntuables.agregarLugar(lugar1)
-	 	admPuntuables.agregarLugar(lugar2)
-	 	admPuntuables.agregarLugar(lugar3)
-	 	// hay que tirar una excepcion 
+	    lugar1.nombre="Fravega"
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
+	 	
+	 	
 	 	
 	 }
 	 
@@ -372,15 +375,15 @@ class AdmPuntuablesTest {
 	  */
 	 
 	 @Test 
-	 def hayServiciosDupplicados(){
+	 def hayServiciosDuplicados(){
 	 	
-	 	var admPuntuables= new AdmPuntuables()
+	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
 	    var servicio3= new Puntuable
-	 	admPuntuables.agregarServicio(servicio1)
-	 	admPuntuables.agregarServicio(servicio2)
-	 	admPuntuables.agregarServicio(servicio3)
+	 	admServicios.agregar(servicio1)
+	 	admServicios.agregar(servicio2)
+	 	admServicios.agregar(servicio3)
 	 	servicio1.nombre="Metrogas"
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"

@@ -57,7 +57,7 @@ class AdmCalificaciones {
 	}
 	
 	def calificacionesDelPutuable(Puntuable puntuable){
-		listaCalificaciones.filter[calificacion | calificacion.isPuntuableBuscado(puntuable)] 
+		listaCalificaciones.filter[calificacion | calificacion.isPuntuableBuscado(puntuable)].toList
 	}
 	
 	def cantidadDeCalificacionesDelPuntuable(Puntuable puntuable){

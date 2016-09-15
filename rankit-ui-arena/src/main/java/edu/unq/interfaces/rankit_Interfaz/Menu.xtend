@@ -70,13 +70,13 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"
 				onClick [|new AdmServicioWindow(this,new PuntuableAppModel(
-								this.modelObject.rankit.admPuntuables,
+								this.modelObject.rankit.admServicios,
 								this.modelObject.rankit.admCalificaciones,this.modelObject.rankit.usuarioLogeado)).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Lugares"
 				onClick [|new AdmLugarWindow(this,new PuntuableAppModel(
-								this.modelObject.rankit.admPuntuables,
+								this.modelObject.rankit.admLugares,
 								this.modelObject.rankit.admCalificaciones,this.modelObject.rankit.usuarioLogeado)).open ]
 			]
 	}
