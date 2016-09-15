@@ -11,12 +11,11 @@ class AdmUsuarios
 {
 	private List<Usuario> usuarios = new ArrayList<Usuario>()
 	
-	new (List<Usuario> usuarios){
+	new (List<Usuario> usuarios)
+	{
 		usuarios.addAll(usuarios)
 	}
-	def getUsuarios(){
-		usuarios
-	}
+	
 	
 	def void agregarUsuarioNuevo(Usuario usuarioNuevo) 
 	{
@@ -68,6 +67,11 @@ class AdmUsuarios
 	def usuariosBaneados() 
 	{
 		getUsuarios.filter[usuario | usuario.baneado].toList
+	}
+	
+	def buscarUsuarioConNombre(String nombreDeUsuarioABuscar) 
+	{
+		// throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 }

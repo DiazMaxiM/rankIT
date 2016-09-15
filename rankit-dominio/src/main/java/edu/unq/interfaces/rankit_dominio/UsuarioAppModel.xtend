@@ -3,60 +3,83 @@ package edu.unq.interfaces.rankit_dominio
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import edu.unq.interfaces.rankit_dominio.Usuario
+import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Dependencies
 
 @Observable
 @Accessors
 
 class UsuarioAppModel 
 {
-	private AdmUsuarios todosLosUsuarios
-	private Usuario usuarioSeleccionado
-	private CalificacionAppModel administradorDeCalificaciones
+	AdmUsuarios todosLosUsuarios
+	Usuario usuarioSeleccionado
+	String  nombreDeUsuarioABuscar = ""
 	
 	new (AdmUsuarios usuarios)
 	{
 		setTodosLosUsuarios(usuarios)
 	}
 	
+	def publicacionesDelUsuario() 
+	{
+        usuarioSeleccionado.getPublicaciones
+	}
+	
+	def buscarPorNombreDeUsuario()
+	{
+		todosLosUsuarios.buscarUsuarioConNombre(nombreDeUsuarioABuscar)
+	}
+	
 	def cantidadDeUsuariosRegistrados()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuarios
+		todosLosUsuarios.cantidadTotalDeUsuarios
 	}
 	
 	def cantidadDeUsuariosActivos()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuariosActivos
+		todosLosUsuarios.cantidadTotalDeUsuariosActivos
 	}
 	
 	def cantidadDeUsuariosInactivos()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuariosInactivos
+		todosLosUsuarios.cantidadTotalDeUsuariosInactivos
 	}
 	
 	def cantidadDeUsuariosBaneados()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuariosBaneados
+		todosLosUsuarios.cantidadTotalDeUsuariosBaneados
 	}
 	
 	def eliminarUsuario() 
 	{
-		getTodosLosUsuarios.eliminarUsuario(getUsuarioSeleccionado)
-	}
-	
-	def abrirVentanaDeCalificaciones()
-	{
-		// Se pide crear una nueva ventana de calificaciones con el usuario seleccionado como filtro
-
+		todosLosUsuarios.eliminarUsuario(usuarioSeleccionado)
+		// avisarCambiosDeLugares
 	}
 	
 	def void blanquearContrasenha()
 	{
-		getTodosLosUsuarios.blanquearContrasenha(getUsuarioSeleccionado)
+		todosLosUsuarios.blanquearContrasenha(usuarioSeleccionado)
+		// avisarCambiosDeLugares
 	}
 	
 	def agregarUsuario(Usuario usuarioNuevo) 
 	{
-		getTodosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+		todosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+	}
+	
+	def agregarNuevoUsuario() 
+	{
+		var usuarioNuevo = new Usuario
+		todosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+		//avisarCambiosDeLugares
+		usuarioNuevo
+	}
+	
+@Dependencies("usuarioSeleccionado")
+
+	def hayUsuarioSeleccionado()
+	{
+		usuarioSeleccionado!=null
 	}
 
 }
