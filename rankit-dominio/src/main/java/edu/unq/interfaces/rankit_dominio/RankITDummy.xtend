@@ -91,13 +91,16 @@ class RankITDummy {
 		admPuntuables.agregarLugar(lugar2)
 		admPuntuables.agregarLugar(lugarParaCalificacion1)
 		
+		val admUsuario = new AdmUsuarios()
+		
+		admUsuario.agregarUsuarioNuevo(usuarioMaxi)
+		admUsuario.agregarUsuarioNuevo(usuarioLiza)
+		admUsuario.agregarUsuarioNuevo(usuarioRosali)
 		
 		rankit = new RankIT()
 		rankit.admPuntuables  = admPuntuables
 		rankit.usuarioLogeado = usuarioMaxi
-		rankit.agregarUsuario(usuarioMaxi) 
-		rankit.agregarUsuario(usuarioLiza) 
-		rankit.agregarUsuario(usuarioRosali) 
+		rankit.admUsuarios = admUsuario
 		rankit.admCalificaciones = admCalificaciones
 	
 	}

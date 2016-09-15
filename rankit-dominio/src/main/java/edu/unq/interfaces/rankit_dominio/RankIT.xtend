@@ -8,19 +8,11 @@ import org.eclipse.xtend.lib.annotations.Accessors
 	
 class RankIT {
 
-	private var List<Usuario>usuarios
+	private var AdmUsuarios admUsuarios
 	private var AdmCalificaciones admCalificaciones;
 	private var AdmPuntuables admPuntuables;
 	private var Usuario usuarioLogeado;
  //Constructor
-	 new(){
-		this.usuarios= newArrayList	
+		
 	}
-
-	
-	
-	def void agregarUsuario(Usuario usuario){
-		usuarios.add(usuario);
-	}
-}
 		

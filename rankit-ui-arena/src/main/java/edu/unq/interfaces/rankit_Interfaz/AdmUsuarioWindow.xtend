@@ -32,7 +32,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		panel.layout = new VerticalLayout
 		panelDeSituacionActual(panel)
 		panelDeBusqueda(panel)
-		panelDeTablaYOpciones(panel)
+	//	panelDeTablaYOpciones(panel)
 	}
 	
 	def panelDeTablaYOpciones(Panel panelPrincipal) 

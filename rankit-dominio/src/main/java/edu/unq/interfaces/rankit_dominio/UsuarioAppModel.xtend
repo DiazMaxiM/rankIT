@@ -9,38 +9,38 @@ import edu.unq.interfaces.rankit_dominio.Usuario
 
 class UsuarioAppModel 
 {
-	private AdmUsuarios todosLosUsuarios
+	private AdmUsuarios administradorDeUsuarios
 	private Usuario usuarioSeleccionado
 	private CalificacionAppModel administradorDeCalificaciones
 	
-	new (AdmUsuarios usuarios)
+	new (AdmUsuarios admUsuarios)
 	{
-		setTodosLosUsuarios(usuarios)
+		administradorDeUsuarios= admUsuarios
 	}
 	
 	def cantidadDeUsuariosRegistrados()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuarios
+		administradorDeUsuarios.cantidadTotalDeUsuarios
 	}
 	
 	def cantidadDeUsuariosActivos()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuariosActivos
+		administradorDeUsuarios.cantidadTotalDeUsuariosActivos
 	}
 	
 	def cantidadDeUsuariosInactivos()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuariosInactivos
+		administradorDeUsuarios.cantidadTotalDeUsuariosInactivos
 	}
 	
 	def cantidadDeUsuariosBaneados()
 	{
-		getTodosLosUsuarios.cantidadTotalDeUsuariosBaneados
+		administradorDeUsuarios.cantidadTotalDeUsuariosBaneados
 	}
 	
 	def eliminarUsuario() 
 	{
-		getTodosLosUsuarios.eliminarUsuario(getUsuarioSeleccionado)
+		administradorDeUsuarios.eliminarUsuario(getUsuarioSeleccionado)
 	}
 	
 	def abrirVentanaDeCalificaciones()
@@ -51,12 +51,12 @@ class UsuarioAppModel
 	
 	def void blanquearContrasenha()
 	{
-		getTodosLosUsuarios.blanquearContrasenha(getUsuarioSeleccionado)
+		administradorDeUsuarios.blanquearContrasenha(getUsuarioSeleccionado)
 	}
 	
 	def agregarUsuario(Usuario usuarioNuevo) 
 	{
-		getTodosLosUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
 	}
 
 }
