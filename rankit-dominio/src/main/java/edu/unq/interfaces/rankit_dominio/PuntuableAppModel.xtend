@@ -1,34 +1,33 @@
 package edu.unq.interfaces.rankit_dominio
 
-
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.model.ObservableUtils
-import org.uqbar.commons.utils.Dependencies
 import org.uqbar.commons.model.UserException
 import java.util.Date
 import java.util.List
+import org.uqbar.commons.utils.Dependencies
 
 @Observable
 @Accessors
 class PuntuableAppModel {
-	 val Puntuable miPuntuableNull  =new PuntuableNull
+	 val Puntuable miPuntuableNull=new PuntuableNull
 	Usuario usuarioLogeado
 	 AdmPuntuables administradorDePuntuables
 	 AdmCalificaciones administradorCalificacion
 	 Puntuable    puntuableSeleccionado = miPuntuableNull
-	 String  nombreDelLugarBuscado=""
-	 String  nombreDelServicioBuscado=""
+	 String  nombreBuscado=""
 	
 	new(AdmPuntuables adm1, AdmCalificaciones adm2,Usuario usuarioLogeado){
 		this.administradorDePuntuables= adm1
 		this.administradorCalificacion=adm2
 		this.usuarioLogeado=usuarioLogeado
 		
-	}
+		}
+		
 	@Dependencies("puntuableSeleccionado")
 	def setPuntuableSeleccionado(Puntuable seleccionado){
-		puntuableSeleccionado = seleccionado
+		   puntuableSeleccionado = seleccionado
 		   ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
 		   ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
 		   ObservableUtils.firePropertyChanged(this,"fechaDeRegistro",fechaDeRegistro) 
@@ -41,67 +40,44 @@ class PuntuableAppModel {
 		!puntuableSeleccionado.equals(miPuntuableNull)
 	}
 	
-	def setNombreDelLugarBuscado(String nombre){
-		 nombreDelLugarBuscado=nombre
-		 ObservableUtils.firePropertyChanged(this," buscarPorNombreDeLugar", buscarPorNombreDeLugar)
+	def void setNombreBuscado(String nombre){
+		 nombreBuscado=nombre
+		 administradorDePuntuables.buscar(nombreBuscado)
+		 ObservableUtils.firePropertyChanged(this,"elementos",elementos)
 	}
 	
-	def setNombreDelServicioBuscado(String nombre){
-		 nombreDelServicioBuscado=nombre
-		 ObservableUtils.firePropertyChanged(this," buscarPorNombreDeServicio", buscarPorNombreDeServicio)
+	def void nuevo() {
+		var puntuable = new Puntuable
+		administradorDePuntuables.agregar(puntuable)
+		avisarCambiosDeLista
 	}
 	
-	def nuevoLugar() {
-		var lugar = new Puntuable
-		administradorDePuntuables.agregarLugar(lugar)
-		avisarCambiosDeLugares
-		lugar
-	}
-	def eliminarLugar(){
-		administradorDePuntuables.eliminarLugar(puntuableSeleccionado)
-	 //	puntuableSeleccionado=null
-		avisarCambiosDeLugares
-	}
-	
-	def nuevoServicio() {
-		var servicio = new Puntuable
-		administradorDePuntuables.agregarServicio(servicio)
-		avisarCambiosDeServicios
-		servicio
-	}
-	
-	def eliminarServicio(){
-		administradorDePuntuables.eliminarServicio(puntuableSeleccionado)
-		avisarCambiosDeServicios
-		//puntuableSeleccionado=null
-	}
-	def getRatingPromedio(){
+	def int getRatingPromedio(){
 		administradorCalificacion.ratingPromedio(puntuableSeleccionado)
 	}
-	def getCantidadDeCalificacionesDelPuntuable(){
+	def int getCantidadDeCalificacionesDelPuntuable(){
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(puntuableSeleccionado)
 	}
 	
-	def getFechaDeRegistro(){
+	def Date getFechaDeRegistro(){
 		puntuableSeleccionado.fechaDeRegistro
 	}
 	@Dependencies("puntuableSeleccionado")
-	def getNombre(){
+	def String getNombre(){
 		puntuableSeleccionado.nombre
 	}
     @Dependencies("puntuableSeleccionado")
-    def setHabilitado(boolean bool){
+    def void setHabilitado(boolean bool){
     	puntuableSeleccionado.habilitado=bool
-    	avisarCambiosDeServicios()
-    	avisarCambiosDeLugares()
+    	avisarCambiosDeLista()
     }
 	@Dependencies("puntuableSeleccionado")
-	def getHabilitado(){
+	def boolean getHabilitado(){
 		puntuableSeleccionado.habilitado
 	}
 
 	@Dependencies("puntuableSeleccionado")
-	def setNombre(String nombreNuevo){
+	def void setNombre(String nombreNuevo){
 		administradorDePuntuables.verificarLugaresDuplicados(nombreNuevo)
 		administradorDePuntuables.verificarServiciosDuplicados(nombreNuevo)
 		this.puntuableSeleccionado.nombre=nombreNuevo
@@ -109,66 +85,50 @@ class PuntuableAppModel {
 		
 	}
     @Dependencies("puntuableSeleccionado")
-	def getLugaresInscriptos(){
-		administradorDePuntuables.lugaresInscriptos
+	def int getInscriptos(){
+		administradorDePuntuables.inscriptos
 	}
 	@Dependencies("puntuableSeleccionado")
-	def getLugaresHabilitados(){
-		administradorDePuntuables.lugaresHabilitados
+	def int getHabilitados(){
+		administradorDePuntuables.habilitados
 	}
 	@Dependencies("puntuableSeleccionado")
-	def getLugaresDeshabilitados(){
-		administradorDePuntuables.lugaresDeshabilitados
+	def int getDeshabilitados(){
+		administradorDePuntuables.deshabilitados
 	}
 	
 	
-	def buscarPorNombreDeLugar(){
-		administradorDePuntuables.buscarLugares(nombreDelLugarBuscado)
+	def void buscar(){
+		administradorDePuntuables.buscar(nombreBuscado)
+		ObservableUtils.firePropertyChanged(this,"elementos",elementos)
 	}
 	
-	def buscarPorNombreDeServicio() {
-		administradorDePuntuables.buscarServicios(nombreDelServicioBuscado)
-	}
-	@Dependencies("puntuableSeleccionado")
-	def getServiciosHabilitados(){
-		administradorDePuntuables.serviciosHabilitados
-	}
-	@Dependencies("puntuableSeleccionado")
-	def getServiciosDeshabilitados(){
-		administradorDePuntuables.serviciosDeshabilitados
-	}
-	@Dependencies("puntuableSeleccionado")
-	def getServiciosInscriptos(){
-		administradorDePuntuables.serviciosInscriptos
-	}
 	
-	def avisarCambiosDeLugares(){
-		ObservableUtils.firePropertyChanged(this,"lugaresInscriptos",lugaresInscriptos)
-		ObservableUtils.firePropertyChanged(this,"lugaresHabilitados",lugaresHabilitados)
-		ObservableUtils.firePropertyChanged(this,"lugaresDeshabilitados",lugaresDeshabilitados)
-		
-	}
-	
-	def avisarCambiosDeServicios() {
-		ObservableUtils.firePropertyChanged(this,"serviciosInscriptos",serviciosInscriptos)
-		ObservableUtils.firePropertyChanged(this,"serviciosHabilitados",serviciosHabilitados)
-		ObservableUtils.firePropertyChanged(this,"serviciosDeshabilitados",serviciosDeshabilitados)
-		
-	}
 	@Dependencies("puntuableSeleccionado")
-	def verificarSiTieneNombreAsignado(){
+	def void verificarSiTieneNombreAsignado(){
 		puntuableSeleccionado.verificarSiTieneNombre
 	}
 	
-	def getCalificacionesDelPuntuable() {
-        administradorCalificacion.calificacionesDelPutuable(puntuableSeleccionado).toList
+	def List<Puntuable>getElementos(){
+		administradorDePuntuables.puntuables
 	}
 	
-	def mostrarCalificacionesDelPuntuable() {
+	def void eliminar() {
+		administradorDePuntuables.eliminar(puntuableSeleccionado)
+		puntuableSeleccionado=miPuntuableNull
+		avisarCambiosDeLista()
+	}
+	
+	
+	def void avisarCambiosDeLista(){
+		ObservableUtils.firePropertyChanged(this,"inscriptos",inscriptos)
+		ObservableUtils.firePropertyChanged(this,"habilitados",habilitados)
+		ObservableUtils.firePropertyChanged(this,"deshabilitados",deshabilitados)
+		ObservableUtils.firePropertyChanged(this,"elementos",elementos)
+		
 		
 	}
-	
-	
-	
-
+	def AdmCalificaciones administradorCalificacionesParaCalificacionSeleccionada(){
+		administradorCalificacion
+	}
 }

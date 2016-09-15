@@ -54,29 +54,32 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 		new Label(panel) => [
 			text = "Deshabilitados: "
 		]
-
-		new Label(panel) => [
-			bindValueToProperty("lugaresDeshabilitados")
-		]
-	}
-
+		
+		new Label(panel)=> [
+			bindValueToProperty("deshabilitados")
+			
+			]
+}
 	def puntuablesHabilitados(Panel panel) {
 		new Label(panel) => [
 			text = "Habilitados: "
 
 		]
-		new Label(panel) => [
-			bindValueToProperty("lugaresHabilitados")
-		]
-	}
+		new Label(panel)=> [
+			bindValueToProperty("habilitados")
+	   ]
+	   
+	   }
 
 	def puntuablesInscriptos(Panel panel) {
 		new Label(panel) => [
 			text = "Lugares Inscriptos: "
 		]
-		new Label(panel) => [
-			bindValueToProperty("lugaresInscriptos")
-		]
+		
+	    new Label(panel)=> [
+			bindValueToProperty("inscriptos")
+			
+			]
 	}
 
 	def crearListadoDeServicios(Panel panel) {
@@ -99,17 +102,19 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 		var panelDatos = new Panel(panel)
 		panelDatos.layout = new ColumnLayout(3)
 		new Label(panelDatos).text = "Buscar por nombre de Lugar:"
-		new TextBox(panelDatos) => [
-			bindValueToProperty("nombreDelLugarBuscado")
-
-			width = 100
-		]
-
-		new Button(panelDatos) => [
-			caption = "Buscar"
-			width = 100
-			onClick([|modelObject.buscarPorNombreDeLugar]).setAsDefault.disableOnError
-		]
+	    new TextBox(panelDatos) => [
+	       bindValueToProperty("nombreBuscado")
+	       
+           width = 100
+         ]  
+         
+		 new Button(panelDatos) => [
+	      caption = "Buscar"
+	      width = 100
+	       onClick([|modelObject.buscar])
+	       .setAsDefault
+          .disableOnError
+        ]
 	}
 
 	def crearEdicionDeServicioSeleccionado(Panel panel) {
@@ -192,29 +197,30 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 		]
 
 	}
-
-	def botones(Panel panel) {
-		new Button(panel) => [
-			caption = "Revisar Calificaciones"
-			bindEnabledToProperty("hayPuntuableSeleccionado")
-			onClick [ |
-				new AdmCalificacionWindow(
-					this,
-					new CalificacionAppModel(this.modelObject.administradorCalificacion,
-											 this.modelObject.administradorDePuntuables,
-											 this.modelObject.usuarioLogeado).
-											 filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)).open
-			]
-			width = 200
+		
+		def botones(Panel panel){
+		     new Button(panel) => [
+		       caption = "Revisar Calificaciones"
+		       bindEnabledToProperty("hayPuntuableSeleccionado")
+		      
+		      onClick [|new AdmCalificacionWindow(this, new CalificacionAppModel
+		      	
+		      	(this.modelObject.administradorCalificacionesParaCalificacionSeleccionada,
+		      		this.modelObject.administradorDePuntuables,
+		      		this.modelObject.usuarioLogeado
+		      	).filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)
+		      ).open
+]
+		       width = 200
 		]
-		new Button(panel) => [
-			caption = "Eliminar"
-			bindEnabledToProperty("hayPuntuableSeleccionado")
-			onClick [|
-				this.modelObject.eliminarLugar
-			]
-			width = 200
-		]
+	         new Button(panel) => [
+		      caption = "Eliminar"
+		     bindEnabledToProperty("hayPuntuableSeleccionado")
+		      onClick [| 
+			 	this.modelObject.eliminar
+			 ]
+		       width = 200
+	         ]
 	}
 
 	def panelIzquierdo(Panel panel) {
@@ -224,57 +230,55 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 	}
 
 	def contenedorTabla(Panel panel) {
-
-		val panelTabla = new Panel(panel)
-		new Table<Puntuable>(panelTabla, typeof(Puntuable)) =>
-			[
-				// bindeamos el contenido de la tabla
-				(items <=> "administradorDePuntuables.lugares")
-				value <=> "puntuableSeleccionado"
-				// le definimos el alto y ancho, esto es opcional
-				width = 200
-				// describimos cada fila
-				// para esto definimos las celdas de cada filar
-				// it es la grilla de resultados 
-				new Column<Puntuable>(it) => [
-					title = "Fecha De Registro" // el nombre de la columna
-					fixedSize = 150 // el tamaño que va a tener
-					bindContentsToProperty("fechaDeRegistro").transformer = [fecha |
-						new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fecha)
-					]
-				// la propiedad que mostramos del objeto que está atrás de la fila 
-				]
-
-				new Column<Puntuable>(it) => [
-					title = "Nombre" // el nombre de la columna
-					fixedSize = 150 // el tamaño que va a tener
-					bindContentsToProperty("nombre")
-				// la propiedad que mostramos del objeto que está atrás de la fila 
-				]
-
-				new Column<Puntuable>(it) => [
-					title = "Habilitado" // el nombre de la columna
-					fixedSize = 150 // el tamaño que va a tener
-					bindContentsToProperty("habilitado").transformer = [ Boolean isHabilitado |
-						if(isHabilitado) "SI" else "NO"
-					]
-				// la propiedad que mostramos del objeto que está atrás de la fila 
-				]
-			]
-	}
+	
+		val panelTabla=new Panel(panel)
+		new Table<Puntuable>(panelTabla, typeof(Puntuable)) => [
+			//bindeamos el contenido de la tabla
+			(items <=> "elementos")
+			value <=> "puntuableSeleccionado"
+			//le definimos el alto y ancho, esto es opcional
+			width=200
+			// describimos cada fila
+			// para esto definimos las celdas de cada filar
+			// it es la grilla de resultados 
+			 
+			new Column<Puntuable>(it) => [
+				title = "Fecha De Registro" //el nombre de la columna
+				fixedSize = 150   //el tamaño que va a tener
+				bindContentsToProperty("fechaDeRegistro").transformer = [fecha | new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fecha)]
+		 //la propiedad que mostramos del objeto que está atrás de la fila 
+			] 
+			
+			new Column<Puntuable>(it) => [
+				title = "Nombre" //el nombre de la columna
+				fixedSize = 150   //el tamaño que va a tener
+				bindContentsToProperty("nombre")
+		 //la propiedad que mostramos del objeto que está atrás de la fila 
+			] 
+			
+			new Column<Puntuable>(it) => [
+				title = "Habilitado" //el nombre de la columna
+				fixedSize = 150   //el tamaño que va a tener
+				bindContentsToProperty("habilitado").transformer = [ Boolean isHabilitado | if (isHabilitado) "SI" else "NO" ]
+		 //la propiedad que mostramos del objeto que está atrás de la fila 
+			] 
+			]  
+    }
 
 	def panelBotones(Panel panel) {
 		val panelBotones = new Panel(panel)
 		new Button(panelBotones) => [
 			caption = "Nuevo"
-			onClick [|
-				this.modelObject.nuevoLugar
+			onClick [| 
+				this.modelObject.nuevo
 			]
-		]
+		] 
 	}
+	
 
 	
 	override protected addActions(Panel panel) {
 	}
 
 }
+
