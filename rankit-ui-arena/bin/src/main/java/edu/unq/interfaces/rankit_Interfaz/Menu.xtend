@@ -12,8 +12,6 @@ import org.uqbar.arena.windows.SimpleWindow
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
 import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
-import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
-import edu.unq.interfaces.rankit_dominio.AdmUsuarios
 
 class Menu extends SimpleWindow<RankITAppModel> {
 	
@@ -56,7 +54,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		
 		new Button(botoneraPanel) => [
 				caption = "Adm. Usuarios"
-				onClick [ | new AdmUsuarioWindow(this,new UsuarioAppModel(new AdmUsuarios(this.modelObject.rankit.usuarios))).open ]
+				onClick [ | new AdmUsuarioWindow(this,new Usuario()).open ]
 		]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Calificaciones"
@@ -69,9 +67,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Servicios"
-				onClick [|new AdmServicioWindow(this,new PuntuableAppModel(
-								this.modelObject.rankit.admPuntuables,
-								this.modelObject.rankit.admCalificaciones)).open ]
+				//onClick [|new AdmLugarWindow(this,new Usuario()).open ]
 			]
 		new Button(botoneraPanel) => [
 				caption = "Adm. Lugares"

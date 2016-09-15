@@ -10,11 +10,3 @@ rankit-ui-arena/*.classpath
 rankit-ui-arena/src/main/generated-sources
 rankit-ui-arena/src/test/generated-sources
 rankit-ui-arena/.settings
-/target/
-.classpath
-.project
-.settings/
-*generated-sources*
-/bin
-/xtend-gen
-

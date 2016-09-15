@@ -12,8 +12,6 @@ class Usuario {
 	private var String password
 	private boolean activo
 	private boolean baneado
-	private Calificacion[] publicaciones
-	
 	new() {
 		this.fechaDeRegistro= new DateTime
 		this.nombre="NN"
@@ -21,19 +19,9 @@ class Usuario {
 		this.activo=false
 		this.baneado=false
 		}
-		
-	def ultimaPublicacion ()
-	{
-		// publicaciones.get(0)
-	}
     
     def cambiarNombre(String nombre){
 		this.nombre=nombre
-	}
-	
-	def obtenerNombre()
-	{
-		this.nombre
 	}
     
     def cambiarContrasenha(String contrasenha){
