@@ -103,36 +103,36 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 			// it es la grilla de resultados 
 			new Column<Calificacion>(it) => [
 				title = "Evaluado" //el nombre de la columna
-				fixedSize = 100   //el tamaño que va a tener
+				//fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("evaluado").transformer = [ Puntuable puntuable | puntuable.nombre]
 		 //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
 				title = "Ptos"
-				fixedSize = 100
+				//fixedSize = 150
 				bindContentsToProperty("puntos")
 			]
 			new Column<Calificacion>(it) => [
 				title = "Fecha" //el nombre de la columna
-				fixedSize = 100   //el tamaño que va a tener
+//				fixedSize = 150   //el tamaño que va a tener
 				bindContentsToProperty("fecha").transformer = [fecha | new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fecha)] //la propiedad que mostramos del objeto que está atrás de la fila 
 			]   
 			//el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
 				title = "User"
-				fixedSize = 100
+//				fixedSize = 150
 				bindContentsToProperty("usuario").transformer = [ Usuario usuario | usuario.nombre]
 			] 
 			new Column<Calificacion>(it) => [
 				title = "Es Ofensiva"
-				fixedSize = 100
+//				fixedSize = 150
 				bindContentsToProperty("contenidoOfensivo").transformer = [ esOfensivo | if (esOfensivo) "Si" else "No"]
 			] 
 		]
 		new Button(contenedorTabla)=>[
 			caption = "Nuevo"
-			onClick [ | this.modelObject.agregarNuevaCalificacion()]
+			onClick [ | this.modelObject.agregarCalificacion(new Calificacion(this.modelObject.usuarioLogeado)); ]
 			]
 	}
 	
@@ -165,9 +165,8 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]
 		new Label(contenedorFechaColumna)=> [
 			bindEnabledToProperty("hayCalificacionSeleccionada")
-		val dateTransformer =new DateTransformer;		
-			dateTransformer.pattern="dd/MM/yyyy HH:mm"
-			bindValueToProperty("calificacionSeleccionada.fecha").transformer = dateTransformer
+		
+			bindValueToProperty("calificacionSeleccionada.fecha").transformer = new DateTransformer
 		]
 		
 		val contenedorUsuarioColumna= new Panel(contenedorFecha)

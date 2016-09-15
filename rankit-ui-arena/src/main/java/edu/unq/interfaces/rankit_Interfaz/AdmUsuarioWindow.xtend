@@ -82,14 +82,14 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		[
 			caption = "Blanquear clave"
 			bindEnabledToProperty("usuarioSeleccionado")
-			//onClick [ | this.modelObject.blanquearContrasenha]
+			onClick [ | this.modelObject.blanquearContrasenha]
 		]
 		
 		new Button(opcionesDeEdicion)=> 
 		[
 			caption = "Eliminar"
 		    bindEnabledToProperty("usuarioSeleccionado")
-			//onClick [ | this.modelObject.eliminarUsuario]
+			onClick [ | this.modelObject.eliminarUsuario]
 		]
 	}
 	
@@ -143,7 +143,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new Button(tablaDeResultado)=>
 		[
 			caption = "Nuevo"
-			//onClick[|this.modelObject.agregarUsuario (new Usuario())]
+			onClick[|this.modelObject.agregarUsuario (new Usuario())]
 			//onClick[|this.modelObject.agregarUsuario (new Usuario(this.modelObject.usuarioLogeado))]
 		]
 	}
@@ -211,7 +211,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	
 	def revisarPublicaciones() 
 	{
-		//new AdmCalificacionWindow(this, this.modelObject.administradorDeCalificaciones)
+		new AdmCalificacionWindow(this, this.modelObject.administradorDeCalificaciones)
 	}
 	
 	
