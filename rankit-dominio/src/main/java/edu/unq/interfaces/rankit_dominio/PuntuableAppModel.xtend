@@ -7,37 +7,38 @@ import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Dependencies
 import org.uqbar.commons.model.UserException
 import java.util.Date
+import java.util.List
 
 @Observable
 @Accessors
 class PuntuableAppModel {
+	 val Puntuable miPuntuableNull  =new PuntuableNull
+	Usuario usuarioLogeado
 	 AdmPuntuables administradorDePuntuables
 	 AdmCalificaciones administradorCalificacion
-	 Puntuable    puntuableSeleccionado
+	 Puntuable    puntuableSeleccionado = miPuntuableNull
 	 String  nombreDelLugarBuscado=""
 	 String  nombreDelServicioBuscado=""
 	
-	new(AdmPuntuables adm1, AdmCalificaciones adm2){
+	new(AdmPuntuables adm1, AdmCalificaciones adm2,Usuario usuarioLogeado){
 		this.administradorDePuntuables= adm1
 		this.administradorCalificacion=adm2
-	
+		this.usuarioLogeado=usuarioLogeado
 		
 	}
 	@Dependencies("puntuableSeleccionado")
 	def setPuntuableSeleccionado(Puntuable seleccionado){
 		puntuableSeleccionado = seleccionado
-		if(puntuableSeleccionado!=null){
 		   ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
 		   ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
 		   ObservableUtils.firePropertyChanged(this,"fechaDeRegistro",fechaDeRegistro) 
 		   verificarSiTieneNombreAsignado
-		}
 		
 	}
 	
 	@Dependencies("puntuableSeleccionado")
 	def getHayPuntuableSeleccionado(){
-		puntuableSeleccionado!=null
+		!puntuableSeleccionado.equals(miPuntuableNull)
 	}
 	
 	def setNombreDelLugarBuscado(String nombre){
@@ -161,6 +162,18 @@ class PuntuableAppModel {
 	
 	def getCalificacionesDelPuntuable() {
         administradorCalificacion.calificacionesDelPutuable(puntuableSeleccionado).toList
+	}
+	
+	def mostrarCalificacionesDelPuntuable() {
+		var admPuntuables = new AdmPuntuables
+		admPuntuables.agregarLugar(puntuableSeleccionado)
+		var admCalificaciones = new AdmCalificaciones
+		admCalificaciones.agregarTodasLasCalificaciones(calificacionesDelPuntuable)
+		var usuario = new Usuario
+		var appModel = new CalificacionAppModel(admCalificaciones, admPuntuables, usuario)
+		new AdmCalificacionWindow(this, appModel) => [
+			open
+		]
 	}
 	
 	
