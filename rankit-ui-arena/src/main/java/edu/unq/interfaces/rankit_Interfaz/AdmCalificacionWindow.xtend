@@ -132,7 +132,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]
 		new Button(contenedorTabla)=>[
 			caption = "Nuevo"
-			onClick [ | this.modelObject.agregarCalificacion(new Calificacion(this.modelObject.usuarioLogeado)); ]
+			onClick [ | this.modelObject.crearCalificacion; ]
 			]
 	}
 	

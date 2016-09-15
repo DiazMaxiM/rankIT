@@ -8,7 +8,7 @@ import org.uqbar.commons.utils.Dependencies
 @Observable
 @Accessors
 class CalificacionAppModel {
-	
+
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
 	Usuario usuarioLogeado;
@@ -16,79 +16,90 @@ class CalificacionAppModel {
 	String nombreUsuarioBusqueda;
 	String nombreEvaluadoBusqueda;
 
-	new(AdmCalificaciones calificaciones, AdmPuntuables puntuables,Usuario usuario) {
-	administradorCalificacion = calificaciones
-	admPuntuables= puntuables
-	usuarioLogeado=	usuario
+	new(AdmCalificaciones calificaciones, AdmPuntuables puntuables, Usuario usuario) {
+		administradorCalificacion = calificaciones
+		admPuntuables = puntuables
+		usuarioLogeado = usuario
 	}
+
 	@Dependencies("calificacionSeleccionada")
-	def Integer getPuntos(){
-		if (hayCalificacionSeleccionada){
+	def Integer getPuntos() {
+		if (hayCalificacionSeleccionada) {
 			return calificacionSeleccionada.puntos
 		}
 		null
 	}
-	
-	def void setPuntos(Integer numero){
-		var Integer valor=0;
-		if (numero != null){
-			valor=numero
+
+	def void setPuntos(Integer numero) {
+		var Integer valor = 0;
+		if (numero != null) {
+			valor = numero
 		}
-		 calificacionSeleccionada.puntos=valor
+		calificacionSeleccionada.puntos = valor
 	}
-	
-	def setNombreUsuarioBusqueda(String nombre){
-		nombreUsuarioBusqueda= nombre
-		ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)		
+
+	def setNombreUsuarioBusqueda(String nombre) {
+		nombreUsuarioBusqueda = nombre
+		ObservableUtils.firePropertyChanged(this, "listaCalificacionesFiltradas", listaCalificacionesFiltradas)
 	}
-	def setNombreEvaluadoBusqueda(String nombre){
-		nombreEvaluadoBusqueda= nombre
-		ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)		
+
+	def setNombreEvaluadoBusqueda(String nombre) {
+		nombreEvaluadoBusqueda = nombre
+		ObservableUtils.firePropertyChanged(this, "listaCalificacionesFiltradas", listaCalificacionesFiltradas)
 	}
-	def listaCalificacionesFiltradas(){
-		administradorCalificacion.filtrarCalificaciones(nombreEvaluadoBusqueda,nombreUsuarioBusqueda)
+
+	def listaCalificacionesFiltradas() {
+		administradorCalificacion.filtrarCalificaciones(nombreEvaluadoBusqueda, nombreUsuarioBusqueda)
 	}
-	
-	def void setCalificacionSeleccionada(Calificacion calificacionSel){
+
+	def void setCalificacionSeleccionada(Calificacion calificacionSel) {
 		calificacionSeleccionada = calificacionSel
-		if (calificacionSel!=null){
-			ObservableUtils.firePropertyChanged(this,"contenidoOfensivo",contenidoOfensivo)
-		}		
+		if (calificacionSel != null) {
+			ObservableUtils.firePropertyChanged(this, "contenidoOfensivo", contenidoOfensivo)
+		}
 	}
-	def Boolean getContenidoOfensivo(){
+
+	def Boolean getContenidoOfensivo() {
 		calificacionSeleccionada.contenidoOfensivo
 	}
 
-	def void setContenidoOfensivo(Boolean bool){
-		administradorCalificacion.contenidoOfensivo(calificacionSeleccionada,bool) 
+	def void setContenidoOfensivo(Boolean bool) {
+		administradorCalificacion.contenidoOfensivo(calificacionSeleccionada, bool)
 		actualizarEstadoSituacion
 	}
+
 	@Dependencies("calificacionSeleccionada")
-	def Boolean getHayCalificacionSeleccionada(){
+	def Boolean getHayCalificacionSeleccionada() {
 		calificacionSeleccionada != null
-	}	
-	
-	def int getCalificacionesRegistradas(){
+	}
+
+	def int getCalificacionesRegistradas() {
 		administradorCalificacion.getCalificacionesRegistradas()
 	}
-	def int getCalificacionesOfensivas(){
- 		administradorCalificacion.getCalificacionesOfensivas()
+
+	def int getCalificacionesOfensivas() {
+		administradorCalificacion.getCalificacionesOfensivas()
 	}
-	
-	def eliminarCalificacionSeleccionada(){
+
+	def eliminarCalificacionSeleccionada() {
 		administradorCalificacion.eliminarCalificacion(calificacionSeleccionada)
 		actualizarEstadoSituacion
 	}
 
-	def agregarCalificacion(Calificacion nuevaCalificacion){
+	def agregarCalificacion(Calificacion nuevaCalificacion) {
 		administradorCalificacion.agregarCalificacion(nuevaCalificacion)
 		actualizarEstadoSituacion
 	}
-	
-	def actualizarEstadoSituacion(){	
-		ObservableUtils.firePropertyChanged(this,"puntos",puntos)
-		ObservableUtils.firePropertyChanged(this,"listaCalificacionesFiltradas",listaCalificacionesFiltradas)
-		ObservableUtils.firePropertyChanged(this,"calificacionesRegistradas",calificacionesRegistradas)
-		ObservableUtils.firePropertyChanged(this,"calificacionesOfensivas",calificacionesOfensivas)	
+
+	def actualizarEstadoSituacion() {
+		ObservableUtils.firePropertyChanged(this, "puntos", puntos)
+		ObservableUtils.firePropertyChanged(this, "listaCalificacionesFiltradas", listaCalificacionesFiltradas)
+		ObservableUtils.firePropertyChanged(this, "calificacionesRegistradas", calificacionesRegistradas)
+		ObservableUtils.firePropertyChanged(this, "calificacionesOfensivas", calificacionesOfensivas)
 	}
+	
+	def crearCalificacion() {
+		agregarCalificacion(new Calificacion(this.usuarioLogeado))
+	}
+	
 }
