@@ -3,6 +3,7 @@ package edu.unq.interfaces.rankit_dominio
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import edu.unq.interfaces.rankit_dominio.Usuario
+import org.uqbar.commons.utils.Dependencies
 
 @Observable
 @Accessors
@@ -11,10 +12,12 @@ class UsuarioAppModel
 {
 	private AdmUsuarios administradorDeUsuarios
 	private Usuario usuarioSeleccionado
-	private Usuario usuarioLogeado
 	private AdmCalificaciones administradorDeCalificaciones
+	private String nombreDeUsuarioABuscar
 	
-	private AdmPuntuables admDePuntuables
+	AdmPuntuables admDePuntuables
+	
+	Usuario usuarioLogeado
 	
 	new (AdmUsuarios admUsuarios,AdmCalificaciones administradorDeCalificaciones,AdmPuntuables admPuntuables,Usuario usuarioLogeado)
 	{
@@ -22,6 +25,10 @@ class UsuarioAppModel
 		this.administradorDeUsuarios= admUsuarios
 		this.administradorDeCalificaciones= administradorDeCalificaciones
 		this.usuarioLogeado= usuarioLogeado
+	}
+	new (AdmUsuarios admUsuarios)
+	{
+		administradorDeUsuarios= admUsuarios
 	}
 	
 	def cantidadDeUsuariosRegistrados()
@@ -46,23 +53,46 @@ class UsuarioAppModel
 	
 	def eliminarUsuario() 
 	{
-		administradorDeUsuarios.eliminarUsuario(getUsuarioSeleccionado)
-	}
-	
-	def abrirVentanaDeCalificaciones()
-	{
-		// Se pide crear una nueva ventana de calificaciones con el usuario seleccionado como filtro
-
+		administradorDeUsuarios.eliminarUsuario(usuarioSeleccionado)
 	}
 	
 	def void blanquearContrasenha()
 	{
-		administradorDeUsuarios.blanquearContrasenha(getUsuarioSeleccionado)
+		administradorDeUsuarios.blanquearContrasenha(usuarioSeleccionado)
+	}
+//	
+//	def agregarUsuario(Usuario usuarioNuevo) 
+//	{
+//		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+//	}
+	
+	def buscarPorNombreDeUsuario() 
+	{
+		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 	}
 	
-	def agregarUsuario(Usuario usuarioNuevo) 
+	def agregarNuevoUsuario() 
 	{
-		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+		//administradorDeUsuario.
+	}
+	
+	@Dependencies("usuarioSeleccionado")
+
+	def hayUsuarioSeleccionado()
+	{
+		usuarioSeleccionado!=null
+	}
+	
+	def fechaDeLaUltimaPublicacion ()
+	{
+		//administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(usuarioSeleccionado)
+		// fechaDeLaUltimaPublicacionDe (implementacion de AdmCalificacion)
+	}
+	
+	def publicacionesDelUsuario() 
+	{
+		//administradorDeCalificaciones.publicacionesDelUsuario(usuarioSeleccionado)
+		// publicacionesDelUsuario (implementacion de AdmCalificacion)
 	}
 
 }
