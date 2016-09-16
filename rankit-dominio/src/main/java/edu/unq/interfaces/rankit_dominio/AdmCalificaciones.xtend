@@ -27,7 +27,7 @@ class AdmCalificaciones {
 			return listaCalificaciones
 		}
 		if (!estaVacio(nombreEvaluadoBusqueda) && estaVacio(nombreUsuarioBusqueda)) {
-			return listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.equals(nombreEvaluadoBusqueda)].
+			return listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.equals(nombreEvaluadoBusqueda) || calificacion.evaluado.nombre.equals("") ].
 				toList
 		}
 		if (estaVacio(nombreEvaluadoBusqueda) && !estaVacio(nombreUsuarioBusqueda)) {

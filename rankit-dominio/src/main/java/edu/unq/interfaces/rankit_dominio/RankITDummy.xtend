@@ -18,6 +18,14 @@ class RankITDummy {
 		val usuarioLiza = new Usuario
 		val usuarioRosali = new Usuario
 
+	var Usuario admin = new Usuario => [
+			activo = true
+			baneado = false
+			nombre = "Admin"
+			password = "123"
+
+		];
+
 		usuarioMaxi => [
 			activo = true
 			baneado = false
@@ -25,6 +33,7 @@ class RankITDummy {
 			password = "Maxi"
 
 		];
+		
 		usuarioLiza => [
 			activo = true
 			baneado = true
@@ -96,7 +105,7 @@ class RankITDummy {
 		rankit = new RankIT()
 		rankit.admLugares = admLugares
 		rankit.admServicios = admServicios
-		rankit.usuarioLogeado = usuarioMaxi
+		rankit.usuarioLogeado = admin
 		rankit.admUsuarios = admUsuario
 		rankit.admCalificaciones = admCalificaciones
 

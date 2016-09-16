@@ -13,7 +13,7 @@ abstract class VistaGenericaWindow<T> extends  SimpleWindow<T>{
 		super(parent, model)
 	}
 	override protected createFormPanel(Panel mainPanel) {
-		
+		 
 		 val panel= new Panel(mainPanel)
 		 panel.layout= new VerticalLayout
 		
@@ -21,12 +21,12 @@ abstract class VistaGenericaWindow<T> extends  SimpleWindow<T>{
 		 busqueda(panel)
 		 tablaYEdicion(panel)
 	}
+	def void resumenDeSituacion(Panel mainPanel)
 	
-	def void busqueda(Panel panel)
+	def void busqueda(Panel mainPanel)
 	
-	def void resumenDeSituacion(Panel panel)
 	
-	def void tablaYEdicion(Panel panel)
+	def void tablaYEdicion(Panel mainPanel)
 	
 	
 	

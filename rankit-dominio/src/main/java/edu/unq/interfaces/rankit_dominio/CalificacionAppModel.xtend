@@ -4,6 +4,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.utils.Dependencies
+import java.util.List
+import com.google.common.base.Strings
 
 @Observable
 @Accessors
@@ -12,31 +14,42 @@ class CalificacionAppModel {
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
 	Usuario usuarioLogeado;
-	AdmPuntuables admPuntuables;
+	//AdmPuntuables admPuntuables;
+	
+	AdmPuntuables admPuntuables=new AdmPuntuables;
+	
 	String nombreUsuarioBusqueda;
 	String nombreEvaluadoBusqueda;
 	Boolean habilitadoEvaluadoBusqueda=true;
 	Boolean habilitadoUsuarioBusqueda=true;
 	
 
-	new(AdmCalificaciones calificaciones, AdmPuntuables puntuables, Usuario usuario) {
+	new(AdmCalificaciones calificaciones, AdmPuntuables lugares,AdmPuntuables servicios, Usuario usuario) {
 		administradorCalificacion = calificaciones
-		admPuntuables = puntuables
+		admPuntuables.puntuables.addAll( lugares.puntuables)
+		admPuntuables.puntuables.addAll( servicios.puntuables)
 		usuarioLogeado = usuario
+	}
+	new(AdmCalificaciones calificaciones,  Usuario usuario) {
+		administradorCalificacion = calificaciones
+		usuarioLogeado = usuario
+	}
+	def List<Puntuable>getPuntuables(){
+		admPuntuables.puntuables
 	}
 
 	@Dependencies("calificacionSeleccionada")
-	def Integer getPuntos() {
+	def String getPuntos() {
 		if (hayCalificacionSeleccionada) {
-			return calificacionSeleccionada.puntos
+			return calificacionSeleccionada.puntos.toString
 		}
-		null
+		""
 	}
 
-	def void setPuntos(Integer numero) {
+	def void setPuntos(String numero) {
 		var Integer valor = 0;
-		if (numero != null) {
-			valor = numero
+		if (!Strings.isNullOrEmpty(numero)) {
+			valor = Integer.parseInt(numero)
 		}
 		calificacionSeleccionada.puntos = valor
 	}
@@ -106,6 +119,7 @@ class CalificacionAppModel {
 	}
 	
 	def  filtradoObligatorioPorPuntuable(Puntuable puntuable) {
+		admPuntuables.agregar(puntuable)
 		nombreEvaluadoBusqueda = puntuable.nombre
 		habilitadoEvaluadoBusqueda=false
 		this
