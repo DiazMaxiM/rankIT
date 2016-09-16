@@ -166,7 +166,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		new Label(contenedorFechaColumna)=> [
 			bindEnabledToProperty("hayCalificacionSeleccionada")
 		
-			bindValueToProperty("calificacionSeleccionada.fecha").transformer = new DateTransformer
+			bindValueToProperty("calificacionSeleccionada.fecha").transformer = new DateTransformer=>[pattern="dd/MM/yyyy HH:mm"];
 		]
 		
 		val contenedorUsuarioColumna= new Panel(contenedorFecha)
