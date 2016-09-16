@@ -8,17 +8,17 @@ import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.layout.VerticalLayout
-import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.windows.ErrorsPanel
-import org.uqbar.arena.widgets.CheckBox
 import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
 import java.text.SimpleDateFormat
 import org.uqbar.arena.bindings.DateTransformer
-import edu.unq.interfaces.rankit_dominio.Calificacion
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.component.LabelCheckBox
+import org.uqbar.arena.widgets.TextBox
 
 class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel> 
 {
@@ -26,6 +26,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	new(WindowOwner parent, UsuarioAppModel modelo)
 	{
 		super (parent, modelo)
+		title = "Rank-IT -->Adm Usuarios"
 	}
 	
 	override protected createFormPanel(Panel panelPrincipal) 
@@ -34,11 +35,6 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		panelDeSituacionActual(panel)
 		panelDeBusqueda(panel)
 		panelDeTablaYEdicion(panel)
-		
-	//	this.panelDeSituacionActual(panel)
-	//	panelDeSituacionActual(panel)
-	//	panelDeBusqueda(panel)
-	//	panelDeTablaYOpciones(panel)
 	}
 	
 	def panelDeSituacionActual(Panel panelPrincipal) 
@@ -131,10 +127,15 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new Button(panel) => 
 		[
 			caption = "Revisar Publicaciones"
-			bindEnabledToProperty ("hayUsuarioSeleccionado")
-//			onClick [ |mostrarPublicacionesDelUsuario (this.modelObject.publicacionesDelUsuario,
-//														this.modelObject.usuarioSeleccionado)]
-//			width = 200
+			onClick (
+			[|new AdmCalificacionWindow 
+				(this, new CalificacionAppModel(this.modelObject.administradorDeCalificaciones,
+												this.modelObject.administradorDePuntuables,
+												this.modelObject.usuarioLogeado
+												)
+						.filtradoObligatorioPorUsuario (this.modelObject.usuarioSeleccionado)
+				).open										
+			])
 		]
 		
 		new Button(panel) => 
@@ -182,12 +183,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	{
 		var usuarioBaneado = new Panel(panelDeEdicion)
 		usuarioBaneado.layout = new HorizontalLayout
-		new CheckBox(usuarioBaneado)=> 
-		[
-			bindEnabledToProperty("hayUsuarioSeleccionado")
-			bindValueToProperty("usuarioSeleccionado.baneado")
-		]
-		new Label(usuarioBaneado).text= "Baneado"
+		new LabelCheckBox(usuarioBaneado).setText("Baneado").bindEnabledToProperty("hayUsuarioSeleccionado").bindValueToProperty("baneado")
 	}
 
 	def edicionDeCasillas (Panel panelDeEdicion) 
@@ -202,12 +198,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	{
 		var usuarioActivo = new Panel(panelDeEdicion)
 		usuarioActivo.layout = new HorizontalLayout
-		new CheckBox(usuarioActivo)=> 
-		[
-		  bindEnabledToProperty("hayUsuarioSeleccionado")
-		  bindValueToProperty("usuarioSeleccionado.activo")
-		]
-		new Label(usuarioActivo).text= "Activo"
+		new LabelCheckBox(usuarioActivo).setText("Activo").bindEnabledToProperty("hayUsuarioSeleccionado").bindValueToProperty("activo")
 	}
 
 	def edicionDeFechaDeRegistro (Panel panelDeEdicion)
@@ -229,8 +220,14 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	{
 		var nombreDeUsuario = new Panel(panelDeEdicion)
 		nombreDeUsuario.layout = new  ColumnLayout(2)
-		new Label(nombreDeUsuario)=> [text="Nombre: " fontSize = 15]
-		new Label(nombreDeUsuario)=> [value <=> "usuarioSeleccionado.nombre" fontSize = 15]
+		new Label(nombreDeUsuario)=> [text="Nombre:" fontSize = 15]
+//		new Label(nombreDeUsuario)=> [value <=> "nombre" fontSize = 15]
+		new Label(nombreDeUsuario).text = "Nombre:"
+		new TextBox(nombreDeUsuario) => 
+		[
+			bindEnabledToProperty("hayUsuarioSeleccionado")
+			bindValueToProperty("nombre")
+		]
 	}
 	
 	def panelDeTablaDeResultado(Panel panelPrincipal) 

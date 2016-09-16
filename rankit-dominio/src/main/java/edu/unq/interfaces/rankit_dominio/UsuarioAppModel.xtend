@@ -4,6 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import edu.unq.interfaces.rankit_dominio.Usuario
 import org.uqbar.commons.utils.Dependencies
+import org.uqbar.commons.model.ObservableUtils
 
 @Observable
 @Accessors
@@ -14,14 +15,13 @@ class UsuarioAppModel
 	private Usuario usuarioSeleccionado
 	private AdmCalificaciones administradorDeCalificaciones
 	private String nombreDeUsuarioABuscar
-	
-	AdmPuntuables admDePuntuables
+	AdmPuntuables administradorDePuntuables
 	
 	Usuario usuarioLogeado
 	
 	new (AdmUsuarios admUsuarios,AdmCalificaciones administradorDeCalificaciones,AdmPuntuables admPuntuables,Usuario usuarioLogeado)
 	{
-		this.admDePuntuables= admPuntuables
+		this.administradorDePuntuables= admPuntuables
 		this.administradorDeUsuarios= admUsuarios
 		this.administradorDeCalificaciones= administradorDeCalificaciones
 		this.usuarioLogeado= usuarioLogeado
@@ -60,11 +60,6 @@ class UsuarioAppModel
 	{
 		administradorDeUsuarios.blanquearContrasenha(usuarioSeleccionado)
 	}
-//	
-//	def agregarUsuario(Usuario usuarioNuevo) 
-//	{
-//		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
-//	}
 	
 	def buscarPorNombreDeUsuario() 
 	{
@@ -73,14 +68,40 @@ class UsuarioAppModel
 	
 	def agregarNuevoUsuario() 
 	{
-		//administradorDeUsuario.
+		var usuarioNuevo = new Usuario
+		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+		avisarCambiosDeNuevoUsuario
 	}
 	
-	@Dependencies("usuarioSeleccionado")
+	
+	def void avisarCambiosDeNuevoUsuario() 
+	{
+		ObservableUtils.firePropertyChanged(this, "inscriptos", usuariosActuales)
 
+	}
+	
+@Dependencies("usuarioSeleccionado")
+	def Usuario[] getUsuariosActuales() 
+	{
+		administradorDeUsuarios.usuarios
+	}
+	
+@Dependencies("usuarioSeleccionado")
+	def String getNombre() 
+	{
+		usuarioSeleccionado.nombre
+	}
+	
+@Dependencies("usuarioSeleccionado")
 	def hayUsuarioSeleccionado()
 	{
 		usuarioSeleccionado!=null
+	}
+	
+@Dependencies("usuarioSeleccionado")
+	def getHayUsarioSeleccionado()
+	{
+		!usuarioSeleccionado.equals(null)
 	}
 	
 	def fechaDeLaUltimaPublicacion ()
@@ -94,5 +115,17 @@ class UsuarioAppModel
 		//administradorDeCalificaciones.publicacionesDelUsuario(usuarioSeleccionado)
 		// publicacionesDelUsuario (implementacion de AdmCalificacion)
 	}
+	
+@Dependencies("usuarioSeleccionado")
+	def boolean getActivo() 
+	{
+		usuarioSeleccionado.activo
+	}	
+
+@Dependencies("usuarioSeleccionado")
+	def boolean getBaneado() 
+	{
+		usuarioSeleccionado.baneado
+	}	
 
 }
