@@ -5,6 +5,7 @@ import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.utils.Dependencies
 import java.util.List
+import com.google.common.base.Strings
 
 @Observable
 @Accessors
@@ -38,17 +39,17 @@ class CalificacionAppModel {
 	}
 
 	@Dependencies("calificacionSeleccionada")
-	def Integer getPuntos() {
+	def String getPuntos() {
 		if (hayCalificacionSeleccionada) {
-			return calificacionSeleccionada.puntos
+			return calificacionSeleccionada.puntos.toString
 		}
-		null
+		""
 	}
 
-	def void setPuntos(Integer numero) {
+	def void setPuntos(String numero) {
 		var Integer valor = 0;
-		if (numero != null) {
-			valor = numero
+		if (!Strings.isNullOrEmpty(numero)) {
+			valor = Integer.parseInt(numero)
 		}
 		calificacionSeleccionada.puntos = valor
 	}
