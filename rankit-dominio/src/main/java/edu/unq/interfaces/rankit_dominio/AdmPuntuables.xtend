@@ -66,13 +66,8 @@ class AdmPuntuables {
 		puntuablesCopia.filter[puntuable|puntuable.contieneLasLetras(letras)]
 	}
 	
-	def verificarLugaresDuplicados(String nombre) {
-		if(isPuntuablesDuplicados(nombre)){
-			throw new UserException("Ya existe otro Lugar con el nombre "+ nombre)
-		}
-	}
 	
-	def verificarServiciosDuplicados(String nombre) {
+	def verificarSiHayDuplicados(String nombre) {
 		if(isPuntuablesDuplicados(nombre)){
 			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
 		}

@@ -37,10 +37,14 @@ class Puntuable {
 	}
 	 
 	def void verificarSiTieneNombre(){
-		if(this.nombre.equals("")){
+		if(isNoTieneNombre()){
 			throw new UserException("Por favor defina un nombre" )
 			
 		}
 	}
+	
+	def isNoTieneNombre() {
+		this.nombre.equals("")
+	} 
 	
 }

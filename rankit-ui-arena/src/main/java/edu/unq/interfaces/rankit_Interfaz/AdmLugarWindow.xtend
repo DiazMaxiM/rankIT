@@ -165,7 +165,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 	def habilitarPuntuable(Panel panel) {
 		var panelHabilitar = new Panel(panel)
 		panelHabilitar.layout = new HorizontalLayout
-		new LabelCheckBox(panelHabilitar).setText("Habilitado").bindEnabledToProperty("hayPuntuableSeleccionado").
+		new LabelCheckBox(panelHabilitar).setText("Habilitado").bindEnabledToProperty("hayPuntuableSeleccionadoConNombre").
 			bindValueToProperty("habilitado")
 
 	}
@@ -201,7 +201,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 		def botones(Panel panel){
 		     new Button(panel) => [
 		       caption = "Revisar Calificaciones"
-		       bindEnabledToProperty("hayPuntuableSeleccionado")
+		       bindEnabledToProperty("hayPuntuableSeleccionadoConNombre")
 		      
 		      onClick [|new AdmCalificacionWindow(this, new CalificacionAppModel
 		      	

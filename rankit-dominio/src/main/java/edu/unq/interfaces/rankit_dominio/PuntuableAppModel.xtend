@@ -28,11 +28,13 @@ class PuntuableAppModel {
 	@Dependencies("puntuableSeleccionado")
 	def setPuntuableSeleccionado(Puntuable seleccionado){
 		   puntuableSeleccionado = seleccionado
+		   if(getHayPuntuableSeleccionado){
 		   ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
 		   ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
 		   ObservableUtils.firePropertyChanged(this,"fechaDeRegistro",fechaDeRegistro) 
+		   ObservableUtils.firePropertyChanged(this,"hayPuntuableSeleccionadoConNombre",hayPuntuableSeleccionadoConNombre) 
 		   verificarSiTieneNombreAsignado
-		
+		}
 	}
 	
 	@Dependencies("puntuableSeleccionado")
@@ -40,6 +42,10 @@ class PuntuableAppModel {
 		!puntuableSeleccionado.equals(miPuntuableNull)
 	}
 	
+	@Dependencies("puntuableSeleccionado")
+	def getHayPuntuableSeleccionadoConNombre(){
+		!puntuableSeleccionado.isNoTieneNombre
+	}
 	def void setNombreBuscado(String nombre){
 		 nombreBuscado=nombre
 		 administradorDePuntuables.buscar(nombreBuscado)
@@ -75,15 +81,20 @@ class PuntuableAppModel {
 	def boolean getHabilitado(){
 		puntuableSeleccionado.habilitado
 	}
+	
 
 	@Dependencies("puntuableSeleccionado")
 	def void setNombre(String nombreNuevo){
-		administradorDePuntuables.verificarLugaresDuplicados(nombreNuevo)
-		administradorDePuntuables.verificarServiciosDuplicados(nombreNuevo)
+		verificarSiHayDuplicados(nombreNuevo)
 		this.puntuableSeleccionado.nombre=nombreNuevo
 		verificarSiTieneNombreAsignado
 		
 	}
+	@Dependencies("puntuableSeleccionado")
+	def verificarSiHayDuplicados(String nombre) {
+		administradorDePuntuables.verificarSiHayDuplicados(nombre)
+	}
+	
     @Dependencies("puntuableSeleccionado")
 	def int getInscriptos(){
 		administradorDePuntuables.inscriptos
