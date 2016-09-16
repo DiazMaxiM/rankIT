@@ -1,15 +1,74 @@
 package test
-import org.junit.Test
-import static org.junit.Assert.*;
-import edu.unq.interfaces.rankit_dominio.Calificacion
+
 import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
-import java.util.List
-import java.util.ArrayList
-
-
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import static org.mockito.Mockito.*;
 class AdmCalificacionesTest {
-	
-	
+	private var AdmCalificaciones admCalificacion
+
+	@Before
+	def void SetUp() {
+		admCalificacion = new AdmCalificaciones
+	}
+
+	@Test 
+	def void testSiAgregoCalificacionLaCantidadDeCalificacionesEs1YSiLaRecuperoEsLaMisma(){
+		
+		val calificacionMock = mock (typeof(Calificacion))
+		
+		val listaConUnaSolaCalificacion = newArrayList
+		listaConUnaSolaCalificacion.add(calificacionMock)
+		
+		admCalificacion.agregarCalificacion(calificacionMock)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas,1)
+		Assert.assertEquals(admCalificacion.listaCalificaciones,listaConUnaSolaCalificacion)
+		
+	}@Test 
+	def void testSiAgregoUnaListaDeCalificacionesAlAdmCalificacionesDeberaTenerMismoSizeYMismosElementos(){
+		
+		val calificacionMock = mock (typeof(Calificacion))
+		
+		val listaConUnaSolaCalificacion = newArrayList
+		listaConUnaSolaCalificacion.add(calificacionMock)
+		
+		admCalificacion.agregarTodasLasCalificaciones(listaConUnaSolaCalificacion)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas,listaConUnaSolaCalificacion.size)
+		Assert.assertEquals(admCalificacion.listaCalificaciones,listaConUnaSolaCalificacion)
+		
+	}
+	@Test 
+	def void testSiAgregoUnaCalificacionAlAdmCalificacionesYLaEliminoNoDeberiaTenerCalificaciones(){
+		
+		val calificacionMock = mock (typeof(Calificacion))
+		
+		admCalificacion.agregarCalificacion(calificacionMock)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas,1)
+		
+		admCalificacion.eliminarCalificacion(calificacionMock)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas,0)
+	}
+	@Test 
+	def void testSiAgregoDosCalificacionesYUnaDeEllasEsOfensivaDebeDevolverDosTotalesYUnaOfensivaYVerificarQueLasMismasSeanLasOriginales(){
+		
+		val calificacionOfensivaMock = mock (typeof(Calificacion))
+		when(calificacionOfensivaMock.contenidoOfensivo).thenReturn(true);
+		val calificacionMock = mock (typeof(Calificacion))
+		when(calificacionMock.contenidoOfensivo).thenReturn(false);
+		
+		admCalificacion.agregarCalificacion(calificacionMock)
+		admCalificacion.agregarCalificacion(calificacionOfensivaMock)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas,2)
+		
+		Assert.assertEquals(admCalificacion.calificacionesOfensivas,1)
+	}
 //	
 //	
 //	/**

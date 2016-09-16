@@ -375,7 +375,7 @@ class AdmPuntuablesTest {
 	  */
 	 
 	 @Test 
-	 def hayServiciosDuplicados(){
+	 def void hayServiciosDuplicados(){
 	 	
 	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
