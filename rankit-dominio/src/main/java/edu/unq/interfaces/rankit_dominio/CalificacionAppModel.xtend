@@ -15,8 +15,7 @@ class CalificacionAppModel {
 	Usuario usuarioLogeado;
 	//AdmPuntuables admPuntuables;
 	
-	AdmPuntuables admPuntuablesLugares;
-	AdmPuntuables admPuntuablesServicios;
+	AdmPuntuables admPuntuables=new AdmPuntuables;
 	
 	String nombreUsuarioBusqueda;
 	String nombreEvaluadoBusqueda;
@@ -26,15 +25,17 @@ class CalificacionAppModel {
 
 	new(AdmCalificaciones calificaciones, AdmPuntuables lugares,AdmPuntuables servicios, Usuario usuario) {
 		administradorCalificacion = calificaciones
-		admPuntuablesLugares = lugares
-		admPuntuablesServicios= servicios
+		admPuntuables.puntuables.addAll( lugares.puntuables)
+		admPuntuables.puntuables.addAll( servicios.puntuables)
+		usuarioLogeado = usuario
+	}
+	new(AdmCalificaciones calificaciones,  Usuario usuario) {
+		administradorCalificacion = calificaciones
 		usuarioLogeado = usuario
 	}
 	def List<Puntuable>getPuntuables(){
 		var listaAux= newArrayList
-		listaAux.addAll(admPuntuablesLugares.puntuables)
-		listaAux.addAll(admPuntuablesServicios.puntuables)
-		listaAux
+		admPuntuables.puntuables
 	}
 
 	@Dependencies("calificacionSeleccionada")
@@ -118,13 +119,14 @@ class CalificacionAppModel {
 	}
 	
 	def  filtradoObligatorioPorPuntuable(Puntuable puntuable) {
+		admPuntuables.agregar(puntuable)
 		nombreEvaluadoBusqueda = puntuable.nombre
 		habilitadoEvaluadoBusqueda=false
 		this
 	}
 	def  filtradoObligatorioPorUsuario(Usuario usuario) {
 		nombreEvaluadoBusqueda = usuario.nombre
-		//habilitadoUsuarioBusqueda=false
+		habilitadoUsuarioBusqueda=false
 		this
 	}
 
