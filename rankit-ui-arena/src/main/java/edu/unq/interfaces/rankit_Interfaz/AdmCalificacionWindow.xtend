@@ -147,7 +147,7 @@ class AdmCalificacionWindow extends SimpleWindow<CalificacionAppModel>{
 		]	
 		new Selector(contenedorOpciones)=>[
 			bindEnabledToProperty("hayCalificacionSeleccionada")
-			bindItemsToProperty("admPuntuables.todosLosPuntuables").adapter = new PropertyAdapter(Puntuable, "nombre")
+			bindItemsToProperty("puntuables").adapter = new PropertyAdapter(Puntuable, "nombre")
 			bindValueToProperty("calificacionSeleccionada.evaluado")
 		]
 	 

@@ -19,6 +19,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 
 class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
 
@@ -199,6 +200,7 @@ class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
 					new CalificacionAppModel(
 						this.modelObject.administradorCalificacionesParaCalificacionSeleccionada,
 						this.modelObject.administradorDePuntuables,
+						new AdmPuntuables,
 						this.modelObject.usuarioLogeado
 					).filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)
 				).open

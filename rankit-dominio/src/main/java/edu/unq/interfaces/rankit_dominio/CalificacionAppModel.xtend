@@ -4,6 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.utils.Dependencies
+import java.util.List
 
 @Observable
 @Accessors
@@ -12,17 +13,28 @@ class CalificacionAppModel {
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
 	Usuario usuarioLogeado;
-	AdmPuntuables admPuntuables;
+	//AdmPuntuables admPuntuables;
+	
+	AdmPuntuables admPuntuablesLugares;
+	AdmPuntuables admPuntuablesServicios;
+	
 	String nombreUsuarioBusqueda;
 	String nombreEvaluadoBusqueda;
 	Boolean habilitadoEvaluadoBusqueda=true;
 	Boolean habilitadoUsuarioBusqueda=true;
 	
 
-	new(AdmCalificaciones calificaciones, AdmPuntuables puntuables, Usuario usuario) {
+	new(AdmCalificaciones calificaciones, AdmPuntuables lugares,AdmPuntuables servicios, Usuario usuario) {
 		administradorCalificacion = calificaciones
-		admPuntuables = puntuables
+		admPuntuablesLugares = lugares
+		admPuntuablesServicios= servicios
 		usuarioLogeado = usuario
+	}
+	def List<Puntuable>getPuntuables(){
+		var listaAux= newArrayList
+		listaAux.addAll(admPuntuablesLugares.puntuables)
+		listaAux.addAll(admPuntuablesServicios.puntuables)
+		listaAux
 	}
 
 	@Dependencies("calificacionSeleccionada")
@@ -112,7 +124,7 @@ class CalificacionAppModel {
 	}
 	def  filtradoObligatorioPorUsuario(Usuario usuario) {
 		nombreEvaluadoBusqueda = usuario.nombre
-		habilitadoUsuarioBusqueda=false
+		//habilitadoUsuarioBusqueda=false
 		this
 	}
 
