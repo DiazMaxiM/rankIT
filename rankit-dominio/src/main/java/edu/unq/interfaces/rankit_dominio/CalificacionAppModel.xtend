@@ -34,7 +34,6 @@ class CalificacionAppModel {
 		usuarioLogeado = usuario
 	}
 	def List<Puntuable>getPuntuables(){
-		var listaAux= newArrayList
 		admPuntuables.puntuables
 	}
 
