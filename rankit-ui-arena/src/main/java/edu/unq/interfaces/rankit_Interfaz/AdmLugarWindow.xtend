@@ -15,14 +15,13 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.ErrorsPanel
-import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 
 class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
-
+	 
 	new(WindowOwner parent, PuntuableAppModel model) {
 		super(parent, model)
 		title = "Rank-IT -->Adm Servicios"
@@ -199,8 +198,6 @@ class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
 					this,
 					new CalificacionAppModel(
 						this.modelObject.administradorCalificacionesParaCalificacionSeleccionada,
-						this.modelObject.administradorDePuntuables,
-						new AdmPuntuables,
 						this.modelObject.usuarioLogeado
 					).filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)
 				).open
@@ -271,7 +268,7 @@ class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
 			]
 		]
 	}
-
+	
 
 
 }
