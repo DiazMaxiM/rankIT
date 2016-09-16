@@ -20,7 +20,7 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
-class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
+class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
 
 	new(WindowOwner parent, PuntuableAppModel model) {
 		super(parent, model)
@@ -29,15 +29,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 
 	}
 
-	override protected createFormPanel(Panel panelPrincipal) {
-		val panel = new Panel(panelPrincipal)
-		this.resumenDeSituacion(panel)
-		this.crearListadoDeServicios(panel)
-		this.crearEdicionDeServicioSeleccionado(panel)
-
-	}
-
-	def resumenDeSituacion(Panel panel) {
+	override resumenDeSituacion(Panel panel) {
 		val panelEstadisticas = new Panel(panel)
 		panelEstadisticas.layout = new HorizontalLayout
 		this.puntuablesInscriptos(panelEstadisticas)
@@ -78,7 +70,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 		]
 	}
 
-	def void crearListadoDeServicios(Panel panel) {
+	override void busqueda(Panel panel) {
 		var panelBusqueda = new Panel(panel)
 		this.titulo(panelBusqueda)
 		this.ingresarDatosYBuscar(panelBusqueda)
@@ -111,7 +103,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 		]
 	}
 
-	def crearEdicionDeServicioSeleccionado(Panel panel) {
+	override tablaYEdicion(Panel panel) {
 		val panelDatos = new Panel(panel)
 		panelDatos.layout = new ColumnLayout(2)
 
@@ -277,6 +269,7 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 			]
 		]
 	}
+
 
 
 }
