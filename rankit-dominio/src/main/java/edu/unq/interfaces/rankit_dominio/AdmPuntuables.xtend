@@ -46,7 +46,7 @@ class AdmPuntuables {
 	
 	
 	def puntubleConElnombre(String nombre) {
-		puntuables.findFirst[puntuable|puntuable.isNombre(nombre)]
+		puntuablesCopia.findFirst[puntuable|puntuable.isNombre(nombre)]
 	}
 	
 	def buscar(String letrasDelNombreBuscado) {

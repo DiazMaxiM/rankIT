@@ -193,7 +193,6 @@ class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 	}
 	
 	override protected addActions(Panel actionsPanel) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 

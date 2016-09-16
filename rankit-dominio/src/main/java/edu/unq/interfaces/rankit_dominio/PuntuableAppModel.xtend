@@ -143,6 +143,8 @@ class PuntuableAppModel {
 		ObservableUtils.firePropertyChanged(this, "habilitados", habilitados)
 		ObservableUtils.firePropertyChanged(this, "deshabilitados", deshabilitados)
 		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+		ObservableUtils.firePropertyChanged(this, "ratingPromedio", ratingPromedio)
+		ObservableUtils.firePropertyChanged(this, "cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
 
 	}
 
