@@ -22,35 +22,18 @@ class Calificacion {
 		this.evaluado= new PuntuableNull()
 		this.usuario = usuario
 	}
-	
-	new() {
-		this.contenidoOfensivo=false
-		this.detalle=""
-		this.fecha=new Date() 
-		this.puntos=0
-		this.evaluado=null  
-		
-		  }
-	
-	def boolean esCalificacionOfensiva() {
-		contenidoOfensivo.equals(true)
-	}
-	def void marcarComoContenidoOfensivo(){
-	    contenidoOfensivo=true  
-	}
-	def boolean sinDescripcion() {
-		detalle.equals("prueba")
-	}
-	def void darPuntosALaCalificacion(int puntos){
-		this.puntos=puntos
-	}
-	def void indicarElDetalleDeLaCalificacion(String detalle){
-		this.detalle=detalle
-	}	
-	def  void indicarEvaluado(Puntuable evaluado){
-		this.evaluado=evaluado 
-	}
-	
+	/**
+	 * 
+	 * TODO: problemas de responsabilidades
+	 * 
+	 */
+//	def void marcarComoContenidoOfensivo(){
+//	    contenidoOfensivo=true  
+//	}
+	/**
+	 * TODO: isPuntableBuscado no es responsabilidad de Calificacion
+	 * 
+	 */
 	def isPuntuableBuscado(Puntuable puntuable) {
 	    this.evaluado.nombre.equals(puntuable.nombre)
 	}
