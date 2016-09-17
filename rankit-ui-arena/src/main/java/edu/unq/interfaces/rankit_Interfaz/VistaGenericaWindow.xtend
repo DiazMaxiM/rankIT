@@ -93,7 +93,11 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
 		new Button(contenedorOpcionPanel) => [
 			caption = "Eliminar"
-		// onClick[| this.modelObject.eliminar]
+			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+		 onClick[| 
+		 	val adapterAppModel = this.modelObject
+		 	new EliminarWindow(this,adapterAppModel).open
+				]
 		]
 	}
 

@@ -28,5 +28,5 @@ interface GenericaAppModel {
 	def String getSegundoParametroDeBusqueda()
 	
 	def void nuevo()
-
+	def void eliminar()
 }

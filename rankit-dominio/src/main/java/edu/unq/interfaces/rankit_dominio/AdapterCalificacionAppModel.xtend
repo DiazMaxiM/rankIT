@@ -79,6 +79,11 @@ class   AdapterCalificacionAppModel implements GenericaAppModel {
 		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
+	override eliminar() {
+		miAppModel.eliminarCalificacionSeleccionada
+	}
+	
+	
 	
 
 	

@@ -12,7 +12,7 @@ import com.google.common.base.Strings
 class CalificacionAppModel  {
 
 	AdmCalificaciones administradorCalificacion;
-	Calificacion calificacionSeleccionada;
+	Calificacion itemSeleccionado;
 	Usuario usuarioLogeado;
 	//AdmPuntuables admPuntuables;
 	
@@ -44,10 +44,10 @@ class CalificacionAppModel  {
 		admPuntuables.puntuables
 	}
 
-	@Dependencies("calificacionSeleccionada")
+	@Dependencies("itemSeleccionado")
 	def String getPuntos() {
-		if (hayCalificacionSeleccionada) {
-			return calificacionSeleccionada.puntos.toString
+		if (hayItemSeleccionado) {
+			return itemSeleccionado.puntos.toString
 		}
 		""
 	}
@@ -57,7 +57,7 @@ class CalificacionAppModel  {
 		if (!Strings.isNullOrEmpty(numero)) {
 			valor = Integer.parseInt(numero)
 		}
-		calificacionSeleccionada.puntos = valor
+		itemSeleccionado.puntos = valor
 	}
 
 	def setNombreUsuarioBusqueda(String nombre) {
@@ -74,25 +74,25 @@ class CalificacionAppModel  {
 		administradorCalificacion.filtrarCalificaciones(nombreEvaluadoBusqueda, nombreUsuarioBusqueda)
 	}
 
-	def void setCalificacionSeleccionada(Calificacion calificacionSel) {
-		calificacionSeleccionada = calificacionSel
+	def void setItemSeleccionado(Calificacion calificacionSel) {
+		itemSeleccionado = calificacionSel
 		if (calificacionSel != null) {
 			ObservableUtils.firePropertyChanged(this, "contenidoOfensivo", contenidoOfensivo)
 		}
 	}
 
 	def Boolean getContenidoOfensivo() {
-		calificacionSeleccionada.contenidoOfensivo
+		itemSeleccionado.contenidoOfensivo
 	}
 
 	def void setContenidoOfensivo(Boolean bool) {
-		administradorCalificacion.contenidoOfensivo(calificacionSeleccionada, bool)
+		administradorCalificacion.contenidoOfensivo(itemSeleccionado, bool)
 		actualizarEstadoSituacion
 	}
 
-	@Dependencies("calificacionSeleccionada")
-	def Boolean getHayCalificacionSeleccionada() {
-		calificacionSeleccionada != null
+	@Dependencies("itemSeleccionado")
+	def Boolean getHayItemSeleccionado() {
+		itemSeleccionado != null
 	}
 
 	def int getCalificacionesRegistradas() {
@@ -104,7 +104,7 @@ class CalificacionAppModel  {
 	}
 
 	def eliminarCalificacionSeleccionada() {
-		administradorCalificacion.eliminarCalificacion(calificacionSeleccionada)
+		administradorCalificacion.eliminarCalificacion(itemSeleccionado)
 		actualizarEstadoSituacion
 	}
 
