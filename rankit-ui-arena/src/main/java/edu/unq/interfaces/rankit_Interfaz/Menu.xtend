@@ -12,7 +12,6 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.GenericaAppModel
-import edu.unq.interfaces.rankit_dominio.AdapterPuntuableAppModel
 import edu.unq.interfaces.rankit_dominio.AdapterLugarAppModel
 
 class Menu extends SimpleWindow<RankITAppModel> {

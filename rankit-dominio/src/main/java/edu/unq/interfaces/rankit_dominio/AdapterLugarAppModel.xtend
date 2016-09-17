@@ -2,6 +2,7 @@ package edu.unq.interfaces.rankit_dominio
 
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.ObservableUtils
 
 @Observable
 @Accessors
@@ -69,6 +70,14 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	
 	override nuevo() {
 		miAppModel.nuevo
+	}
+	
+	override eliminar() {
+          miAppModel.eliminar
+	} 
+	
+	def void avisarCambios(){
+		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
 	}
 	
 }

@@ -15,7 +15,7 @@ class PuntuableAppModel {
 	Usuario usuarioLogeado
 	AdmPuntuables administradorDePuntuables
 	AdmCalificaciones administradorCalificacion
-	Puntuable puntuableSeleccionado = miPuntuableNull
+	Puntuable itemSeleccionado = miPuntuableNull
 	String nombreBuscado = ""
 
 	new(AdmPuntuables adm1, AdmCalificaciones adm2, Usuario usuarioLogeado) {
@@ -25,27 +25,27 @@ class PuntuableAppModel {
 
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def setPuntuableSeleccionado(Puntuable seleccionado){
-		   puntuableSeleccionado = seleccionado
-		   if(getHayPuntuableSeleccionado){
+		   itemSeleccionado = seleccionado
+		   if(getHayItemSeleccionado){
 		   ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
 		   ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
 		   ObservableUtils.firePropertyChanged(this,"fechaDeRegistro",fechaDeRegistro) 
-		   ObservableUtils.firePropertyChanged(this,"hayPuntuableSeleccionadoConNombre",hayPuntuableSeleccionadoConNombre) 
+		   ObservableUtils.firePropertyChanged(this,"hayItemSeleccionadoConNombre",hayItemSeleccionadoConNombre) 
 		   verificarSiTieneNombreAsignado
 		}
 	}
 	
 
-	@Dependencies("puntuableSeleccionado")
-	def getHayPuntuableSeleccionado() {
-		!puntuableSeleccionado.equals(miPuntuableNull)
+	@Dependencies("itemSeleccionado")
+	def getHayItemSeleccionado() {
+		!itemSeleccionado.equals(miPuntuableNull)
 	}
 	
-	@Dependencies("puntuableSeleccionado")
-	def getHayPuntuableSeleccionadoConNombre(){
-		!puntuableSeleccionado.isNoTieneNombre
+	@Dependencies("itemSeleccionado")
+	def getHayItemSeleccionadoConNombre(){
+		!itemSeleccionado.isNoTieneNombre
 	}
 
 
@@ -62,58 +62,58 @@ class PuntuableAppModel {
 	}
 
 	def int getRatingPromedio() {
-		administradorCalificacion.ratingPromedio(puntuableSeleccionado)
+		administradorCalificacion.ratingPromedio(itemSeleccionado)
 	}
 
 	def int getCantidadDeCalificacionesDelPuntuable() {
-		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(puntuableSeleccionado)
+		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(itemSeleccionado)
 	}
 
 	def Date getFechaDeRegistro() {
-		puntuableSeleccionado.fechaDeRegistro
+		itemSeleccionado.fechaDeRegistro
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def String getNombre() {
-		puntuableSeleccionado.nombre
+		itemSeleccionado.nombre
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def void setHabilitado(boolean bool) {
-		puntuableSeleccionado.habilitado = bool
+		itemSeleccionado.habilitado = bool
 		avisarCambiosDeLista()
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def boolean getHabilitado() {
-		puntuableSeleccionado.habilitado
+		itemSeleccionado.habilitado
 	}
 	
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def void setNombre(String nombreNuevo){
 		verificarSiHayDuplicados(nombreNuevo)
-		this.puntuableSeleccionado.nombre=nombreNuevo
+		this.itemSeleccionado.nombre=nombreNuevo
 	    verificarSiTieneNombreAsignado
 
 	}
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def verificarSiHayDuplicados(String nombre) {
 		administradorDePuntuables.verificarSiHayDuplicados(nombre)
 	}
 	
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def int getInscriptos() {
 		administradorDePuntuables.inscriptos
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def int getHabilitados() {
 		administradorDePuntuables.habilitados
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def int getDeshabilitados() {
 		administradorDePuntuables.deshabilitados
 	}
@@ -123,9 +123,9 @@ class PuntuableAppModel {
 		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
 	}
 
-	@Dependencies("puntuableSeleccionado")
+	@Dependencies("itemSeleccionado")
 	def void verificarSiTieneNombreAsignado() {
-		puntuableSeleccionado.verificarSiTieneNombre
+		itemSeleccionado.verificarSiTieneNombre
 	}
 
 	def List<Puntuable> getElementos() {
@@ -133,8 +133,8 @@ class PuntuableAppModel {
 	}
 
 	def void eliminar() {
-		administradorDePuntuables.eliminar(puntuableSeleccionado)
-		puntuableSeleccionado = miPuntuableNull
+		administradorDePuntuables.eliminar(itemSeleccionado)
+		itemSeleccionado = miPuntuableNull
 		avisarCambiosDeLista()
 	}
 

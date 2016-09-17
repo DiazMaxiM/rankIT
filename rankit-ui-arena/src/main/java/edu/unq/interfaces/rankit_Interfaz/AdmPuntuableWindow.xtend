@@ -9,10 +9,19 @@ import org.uqbar.arena.widgets.Panel
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.tables.Column
 import java.text.SimpleDateFormat
+import org.uqbar.arena.layout.VerticalLayout
+import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.layout.ColumnLayout
+import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.windows.ErrorsPanel
+import org.uqbar.arena.widgets.TextBox
+import org.uqbar.arena.layout.HorizontalLayout
+import edu.unq.interfaces.component.LabelCheckBox
 
 class AdmPuntuableWindow extends VistaGenericaWindow {
+
 	
-	new(WindowOwner parent, AdapterLugarAppModel model) {
+	new(WindowOwner parent, GenericaAppModel model) {
 		super(parent, model)
 	}
 	
@@ -21,7 +30,7 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 		new Table<Puntuable>(panel, typeof(Puntuable)) => [
 			// bindeamos el contenido de la tabla
 			(items <=> "miAppModel.elementos")
-			value <=> "miAppModel.puntuableSeleccionado"
+			value <=> "miAppModel.itemSeleccionado"
 			// le definimos el alto y ancho, esto es opcional
 			width = 200
 			// describimos cada fila
@@ -53,4 +62,97 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 			]
 		]
 	}
+	
+	override opciones(Panel panel) {
+		this.mostrarNombrePuntuable(panel)
+		this.panelErrores(panel)
+		this.editarNombre(panel)
+		this.habilitarPuntuable(panel)
+		this.calificacionesPuntuable(panel)
+		this.botones(panel)
+	}
+
+	def mostrarNombrePuntuable(Panel panel) {
+		var panelNombre = new Panel(panel)
+		panelNombre.layout = new ColumnLayout(2)
+		new Label(panelNombre) => [
+			text = "Nombre: "
+			fontSize = 13
+		]
+		new Label(panelNombre) => [
+			value <=> "miAppModel.nombre"
+			fontSize = 13
+		]
+	}
+
+	def panelErrores(Panel panel) {
+		new ErrorsPanel(panel, "Edita la información")
+	}
+
+	def editarNombre(Panel panel) {
+		new Label(panel).text = "Nombre:"
+		new TextBox(panel) => [
+			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+			bindValueToProperty("miAppModel.nombre")
+		]
+
+	}
+
+	def habilitarPuntuable(Panel panel) {
+		var panelHabilitar = new Panel(panel)
+		panelHabilitar.layout = new HorizontalLayout
+		new LabelCheckBox(panelHabilitar).setText("Habilitado").bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre").
+			bindValueToProperty("miAppModel.habilitado")
+
+	}
+
+	def calificacionesPuntuable(Panel panel) {
+		this.rating(panel)
+		this.calificaciones(panel)
+
+	}
+
+	def rating(Panel panel) {
+		var panelRating = new Panel(panel)
+		panelRating.layout = new HorizontalLayout
+		new Label(panelRating).text = "Ranting promedio:"
+		new Label(panelRating) => [
+			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+			bindValueToProperty("miAppModel.ratingPromedio")
+		]
+
+	}
+
+	def calificaciones(Panel panel) {
+		var panelCalificaciones = new Panel(panel)
+		panelCalificaciones.layout = new HorizontalLayout
+		new Label(panelCalificaciones).text = "Calificaciones:"
+		new Label(panelCalificaciones) => [
+			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+			bindValueToProperty("miAppModel.cantidadDeCalificacionesDelPuntuable")
+		]
+
+	}
+	
+
+	
+	
+	def botones(Panel panel) {
+		new Button(panel) => [
+			caption = "Revisar Calificaciones"
+ 		//    bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre")
+
+//			onClick [|
+//				new AdmCalificacionWindow(
+//					this,
+//					new CalificacionAppModel(
+//						this.modelObject.administradorCalificacionesParaCalificacionSeleccionada,
+//						this.modelObject.usuarioLogeado
+//					).filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)
+//				).open
+//			]
+//			width = 200
+		]
+		
+   }
 }
