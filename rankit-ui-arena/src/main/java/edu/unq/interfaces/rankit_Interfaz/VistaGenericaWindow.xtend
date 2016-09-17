@@ -46,18 +46,15 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 			bindValueToProperty("primerParametroDeBusqueda")
 		]
 
-		contenedorEspecialMaxi(panelBusquedaParametros)
+		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)
 	}
 	
 	def void tituloContenedorBusqueda(Panel panelBusqueda) {
 		new Titulo(panelBusqueda, this.modelObject.tituloContenedorBusqueda)
 	}
 
-	def contenedorEspecialMaxi(Panel panelBusquedaParametros) {
-		new LabeledTextBox(panelBusquedaParametros) => [
-			text = this.modelObject.textoSegundoParametroDeBusqueda
-			bindValueToProperty("segundoParametroDeBusqueda")
-		]
+	def contenedorParaSegundoParametroCalificacion(Panel panelBusquedaParametros) {
+	
 	}
 
 	def contenedorResumenDeSituacion(Panel panelGeneral) {

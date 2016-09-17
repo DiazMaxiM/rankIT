@@ -22,6 +22,7 @@ import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import edu.unq.interfaces.component.LabeledTextBox
 
 class AdmCalificacionWindow extends VistaGenericaWindow {
 
@@ -29,6 +30,12 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		super(parent, model)
 	}
 
+	override contenedorParaSegundoParametroCalificacion(Panel panelBusquedaParametros) {
+		new LabeledTextBox(panelBusquedaParametros) => [
+			text = this.modelObject.textoSegundoParametroDeBusqueda
+			bindValueToProperty("segundoParametroDeBusqueda")
+		]
+	}
 	override opciones(Panel panel) {
 		val contenedorOpciones = new Panel(panel)
 		contenedorOpciones.layout = new VerticalLayout
