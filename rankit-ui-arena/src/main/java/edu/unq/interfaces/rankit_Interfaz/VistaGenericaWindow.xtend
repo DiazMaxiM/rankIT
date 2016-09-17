@@ -36,7 +36,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		val panelBusqueda = new Panel(panelGeneral)
 		panelBusqueda.layout = new HorizontalLayout
 
-		new Titulo(panelBusqueda, this.modelObject.tituloContenedorBusqueda)
+		tituloContenedorBusqueda(panelBusqueda)
 
 		val panelBusquedaParametros = new Panel(panelGeneral)
 		panelBusquedaParametros.layout = new HorizontalLayout
@@ -47,6 +47,10 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		]
 
 		contenedorEspecialMaxi(panelBusquedaParametros)
+	}
+	
+	def void tituloContenedorBusqueda(Panel panelBusqueda) {
+		new Titulo(panelBusqueda, this.modelObject.tituloContenedorBusqueda)
 	}
 
 	def contenedorEspecialMaxi(Panel panelBusquedaParametros) {
