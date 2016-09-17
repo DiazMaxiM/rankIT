@@ -19,6 +19,7 @@ import org.uqbar.arena.bindings.DateTransformer
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.component.LabelCheckBox
 import org.uqbar.arena.widgets.TextBox
+import java.awt.Color
 
 class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel> 
 {
@@ -58,25 +59,25 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	def usuariosRegistrados(Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="Usuarios Registrados: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosRegistrados")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.BLUE bindValueToProperty("cantidadDeUsuariosRegistrados")]
 	}
 	
 	def usuariosActivos(Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="   Activos: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosActivos")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.BLUE bindValueToProperty("cantidadDeUsuariosActivos")]
 	}
 	
 	def usuariosInactivos (Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="   Inactivos: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosInactivos")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.RED bindValueToProperty("cantidadDeUsuariosInactivos")]
 	}	
 	
 	def usuariosBaneados (Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="   Baneados: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosBaneados")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.RED bindValueToProperty("cantidadDeUsuariosBaneados")]
 	}
 	
 	def panelDeBusqueda (Panel panelPrincipal)
@@ -93,7 +94,18 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		busqueda.layout = new HorizontalLayout
 		
 		new Label(busqueda).text = "Buscar por nombre de usuario "
-	    new TextBox(busqueda) => [ bindValueToProperty ("nombreDeUsuarioABuscar") width = 180]
+	    new TextBox(busqueda) => [ bindValueToProperty ("nombreABuscar") width = 180]
+		
+//		new TextBox(busqueda) => 
+//		[
+//			// tip: de esta manera se registra el binding
+//			// anidado y se disparan notificaciones,
+//			// si al searchFormPanel se le asigna como modelo
+//			// el objeto example no se disparan 
+//			value <=> "nombreABuscar"
+//			width = 200
+//		]
+		
 		new Button(busqueda) => 
 		[
 	      caption = "Buscar" width = 100
@@ -194,7 +206,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new TextBox (panelDeEdicion) => 
 		[
 			bindEnabledToProperty("hayUsuarioSeleccionado")
-			bindValueToProperty("usuarioSeleccionado.fechaDeRegistro").transformer = new DateTransformer
+			bindValueToProperty("fechaDeRegistroDelUsuario").transformer = new DateTransformer
 		]
 	}
 
@@ -232,7 +244,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new Table<Usuario> (tabla, typeof (Usuario)) => 
 		[
 			//bindeamos el contenido de la tabla
-			(items <=> "administradorDeUsuarios.usuarios")
+			(items <=> "usuarios")
 			value <=> "usuarioSeleccionado"
 			//le definimos el alto y ancho, esto es opcional
 			width= 300

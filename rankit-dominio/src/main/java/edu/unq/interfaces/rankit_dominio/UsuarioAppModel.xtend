@@ -1,10 +1,11 @@
 package edu.unq.interfaces.rankit_dominio
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.utils.Observable
-import edu.unq.interfaces.rankit_dominio.Usuario
 import org.uqbar.commons.utils.Dependencies
 import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Observable
+import java.util.Date
+import java.util.List
 
 @Observable
 @Accessors
@@ -31,31 +32,31 @@ class UsuarioAppModel
 		administradorDeUsuarios= admUsuarios
 	}
 	
-	def cantidadDeUsuariosRegistrados()
+	def int getCantidadDeUsuariosRegistrados()
 	{
 		administradorDeUsuarios.cantidadTotalDeUsuarios
 	}
 	
-	def cantidadDeUsuariosActivos()
+	def int getCantidadDeUsuariosActivos()
 	{
 		administradorDeUsuarios.cantidadTotalDeUsuariosActivos
 	}
 	
-	def cantidadDeUsuariosInactivos()
+	def int getCantidadDeUsuariosInactivos()
 	{
 		administradorDeUsuarios.cantidadTotalDeUsuariosInactivos
 	}
 	
-	def cantidadDeUsuariosBaneados()
+	def int getCantidadDeUsuariosBaneados()
 	{
 		administradorDeUsuarios.cantidadTotalDeUsuariosBaneados
 	}
 	
-	def eliminarUsuario() 
+	def void eliminarUsuario() 
 	{
 		administradorDeUsuarios.eliminarUsuario(usuarioSeleccionado)
-		usuarioSeleccionado = null
 		avisarModificacionesDeUsuarios
+		usuarioSeleccionado = null
 	}
 	
 	def void blanquearContrasenha()
@@ -68,7 +69,14 @@ class UsuarioAppModel
 		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 	}
 	
-	def agregarNuevoUsuario() 
+	def void setNombreABuscar(String nombre) 
+	{
+		nombreDeUsuarioABuscar = nombre
+		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
+	}
+	
+	def void agregarNuevoUsuario() 
 	{
 		var usuarioNuevo = new Usuario
 		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
@@ -77,15 +85,16 @@ class UsuarioAppModel
 	
 	def void avisarModificacionesDeUsuarios() 
 	{
-		ObservableUtils.firePropertyChanged(this, "usuarios", usuariosActuales)
+		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
+		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosRegistrados", cantidadDeUsuariosRegistrados)
+		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosActivos", cantidadDeUsuariosActivos)
+		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosInactivos", cantidadDeUsuariosInactivos)
+		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosBaneados", cantidadDeUsuariosBaneados)
+		ObservableUtils.firePropertyChanged(this, "baneado", baneado)
+		ObservableUtils.firePropertyChanged(this, "activo", activo)
+		
 	}
-	
-@Dependencies("usuarioSeleccionado")
-	def Usuario[] getUsuariosActuales() 
-	{
-		administradorDeUsuarios.usuarios
-	}
-	
+
 @Dependencies("usuarioSeleccionado")
 	def String getNombre() 
 	{
@@ -93,18 +102,12 @@ class UsuarioAppModel
 	}
 	
 @Dependencies("usuarioSeleccionado")
-	def hayUsuarioSeleccionado()
+	def getHayUsuarioSeleccionado()
 	{
 		usuarioSeleccionado!=null
 	}
 	
-@Dependencies("usuarioSeleccionado")
-	def getHayUsarioSeleccionado()
-	{
-		!usuarioSeleccionado.equals(null)
-	}
-	
-	def fechaDeLaUltimaPublicacion ()
+	def Date getFechaDeLaUltimaPublicacion ()
 	{
 		//administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(usuarioSeleccionado)
 		// fechaDeLaUltimaPublicacionDe (implementacion de AdmCalificacion)
@@ -114,12 +117,40 @@ class UsuarioAppModel
 	def boolean getActivo() 
 	{
 		usuarioSeleccionado.activo
-	}	
+	}
+	
+@Dependencies("usuarioSeleccionado")
+	def void setActivo(boolean bool) 
+	{
+		usuarioSeleccionado.activo = bool
+		usuarioSeleccionado.desbanearUsuario
+		avisarModificacionesDeUsuarios()
+	}
 
 @Dependencies("usuarioSeleccionado")
 	def boolean getBaneado() 
 	{
 		usuarioSeleccionado.baneado
-	}	
+	}
+		
+@Dependencies("usuarioSeleccionado")
+	def void setBaneado(boolean bool) 
+	{
+		usuarioSeleccionado.baneado = bool
+		usuarioSeleccionado.activo = false
+		avisarModificacionesDeUsuarios()
+	}
+
+@Dependencies("usuarioSeleccionado")
+	def Date getFechaDeRegistroDelUsuario()
+	{
+		usuarioSeleccionado.fechaDeRegistro
+	}
+
+@Dependencies("usuarioSeleccionado")
+	def List<Usuario> getUsuarios()
+	{
+		administradorDeUsuarios.usuarios
+	}
 
 }
