@@ -130,7 +130,6 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 			onClick (
 			[|new AdmCalificacionWindow 
 				(this, new CalificacionAppModel(this.modelObject.administradorDeCalificaciones,
-												this.modelObject.administradorDePuntuables,
 												this.modelObject.usuarioLogeado
 												)
 						.filtradoObligatorioPorUsuario (this.modelObject.usuarioSeleccionado)
@@ -152,20 +151,8 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 			bindEnabledToProperty("hayUsuarioSeleccionado")
 			onClick [| this.modelObject.eliminarUsuario]
 			width = 100
-	    ]
+		]
 	}
-	
-//	def mostrarPublicacionesDelUsuario(Calificacion[] publicaciones, Usuario usuario)
-//	{  
-//		 var calificaciones = new AdmUsuarios 
-//		 todosLosUsuarios.agregarUsuarioNuevo (usuario)
-//		 var todasLasPublicaciones = new AdmCalificaciones
-//		 todasLasPublicaciones.agregarTodasLasCalificaciones(publicaciones)
-//		 var usuarioNuevo = new Usuario
-//		 var appModel= new CalificacionAppModel(todasLasPublicaciones, todosLosUsuarios, usuarioNuevo)
-//         // Necesito un CalificacionAppModel que tome un AdmUsuarios como parametro
-//         new AdmCalificacionWindow(this,appModel) => [open]
-//	}
 
 	def ultimaPublicacionDelUsuario (Panel panelDeEdicion) 
 	{
@@ -222,7 +209,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		nombreDeUsuario.layout = new  ColumnLayout(2)
 		new Label(nombreDeUsuario)=> [text="Nombre:" fontSize = 15]
 //		new Label(nombreDeUsuario)=> [value <=> "nombre" fontSize = 15]
-		new Label(nombreDeUsuario).text = "Nombre:"
+//		new Label(nombreDeUsuario).text = "Nombre:"
 		new TextBox(nombreDeUsuario) => 
 		[
 			bindEnabledToProperty("hayUsuarioSeleccionado")
@@ -273,14 +260,14 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 			[
 				title = "Activo"
 				fixedSize = 100 
-				bindContentsToProperty("activo").transformer = [ isActivo | if (isActivo) "Sí" else "No"]
+				bindContentsToProperty("activo").transformer = [ esActivo | if (esActivo) "Sí" else "No"]
 			] 
 			
 			new Column<Usuario>(it) => 
 			[
 				title = "Baneado"
 				fixedSize = 100 
-				bindContentsToProperty("baneado").transformer = [ isBaneado | if (isBaneado) "Sí" else "-"]
+				bindContentsToProperty("baneado").transformer = [ estaBaneado | if (estaBaneado) "Sí" else "-"]
 			]
 		]  
     }

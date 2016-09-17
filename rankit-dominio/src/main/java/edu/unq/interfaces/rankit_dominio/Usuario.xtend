@@ -13,7 +13,8 @@ class Usuario {
 	private boolean activo
 	private boolean baneado
 
-	new() {
+	new() 
+	{
 		this.fechaDeRegistro = new Date
 		this.nombre = "NN"
 		this.password = "123"
@@ -21,18 +22,21 @@ class Usuario {
 		this.baneado = false
 	}
 
-	def cambiarNombre(String nombre) {
-		this.nombre = nombre
+	def cambiarNombre(String nombreNuevo) 
+	{
+		nombre = nombreNuevo
 	}
 
-	def cambiarContrasenha(String contrasenha) {
-		this.password = contrasenha
+	def cambiarContrasenha(String contrasenhaNueva) 
+	{
+		password = contrasenhaNueva
 	}
 
 	/**
 	 * Cuando se banea a un usuario, este queda inactivo 
 	 */
-	def void banearUsuario() {
+	def void banearUsuario() 
+	{
 		activo = false
 		baneado = true
 	}
@@ -40,25 +44,35 @@ class Usuario {
 	/**
 	 * Cuando se desbanea a un usuario, este queda activo 
 	 */
-	def void desbanearUsuario() {
+	def void desbanearUsuario() 
+	{
 		activo = true
 		baneado = false
 	}
 
-	def isNombre(String nombre) {
-		this.nombre.equals(nombre)
-	}
-
-	def boolean isActivo() {
-		activo
-	}
-
-	def seLlama(String nombreAComparar) {
+	def deNombre(String nombreAComparar) 
+	{
 		nombre.equals(nombreAComparar)
 	}
 
-	def isBaneado() {
+	def boolean esActivo() 
+	{
+		activo
+	}
+
+	def estaBaneado() 
+	{
 		baneado
+	}
+	
+	def esInactivo() 
+	{
+		activo==false
+	}
+	
+	def blanqueoDeContrasenha() 
+	{
+		password = "123"
 	}
 
 }

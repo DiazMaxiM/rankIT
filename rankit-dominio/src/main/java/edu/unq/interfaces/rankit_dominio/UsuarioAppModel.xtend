@@ -54,6 +54,8 @@ class UsuarioAppModel
 	def eliminarUsuario() 
 	{
 		administradorDeUsuarios.eliminarUsuario(usuarioSeleccionado)
+		usuarioSeleccionado = null
+		avisarModificacionesDeUsuarios
 	}
 	
 	def void blanquearContrasenha()
@@ -70,14 +72,12 @@ class UsuarioAppModel
 	{
 		var usuarioNuevo = new Usuario
 		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
-		avisarCambiosDeNuevoUsuario
+		avisarModificacionesDeUsuarios
 	}
 	
-	
-	def void avisarCambiosDeNuevoUsuario() 
+	def void avisarModificacionesDeUsuarios() 
 	{
-		ObservableUtils.firePropertyChanged(this, "inscriptos", usuariosActuales)
-
+		ObservableUtils.firePropertyChanged(this, "usuarios", usuariosActuales)
 	}
 	
 @Dependencies("usuarioSeleccionado")
@@ -108,12 +108,6 @@ class UsuarioAppModel
 	{
 		//administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(usuarioSeleccionado)
 		// fechaDeLaUltimaPublicacionDe (implementacion de AdmCalificacion)
-	}
-	
-	def publicacionesDelUsuario() 
-	{
-		//administradorDeCalificaciones.publicacionesDelUsuario(usuarioSeleccionado)
-		// publicacionesDelUsuario (implementacion de AdmCalificacion)
 	}
 	
 @Dependencies("usuarioSeleccionado")

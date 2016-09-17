@@ -13,19 +13,17 @@ class AdmUsuarios
 	
 	def void agregarUsuarioNuevo(Usuario usuarioNuevo) 
 	{
-		getUsuarios.add (usuarioNuevo)
+		usuarios.add (usuarioNuevo)
 	}
 	
 	def void eliminarUsuario(Usuario usuarioAEliminar) 
 	{
-		getUsuarios.remove(usuarioAEliminar)
+		usuarios.remove(usuarioAEliminar)
 	}
 	
 	def void blanquearContrasenha(Usuario usuarioABlanquear) 
 	{
-		eliminarUsuario(usuarioABlanquear)
-//		usuarioABlanquear.blanquear()
-		agregarUsuarioNuevo(usuarioABlanquear)
+		usuarioABlanquear.blanqueoDeContrasenha
 	}
 	
 	def cantidadTotalDeUsuarios()
@@ -45,12 +43,12 @@ class AdmUsuarios
 	
 	def cantidadTotalDeUsuariosInactivos() 
 	{
-	//	usuariosInactivos.size
+		usuariosInactivos.size
 	}
 	
 	def usuariosInactivos() 
 	{
-	//	getUsuarios.filter[usuario | usuario.inactivo].toList
+		usuarios.filter[usuario | usuario.esInactivo].toList
 	}
 	
 	def cantidadTotalDeUsuariosBaneados() 
@@ -65,7 +63,7 @@ class AdmUsuarios
 	
 	def buscarUsuarioDeNombre (String nombreABuscar) 
 	{
-		usuarios.filter[usuario | usuario.seLlama(nombreABuscar)].toList
+		usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList
 	}
 	
 }
