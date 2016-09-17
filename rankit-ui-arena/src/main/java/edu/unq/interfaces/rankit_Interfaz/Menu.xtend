@@ -10,6 +10,8 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
+import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.GenericaAppModel
 
 class Menu extends SimpleWindow<RankITAppModel> {
 
@@ -63,14 +65,20 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		new Button(botoneraPanel) => [
 			caption = "Adm. Calificaciones"
 			onClick [|
-				new AdmCalificacionWindow(
-					this,
-					new CalificacionAppModel(
-						this.modelObject.rankit.admCalificaciones,
+				
+				val CalificacionAppModel calAppModel=	new CalificacionAppModel(
+					    this.modelObject.rankit.admCalificaciones,
 						this.modelObject.rankit.admLugares,
 						this.modelObject.rankit.admServicios,
 						this.modelObject.rankit.usuarioLogeado
-					)
+						)
+				
+				var   nuevoAdapter = new AdapterCalificacionAppModel(calAppModel)
+				
+				
+				new AdmCalificacionWindow(
+					this,
+					nuevoAdapter
 				).open
 			]
 		]

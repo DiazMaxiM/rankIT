@@ -19,8 +19,9 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import org.uqbar.arena.windows.SimpleWindow
 
-class AdmLugarWindow extends VistaGenericaWindow<PuntuableAppModel> {
+class AdmLugarWindow extends SimpleWindow<PuntuableAppModel> {
 	 
 	new(WindowOwner parent, PuntuableAppModel model) {
 		super(parent, model)

@@ -9,7 +9,7 @@ import com.google.common.base.Strings
 
 @Observable
 @Accessors
-class CalificacionAppModel {
+class CalificacionAppModel  {
 
 	AdmCalificaciones administradorCalificacion;
 	Calificacion calificacionSeleccionada;
@@ -22,6 +22,10 @@ class CalificacionAppModel {
 	String nombreEvaluadoBusqueda;
 	Boolean habilitadoEvaluadoBusqueda=true;
 	Boolean habilitadoUsuarioBusqueda=true;
+
+	new() {
+
+	}
 	
 
 	new(AdmCalificaciones calificaciones, AdmPuntuables lugares,AdmPuntuables servicios, Usuario usuario) {
@@ -34,6 +38,8 @@ class CalificacionAppModel {
 		administradorCalificacion = calificaciones
 		usuarioLogeado = usuario
 	}
+	
+	
 	def List<Puntuable>getPuntuables(){
 		admPuntuables.puntuables
 	}
@@ -129,6 +135,6 @@ class CalificacionAppModel {
 		habilitadoUsuarioBusqueda=false
 		this
 	}
-
+	
 	
 }
