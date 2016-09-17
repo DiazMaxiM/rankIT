@@ -26,7 +26,7 @@ class PuntuableAppModel {
 	}
 
 	@Dependencies("itemSeleccionado")
-	def setPuntuableSeleccionado(Puntuable seleccionado){
+	def setItemeleccionado(Puntuable seleccionado){
 		   itemSeleccionado = seleccionado
 		   if(getHayItemSeleccionado){
 		   ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)

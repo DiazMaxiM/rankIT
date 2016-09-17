@@ -1,12 +1,13 @@
 package edu.unq.interfaces.rankit_dominio
 
+
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.ObservableUtils
 
-@Observable 
+@Observable
 @Accessors
-class AdapterLugarAppModel implements GenericaAppModel{
+class AdapterServicioAppModel implements GenericaAppModel{
 	private PuntuableAppModel miAppModel;
 	
 	new(PuntuableAppModel model) {
@@ -14,12 +15,11 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelNombre1() {
-		"Lugares Inscriptos: "
+		"Servicios Inscriptos: "
 	}
 	
 	override String getLabelValor1() {
-		var inscriptos=miAppModel.inscriptos
-		inscriptos.toString
+		miAppModel.inscriptos.toString
 	}
 	
 	override String getLabelNombre2() {
@@ -27,8 +27,7 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelValor2() {
-		var habilitados=miAppModel.habilitados.toString
-		habilitados.toString
+		miAppModel.habilitados.toString
 	}
 	
 	override String getLabelNombre3() {
@@ -36,8 +35,7 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelValor3() {
-		var deshabilitados=miAppModel.deshabilitados
-		deshabilitados.toString
+		miAppModel.deshabilitados.toString
 	}
 	
 	override String getLabelNombre4() {
@@ -49,11 +47,11 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override tituloContenedorBusqueda() {
-	   "Lugares"
+	   "Servicios"
 	}
 	
 	override textoPrimerParametroDeBusqueda() {
-		"Buscar por nombre de Lugar "
+	    "Buscar por nombre de Servicio "
 	}
 	
 	override getPrimerParametroDeBusqueda() {
@@ -73,18 +71,14 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	
 	override nuevo() {
 		miAppModel.nuevo
-		avisarCambios
 	}
 	
 	override eliminar() {
           miAppModel.eliminar
-          avisarCambios
 	} 
 	
 	def void avisarCambios(){
 		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
-		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
-		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
 	}
 	
 }

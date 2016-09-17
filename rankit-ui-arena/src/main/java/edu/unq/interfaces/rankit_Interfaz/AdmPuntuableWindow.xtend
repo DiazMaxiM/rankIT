@@ -17,6 +17,8 @@ import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.layout.HorizontalLayout
 import edu.unq.interfaces.component.LabelCheckBox
+import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 
 class AdmPuntuableWindow extends VistaGenericaWindow {
 
@@ -140,14 +142,15 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 	def botones(Panel panel) {
 		new Button(panel) => [
 			caption = "Revisar Calificaciones"
- 		//    bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre")
+ 		   bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre")
 
-//			onClick [|
+//     		onClick [|
 //				new AdmCalificacionWindow(
 //					this,
+//					new AdapterCalificacionAppModel(
 //					new CalificacionAppModel(
 //						this.modelObject.administradorCalificacionesParaCalificacionSeleccionada,
-//						this.modelObject.usuarioLogeado
+//					    this.modelObject.usuarioLogeado
 //					).filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)
 //				).open
 //			]
