@@ -12,6 +12,8 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.GenericaAppModel
+import edu.unq.interfaces.rankit_dominio.AdapterPuntuableAppModel
+import edu.unq.interfaces.rankit_dominio.AdapterLugarAppModel
 
 class Menu extends SimpleWindow<RankITAppModel> {
 
@@ -84,18 +86,40 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		]
 		new Button(botoneraPanel) => [
 			caption = "Adm. Servicios"
-			onClick [|
-				new AdmServicioWindow(this,
-					new PuntuableAppModel(this.modelObject.rankit.admServicios,
-						this.modelObject.rankit.admCalificaciones, this.modelObject.rankit.usuarioLogeado)).open
-			]
+//			onClick [|
+//				
+//				val PuntuableAppModel servicioAppModel=new PuntuableAppModel(
+//						this.modelObject.rankit.admLugares,
+//					    this.modelObject.rankit.admCalificaciones,
+//						this.modelObject.rankit.usuarioLogeado
+//						)
+//				
+//				var   nuevoAdapter = new AdapterPuntuableAppModel(servicioAppModel)
+//				
+//				
+//				new AdmServicioWindow(
+//					this,
+//					nuevoAdapter
+//				).open
+//			]
 		]
 		new Button(botoneraPanel) => [
 			caption = "Adm. Lugares"
-			onClick [|
-				new AdmLugarWindow(this,
-					new PuntuableAppModel(this.modelObject.rankit.admLugares, this.modelObject.rankit.admCalificaciones,
-						this.modelObject.rankit.usuarioLogeado)).open
+           onClick [|
+				
+				val PuntuableAppModel lugarAppModel=new PuntuableAppModel(
+						this.modelObject.rankit.admLugares,
+					    this.modelObject.rankit.admCalificaciones,
+						this.modelObject.rankit.usuarioLogeado
+						)
+				
+				var   nuevoAdapter = new AdapterLugarAppModel(lugarAppModel)
+				
+				
+				new AdmPuntuableWindow(
+					this,
+					nuevoAdapter
+				).open
 			]
 		]
 	}
