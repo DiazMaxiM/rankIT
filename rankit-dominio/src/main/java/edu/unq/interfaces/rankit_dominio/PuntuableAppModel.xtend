@@ -26,15 +26,14 @@ class PuntuableAppModel {
 	}
 
 	@Dependencies("itemSeleccionado")
-	def setItemeleccionado(Puntuable seleccionado){
+	def setItemSeleccionado(Puntuable seleccionado){
 		   itemSeleccionado = seleccionado
-		   if(getHayItemSeleccionado){
 		   ObservableUtils.firePropertyChanged(this,"ratingPromedio",ratingPromedio)
 		   ObservableUtils.firePropertyChanged(this,"cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
 		   ObservableUtils.firePropertyChanged(this,"fechaDeRegistro",fechaDeRegistro) 
 		   ObservableUtils.firePropertyChanged(this,"hayItemSeleccionadoConNombre",hayItemSeleccionadoConNombre) 
 		   verificarSiTieneNombreAsignado
-		}
+		
 	}
 	
 
@@ -60,28 +59,28 @@ class PuntuableAppModel {
 		administradorDePuntuables.agregar(puntuable)
 		avisarCambiosDeLista
 	}
-
+    @Dependencies("itemSeleccionado")
 	def int getRatingPromedio() {
 		administradorCalificacion.ratingPromedio(itemSeleccionado)
 	}
-
+    @Dependencies("itemSeleccionado")
 	def int getCantidadDeCalificacionesDelPuntuable() {
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(itemSeleccionado)
 	}
-
-	def Date getFechaDeRegistro() {
-		itemSeleccionado.fechaDeRegistro
-	}
-
-	@Dependencies("itemSeleccionado")
-	def String getNombre() {
-		itemSeleccionado.nombre
-	}
-
+	
 	@Dependencies("itemSeleccionado")
 	def void setHabilitado(boolean bool) {
 		itemSeleccionado.habilitado = bool
-		avisarCambiosDeLista()
+		avisarCambiosDeLista
+	}
+	
+	 @Dependencies("itemSeleccionado")
+	def Date getFechaDeRegistro() {
+		itemSeleccionado.fechaDeRegistro
+	}
+	@Dependencies("itemSeleccionado")
+	def String getNombre() {
+		itemSeleccionado.nombre
 	}
 
 	@Dependencies("itemSeleccionado")
@@ -90,7 +89,7 @@ class PuntuableAppModel {
 	}
 	
 
-	@Dependencies("itemSeleccionado")
+	@Dependencies("itemSeleccionado") 
 	def void setNombre(String nombreNuevo){
 		verificarSiHayDuplicados(nombreNuevo)
 		this.itemSeleccionado.nombre=nombreNuevo
@@ -123,7 +122,7 @@ class PuntuableAppModel {
 		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
 	}
 
-	@Dependencies("itemSeleccionado")
+	@Dependencies("itemSeleccionado,hayItemSeleccionadoConNombre")
 	def void verificarSiTieneNombreAsignado() {
 		itemSeleccionado.verificarSiTieneNombre
 	}
@@ -137,14 +136,13 @@ class PuntuableAppModel {
 		itemSeleccionado = miPuntuableNull
 		avisarCambiosDeLista()
 	}
-
+    @Dependencies("itemSeleccionado")
 	def void avisarCambiosDeLista() {
 		ObservableUtils.firePropertyChanged(this, "inscriptos", inscriptos)
 		ObservableUtils.firePropertyChanged(this, "habilitados", habilitados)
 		ObservableUtils.firePropertyChanged(this, "deshabilitados", deshabilitados)
 		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
-		ObservableUtils.firePropertyChanged(this, "ratingPromedio", ratingPromedio)
-		ObservableUtils.firePropertyChanged(this, "cantidadDeCalificacionesDelPuntuable",cantidadDeCalificacionesDelPuntuable)
+
 
 	}
 

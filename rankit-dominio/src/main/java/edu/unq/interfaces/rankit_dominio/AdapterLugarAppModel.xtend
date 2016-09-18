@@ -9,6 +9,7 @@ import org.uqbar.commons.model.ObservableUtils
 class AdapterLugarAppModel implements GenericaAppModel{
 	private PuntuableAppModel miAppModel;
 	
+	
 	new(PuntuableAppModel model) {
 		this.miAppModel=model
 	}
@@ -73,18 +74,29 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	
 	override nuevo() {
 		miAppModel.nuevo
-		avisarCambios
+		setActualizar
 	}
 	
 	override eliminar() {
           miAppModel.eliminar
-          avisarCambios
+          setActualizar
 	} 
-	
-	def void avisarCambios(){
+
+
+	def void setActualizar(){
 		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
 		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
 		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
 	}
+	
+	override getElementosNecesariosParaAdmCalificacionWindow() {
+		new AdapterCalificacionAppModel(
+			new CalificacionAppModel(
+					miAppModel.administradorCalificacion,					    
+					miAppModel.usuarioLogeado
+					).filtradoObligatorioPorPuntuable(miAppModel.itemSeleccionado))
+				
+	}
+	
 	
 }

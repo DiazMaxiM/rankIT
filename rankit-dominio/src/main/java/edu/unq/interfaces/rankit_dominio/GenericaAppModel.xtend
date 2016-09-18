@@ -30,4 +30,7 @@ interface GenericaAppModel {
 	def void nuevo()
 	
 	def void eliminar()
+	
+	def AdapterCalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
+	
 }

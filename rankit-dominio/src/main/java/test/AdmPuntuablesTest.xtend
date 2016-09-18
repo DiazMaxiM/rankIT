@@ -3,7 +3,6 @@ import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 import org.junit.Test
 import static org.junit.Assert.*;
 import edu.unq.interfaces.rankit_dominio.Puntuable
-import javassist.expr.Cast
 import org.uqbar.commons.model.UserException
 
 class AdmPuntuablesTest {
@@ -366,6 +365,8 @@ class AdmPuntuablesTest {
 	 	admLugares.agregar(lugar3)
 	 	
 	 	
+	 	admLugares.verificarSiHayDuplicados("Yona")
+	 	
 	 	
 	 }
 	 
@@ -374,7 +375,7 @@ class AdmPuntuablesTest {
 	  * tira una excepcion 
 	  */
 	 
-	 @Test 
+	 @Test(expected=UserException)
 	 def void hayServiciosDuplicados(){
 	 	
 	 	var admServicios= new AdmPuntuables()
@@ -387,7 +388,8 @@ class AdmPuntuablesTest {
 	 	servicio1.nombre="Metrogas"
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"
-	 	// hay que tirar una excepcion
+	 	
+	 	admServicios.verificarSiHayDuplicados("Metrogas")
 	 	
 	 }
 	 

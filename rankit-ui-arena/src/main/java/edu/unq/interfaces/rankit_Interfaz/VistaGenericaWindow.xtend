@@ -11,6 +11,9 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.arena.windows.ErrorsPanel
+import org.uqbar.arena.widgets.Label
+import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
@@ -88,23 +91,48 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 	def contenedorOpciones(Panel panel) {
 		val contenedorOpcionPanel = new Panel(panel)
 		contenedorOpcionPanel.layout = new VerticalLayout
+		this.mostrarNombreDelItem(contenedorOpcionPanel)
+		this.panelErrores(contenedorOpcionPanel)
+		this.mostrarInformacionDelItem(contenedorOpcionPanel)
+        this.botonParaMostrarCalificacionesDelItem(contenedorOpcionPanel)
+		this.botonParaEliminarItem(contenedorOpcionPanel) 
+	}
+	
+	def void mostrarNombreDelItem(Panel panel)
+	
+	def panelErrores(Panel panel){
+		new ErrorsPanel(panel, "Edita la información")
+	}
+	
+	def void mostrarInformacionDelItem(Panel panel)
+     
+   def  botonParaMostrarCalificacionesDelItem(Panel panel){
+   	    new Button(panel) => [
+			caption = "Revisar Calificaciones"
+		//debe ser hay itemSeleccionadoConNombre
+ 		   bindEnabledToProperty("miAppModel.hayItemSeleccionado")
 
-		opciones(contenedorOpcionPanel)
-
-		new Button(contenedorOpcionPanel) => [
-			caption = "Eliminar"
+     		onClick [|new AdmCalificacionWindow(
+          				this,this.modelObject.elementosNecesariosParaAdmCalificacionWindow
+				).open
+			]
+				width = 200
+		]
+   	
+   }
+   
+   def botonParaEliminarItem(Panel panel){
+   	   new Button(panel) => [
+   	    caption = "Eliminar"
 			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
 		 onClick[| 
 		 	val adapterAppModel = this.modelObject
 		 	new EliminarWindow(this,adapterAppModel).open
 				]
 		]
-	}
-
-	def opciones(Panel panel) {
-		// throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
+   	
+   }
+    
 	def contenedorTabla(Panel panel) {
 		val contenedorTablaPanel = new Panel(panel)
 		contenedorTablaPanel.layout = new VerticalLayout
@@ -118,8 +146,6 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
 	}
 
-	def void tabla(Panel panel) {
-		// throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
+	def void tabla(Panel panel)
 
 }

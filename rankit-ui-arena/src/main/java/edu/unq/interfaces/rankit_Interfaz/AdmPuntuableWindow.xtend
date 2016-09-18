@@ -65,16 +65,13 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 		]
 	}
 	
-	override opciones(Panel panel) {
-		this.mostrarNombrePuntuable(panel)
-		this.panelErrores(panel)
+	  override  mostrarInformacionDelItem(Panel panel) {
 		this.editarNombre(panel)
 		this.habilitarPuntuable(panel)
 		this.calificacionesPuntuable(panel)
-		this.botones(panel)
 	}
 
-	def mostrarNombrePuntuable(Panel panel) {
+	override mostrarNombreDelItem(Panel panel) {
 		var panelNombre = new Panel(panel)
 		panelNombre.layout = new ColumnLayout(2)
 		new Label(panelNombre) => [
@@ -85,10 +82,6 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 			value <=> "miAppModel.nombre"
 			fontSize = 13
 		]
-	}
-
-	def panelErrores(Panel panel) {
-		new ErrorsPanel(panel, "Edita la información")
 	}
 
 	def editarNombre(Panel panel) {
@@ -103,8 +96,10 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 	def habilitarPuntuable(Panel panel) {
 		var panelHabilitar = new Panel(panel)
 		panelHabilitar.layout = new HorizontalLayout
-		new LabelCheckBox(panelHabilitar).setText("Habilitado").bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre").
+		new LabelCheckBox(panelHabilitar).setText("Habilitado")
+		    .bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre").
 			bindValueToProperty("miAppModel.habilitado")
+			
 
 	}
 
@@ -136,26 +131,6 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 
 	}
 	
-
 	
-	
-	def botones(Panel panel) {
-		new Button(panel) => [
-			caption = "Revisar Calificaciones"
- 		   bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre")
 
-//     		onClick [|
-//				new AdmCalificacionWindow(
-//					this,
-//					new AdapterCalificacionAppModel(
-//					new CalificacionAppModel(
-//						this.modelObject.administradorCalificacionesParaCalificacionSeleccionada,
-//					    this.modelObject.usuarioLogeado
-//					).filtradoObligatorioPorPuntuable(this.modelObject.puntuableSeleccionado)
-//				).open
-//			]
-//			width = 200
-		]
-		
-   }
 }

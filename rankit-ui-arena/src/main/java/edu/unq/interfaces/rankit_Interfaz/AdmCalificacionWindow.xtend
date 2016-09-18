@@ -37,7 +37,7 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		]
 	}
 
-	override opciones(Panel panel) {
+	def opciones(Panel panel) {
 		val contenedorOpciones = new Panel(panel)
 		contenedorOpciones.layout = new VerticalLayout
 
@@ -158,6 +158,18 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 			]
 		]
 
+	}
+	
+	override botonParaMostrarCalificacionesDelItem(Panel panel){
+		
+	}
+	
+	override mostrarInformacionDelItem(Panel panel) {
+		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override mostrarNombreDelItem(Panel panel) {
+		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	

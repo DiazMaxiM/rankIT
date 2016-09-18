@@ -81,4 +81,16 @@ class AdapterServicioAppModel implements GenericaAppModel{
 		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
 	}
 	
+	override getAdministradorCalificacionesParaCalificacionSeleccionada() {
+		miAppModel.administradorCalificacion
+	}
+	
+	override usuarioLogeado() {
+		miAppModel.usuarioLogeado
+	}
+	
+	override itemSeleccionado() {
+		miAppModel.itemSeleccionado
+	}
+	
 }
