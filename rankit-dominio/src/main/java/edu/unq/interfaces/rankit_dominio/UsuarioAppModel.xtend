@@ -6,7 +6,6 @@ import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Observable
 import java.util.Date
 import java.util.List
-import java.text.DateFormat
 
 @Observable
 @Accessors
@@ -111,6 +110,13 @@ class UsuarioAppModel
 	}
 	
 @Dependencies("usuarioSeleccionado")
+	def void setNombre(String nombreIngresado) 
+	{
+		usuarioSeleccionado.cambiarNombre(nombreIngresado)
+		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
+	}
+	
+@Dependencies("usuarioSeleccionado")
 	def boolean getHayUsuarioSeleccionado()
 	{
 		usuarioSeleccionado!=null
@@ -118,8 +124,10 @@ class UsuarioAppModel
 	
 	def Date getFechaDeLaUltimaPublicacion ()
 	{
-		//administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(usuarioSeleccionado)
-		// fechaDeLaUltimaPublicacionDe (implementacion de AdmCalificacion)
+		if (hayUsuarioSeleccionado)
+		{
+			//administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(usuarioSeleccionado)
+		}
 	}
 	
 @Dependencies("usuarioSeleccionado")
