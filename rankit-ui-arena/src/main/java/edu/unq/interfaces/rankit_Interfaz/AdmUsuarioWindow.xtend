@@ -94,17 +94,15 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		busqueda.layout = new HorizontalLayout
 		
 		new Label(busqueda).text = "Buscar por nombre de usuario "
-	    new TextBox(busqueda) => [ bindValueToProperty ("nombreABuscar") width = 180]
+	    //new TextBox(busqueda) => [ bindValueToProperty ("nombreDeUsuarioABuscar") width = 180]
 		
-//		new TextBox(busqueda) => 
-//		[
-//			// tip: de esta manera se registra el binding
-//			// anidado y se disparan notificaciones,
-//			// si al searchFormPanel se le asigna como modelo
-//			// el objeto example no se disparan 
-//			value <=> "nombreABuscar"
-//			width = 200
-//		]
+		new TextBox(busqueda) => 
+		[
+			// tip: de esta manera se registra el binding
+			// anidado y se disparan notificaciones
+			value <=> "nombreDeUsuarioABuscar"
+			width = 200
+		]
 		
 		new Button(busqueda) => 
 		[

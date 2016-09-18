@@ -6,6 +6,7 @@ import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Observable
 import java.util.Date
 import java.util.List
+import java.text.DateFormat
 
 @Observable
 @Accessors
@@ -15,7 +16,7 @@ class UsuarioAppModel
 	private AdmUsuarios administradorDeUsuarios
 	private Usuario usuarioSeleccionado
 	private AdmCalificaciones administradorDeCalificaciones
-	private String nombreDeUsuarioABuscar
+	private String nombreDeUsuarioABuscar = ""
 	AdmPuntuables administradorDePuntuables
 	
 	Usuario usuarioLogeado
@@ -67,6 +68,7 @@ class UsuarioAppModel
 	def buscarPorNombreDeUsuario() 
 	{
 		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
 	}
 	
 	def void setNombreABuscar(String nombre) 
@@ -98,11 +100,18 @@ class UsuarioAppModel
 @Dependencies("usuarioSeleccionado")
 	def String getNombre() 
 	{
-		usuarioSeleccionado.nombre
+		if (hayUsuarioSeleccionado)
+		{
+			usuarioSeleccionado.nombre
+		}
+		else
+		{
+			""
+		}
 	}
 	
 @Dependencies("usuarioSeleccionado")
-	def getHayUsuarioSeleccionado()
+	def boolean getHayUsuarioSeleccionado()
 	{
 		usuarioSeleccionado!=null
 	}
@@ -114,9 +123,12 @@ class UsuarioAppModel
 	}
 	
 @Dependencies("usuarioSeleccionado")
-	def boolean getActivo() 
+	def getActivo() 
 	{
-		usuarioSeleccionado.activo
+		if (hayUsuarioSeleccionado)
+		{
+			usuarioSeleccionado.activo
+		}
 	}
 	
 @Dependencies("usuarioSeleccionado")
@@ -128,9 +140,12 @@ class UsuarioAppModel
 	}
 
 @Dependencies("usuarioSeleccionado")
-	def boolean getBaneado() 
+	def getBaneado() 
 	{
-		usuarioSeleccionado.baneado
+		if (hayUsuarioSeleccionado)
+		{
+			usuarioSeleccionado.baneado
+		}
 	}
 		
 @Dependencies("usuarioSeleccionado")
@@ -142,15 +157,31 @@ class UsuarioAppModel
 	}
 
 @Dependencies("usuarioSeleccionado")
-	def Date getFechaDeRegistroDelUsuario()
+	def getFechaDeRegistroDelUsuario()
 	{
-		usuarioSeleccionado.fechaDeRegistro
+		if (hayUsuarioSeleccionado)
+		{
+			usuarioSeleccionado.fechaDeRegistro
+		}
 	}
 
 @Dependencies("usuarioSeleccionado")
 	def List<Usuario> getUsuarios()
 	{
-		administradorDeUsuarios.usuarios
+		if (hayUsuarioABuscar)
+		{
+			administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+		}
+		else 
+		{
+			administradorDeUsuarios.usuarios
+		}
 	}
+	
+	def hayUsuarioABuscar() 
+	{
+		nombreDeUsuarioABuscar!=""
+	}
+
 
 }

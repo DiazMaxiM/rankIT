@@ -63,7 +63,20 @@ class AdmUsuarios
 	
 	def buscarUsuarioDeNombre (String nombreABuscar) 
 	{
-		usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList
+		if (tieneNombre(nombreABuscar))
+		{
+			usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList			
+		}
+		
+		else
+		{
+			usuarios
+		}
+	}
+	
+	def tieneNombre(String nombre) 
+	{
+		nombre!=""
 	}
 	
 }
