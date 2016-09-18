@@ -1,25 +1,25 @@
 package edu.unq.interfaces.rankit_dominio
 
-
+import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Dependencies
+import java.util.List
+import java.util.Date
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.ObservableUtils
 
 @Observable
 @Accessors
-class AdapterServicioAppModel implements GenericaAppModel{
-	private PuntuableAppModel miAppModel;
+class ServicioAppModel extends PuntuableAppModel {	
 	
-	new(PuntuableAppModel model) {
-		this.miAppModel=model
-	}
+	//Ventana
+
 	
 	override String getLabelNombre1() {
 		"Servicios Inscriptos: "
 	}
 	
 	override String getLabelValor1() {
-		miAppModel.inscriptos.toString
+		inscriptos.toString
 	}
 	
 	override String getLabelNombre2() {
@@ -27,7 +27,7 @@ class AdapterServicioAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelValor2() {
-		miAppModel.habilitados.toString
+		habilitados.toString
 	}
 	
 	override String getLabelNombre3() {
@@ -35,7 +35,7 @@ class AdapterServicioAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelValor3() {
-		miAppModel.deshabilitados.toString
+		deshabilitados.toString
 	}
 	
 	override String getLabelNombre4() {
@@ -51,14 +51,15 @@ class AdapterServicioAppModel implements GenericaAppModel{
 	}
 	
 	override textoPrimerParametroDeBusqueda() {
-	    "Buscar por nombre de Servicio "
+		"Buscar por nombre de Servicio "
 	}
 	
 	override getPrimerParametroDeBusqueda() {
-	   miAppModel.nombreBuscado
+	   nombreBuscado
 	}
 	def setPrimerParametroDeBusqueda(String nombre) {
-	   miAppModel.nombreBuscado=nombre
+	    nombreBuscado = nombre
+	    ObservableUtils.firePropertyChanged(this,"elementos", elementos)
 	}
 	
 	override textoSegundoParametroDeBusqueda() {
@@ -69,28 +70,10 @@ class AdapterServicioAppModel implements GenericaAppModel{
 		""
 	}
 	
-	override nuevo() {
-		miAppModel.nuevo
+	override getElementosNecesariosParaAdmCalificacionWindow() {
+		
 	}
 	
-	override eliminar() {
-          miAppModel.eliminar
-	} 
-	
-	def void avisarCambios(){
-		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
-	}
-	
-	override getAdministradorCalificacionesParaCalificacionSeleccionada() {
-		miAppModel.administradorCalificacion
-	}
-	
-	override usuarioLogeado() {
-		miAppModel.usuarioLogeado
-	}
-	
-	override itemSeleccionado() {
-		miAppModel.itemSeleccionado
-	}
-	
+
+
 }

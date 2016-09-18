@@ -45,6 +45,11 @@ class Puntuable {
 	
 	def isNoTieneNombre() {
 		this.nombre.equals("")
-	} 
+	}
+	
+	def isElMismo(String nombre){
+		isNombre(nombre)
+	}
+	
 	
 }

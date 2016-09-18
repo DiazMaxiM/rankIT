@@ -238,7 +238,7 @@ class AdmPuntuablesTest {
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admLugares.buscar("n").size,2)
+	 	assertEquals(2,admLugares.buscar("n").size)
 	 	assertTrue(admLugares.buscar("n").contains(lugar2))
 	 	assertTrue(admLugares.buscar("n").contains(lugar1))
 	 	assertFalse(admLugares.buscar("n").contains(lugar3))
@@ -276,14 +276,14 @@ class AdmPuntuablesTest {
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
 	    var lugar3= new Puntuable
-	    lugar3.nombre="Fravega"
+	    lugar3.nombre="Hoyts Quilmes"
 	    lugar2.nombre="Yona"
 	    lugar1.nombre="San Cayetano"
 	 	admLugares.agregar(lugar1)
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admLugares.buscar("Garbarino").size,0)
+	 	assertEquals(admLugares.buscar("Hoyts Abasto").size,0)
 	 }
 	 
 	  /**

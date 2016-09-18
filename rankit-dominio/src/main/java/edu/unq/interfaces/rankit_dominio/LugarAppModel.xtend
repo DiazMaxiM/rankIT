@@ -1,25 +1,22 @@
 package edu.unq.interfaces.rankit_dominio
 
+import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Dependencies
+import java.util.Date
+import java.util.List
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.model.ObservableUtils
 
-@Observable 
+@Observable
 @Accessors
-class AdapterLugarAppModel implements GenericaAppModel{
-	private PuntuableAppModel miAppModel;
+class LugarAppModel extends PuntuableAppModel {
 	
-	
-	new(PuntuableAppModel model) {
-		this.miAppModel=model
-	}
-	
+	//Ventana
 	override String getLabelNombre1() {
 		"Lugares Inscriptos: "
 	}
 	
 	override String getLabelValor1() {
-		var inscriptos=miAppModel.inscriptos
 		inscriptos.toString
 	}
 	
@@ -28,7 +25,6 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelValor2() {
-		var habilitados=miAppModel.habilitados.toString
 		habilitados.toString
 	}
 	
@@ -37,7 +33,6 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override String getLabelValor3() {
-		var deshabilitados=miAppModel.deshabilitados
 		deshabilitados.toString
 	}
 	
@@ -58,10 +53,11 @@ class AdapterLugarAppModel implements GenericaAppModel{
 	}
 	
 	override getPrimerParametroDeBusqueda() {
-	   miAppModel.nombreBuscado
+	   nombreBuscado
 	}
 	def setPrimerParametroDeBusqueda(String nombre) {
-	   miAppModel.nombreBuscado=nombre
+	    nombreBuscado = nombre
+	    ObservableUtils.firePropertyChanged(this,"elementos", elementos)
 	}
 	
 	override textoSegundoParametroDeBusqueda() {
@@ -72,31 +68,9 @@ class AdapterLugarAppModel implements GenericaAppModel{
 		""
 	}
 	
-	override nuevo() {
-		miAppModel.nuevo
-		setActualizar
-	}
-	
-	override eliminar() {
-          miAppModel.eliminar
-          setActualizar
-	} 
-
-
-	def void setActualizar(){
-		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
-		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
-		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
-	}
-	
 	override getElementosNecesariosParaAdmCalificacionWindow() {
-		new AdapterCalificacionAppModel(
-			new CalificacionAppModel(
-					miAppModel.administradorCalificacion,					    
-					miAppModel.usuarioLogeado
-					).filtradoObligatorioPorPuntuable(miAppModel.itemSeleccionado))
-				
+		
 	}
-	
+
 	
 }

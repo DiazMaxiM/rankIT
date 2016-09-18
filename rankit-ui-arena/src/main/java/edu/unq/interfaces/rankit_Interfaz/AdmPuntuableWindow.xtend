@@ -31,8 +31,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 
 		new Table<Puntuable>(panel, typeof(Puntuable)) => [
 			// bindeamos el contenido de la tabla
-			(items <=> "miAppModel.elementos")
-			value <=> "miAppModel.itemSeleccionado"
+			(items <=> "elementos")
+			value <=> "itemSeleccionado"
 			// le definimos el alto y ancho, esto es opcional
 			width = 200
 			// describimos cada fila
@@ -79,7 +79,7 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 			fontSize = 13
 		]
 		new Label(panelNombre) => [
-			value <=> "miAppModel.nombre"
+			value <=> "nombre"
 			fontSize = 13
 		]
 	}
@@ -87,8 +87,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 	def editarNombre(Panel panel) {
 		new Label(panel).text = "Nombre:"
 		new TextBox(panel) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindValueToProperty("miAppModel.nombre")
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindValueToProperty("nombre")
 		]
 
 	}
@@ -97,8 +97,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 		var panelHabilitar = new Panel(panel)
 		panelHabilitar.layout = new HorizontalLayout
 		new LabelCheckBox(panelHabilitar).setText("Habilitado")
-		    .bindEnabledToProperty("miAppModel.hayItemSeleccionadoConNombre").
-			bindValueToProperty("miAppModel.habilitado")
+		    .bindEnabledToProperty("hayItemSeleccionadoConNombre").
+			bindValueToProperty("habilitado")
 			
 
 	}
@@ -114,8 +114,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 		panelRating.layout = new HorizontalLayout
 		new Label(panelRating).text = "Ranting promedio:"
 		new Label(panelRating) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindValueToProperty("miAppModel.ratingPromedio")
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindValueToProperty("ratingPromedio")
 		]
 
 	}
@@ -125,8 +125,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 		panelCalificaciones.layout = new HorizontalLayout
 		new Label(panelCalificaciones).text = "Calificaciones:"
 		new Label(panelCalificaciones) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindValueToProperty("miAppModel.cantidadDeCalificacionesDelPuntuable")
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindValueToProperty("cantidadDeCalificacionesDelPuntuable")
 		]
 
 	}

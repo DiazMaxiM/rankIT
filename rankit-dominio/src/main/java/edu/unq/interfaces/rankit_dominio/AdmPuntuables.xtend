@@ -6,24 +6,19 @@ import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.model.UserException
+import com.google.common.base.Strings
 
 @Observable
 @Accessors
 class AdmPuntuables {
 	List<Puntuable> puntuables = new ArrayList
-	List<Puntuable>puntuablesCopia= new ArrayList
 	
-	def getTodosLosPuntuables(){
-		puntuables
-	}
 	def agregar(Puntuable puntuable) {
 		puntuables.add(puntuable)
-		puntuablesCopia.add(puntuable)
 	 }
 	
 	def eliminar(Puntuable puntuable) {
 		puntuables.remove(puntuable)
-		puntuablesCopia.remove(puntuable)
 	}
 	
 	def inscriptos() {
@@ -40,30 +35,24 @@ class AdmPuntuables {
 	}
 	
 	def isPuntuablesDuplicados(String nombre) {
-       puntubleConElnombre(nombre)!=null
+       !puntuableConElnombre(nombre).equals(null)
    }
-    
-	
-	
-	def puntubleConElnombre(String nombre) {
-		puntuablesCopia.findFirst[puntuable|puntuable.isNombre(nombre)]
+   	
+	def puntuableConElnombre(String nombre) {
+		puntuables.findFirst[puntuable|puntuable.isNombre(nombre)]
 	}
 	
-	def buscar(String letrasDelNombreBuscado) {
-		if(letrasDelNombreBuscado!=""){
-		   var buscados=this.puntuablesConLasLetras(letrasDelNombreBuscado).toList
-		   
-		   puntuables=buscados
-		}
-		else{
-			puntuables=puntuablesCopia
-		}
+	def List<Puntuable>buscar(String nombre) {
+		  if(!estaVacio(nombre)){
+		  	puntuables.filter[puntuable|puntuable.contieneLasLetras(nombre)].toList
+		  }
+		  else{
+		  	puntuables
+		  }
 		
 	}
-	
-
-	def puntuablesConLasLetras(String letras) {
-		puntuablesCopia.filter[puntuable|puntuable.contieneLasLetras(letras)]
+	private def estaVacio(String data) {
+		Strings.isNullOrEmpty(data)
 	}
 	
 	

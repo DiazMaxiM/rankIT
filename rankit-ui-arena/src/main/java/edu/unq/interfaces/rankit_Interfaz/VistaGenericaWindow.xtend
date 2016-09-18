@@ -110,7 +110,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
    	    new Button(panel) => [
 			caption = "Revisar Calificaciones"
 		//debe ser hay itemSeleccionadoConNombre
- 		   bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+ 		   bindEnabledToProperty("hayItemSeleccionadoConNombre")
 
      		onClick [|new AdmCalificacionWindow(
           				this,this.modelObject.elementosNecesariosParaAdmCalificacionWindow
@@ -124,7 +124,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
    def botonParaEliminarItem(Panel panel){
    	   new Button(panel) => [
    	    caption = "Eliminar"
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+			bindEnabledToProperty("hayItemSeleccionado")
 		 onClick[| 
 		 	val adapterAppModel = this.modelObject
 		 	new EliminarWindow(this,adapterAppModel).open

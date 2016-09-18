@@ -90,13 +90,6 @@ class AdmCalificaciones {
 	}
 
 	/**
-	 * TODO: NO ENCUENTRO QUIEN HIZO ESTO Y PARA QUE
-	 */
-//	def agregarTodasLasCalificaciones(List<Calificacion>calificaciones){
-//     	listaCalificaciones.addAll(calificaciones)
-//    }
-
-	/**
 	 * @param calificacion Calificacion para setear si es ofensiva
 	 * @param bool Boolean
 	 *

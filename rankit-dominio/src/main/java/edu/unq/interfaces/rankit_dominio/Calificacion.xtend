@@ -22,20 +22,10 @@ class Calificacion {
 		this.evaluado= new PuntuableNull()
 		this.usuario = usuario
 	}
-	/**
-	 * 
-	 * TODO: problemas de responsabilidades
-	 * 
-	 */
-//	def void marcarComoContenidoOfensivo(){
-//	    contenidoOfensivo=true  
-//	}
-	/**
-	 * TODO: isPuntableBuscado no es responsabilidad de Calificacion
-	 * 
-	 */
+
+	
 	def isPuntuableBuscado(Puntuable puntuable) {
-	    this.evaluado.nombre.equals(puntuable.nombre)
+	    this.evaluado.isElMismo(puntuable.nombre)
 	}
 	
 }
