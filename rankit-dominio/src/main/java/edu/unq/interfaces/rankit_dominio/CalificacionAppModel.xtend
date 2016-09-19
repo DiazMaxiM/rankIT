@@ -27,13 +27,13 @@ class CalificacionAppModel implements GenericaAppModel  {
 
 	}
 	
-
 	new(AdmCalificaciones calificaciones, AdmPuntuables lugares,AdmPuntuables servicios, Usuario usuario) {
 		administradorCalificacion = calificaciones
 		admPuntuables.puntuables.addAll( lugares.puntuables)
 		admPuntuables.puntuables.addAll( servicios.puntuables)
 		usuarioLogeado = usuario
 	}
+	
 	new(AdmCalificaciones calificaciones,  Usuario usuario) {
 		administradorCalificacion = calificaciones
 		usuarioLogeado = usuario
@@ -139,7 +139,7 @@ class CalificacionAppModel implements GenericaAppModel  {
 	override String getLabelNombre1() {
 	"Calificaciones Registradas:"	
 	}
-	
+	@Dependencies("calificacionesRegistradas")
 	override String getLabelValor1() {
 	  calificacionesRegistradas.toString	
 	}
@@ -147,7 +147,7 @@ class CalificacionAppModel implements GenericaAppModel  {
 	override String getLabelNombre2() {
 	"Ofensivas:"
 	}
-	
+	@Dependencies("calificacionesOfensivas")
 	override getLabelValor2() {
 	 calificacionesOfensivas.toString	
 	}

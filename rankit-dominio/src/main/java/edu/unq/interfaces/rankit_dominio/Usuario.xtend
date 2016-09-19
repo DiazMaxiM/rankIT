@@ -21,6 +21,7 @@ class Usuario {
 		this.activo = false
 		this.baneado = false
 	}
+	
 
 	def cambiarNombre(String nombreNuevo) 
 	{
