@@ -159,7 +159,27 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 	
 	override String getSegundoParametroDeBusqueda()
 	
-	override CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
+	override getLabelValor1Color() {
+		"A"
+	}
+	
+	override getLabelValor2Color() {
+		"A"
+	}
+	
+	override getLabelValor3Color() {
+		"R"
+	}
+	
+	override getLabelValor4Color() {
+		""
+	}
+	
+	override CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow(){
+		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorCalificacion,usuarioLogeado)
+		.filtradoObligatorioPorPuntuable(itemSeleccionado)
+		calificacionAppModel
+	}
 	
 	
 	

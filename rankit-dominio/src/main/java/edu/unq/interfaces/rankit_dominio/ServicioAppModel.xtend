@@ -70,10 +70,5 @@ class ServicioAppModel extends PuntuableAppModel {
 		""
 	}
 	
-	override getElementosNecesariosParaAdmCalificacionWindow() {
-		
-	}
-	
-
 
 }

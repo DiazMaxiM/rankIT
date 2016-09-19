@@ -17,7 +17,6 @@ class LabelConDatos extends Panel{
 	Label labelValor
 	
 	
-	
 	new(Container container) {
 		super(container)
 		layout= new HorizontalLayout
@@ -33,8 +32,11 @@ class LabelConDatos extends Panel{
 		labelNombre.bindValueToProperty(property)
 		this
 	}
-	def cambiarColor(Color color){
-		labelValor.foreground = color
-		
-	}
+	def cambiarDeColorAlValor(String property){
+		     if(property.equals("R")||property.equals("r")){
+		     	labelValor.foreground = Color.RED
+		     }
+				labelValor.foreground = Color.BLUE
+			
+  		 }
 }

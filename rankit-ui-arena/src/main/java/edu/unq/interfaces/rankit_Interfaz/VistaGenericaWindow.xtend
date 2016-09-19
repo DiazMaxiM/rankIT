@@ -48,7 +48,6 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		new LabeledTextBox(panelBusquedaParametros) => [
 			text = this.modelObject.textoPrimerParametroDeBusqueda
 			bindValueToProperty("primerParametroDeBusqueda")
-			bindEnabledToProperty("habilitadoItemBusqueda")
 		]
 
 		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)
@@ -68,18 +67,22 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre1")
 			bindValueToPropertyLabelValor("labelValor1")
+			cambiarDeColorAlValor("labelValor1Color")
 		]
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre2")
 			bindValueToPropertyLabelValor("labelValor2")
+			cambiarDeColorAlValor("labelValor2Color")
 		]
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre3")
 			bindValueToPropertyLabelValor("labelValor3")
+			cambiarDeColorAlValor("labelValor3Color")
 		]
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre4")
 			bindValueToPropertyLabelValor("labelValor4")
+			cambiarDeColorAlValor("labelValor4Color")
 		]
 	}
 
@@ -111,11 +114,11 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
    def  botonParaMostrarCalificacionesDelItem(Panel panel){
    	    new Button(panel) => [
 			caption = "Revisar Calificaciones"
-		//debe ser hay itemSeleccionadoConNombre
  		   bindEnabledToProperty("hayItemSeleccionadoConNombre")
 
      		onClick [|new AdmCalificacionWindow(
-          				this,this.modelObject.elementosNecesariosParaAdmCalificacionWindow
+          				this,
+          				this.modelObject.elementosNecesariosParaAdmCalificacionWindow
 				).open
 			]
 				width = 200

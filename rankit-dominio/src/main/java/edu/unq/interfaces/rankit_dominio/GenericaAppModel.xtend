@@ -4,19 +4,27 @@ interface GenericaAppModel {
 	def String getLabelNombre1()
 
 	def String getLabelValor1()
-
+	
+    def String getLabelValor1Color()
+    
 	def String getLabelNombre2()
 
 	def String getLabelValor2()
+	
+	def String getLabelValor2Color()
 
 	def String getLabelNombre3()
 
 	def String getLabelValor3()
-
+    
+    def String getLabelValor3Color()
+    
 	def String getLabelNombre4()
 
 	def String getLabelValor4()
 	
+	def String getLabelValor4Color()
+	  
 	def String tituloContenedorBusqueda()
 	
 	def String textoPrimerParametroDeBusqueda()

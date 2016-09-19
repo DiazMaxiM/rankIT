@@ -68,9 +68,23 @@ class LugarAppModel extends PuntuableAppModel {
 		""
 	}
 	
-	override getElementosNecesariosParaAdmCalificacionWindow() {
-		
+	override getLabelValor1Color() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
+	
+	override getLabelValor2Color() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getLabelValor3Color() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getLabelValor4Color() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 
+	
 	
 }
