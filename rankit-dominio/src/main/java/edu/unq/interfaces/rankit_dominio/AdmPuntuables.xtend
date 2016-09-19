@@ -57,7 +57,9 @@ class AdmPuntuables {
 	
 	
 	def verificarSiHayDuplicados(String nombre) {
-		if(isPuntuablesDuplicados(nombre)){
+		var puntuablesConElMismoNombre=puntuables.filter[puntuable|puntuable.tieneElNombre(nombre)].toList
+		
+		if(!puntuablesConElMismoNombre.size.equals(0)){
 			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
 		}
 	}

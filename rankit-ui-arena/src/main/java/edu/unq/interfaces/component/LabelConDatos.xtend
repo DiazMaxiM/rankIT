@@ -6,6 +6,7 @@ import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.arena.widgets.Container
 import org.uqbar.arena.layout.HorizontalLayout
+import java.awt.Color
 
 @Observable
 @Accessors
@@ -14,6 +15,7 @@ class LabelConDatos extends Panel{
 
 	Label labelNombre
 	Label labelValor
+	
 	
 	
 	new(Container container) {
@@ -30,5 +32,9 @@ class LabelConDatos extends Panel{
 	def bindValueToPropertyLabelNombre(String property) {
 		labelNombre.bindValueToProperty(property)
 		this
+	}
+	def cambiarColor(Color color){
+		labelValor.foreground = color
+		
 	}
 }

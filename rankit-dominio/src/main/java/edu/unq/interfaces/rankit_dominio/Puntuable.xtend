@@ -22,13 +22,7 @@ class Puntuable {
 	 	this.nombre=""
 	 	this.habilitado=false
 	 }
-	def boolean isHabiltado(){
-		habilitado.equals(true)
-	}
 	
-	def void habilitarPuntuable(){
-		this.habilitado=true
-	}
 	def boolean isNombre(String nombre)	{
 		this.nombre.equals(nombre)
 	}
@@ -47,9 +41,20 @@ class Puntuable {
 		this.nombre.equals("")
 	}
 	
-	def isElMismo(String nombre){
-		isNombre(nombre)
+	def boolean tieneElNombre(String nombre) {
+		 this.nombre.equals(nombre)
 	}
 	
 	
+	def boolean esIgual(Puntuable puntuable) {
+		this.equals(puntuable)
+	}
+
+		override equals(Object o){
+		if(o!=null && o instanceof Puntuable){
+			return this.nombre.equals((o as Puntuable).nombre)
+		}
+        return false
+		
+	}
 }

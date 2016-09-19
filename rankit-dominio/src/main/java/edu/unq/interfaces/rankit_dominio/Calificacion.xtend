@@ -25,7 +25,7 @@ class Calificacion {
 
 	
 	def isPuntuableBuscado(Puntuable puntuable) {
-	    this.evaluado.isElMismo(puntuable.nombre)
+	   evaluado.esIgual(puntuable)
 	}
 	
 }

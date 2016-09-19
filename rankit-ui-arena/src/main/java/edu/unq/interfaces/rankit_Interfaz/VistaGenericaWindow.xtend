@@ -14,6 +14,7 @@ import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.widgets.Label
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import java.awt.Color
 
 abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
@@ -47,6 +48,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		new LabeledTextBox(panelBusquedaParametros) => [
 			text = this.modelObject.textoPrimerParametroDeBusqueda
 			bindValueToProperty("primerParametroDeBusqueda")
+			bindEnabledToProperty("habilitadoItemBusqueda")
 		]
 
 		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)

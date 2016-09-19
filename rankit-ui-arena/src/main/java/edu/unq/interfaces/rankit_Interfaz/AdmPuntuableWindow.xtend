@@ -1,29 +1,23 @@
 package edu.unq.interfaces.rankit_Interfaz
 
 import org.uqbar.arena.windows.WindowOwner
-import edu.unq.interfaces.rankit_dominio.GenericaAppModel
-import edu.unq.interfaces.rankit_dominio.AdapterLugarAppModel
 import edu.unq.interfaces.rankit_dominio.Puntuable
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.widgets.Panel
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import org.uqbar.arena.widgets.tables.Column
 import java.text.SimpleDateFormat
-import org.uqbar.arena.layout.VerticalLayout
-import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
-import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.layout.HorizontalLayout
 import edu.unq.interfaces.component.LabelCheckBox
-import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
-import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
 
 class AdmPuntuableWindow extends VistaGenericaWindow {
 
 	
-	new(WindowOwner parent, GenericaAppModel model) {
+	new(WindowOwner parent, PuntuableAppModel model) {
 		super(parent, model)
 	}
 	
