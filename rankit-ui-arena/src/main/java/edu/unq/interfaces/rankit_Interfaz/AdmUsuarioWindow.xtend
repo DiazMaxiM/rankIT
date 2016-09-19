@@ -19,6 +19,7 @@ import org.uqbar.arena.bindings.DateTransformer
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.component.LabelCheckBox
 import org.uqbar.arena.widgets.TextBox
+import java.awt.Color
 
 class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel> 
 {
@@ -58,25 +59,25 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	def usuariosRegistrados(Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="Usuarios Registrados: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosRegistrados")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.BLUE bindValueToProperty("cantidadDeUsuariosRegistrados")]
 	}
 	
 	def usuariosActivos(Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="   Activos: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosActivos")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.BLUE bindValueToProperty("cantidadDeUsuariosActivos")]
 	}
 	
 	def usuariosInactivos (Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="   Inactivos: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosInactivos")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.RED bindValueToProperty("cantidadDeUsuariosInactivos")]
 	}	
 	
 	def usuariosBaneados (Panel panelDeSituacion) 
 	{
 		new Label(panelDeSituacion)=>[ text="   Baneados: "]
-	    new Label(panelDeSituacion)=> [ bindValueToProperty("cantidadDeUsuariosBaneados")]
+	    new Label(panelDeSituacion)=> [ foreground = Color.RED bindValueToProperty("cantidadDeUsuariosBaneados")]
 	}
 	
 	def panelDeBusqueda (Panel panelPrincipal)
@@ -93,7 +94,16 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		busqueda.layout = new HorizontalLayout
 		
 		new Label(busqueda).text = "Buscar por nombre de usuario "
-	    new TextBox(busqueda) => [ bindValueToProperty ("nombreDeUsuarioABuscar") width = 180]
+	    //new TextBox(busqueda) => [ bindValueToProperty ("nombreDeUsuarioABuscar") width = 180]
+		
+		new TextBox(busqueda) => 
+		[
+			// tip: de esta manera se registra el binding
+			// anidado y se disparan notificaciones
+			value <=> "nombreDeUsuarioABuscar"
+			width = 200
+		]
+		
 		new Button(busqueda) => 
 		[
 	      caption = "Buscar" width = 100
@@ -127,6 +137,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new Button(panel) => 
 		[
 			caption = "Revisar Publicaciones"
+			bindEnabledToProperty ("hayUsuarioSeleccionado")
 			onClick (
 			[|new AdmCalificacionWindow 
 				(this, new CalificacionAppModel(this.modelObject.administradorDeCalificaciones,
@@ -194,7 +205,7 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		new TextBox (panelDeEdicion) => 
 		[
 			bindEnabledToProperty("hayUsuarioSeleccionado")
-			bindValueToProperty("usuarioSeleccionado.fechaDeRegistro").transformer = new DateTransformer
+			bindValueToProperty("fechaDeRegistroDelUsuario").transformer = new DateTransformer
 		]
 	}
 
@@ -208,8 +219,6 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		var nombreDeUsuario = new Panel(panelDeEdicion)
 		nombreDeUsuario.layout = new  ColumnLayout(2)
 		new Label(nombreDeUsuario)=> [text="Nombre:" fontSize = 15]
-//		new Label(nombreDeUsuario)=> [value <=> "nombre" fontSize = 15]
-//		new Label(nombreDeUsuario).text = "Nombre:"
 		new TextBox(nombreDeUsuario) => 
 		[
 			bindEnabledToProperty("hayUsuarioSeleccionado")
@@ -231,28 +240,26 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 		tabla.layout = new VerticalLayout
 		new Table<Usuario> (tabla, typeof (Usuario)) => 
 		[
-			//bindeamos el contenido de la tabla
-			(items <=> "administradorDeUsuarios.usuarios")
+			//Bindeamos el contenido de la tabla
+			(items <=> "usuarios")
 			value <=> "usuarioSeleccionado"
-			//le definimos el alto y ancho, esto es opcional
-			width= 300
+			width= 300 	// Le definimos el alto y ancho, esto es opcional
 			height= 500
-			// describimos cada fila
-			// para esto definimos las celdas de cada filar
+			// A continuacion describimos cada fila definiendo las celdas de cada fila
 			// it es la grilla de resultados 
 			 
 			new Column<Usuario>(it) => 
 			[
-				title = "Fecha De Registro" //el nombre de la columna
-				fixedSize = 150   //el tamaño que va a tener
+				title = "Fecha De Registro" // Nombre de la columna
+				fixedSize = 150   // Tamaño que va a tener
 				bindContentsToProperty("fechaDeRegistro").transformer = [fechaDeRegistro | new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fechaDeRegistro)]
-		 		//la propiedad que mostramos del objeto que está atrás de la fila 
+		 		// La propiedad que mostramos del objeto que está atrás de la fila 
 			] 
 			
 			new Column<Usuario>(it) => 
 			[
-				title = "Nombre" //el nombre de la columna
-				fixedSize = 100   //el tamaño que va a tener
+				title = "Nombre" // El nombre de la columna
+				fixedSize = 100   // El tamaño que va a tener
 				bindContentsToProperty("nombre")
 			] 
 			
@@ -274,21 +281,8 @@ class AdmUsuarioWindow extends SimpleWindow<UsuarioAppModel>
 	
 	override protected addActions(Panel actionsPanel) 
 	{
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		// throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 }
-//			caption = "Revisar Publicaciones"
-//			onClick([|
-//				new AdmCalificacionWindow(
-//					this,
-//					new CalificacionAppModel(
-//											this.modelObject.administradorDeCalificaciones,
-//											this.modelObject.admDePuntuables,
-//											this.modelObject.usuarioLogeado).
-//											 filtradoObligatorioPorUsuario(this.modelObject.usuarioSeleccionado)).open
-//												
-//				
-//				
-//			])
 
