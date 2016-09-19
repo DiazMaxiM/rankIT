@@ -61,8 +61,8 @@ class Usuario
 	}
 	
 	/**
-	 * PROPÓSITO: Pregunta si el nombre del usuario es igual a otro.
-	 * @param: nombreAComparar: Es el nombre con el que realizo la comparacion con el nombre actual del usuario.
+	 * PROPÓSITO: Pregunta si el nombre del usuario es igual a otro especificado por parametro.
+	 * @param: nombreAComparar: Es el nombre con el que realizo la comparacion con el del nombre del usuario.
 	 */
 	def deNombre(String nombreAComparar) 
 	{
@@ -70,11 +70,13 @@ class Usuario
 	}
 
 	/**
-	 * PROPÓSITO: Pregunta si el usuario esta activo.
+	 * PROPÓSITO: Cambia el estado activo del usuario.
+	 * NOTA : Si el usuario esta baneado, automáticamente, este se desbanea.
 	 */
-	def boolean esActivo() 
+	def activarUsuario() 
 	{
-		activo
+		activo = true
+		desbanearUsuario
 	}
 
 	/**
@@ -100,6 +102,14 @@ class Usuario
 	def blanqueoDeContrasenha() 
 	{
 		password = "123"
+	}
+	
+	/**
+	 * PROPÓSITO: Convierte al usuario en inactivo
+	 */
+	def void inactivarUsuario() 
+	{
+		activo=false
 	}
 
 }

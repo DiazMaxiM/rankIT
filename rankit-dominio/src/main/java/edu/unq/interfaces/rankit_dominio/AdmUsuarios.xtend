@@ -42,7 +42,7 @@ class AdmUsuarios
 	/**
 	 * PROPÓSITO: Retorna la cantidad total de usuarios registrados.
 	 */
-	def cantidadTotalDeUsuarios()
+	def int cantidadTotalDeUsuarios()
 	{
 		usuarios.size()
 	}
@@ -52,7 +52,7 @@ class AdmUsuarios
 	 */
 	def usuariosActivos() 
 	{
-		getUsuarios.filter[usuario | usuario.activo].toList
+		usuarios.filter[usuario | usuario.activo].toList
 	}
 	
 	/**
@@ -98,6 +98,7 @@ class AdmUsuarios
 	/**
 	 * PROPÓSITO: Retorna todos los usuarios que tengan el nombre especificado.
 	 * @param nombreABuscar: Es el nombre de usuario con el que se aplicará el filtro.
+	 * NOTA: En el caso de que el nombreABuscar esté vacio, devuelve todos los usuarios.
 	 */
 	def buscarUsuarioDeNombre (String nombreABuscar) 
 	{

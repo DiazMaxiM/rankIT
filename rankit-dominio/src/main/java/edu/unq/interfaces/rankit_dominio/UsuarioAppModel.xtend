@@ -66,8 +66,9 @@ class UsuarioAppModel
 	
 	def buscarPorNombreDeUsuario() 
 	{
-		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+		var List<Usuario> resultado = administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
+		return resultado
 	}
 	
 	def void setNombreABuscar(String nombre) 
@@ -99,14 +100,7 @@ class UsuarioAppModel
 @Dependencies("usuarioSeleccionado")
 	def String getNombre() 
 	{
-		if (hayUsuarioSeleccionado)
-		{
-			usuarioSeleccionado.nombre
-		}
-		else
-		{
-			""
-		}
+		if (hayUsuarioSeleccionado) usuarioSeleccionado.nombre else ""
 	}
 	
 @Dependencies("usuarioSeleccionado")
@@ -133,27 +127,27 @@ class UsuarioAppModel
 @Dependencies("usuarioSeleccionado")
 	def getActivo() 
 	{
-		if (hayUsuarioSeleccionado)
-		{
-			usuarioSeleccionado.activo
-		}
+		if (hayUsuarioSeleccionado) usuarioSeleccionado.activo
 	}
 	
 @Dependencies("usuarioSeleccionado")
 	def void setActivo(boolean bool) 
 	{
-		usuarioSeleccionado.activo = bool
-		usuarioSeleccionado.desbanearUsuario
+		if (usuarioSeleccionado.esInactivo)
+		{
+			usuarioSeleccionado.activarUsuario
+		}
+		else
+		{
+			usuarioSeleccionado.inactivarUsuario
+		}
 		avisarModificacionesDeUsuarios()
 	}
 
 @Dependencies("usuarioSeleccionado")
 	def getBaneado() 
 	{
-		if (hayUsuarioSeleccionado)
-		{
-			usuarioSeleccionado.baneado
-		}
+		if (hayUsuarioSeleccionado) usuarioSeleccionado.baneado
 	}
 		
 @Dependencies("usuarioSeleccionado")
@@ -167,10 +161,7 @@ class UsuarioAppModel
 @Dependencies("usuarioSeleccionado")
 	def getFechaDeRegistroDelUsuario()
 	{
-		if (hayUsuarioSeleccionado)
-		{
-			usuarioSeleccionado.fechaDeRegistro
-		}
+		if (hayUsuarioSeleccionado) usuarioSeleccionado.fechaDeRegistro
 	}
 
 @Dependencies("usuarioSeleccionado")
@@ -190,6 +181,5 @@ class UsuarioAppModel
 	{
 		nombreDeUsuarioABuscar!=""
 	}
-
 
 }
