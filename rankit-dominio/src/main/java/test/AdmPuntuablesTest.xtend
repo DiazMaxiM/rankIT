@@ -348,7 +348,7 @@ class AdmPuntuablesTest {
 	 
 	 /**
 	  * En este test quiero probar que cuando pregunto por un nombre que ya esta registrado 
-	  * tira una excepcion 
+	  * me devulelve una UserException
 	  */
 	 @Test(expected=UserException )
 	 def hayLugaresDuplicados(){
@@ -366,9 +366,25 @@ class AdmPuntuablesTest {
 	 	
 	 	
 	 	admLugares.verificarSiHayDuplicados("Yona")
+	 }
+	 
+	 @Test
+	 def testLugarConElNombre(){
+	 	var admLugares= new AdmPuntuables()
+	 	var lugar1= new Puntuable
+	    var lugar2= new Puntuable
+	    var lugar3= new Puntuable
+	    lugar3.nombre="Fravega"
+	    lugar2.nombre="Yona"
+	    lugar1.nombre="Garbarino"
+	 	admLugares.agregar(lugar1)
+	 	admLugares.agregar(lugar2)
+	 	admLugares.agregar(lugar3)
 	 	
+	 	assertEquals(admLugares.puntuableConElnombre("Yona"),lugar2)
 	 	
 	 }
+	 
 	 
 	 /**
 	  * En este test quiero probar que cuando pregunto por un nombre que ya esta registrado 

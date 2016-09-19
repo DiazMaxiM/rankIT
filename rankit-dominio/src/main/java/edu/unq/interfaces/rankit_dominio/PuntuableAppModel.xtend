@@ -27,7 +27,9 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 	
 		def setItemSeleccionado(Puntuable seleccionado){
 		   itemSeleccionado = seleccionado
-		   verificarSiTieneNombreAsignado
+		   if(hayItemSeleccionado){
+		   	  verificarSiTieneNombreAsignado
+		   }
 		
 	}
 	
@@ -56,7 +58,8 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(itemSeleccionado)
 	}
 	
-	@Dependencies("itemSeleccionado")
+	
+   @Dependencies("hayItemSeleccionado,itemSeleccionado")
 	def void setHabilitado(boolean bool) {
 		itemSeleccionado.habilitado = bool
 		ObservableUtils.firePropertyChanged(this,"habilitado",habilitado)

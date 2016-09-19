@@ -12,8 +12,6 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
 import edu.unq.interfaces.rankit_dominio.GenericaAppModel
-import edu.unq.interfaces.rankit_dominio.AdapterLugarAppModel
-import edu.unq.interfaces.rankit_dominio.AdapterServicioAppModel
 import edu.unq.interfaces.rankit_dominio.LugarAppModel
 import edu.unq.interfaces.rankit_dominio.ServicioAppModel
 
