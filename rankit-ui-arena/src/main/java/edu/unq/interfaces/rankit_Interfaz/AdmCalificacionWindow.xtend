@@ -38,7 +38,7 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		]
 	}
 
-	def opciones(Panel panel) {
+	override mostrarInformacionDelItem(Panel panel) {
 		val contenedorOpciones = new Panel(panel)
 		contenedorOpciones.layout = new VerticalLayout
 
@@ -48,9 +48,9 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 			text = "Evaluado"
 		]
 		new Selector(contenedorOpciones) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindItemsToProperty("miAppModel.puntuables").adapter = new PropertyAdapter(Puntuable, "nombre")
-			bindValueToProperty("miAppModel.itemSeleccionado.evaluado")
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindItemsToProperty("puntuables").adapter = new PropertyAdapter(Puntuable, "nombre")
+			bindValueToProperty("itemSeleccionado.evaluado")
 		]
 
 		val contenedorFechaYUsuario = new Panel(contenedorOpciones)
@@ -65,9 +65,9 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 			text = "Fecha:"
 		]
 		new Label(contenedorFechaColumna) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+			bindEnabledToProperty("hayItemSeleccionado")
 
-			bindValueToProperty("miAppModel.itemSeleccionado.fecha").transformer = new DateTransformer => [
+			bindValueToProperty("itemSeleccionado.fecha").transformer = new DateTransformer => [
 				pattern = "dd/MM/yyyy HH:mm"
 			];
 		]
@@ -79,23 +79,23 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 			text = "Usuario:"
 		]
 		new Label(contenedorFechaColumna) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindValueToProperty("miAppModel.itemSeleccionado.evaluado.nombre") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindValueToProperty("itemSeleccionado.evaluado.nombre") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
 		]
 
 		new Label(contenedorOpciones) => [
 			text = "Puntaje:"
 		]
 		new NumericField(contenedorOpciones) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindValueToProperty("miAppModel.puntos")
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindValueToProperty("puntos")
 		]
 		new Label(contenedorOpciones) => [
 			text = "Detalle:"
 		]
 		new TextBox(contenedorOpciones) => [
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
-			bindValueToProperty("miAppModel.itemSeleccionado.detalle") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+			bindEnabledToProperty("hayItemSeleccionado")
+			bindValueToProperty("itemSeleccionado.detalle") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
 			height = 50
 		]
 
@@ -107,8 +107,8 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		val contenedorContOfensivoHorizontalColumna = new Panel(contenedorContOfensivoHorizontal)
 		contenedorContOfensivoHorizontalColumna.layout = new ColumnLayout(2)
 		new CheckBox(contenedorContOfensivoHorizontalColumna) => [
-			bindValueToProperty("miAppModel.contenidoOfensivo") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
-			bindEnabledToProperty("miAppModel.hayItemSeleccionado")
+			bindValueToProperty("contenidoOfensivo") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+			bindEnabledToProperty("hayItemSeleccionado")
 		]
 		new Label(contenedorContOfensivoHorizontalColumna) => [
 			text = "Contenido Ofensivo"
@@ -118,8 +118,8 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 	override void tabla(Panel panel) {
 		new Table<Calificacion>(panel, typeof(Calificacion)) => [
 			// bindeamos el contenido de la tabla
-			(items <=> "miAppModel.listaCalificacionesFiltradas")
-			value <=> "miAppModel.itemSeleccionado"
+			(items <=> "listaCalificacionesFiltradas")
+			value <=> "itemSeleccionado"
 			// le definimos el alto y ancho, esto es opcional
 			width = 400
 			height = 400
@@ -163,10 +163,6 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 	
 	override botonParaMostrarCalificacionesDelItem(Panel panel){
 		
-	}
-	
-	override mostrarInformacionDelItem(Panel panel) {
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	override mostrarNombreDelItem(Panel panel) {

@@ -195,16 +195,21 @@ class CalificacionAppModel implements GenericaAppModel  {
 	}
 	
 	override nuevo() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	administradorCalificacion.agregarCalificacion(new Calificacion(this.usuarioLogeado))
+	actualizarEstadoSituacion
 	}
 	
 	override eliminar() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	this.eliminarCalificacionSeleccionada
+	actualizarEstadoSituacion
 	}
 	
 	override getElementosNecesariosParaAdmCalificacionWindow() {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
+	def getHabilitadoItemBusqueda(){
+		true
+	}
 	
 }
