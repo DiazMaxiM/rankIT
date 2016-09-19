@@ -41,9 +41,7 @@ class AdmCalificacionesTest {
 		when(lugar2.nombre).thenReturn("Yona");
 		when(lugar3.nombre).thenReturn("Fravega");
 
-		when(calificacionMock1.isPuntuableBuscado(lugar1)).thenReturn(true);
-		when(calificacionMock2.isPuntuableBuscado(lugar1)).thenReturn(true);
-
+	
 		when(calificacionMock1.puntos).thenReturn(15);
 		when(calificacionMock2.puntos).thenReturn(45);
 

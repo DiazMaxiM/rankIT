@@ -21,11 +21,5 @@ class Calificacion {
 		this.puntos=0
 		this.evaluado= new PuntuableNull()
 		this.usuario = usuario
-	}
-
-	
-	def isPuntuableBuscado(Puntuable puntuable) {
-	   evaluado.esIgual(puntuable)
-	}
-	
+	}	
 }
