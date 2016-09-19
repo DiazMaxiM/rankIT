@@ -67,22 +67,18 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre1")
 			bindValueToPropertyLabelValor("labelValor1")
-			cambiarDeColorAlValor("labelValor1Color")
 		]
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre2")
 			bindValueToPropertyLabelValor("labelValor2")
-			cambiarDeColorAlValor("labelValor2Color")
 		]
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre3")
 			bindValueToPropertyLabelValor("labelValor3")
-			cambiarDeColorAlValor("labelValor3Color")
 		]
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre4")
 			bindValueToPropertyLabelValor("labelValor4")
-			cambiarDeColorAlValor("labelValor4Color")
 		]
 	}
 
