@@ -111,5 +111,9 @@ class Usuario
 	{
 		activo=false
 	}
+	
+	def isNoTieneNombre() {
+		nombre.equals("NN")
+	}
 
 }

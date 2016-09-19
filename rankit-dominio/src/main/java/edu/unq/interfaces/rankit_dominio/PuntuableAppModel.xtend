@@ -135,44 +135,15 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 	
 	override String getLabelNombre1()
 
-	override String getLabelValor1()
-
 	override String getLabelNombre2()
 
-	override String getLabelValor2()
-
 	override String getLabelNombre3()
-
-	override String getLabelValor3()
-
-	override String getLabelNombre4()
-
-	override String getLabelValor4()
 	
 	override String tituloContenedorBusqueda()
 	
 	override String textoPrimerParametroDeBusqueda()
 	
-	override String getPrimerParametroDeBusqueda()
-	
-	override String textoSegundoParametroDeBusqueda()
-	
-	override String getSegundoParametroDeBusqueda()
-	
-	override getLabelValor1Color() {
-		"A"
-	}
-	
-	override getLabelValor2Color() {
-		"A"
-	}
-	
-	override getLabelValor3Color() {
-		"R"
-	}
-	
-	override getLabelValor4Color() {
-		""
+	override blanquearContrasenha() {
 	}
 	
 	override CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow(){
@@ -181,6 +152,42 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 		calificacionAppModel
 	}
 	
+	override void buscar(){
+		 ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+	}
 	
+		
+	override getPrimerParametroDeBusqueda() {
+	   nombreBuscado
+	}
+	def void setPrimerParametroDeBusqueda(String nombre) {
+	    nombreBuscado = nombre
+	}
+	
+	override String getLabelValor1() {
+		inscriptos.toString
+	}
+	override String getLabelValor2() {
+		habilitados.toString
+	}
+	
+	override String getLabelValor3() {
+		deshabilitados.toString
+	}
+	override textoSegundoParametroDeBusqueda() {
+		""
+	}
+	
+	override getSegundoParametroDeBusqueda() {
+		""
+	}
+	
+		override String getLabelNombre4() {
+		""
+	}
+	
+	override String getLabelValor4() {
+	   ""
+	}
 	
 }

@@ -24,6 +24,7 @@ import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
+import edu.unq.interfaces.component.LabelConDatos
 
 class AdmCalificacionWindow extends VistaGenericaWindow {
 
@@ -160,13 +161,31 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		]
 
 	}
+	/**
+	 * Cambia El Color
+	 */
+	override dato2(Panel panelResumen){
+		new LabelConDatos(panelResumen) => [
+			bindValueToPropertyLabelNombre("labelNombre2")
+			bindValueToPropertyLabelValor("labelValor2")
+			datoConColorRojo
+		]
+	}
+	
+	override botonBusqueda(Panel panel){
+		
+	}
 	
 	override botonParaMostrarCalificacionesDelItem(Panel panel){
 		
 	}
 	
 	override mostrarNombreDelItem(Panel panel) {
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		
+	}
+	
+	override botonParaBlanquearUsuarios(Panel panel) {
+		
 	}
 	
 	

@@ -124,12 +124,12 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock2)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		when(usuarioMock1.password).thenReturn("123")
 		appUsuario.blanquearContrasenha
 		
-		Assert.assertTrue(appUsuario.usuarioSeleccionado.password.equals("123"))
+		Assert.assertTrue(appUsuario.itemSeleccionado.password.equals("123"))
 		verify(admUsuariosMock).blanquearContrasenha(usuarioMock1)
 	}
 	
@@ -227,7 +227,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		when (usuarioMock1.nombre).thenReturn("Liza")
 		
@@ -249,7 +249,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		when (usuarioMock1.nombre).thenReturn("Camila")
 		appUsuario.setNombre("Camila")
@@ -272,9 +272,9 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
-		Assert.assertTrue(appUsuario.hayUsuarioSeleccionado)
+		Assert.assertTrue(appUsuario.hayItemSeleccionado)
 	}
 	
 	@Test
@@ -292,7 +292,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		when (usuarioMock1.activo).thenReturn(true)
 		
@@ -314,9 +314,9 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
-		when(appUsuario.usuarioSeleccionado.esInactivo).thenReturn(true)
+		when(appUsuario.itemSeleccionado.esInactivo).thenReturn(true)
 		when(usuarioMock1.activo).thenReturn(true)
 		
 		appUsuario.setActivo(true)
@@ -339,7 +339,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		usuarioMock1.activarUsuario
 
@@ -362,7 +362,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		when (usuarioMock1.baneado).thenReturn(true)
 		
@@ -384,7 +384,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		when(usuarioMock1.baneado).thenReturn(true)
 		
@@ -409,7 +409,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		usuarioMock1.banearUsuario
 
@@ -432,7 +432,7 @@ class testUsuarioAppModel
 		admUsuariosMock.agregarUsuarioNuevo(usuarioMock1)
 		
 		val UsuarioAppModel appUsuario = new UsuarioAppModel(admUsuariosMock, admCalificacionesMock, admPuntuablesMock, usuarioLogMock)
-		appUsuario.usuarioSeleccionado = usuarioMock1
+		appUsuario.itemSeleccionado = usuarioMock1
 		
 		Assert.assertEquals(usuarioMock1.fechaDeRegistro, appUsuario.fechaDeRegistroDelUsuario)
 	}

@@ -10,10 +10,11 @@ import java.util.List
 @Observable
 @Accessors
 
-class UsuarioAppModel 
-{
+class UsuarioAppModel implements GenericaAppModel
+{   
+	
 	private AdmUsuarios administradorDeUsuarios
-	private Usuario usuarioSeleccionado
+	private Usuario itemSeleccionado
 	private AdmCalificaciones administradorDeCalificaciones
 	private String nombreDeUsuarioABuscar = ""
 	AdmPuntuables administradorDePuntuables
@@ -52,25 +53,29 @@ class UsuarioAppModel
 		administradorDeUsuarios.cantidadTotalDeUsuariosBaneados
 	}
 	
-	def void eliminarUsuario() 
+	override eliminar() 
 	{
-		administradorDeUsuarios.eliminarUsuario(usuarioSeleccionado)
+		administradorDeUsuarios.eliminarUsuario(itemSeleccionado)
 		avisarModificacionesDeUsuarios
-		usuarioSeleccionado = null
+		itemSeleccionado = null
 	}
 	
-	def void blanquearContrasenha()
+	override blanquearContrasenha()
 	{
-		administradorDeUsuarios.blanquearContrasenha(usuarioSeleccionado)
+		administradorDeUsuarios.blanquearContrasenha(itemSeleccionado)
 	}
 	
-	def buscarPorNombreDeUsuario() 
-	{
-		var List<Usuario> resultado = administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+	override buscar() 
+	{   
+		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+//		var List<Usuario> resultado = administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
-		return resultado
+//		//return resultado
 	}
 	
+	/** 
+	 * No es necesario 
+	 * */
 	def void setNombreABuscar(String nombre) 
 	{
 		nombreDeUsuarioABuscar = nombre
@@ -78,7 +83,7 @@ class UsuarioAppModel
 		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
 	}
 	
-	def void agregarNuevoUsuario() 
+	override nuevo() 
 	{
 		var usuarioNuevo = new Usuario
 		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
@@ -94,77 +99,83 @@ class UsuarioAppModel
 		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosBaneados", cantidadDeUsuariosBaneados)
 		ObservableUtils.firePropertyChanged(this, "baneado", baneado)
 		ObservableUtils.firePropertyChanged(this, "activo", activo)
-		
+	    ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
+		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
+		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
+		ObservableUtils.firePropertyChanged(this, "labelValor4", labelValor4)
 	}
 
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def String getNombre() 
 	{
-		if (hayUsuarioSeleccionado) usuarioSeleccionado.nombre else ""
+		if (hayItemSeleccionado) itemSeleccionado.nombre else ""
 	}
 	
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def void setNombre(String nombreIngresado) 
 	{
-		usuarioSeleccionado.cambiarNombre(nombreIngresado)
+		itemSeleccionado.cambiarNombre(nombreIngresado)
 		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
 	}
 	
-@Dependencies("usuarioSeleccionado")
-	def boolean getHayUsuarioSeleccionado()
+@Dependencies("itemSeleccionado")
+	def boolean getHayItemSeleccionado()
 	{
-		usuarioSeleccionado!=null
+		itemSeleccionado!=null
 	}
 	
 	def Date getFechaDeLaUltimaPublicacion ()
 	{
-		if (hayUsuarioSeleccionado)
+		if (hayItemSeleccionado)
 		{
 			//administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(usuarioSeleccionado)
 		}
 	}
-	
-@Dependencies("usuarioSeleccionado")
+ @Dependencies("itemSeleccionado")  
+	def boolean  getHayItemSeleccionadoConNombre(){
+		!itemSeleccionado.isNoTieneNombre
+	}
+@Dependencies("itemSeleccionado")
 	def getActivo() 
 	{
-		if (hayUsuarioSeleccionado) usuarioSeleccionado.activo
+		if (hayItemSeleccionado) itemSeleccionado.activo
 	}
 	
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def void setActivo(boolean bool) 
 	{
-		if (usuarioSeleccionado.esInactivo)
+		if (itemSeleccionado.esInactivo)
 		{
-			usuarioSeleccionado.activarUsuario
+			itemSeleccionado.activarUsuario
 		}
 		else
 		{
-			usuarioSeleccionado.inactivarUsuario
+			itemSeleccionado.inactivarUsuario
 		}
 		avisarModificacionesDeUsuarios()
 	}
 
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def getBaneado() 
 	{
-		if (hayUsuarioSeleccionado) usuarioSeleccionado.baneado
+		if (hayItemSeleccionado) itemSeleccionado.baneado
 	}
 		
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def void setBaneado(boolean bool) 
 	{
-		usuarioSeleccionado.baneado = bool
-		usuarioSeleccionado.activo = false
+		itemSeleccionado.baneado = bool
+		itemSeleccionado.activo = false
 		avisarModificacionesDeUsuarios()
 	}
 
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def getFechaDeRegistroDelUsuario()
 	{
-		if (hayUsuarioSeleccionado) usuarioSeleccionado.fechaDeRegistro
+		if (hayItemSeleccionado) itemSeleccionado.fechaDeRegistro
 	}
 
-@Dependencies("usuarioSeleccionado")
+@Dependencies("itemSeleccionado")
 	def List<Usuario> getUsuarios()
 	{
 		if (hayUsuarioABuscar)
@@ -181,5 +192,70 @@ class UsuarioAppModel
 	{
 		nombreDeUsuarioABuscar!=""
 	}
+	
+	override getLabelNombre1() {
+		"Usuarios Registrados:"
+	}
+	
+	override getLabelValor1() {
+		cantidadDeUsuariosRegistrados.toString
+	}
+	
+	override getLabelNombre2() {
+		"Activos:"
+	}
+	
+	override getLabelValor2() {
+		cantidadDeUsuariosActivos.toString
+	}
+	
+	override getLabelNombre3() {
+		"Inactivos:"
+	}
+	
+	override getLabelValor3() {
+		 cantidadDeUsuariosInactivos.toString
+	}
+	
+	
+	override getLabelNombre4() {
+		"Baneados:"
+	}
+	
+	override getLabelValor4() {
+		cantidadDeUsuariosBaneados.toString
+	}
+	
+	
+	override tituloContenedorBusqueda() {
+		"Usuarios"
+	}
+	
+	override textoPrimerParametroDeBusqueda() {
+		"Busqueda Por nombre de Usuario"
+	}
+	
+	override getPrimerParametroDeBusqueda() {
+		 nombreDeUsuarioABuscar
+	}
+	
+	def void setPrimerParametroDeBusqueda(String nombre) {
+	    nombreDeUsuarioABuscar = nombre
+	}
+	
+	override textoSegundoParametroDeBusqueda() {
+	}
+	
+	override getSegundoParametroDeBusqueda() {
+		
+	}
+	
+	
+	override getElementosNecesariosParaAdmCalificacionWindow() {
+		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorDeCalificaciones,usuarioLogeado)
+		.filtradoObligatorioPorUsuario(itemSeleccionado)
+		calificacionAppModel
+	}
+	
 
 }

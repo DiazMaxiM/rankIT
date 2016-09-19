@@ -32,5 +32,12 @@ class LabelConDatos extends Panel{
 		labelNombre.bindValueToProperty(property)
 		this
 	}
-
+	def datoConColorRojo(){
+		labelValor.foreground = Color.RED
+	}
+    
+    def datoConColorAzul(){
+    	labelValor.foreground = Color.BLUE
+    	
+    }
 }

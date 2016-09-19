@@ -28,19 +28,23 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 	override protected createFormPanel(Panel mainPanel) {
 		val panelGeneral = new Panel(mainPanel)
 		panelGeneral.layout = new VerticalLayout
-
-		new Titulo(panelGeneral, "Resumen de Situacion")
-
+		titulo(panelGeneral)
 		contenedorResumenDeSituacion(panelGeneral)
 		contenedorBusqueda(panelGeneral)
 		contenedorTablaYEdicion(panelGeneral)
+	}
+	
+	def titulo(Panel panel){
+	  val panelTitulo=new Panel(panel)
+	  panelTitulo.layout =new  HorizontalLayout
+	  new Label(panelTitulo) => [ text = "Resumen de situación:" fontSize = 15]
+	  
 	}
 
 	def contenedorBusqueda(Panel panelGeneral) {
 		val panelBusqueda = new Panel(panelGeneral)
 		panelBusqueda.layout = new HorizontalLayout
 
-		tituloContenedorBusqueda(panelBusqueda)
 
 		val panelBusquedaParametros = new Panel(panelGeneral)
 		panelBusquedaParametros.layout = new HorizontalLayout
@@ -49,9 +53,18 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 			text = this.modelObject.textoPrimerParametroDeBusqueda
 			bindValueToProperty("primerParametroDeBusqueda")
 		]
-
+        botonBusqueda(panelBusquedaParametros)
 		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)
 	}
+	
+	def void botonBusqueda(Panel panel){
+			new Button(panel) => 
+		[
+	      caption = "Buscar" width = 100
+         onClick ([|modelObject.buscar]).setAsDefault.disableOnError
+        ]
+	}
+	
 	
 	def void tituloContenedorBusqueda(Panel panelBusqueda) {
 		new Titulo(panelBusqueda, this.modelObject.tituloContenedorBusqueda)
@@ -64,23 +77,46 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 	def contenedorResumenDeSituacion(Panel panelGeneral) {
 		val panelResumen = new Panel(panelGeneral)
 		panelResumen.layout = new HorizontalLayout
+		
+		dato1(panelResumen)
+		dato2(panelResumen)
+		dato3(panelResumen)
+		dato4(panelResumen)
+	}
+	
+	def dato1(Panel panelResumen){
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre1")
 			bindValueToPropertyLabelValor("labelValor1")
+			datoConColorAzul
 		]
+	  }
+	def dato2(Panel panelResumen){
 		new LabelConDatos(panelResumen) => [
 			bindValueToPropertyLabelNombre("labelNombre2")
 			bindValueToPropertyLabelValor("labelValor2")
-		]
-		new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre3")
-			bindValueToPropertyLabelValor("labelValor3")
-		]
-		new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre4")
-			bindValueToPropertyLabelValor("labelValor4")
+			datoConColorAzul
 		]
 	}
+
+    def dato3(Panel panelResumen){
+    	new LabelConDatos(panelResumen) => [
+			bindValueToPropertyLabelNombre("labelNombre3")
+			bindValueToPropertyLabelValor("labelValor3")
+			datoConColorRojo
+		]
+    	
+    }
+    
+    def dato4(Panel panelResumen){
+    	new LabelConDatos(panelResumen) => [
+			bindValueToPropertyLabelNombre("labelNombre4")
+			bindValueToPropertyLabelValor("labelValor4")
+			datoConColorRojo
+		]
+    }
+	
+	
 
 	def contenedorTablaYEdicion(Panel panelGeneral) {
 		val contenedorTablaYOpcionesPanel = new Panel(panelGeneral)
@@ -96,6 +132,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		this.panelErrores(contenedorOpcionPanel)
 		this.mostrarInformacionDelItem(contenedorOpcionPanel)
         this.botonParaMostrarCalificacionesDelItem(contenedorOpcionPanel)
+        this.botonParaBlanquearUsuarios(contenedorOpcionPanel)
 		this.botonParaEliminarItem(contenedorOpcionPanel) 
 	}
 	
@@ -121,6 +158,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		]
    	
    }
+   def void botonParaBlanquearUsuarios(Panel panel)
    
    def botonParaEliminarItem(Panel panel){
    	   new Button(panel) => [

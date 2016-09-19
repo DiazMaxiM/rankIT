@@ -16,32 +16,13 @@ class LugarAppModel extends PuntuableAppModel {
 		"Lugares Inscriptos: "
 	}
 	
-	override String getLabelValor1() {
-		inscriptos.toString
-	}
-	
 	override String getLabelNombre2() {
 		"Habilitados: "
 	}
 	
-	override String getLabelValor2() {
-		habilitados.toString
-	}
 	
 	override String getLabelNombre3() {
 		"Deshabilitados"
-	}
-	
-	override String getLabelValor3() {
-		deshabilitados.toString
-	}
-	
-	override String getLabelNombre4() {
-		""
-	}
-	
-	override String getLabelValor4() {
-	   ""
 	}
 	
 	override tituloContenedorBusqueda() {
@@ -51,38 +32,8 @@ class LugarAppModel extends PuntuableAppModel {
 	override textoPrimerParametroDeBusqueda() {
 		"Buscar por nombre de Lugar "
 	}
-	
-	override getPrimerParametroDeBusqueda() {
-	   nombreBuscado
-	}
-	def setPrimerParametroDeBusqueda(String nombre) {
-	    nombreBuscado = nombre
-	    ObservableUtils.firePropertyChanged(this,"elementos", elementos)
-	}
-	
-	override textoSegundoParametroDeBusqueda() {
-		""
-	}
-	
-	override getSegundoParametroDeBusqueda() {
-		""
-	}
-	
-	override getLabelValor1Color() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	override getLabelValor2Color() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	override getLabelValor3Color() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	override getLabelValor4Color() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
+
+
 	
 
 	

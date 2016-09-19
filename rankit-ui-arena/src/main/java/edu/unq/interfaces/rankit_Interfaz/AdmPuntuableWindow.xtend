@@ -125,6 +125,9 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 
 	}
 	
+	override botonParaBlanquearUsuarios(Panel panel) {
+	}
+	
 	
 
 }

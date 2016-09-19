@@ -17,33 +17,14 @@ class ServicioAppModel extends PuntuableAppModel {
 	override String getLabelNombre1() {
 		"Servicios Inscriptos: "
 	}
-	
-	override String getLabelValor1() {
-		inscriptos.toString
-	}
-	
+
 	override String getLabelNombre2() {
 		"Habilitados: "
 	}
 	
-	override String getLabelValor2() {
-		habilitados.toString
-	}
 	
 	override String getLabelNombre3() {
 		"Deshabilitados"
-	}
-	
-	override String getLabelValor3() {
-		deshabilitados.toString
-	}
-	
-	override String getLabelNombre4() {
-		""
-	}
-	
-	override String getLabelValor4() {
-	   ""
 	}
 	
 	override tituloContenedorBusqueda() {
@@ -54,21 +35,4 @@ class ServicioAppModel extends PuntuableAppModel {
 		"Buscar por nombre de Servicio "
 	}
 	
-	override getPrimerParametroDeBusqueda() {
-	   nombreBuscado
-	}
-	def setPrimerParametroDeBusqueda(String nombre) {
-	    nombreBuscado = nombre
-	    ObservableUtils.firePropertyChanged(this,"elementos", elementos)
-	}
-	
-	override textoSegundoParametroDeBusqueda() {
-		""
-	}
-	
-	override getSegundoParametroDeBusqueda() {
-		""
-	}
-	
-
 }
