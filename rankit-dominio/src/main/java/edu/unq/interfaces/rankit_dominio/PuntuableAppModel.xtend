@@ -26,14 +26,20 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 
 	}
 	@Dependencies("hayItemSeleccionado")
-	def void  setItemSeleccionado(Puntuable seleccionado){
+	def  void  setItemSeleccionado(Puntuable seleccionado){
+	System.out.println(seleccionado);
+	System.out.println(seleccionado.nombre);
+		
 		itemSeleccionado = seleccionado
 		verificarSiTieneNombreAsignado
+		ObservableUtils.firePropertyChanged(this,"hayItemSeleccionado",hayItemSeleccionado)
+		avisarCambios
 		
 	}
-	@Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionado() {
 		!itemSeleccionado.esIgual(miPuntuableNull)
+		
+
 	}
 	
     @Dependencies("itemSeleccionado")  
@@ -153,7 +159,7 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 	
 	override String getSegundoParametroDeBusqueda()
 	
-	override AdapterCalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
+	override CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
 	
 	
 	

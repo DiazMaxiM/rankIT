@@ -1,8 +1,9 @@
 package edu.unq.interfaces.rankit_Interfaz
 
 import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
-import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
+import edu.unq.interfaces.rankit_dominio.LugarAppModel
 import edu.unq.interfaces.rankit_dominio.RankITAppModel
+import edu.unq.interfaces.rankit_dominio.ServicioAppModel
 import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -10,10 +11,6 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
-import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
-import edu.unq.interfaces.rankit_dominio.GenericaAppModel
-import edu.unq.interfaces.rankit_dominio.LugarAppModel
-import edu.unq.interfaces.rankit_dominio.ServicioAppModel
 
 class Menu extends SimpleWindow<RankITAppModel> {
 
@@ -55,7 +52,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 
 		new Button(botoneraPanel) => [
 			caption = "Adm. Usuarios"
-			onClick [ |
+			onClick [|
 				new AdmUsuarioWindow(this, new UsuarioAppModel(
 					this.modelObject.rankit.admUsuarios,
 					this.modelObject.rankit.admCalificaciones,
@@ -67,49 +64,47 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		new Button(botoneraPanel) => [
 			caption = "Adm. Calificaciones"
 			onClick [|
-				
-				val CalificacionAppModel calAppModel=	new CalificacionAppModel(
-					    this.modelObject.rankit.admCalificaciones,
-						this.modelObject.rankit.admLugares,
-						this.modelObject.rankit.admServicios,
-						this.modelObject.rankit.usuarioLogeado
-						)
-				
-				var   nuevoAdapter = new AdapterCalificacionAppModel(calAppModel)
-				
-				
+
+				val CalificacionAppModel calAppModel = new CalificacionAppModel(
+					this.modelObject.rankit.admCalificaciones,
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admServicios,
+					this.modelObject.rankit.usuarioLogeado
+				)
+
+				// var   nuevoAdapter = new AdapterCalificacionAppModel(calAppModel)
 				new AdmCalificacionWindow(
 					this,
-					nuevoAdapter
+					calAppModel
 				).open
 			]
 		]
 		new Button(botoneraPanel) => [
 			caption = "Adm. Servicios"
-            onClick [|
-				  val ServicioAppModel servicioAppModel=new ServicioAppModel(
-						this.modelObject.rankit.admServicios,
-					    this.modelObject.rankit.admCalificaciones,
-						this.modelObject.rankit.usuarioLogeado
-						)
-				
+			onClick [|
+				val ServicioAppModel servicioAppModel = new ServicioAppModel(
+					this.modelObject.rankit.admServicios,
+					this.modelObject.rankit.admCalificaciones,
+					this.modelObject.rankit.usuarioLogeado
+				)
+
 				new AdmPuntuableWindow(
 					this,
 					servicioAppModel
 				).open
 			]
-		
+
 		]
 		new Button(botoneraPanel) => [
 			caption = "Adm. Lugares"
-           onClick [|
-				
-				val LugarAppModel lugarAppModel=new LugarAppModel(
-						this.modelObject.rankit.admLugares,
-					    this.modelObject.rankit.admCalificaciones,
-						this.modelObject.rankit.usuarioLogeado
-						)
-				
+			onClick [|
+
+				val LugarAppModel lugarAppModel = new LugarAppModel(
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admCalificaciones,
+					this.modelObject.rankit.usuarioLogeado
+				)
+
 				new AdmPuntuableWindow(
 					this,
 					lugarAppModel

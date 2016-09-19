@@ -1,7 +1,7 @@
 package edu.unq.interfaces.rankit_Interfaz
 
 import edu.unq.interfaces.component.LabeledTextBox
-import edu.unq.interfaces.rankit_dominio.AdapterCalificacionAppModel
+
 import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.Puntuable
 import edu.unq.interfaces.rankit_dominio.Usuario
@@ -23,10 +23,11 @@ import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.WindowOwner
 
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
+import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 
 class AdmCalificacionWindow extends VistaGenericaWindow {
 
-	new(WindowOwner parent, AdapterCalificacionAppModel model) {
+	new(WindowOwner parent, CalificacionAppModel model) {
 		super(parent, model)
 	}
 

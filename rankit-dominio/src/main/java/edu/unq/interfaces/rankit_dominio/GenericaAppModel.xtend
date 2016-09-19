@@ -31,6 +31,6 @@ interface GenericaAppModel {
 	
 	def void eliminar()
 	
-	def AdapterCalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
+	def CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
 	
 }

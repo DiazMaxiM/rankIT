@@ -9,7 +9,7 @@ import com.google.common.base.Strings
 
 @Observable
 @Accessors
-class CalificacionAppModel  {
+class CalificacionAppModel implements GenericaAppModel  {
 
 	AdmCalificaciones administradorCalificacion;
 	Calificacion itemSeleccionado;
@@ -134,6 +134,76 @@ class CalificacionAppModel  {
 		nombreEvaluadoBusqueda = usuario.nombre
 		habilitadoUsuarioBusqueda=false
 		this
+	}
+	
+	override String getLabelNombre1() {
+	"Calificaciones Registradas:"	
+	}
+	
+	override String getLabelValor1() {
+	  calificacionesRegistradas.toString	
+	}
+	
+	override String getLabelNombre2() {
+	"Ofensivas:"
+	}
+	
+	override getLabelValor2() {
+	 calificacionesOfensivas.toString	
+	}
+	
+	override getLabelNombre3() {
+	""
+	}
+	
+	override getLabelValor3() {
+	""
+	}
+	
+	override getLabelNombre4() {
+	""
+	}
+	
+	override getLabelValor4() {
+	""
+	}
+	
+	override tituloContenedorBusqueda() {
+	"Calificaciones"
+	}
+	
+	override textoPrimerParametroDeBusqueda() {
+	"Usuario"	
+	}
+	
+	override getPrimerParametroDeBusqueda() {
+	 nombreUsuarioBusqueda
+	}
+	
+	def setPrimerParametroDeBusqueda(String nombre) {
+	 nombreUsuarioBusqueda=nombre
+	}
+	override textoSegundoParametroDeBusqueda(){
+		"Evaluado"
+	}
+	override getSegundoParametroDeBusqueda() {
+	 nombreUsuarioBusqueda
+	}
+	
+	def setSegundoParametroDeBusqueda(String nombre) {
+	 nombreUsuarioBusqueda=nombre
+	}
+	
+	override nuevo() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override eliminar() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getElementosNecesariosParaAdmCalificacionWindow() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	
