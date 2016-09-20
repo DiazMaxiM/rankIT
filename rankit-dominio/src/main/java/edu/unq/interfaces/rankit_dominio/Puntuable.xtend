@@ -50,11 +50,9 @@ class Puntuable {
 		this.equals(puntuable)
 	}
 
-		override equals(Object o){
-		if(o!=null && o instanceof Puntuable){
-			return this.nombre.equals((o as Puntuable).nombre)
-		}
-        return false
-		
+	
+	def tieneNombre() {
+		!this.nombre.equals("")
 	}
+	
 }

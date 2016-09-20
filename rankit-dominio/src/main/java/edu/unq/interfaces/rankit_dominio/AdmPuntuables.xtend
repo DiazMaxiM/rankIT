@@ -25,32 +25,23 @@ class AdmPuntuables {
 		puntuables.size
 	}
 	
-	
 	def habilitados(){
-		puntuables.filter[puntuable|puntuable.isHabilitado].toList.size 
-		
+		puntuables.filter[puntuable | puntuable.isHabilitado].toList.size 	
 	}
+	
 	def deshabilitados(){
-		inscriptos()-habilitados()
+		inscriptos() - habilitados()
 	}
-	
-	def isPuntuablesDuplicados(String nombre) {
-       !puntuableConElnombre(nombre).equals(null)
-   }
-   	
-	def puntuableConElnombre(String nombre) {
-		puntuables.findFirst[puntuable|puntuable.isNombre(nombre)]
-	}
-	
-	def List<Puntuable>buscar(String nombre) {
+
+	def List<Puntuable> buscar(String nombre) {
 		  if(!estaVacio(nombre)){
 		  	puntuables.filter[puntuable|puntuable.contieneLasLetras(nombre)].toList
 		  }
 		  else{
 		  	puntuables
 		  }
-		
 	}
+	
 	private def estaVacio(String data) {
 		Strings.isNullOrEmpty(data)
 	}
@@ -59,7 +50,7 @@ class AdmPuntuables {
 	def verificarSiHayDuplicados(String nombre) {
 		var puntuablesConElMismoNombre=puntuables.filter[puntuable|puntuable.tieneElNombre(nombre)].toList
 		
-		if(!puntuablesConElMismoNombre.size.equals(0)){
+		if(!puntuablesConElMismoNombre.empty){
 			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
 		}
 	}

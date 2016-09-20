@@ -10,14 +10,13 @@ import java.util.Date
 @Observable
 @Accessors
 
-abstract class PuntuableAppModel implements GenericaAppModel {
+ abstract class PuntuableAppModel implements GenericaAppModel {
 	val Puntuable miPuntuableNull = new PuntuableNull
 	Usuario usuarioLogeado
 	AdmPuntuables administradorDePuntuables
 	AdmCalificaciones administradorCalificacion
 	Puntuable itemSeleccionado = miPuntuableNull
 	String nombreBuscado
-	boolean habilitadoItemBusqueda=true
 	
 	new(AdmPuntuables adm1, AdmCalificaciones adm2, Usuario usuarioLogeado) {
 		this.administradorDePuntuables = adm1
@@ -25,114 +24,79 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 		this.usuarioLogeado = usuarioLogeado
 
 	}
-	@Dependencies("hayItemSeleccionado")
-	def  void  setItemSeleccionado(Puntuable seleccionado){
-	System.out.println(seleccionado);
-	System.out.println(seleccionado.nombre);
-		
-		itemSeleccionado = seleccionado
-		verificarSiTieneNombreAsignado
-		ObservableUtils.firePropertyChanged(this,"hayItemSeleccionado",hayItemSeleccionado)
-		avisarCambios
+	
+	def void setItemSeleccionado(Puntuable puntuable){
+		 itemSeleccionado = puntuable
+		verificarSiTieneNombre
+		 avisarCambios
 		
 	}
-	def boolean getHayItemSeleccionado() {
-		!itemSeleccionado.esIgual(miPuntuableNull)
-		
+	
+	def void verificarSiTieneNombre(){
+		 itemSeleccionado.verificarSiTieneNombre
+	}
+	
+	
+	@Dependencies("itemSeleccionado")
+	def boolean getHayItemSeleccionado(){
+		!itemSeleccionado.equals(miPuntuableNull)
+	}
+	@Dependencies("itemSeleccionado")
+	def boolean getHayItemSeleccionadoConNombre(){
+	   (!itemSeleccionado.equals(miPuntuableNull))&&(itemSeleccionado.tieneNombre)
+	}
+	@Dependencies("itemSeleccionado")
+	def boolean getHabilitado(){
+		itemSeleccionado.habilitado
+	}
+	@Dependencies("itemSeleccionado")
+	def void setHabilitado(boolean bool){
+		itemSeleccionado.habilitado = bool
+		avisarCambios
+	}
 
-	}
-	
-    @Dependencies("itemSeleccionado")  
-	def boolean  getHayItemSeleccionadoConNombre(){
-		!itemSeleccionado.isNoTieneNombre
-	}
-	
-	override void nuevo() {
-		var puntuable = new Puntuable
-		administradorDePuntuables.agregar(puntuable)
-		avisarCambios
-	}
-    @Dependencies("itemSeleccionado")
-	def int getRatingPromedio() {
+	@Dependencies("itemSeleccionado")
+	def int getRatingPromedio(){
 		administradorCalificacion.ratingPromedio(itemSeleccionado)
 	}
     @Dependencies("itemSeleccionado")
-	def int getCantidadDeCalificacionesDelPuntuable() {
+	def int getCantidadDeCalificacionesDelPuntuable(){
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(itemSeleccionado)
 	}
-	
-    @Dependencies("itemSeleccionado,hayItemSeleccionado")
-	def void setHabilitado(boolean bool) {
-		itemSeleccionado.habilitado = bool
-		ObservableUtils.firePropertyChanged(this,"habilitado",habilitado)
-		avisarCambios
-	}
-
-
-	def Date getFechaDeRegistro() {
-		itemSeleccionado.fechaDeRegistro
-	}
-    @Dependencies("itemSeleccionado")
-	def String getNombre() {
-		itemSeleccionado.nombre
-	}
-
-    @Dependencies("itemSeleccionado")
-	def boolean getHabilitado() {
-		itemSeleccionado.habilitado
-	}
-    @Dependencies("itemSeleccionado")
-   def void setNombre(String nombreNuevo){
-   	    verificarSiHayDuplicados(nombreNuevo)
-   	    itemSeleccionado.nombre=nombreNuevo
-   	    verificarSiTieneNombreAsignado
-   	    ObservableUtils.firePropertyChanged(this,"nombre",nombre)
-
-   }
-
-	def void verificarSiHayDuplicados(String nombre) {
-		administradorDePuntuables.verificarSiHayDuplicados(nombre)
-	}
-	
-
-	def int getInscriptos() {
-		administradorDePuntuables.inscriptos
-	}
-	
-	def int getHabilitados() {
-		administradorDePuntuables.habilitados
-	}
-
-
-	def int getDeshabilitados() {
-		administradorDePuntuables.deshabilitados
-	}
-
-
-	def void verificarSiTieneNombreAsignado() {
-		itemSeleccionado.verificarSiTieneNombre
-	}
-	
-	def List<Puntuable> getElementos() {
+	@Dependencies("nombreBuscado")
+	def List<Puntuable>getElementos(){
 		administradorDePuntuables.buscar(nombreBuscado)
 	}
-    @Dependencies("itemSeleccionado")
-	override void eliminar() {
-		administradorDePuntuables.eliminar(itemSeleccionado)
-		itemSeleccionado = miPuntuableNull
-		avisarCambios()
+	@Dependencies("itemSeleccionado")
+	def String getNombre(){
+		itemSeleccionado.nombre
 	}
 	
-	def void avisarCambios() {
-		ObservableUtils.firePropertyChanged(this, "inscriptos", inscriptos)
-		ObservableUtils.firePropertyChanged(this, "habilitados", habilitados)
-		ObservableUtils.firePropertyChanged(this, "deshabilitados", deshabilitados)
-		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
-		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
-		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
-		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
+	@Dependencies("itemSeleccionado")
+	def void setNombre(String nuevoNombre){
+		vericarSiHayNombresDuplicados(nuevoNombre)
+		itemSeleccionado.nombre = nuevoNombre
+		ObservableUtils.firePropertyChanged(this, "nombre", nombre)
+		verificarSiTieneNombre
+		ObservableUtils.firePropertyChanged(this, "nombre", nombre)
 	}
 	
+	def void vericarSiHayNombresDuplicados(String nombre){
+		administradorDePuntuables.verificarSiHayDuplicados(nombre)
+	}
+
+	
+	def int inscriptos(){
+	   administradorDePuntuables.inscriptos
+	}
+	
+	def int habilitados(){
+		administradorDePuntuables.habilitados
+	}
+	
+	def int deshabilitados(){
+		administradorDePuntuables.deshabilitados
+	}
 	override String getLabelNombre1()
 
 	override String getLabelNombre2()
@@ -153,41 +117,68 @@ abstract class PuntuableAppModel implements GenericaAppModel {
 	}
 	
 	override void buscar(){
-		 ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+	}
+	
+	def void avisarCambios(){
+		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado", hayItemSeleccionado)
+		ObservableUtils.firePropertyChanged(this, "inscriptos", inscriptos)
+		ObservableUtils.firePropertyChanged(this, "habilitados", habilitados)
+		ObservableUtils.firePropertyChanged(this, "deshabilitados", deshabilitados)
+		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
+		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
+		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
 	}
 	
 		
-	override getPrimerParametroDeBusqueda() {
+	override String getPrimerParametroDeBusqueda() {
 	   nombreBuscado
 	}
 	def void setPrimerParametroDeBusqueda(String nombre) {
 	    nombreBuscado = nombre
+	    ObservableUtils.firePropertyChanged(this, "elementos", elementos)
 	}
 	
 	override String getLabelValor1() {
 		inscriptos.toString
+	
 	}
 	override String getLabelValor2() {
 		habilitados.toString
 	}
 	
 	override String getLabelValor3() {
-		deshabilitados.toString
+		deshabilitados.toString 
 	}
-	override textoSegundoParametroDeBusqueda() {
+	override String textoSegundoParametroDeBusqueda() {
 		""
 	}
 	
-	override getSegundoParametroDeBusqueda() {
+	override String getSegundoParametroDeBusqueda() {
 		""
 	}
 	
-		override String getLabelNombre4() {
+   override String getLabelNombre4() {
 		""
 	}
 	
 	override String getLabelValor4() {
 	   ""
+	}
+	
+	override void nuevo() {
+		var puntuable=new Puntuable
+		administradorDePuntuables.agregar(puntuable)
+		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+		avisarCambios
+	}
+	
+	override void eliminar() {
+		administradorDePuntuables.eliminar(itemSeleccionado)
+		itemSeleccionado = miPuntuableNull
+	    ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+        avisarCambios
+		
 	}
 	
 }

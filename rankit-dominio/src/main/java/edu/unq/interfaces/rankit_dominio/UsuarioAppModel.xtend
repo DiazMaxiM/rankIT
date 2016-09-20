@@ -12,9 +12,9 @@ import java.util.List
 
 class UsuarioAppModel implements GenericaAppModel
 {   
-	
+	private Usuario miUsuarioNull=new UsuarioNull
 	private AdmUsuarios administradorDeUsuarios
-	private Usuario itemSeleccionado
+	private Usuario itemSeleccionado=miUsuarioNull
 	private AdmCalificaciones administradorDeCalificaciones
 	private String nombreDeUsuarioABuscar = ""
 	AdmPuntuables administradorDePuntuables
@@ -56,8 +56,8 @@ class UsuarioAppModel implements GenericaAppModel
 	override eliminar() 
 	{
 		administradorDeUsuarios.eliminarUsuario(itemSeleccionado)
+		itemSeleccionado = miUsuarioNull
 		avisarModificacionesDeUsuarios
-		itemSeleccionado = null
 	}
 	
 	override blanquearContrasenha()
@@ -67,7 +67,6 @@ class UsuarioAppModel implements GenericaAppModel
 	
 	override buscar() 
 	{   
-		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 //		var List<Usuario> resultado = administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
 //		//return resultado
@@ -108,20 +107,20 @@ class UsuarioAppModel implements GenericaAppModel
 @Dependencies("itemSeleccionado")
 	def String getNombre() 
 	{
-		if (hayItemSeleccionado) itemSeleccionado.nombre else ""
+		itemSeleccionado.nombre 
 	}
 	
 @Dependencies("itemSeleccionado")
 	def void setNombre(String nombreIngresado) 
 	{
 		itemSeleccionado.cambiarNombre(nombreIngresado)
-		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
+		ObservableUtils.firePropertyChanged(this, "nombre",nombre)
 	}
 	
 @Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionado()
 	{
-		itemSeleccionado!=null
+		!itemSeleccionado.equals(miUsuarioNull)
 	}
 	
 	def Date getFechaDeLaUltimaPublicacion ()
@@ -138,7 +137,7 @@ class UsuarioAppModel implements GenericaAppModel
 @Dependencies("itemSeleccionado")
 	def getActivo() 
 	{
-		if (hayItemSeleccionado) itemSeleccionado.activo
+		itemSeleccionado.activo
 	}
 	
 @Dependencies("itemSeleccionado")
@@ -158,7 +157,7 @@ class UsuarioAppModel implements GenericaAppModel
 @Dependencies("itemSeleccionado")
 	def getBaneado() 
 	{
-		if (hayItemSeleccionado) itemSeleccionado.baneado
+       itemSeleccionado.baneado
 	}
 		
 @Dependencies("itemSeleccionado")
@@ -172,7 +171,7 @@ class UsuarioAppModel implements GenericaAppModel
 @Dependencies("itemSeleccionado")
 	def getFechaDeRegistroDelUsuario()
 	{
-		if (hayItemSeleccionado) itemSeleccionado.fechaDeRegistro
+	   itemSeleccionado.fechaDeRegistro
 	}
 
 @Dependencies("itemSeleccionado")
@@ -228,7 +227,7 @@ class UsuarioAppModel implements GenericaAppModel
 	
 	
 	override tituloContenedorBusqueda() {
-		"Usuarios"
+		"Usuarios:"
 	}
 	
 	override textoPrimerParametroDeBusqueda() {

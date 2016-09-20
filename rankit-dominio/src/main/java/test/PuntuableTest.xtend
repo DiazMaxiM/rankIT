@@ -78,13 +78,11 @@ class PuntuableTest {
 	  @Test 
 	  def testPrueboSiUnPuntuablesEsIgualAOtro(){
 	  	  lugar1.nombre="Yona"
-	  	  lugar2.nombre="Yona"
-	  	  assertTrue(lugar1.esIgual(lugar2))
+	  	  assertTrue(lugar1.esIgual(lugar1))
 	  }
 	  
 	  @Test
 	  def testPrueboQueUnPuntuableNoEsIgualAOtro(){
-	  	servicio2.nombre="Metrogas"
 	  	assertFalse(servicio2.esIgual(new PuntuableNull))
 	  }
 }
