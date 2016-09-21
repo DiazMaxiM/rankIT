@@ -13,44 +13,46 @@ import com.google.common.base.Strings
 class AdmPuntuables {
 	List<Puntuable> puntuables = new ArrayList
 	
-	def agregar(Puntuable puntuable) {
+	def void agregar(Puntuable puntuable) {
 		puntuables.add(puntuable)
 	 }
 	
-	def eliminar(Puntuable puntuable) {
+	def void eliminar(Puntuable puntuable) {
 		puntuables.remove(puntuable)
 	}
 	
-	def inscriptos() {
+	def int inscriptos() {
 		puntuables.size
 	}
 	
-	def habilitados(){
+	def int  habilitados(){
 		puntuables.filter[puntuable | puntuable.isHabilitado].toList.size 	
 	}
 	
-	def deshabilitados(){
+	def int deshabilitados(){
 		inscriptos() - habilitados()
 	}
 
 	def List<Puntuable> buscar(String nombre) {
 		  if(!estaVacio(nombre)){
-		  	puntuables.filter[puntuable|puntuable.contieneLasLetras(nombre)].toList
+		  	puntuables.filter[puntuable|puntuable.nombreContieneLasLetras(nombre)].toList
 		  }
 		  else{
 		  	puntuables
 		  }
 	}
 	
-	private def estaVacio(String data) {
+	private def boolean estaVacio(String data) {
 		Strings.isNullOrEmpty(data)
 	}
 	
+	private def List<Puntuable>puntuablesConElNombre(String nombre){
+		puntuables.filter[puntuable|puntuable.tieneElNombre(nombre)].toList
+	}
 	
-	def verificarSiHayDuplicados(String nombre) {
-		var puntuablesConElMismoNombre=puntuables.filter[puntuable|puntuable.tieneElNombre(nombre)].toList
+	def void verificarSiHayDuplicados(String nombre) {
 		
-		if(!puntuablesConElMismoNombre.empty){
+		if(!puntuablesConElNombre(nombre).empty){
 			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
 		}
 	}

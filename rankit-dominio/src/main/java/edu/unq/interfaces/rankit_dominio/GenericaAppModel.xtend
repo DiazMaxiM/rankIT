@@ -33,8 +33,8 @@ interface GenericaAppModel {
 	
 	def CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
 	
-	def void blanquearContrasenha()
-	
 	def void buscar()
+	
+	def void blanquearContrasenha()
 	
 }

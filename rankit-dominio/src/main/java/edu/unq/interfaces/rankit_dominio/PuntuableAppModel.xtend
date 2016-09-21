@@ -5,7 +5,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Dependencies
-import java.util.Date
+
 
 @Observable
 @Accessors
@@ -27,7 +27,7 @@ import java.util.Date
 	
 	def void setItemSeleccionado(Puntuable puntuable){
 		 itemSeleccionado = puntuable
-		verificarSiTieneNombre
+		 verificarSiTieneNombre
 		 avisarCambios
 		
 	}

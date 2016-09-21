@@ -68,21 +68,33 @@ class PuntuableTest {
 	  	servicio3.nombre="Edesur"
 	  	assertFalse(servicio3.tieneElNombre("Edenor"))
 	  }
-	  
-	  @Test
-	  def lugarHabilitado(){
-	  	  lugar1.habilitado = true
-	  	  assertTrue(lugar1.habilitado)
-	  }
+
 	  
 	  @Test 
 	  def testPrueboSiUnPuntuablesEsIgualAOtro(){
 	  	  lugar1.nombre="Yona"
-	  	  assertTrue(lugar1.esIgual(lugar1))
+	  	  assertTrue(lugar1.esIgualA(lugar1))
 	  }
 	  
 	  @Test
 	  def testPrueboQueUnPuntuableNoEsIgualAOtro(){
-	  	assertFalse(servicio2.esIgual(new PuntuableNull))
+	  	assertFalse(servicio2.esIgualA(new PuntuableNull))
 	  }
+	  
+	  @Test(expected=UserException)
+	  def testNoPuedohabilitarUnLugarqueNoTieneNombre(){
+	  	  
+	  	  lugar2.habilitado = true
+	  	
+	  }
+	    
+	  @Test
+	  def testHabilitoUnLugarqueTieneNombre(){
+	  	  lugar2.nombre="Yona"
+	  	  lugar2.habilitado = true
+	  	  assertTrue(lugar2.habilitado)
+	  }
+	  
+	  
+	  
 }

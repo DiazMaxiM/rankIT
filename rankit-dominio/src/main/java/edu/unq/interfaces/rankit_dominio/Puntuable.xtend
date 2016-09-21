@@ -22,22 +22,27 @@ class Puntuable {
 	 	this.nombre=""
 	 	this.habilitado=false
 	 }
-	
-	def boolean isNombre(String nombre)	{
-		this.nombre.equals(nombre)
-	}
-	def Boolean contieneLasLetras(String letras){
+
+	def boolean nombreContieneLasLetras(String letras){
 		nombre.contains(letras)
 	}
 	 
 	def void verificarSiTieneNombre(){
-		if(isNoTieneNombre()){
+		if(noTieneNombre()){
 			throw new UserException("Por favor defina un nombre" )
 			
 		}
 	}
 	
-	def isNoTieneNombre() {
+	def void setHabilitado(boolean bool){
+//		if(noTieneNombre){
+//			throw new UserException("Por favor defina un nombre antes de habilitar" )
+//		}
+		habilitado=bool
+	}
+	
+	
+	def boolean noTieneNombre() {
 		this.nombre.equals("")
 	}
 	
@@ -46,7 +51,7 @@ class Puntuable {
 	}
 	
 	
-	def boolean esIgual(Puntuable puntuable) {
+	def boolean esIgualA(Puntuable puntuable) {
 		this.equals(puntuable)
 	}
 

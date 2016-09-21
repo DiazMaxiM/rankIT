@@ -212,4 +212,12 @@ class CalificacionAppModel implements GenericaAppModel  {
 		true
 	}
 	
+	override buscar() {
+		
+	}
+	
+	override blanquearContrasenha() {
+		
+	}
+	
 }
