@@ -27,15 +27,16 @@ import org.uqbar.commons.utils.Dependencies
 	
 	def void setItemSeleccionado(Puntuable puntuable){
 		 itemSeleccionado = puntuable
-		 verificarSiTieneNombre
+		 validarNombreDelItemSeleccionado
 		 avisarCambios
 		
 	}
 	
-	def void verificarSiTieneNombre(){
-		 itemSeleccionado.verificarSiTieneNombre
-	}
 	
+	
+	def void validarNombreDelItemSeleccionado(){
+		 itemSeleccionado.validarSiElPuntuableTieneNombre
+	}
 	
 	@Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionado(){
@@ -43,8 +44,13 @@ import org.uqbar.commons.utils.Dependencies
 	}
 	@Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionadoConNombre(){
-	   (!itemSeleccionado.esIgualA(miPuntuableNull))&&(itemSeleccionado.tieneNombre)
+	   hayItemSeleccionado&&tieneNombre
 	}
+
+    def private boolean tieneNombre(){
+		itemSeleccionado.tieneNombre
+	}
+	
 	@Dependencies("itemSeleccionado")
 	def boolean getHabilitado(){
 		itemSeleccionado.habilitado
@@ -65,7 +71,7 @@ import org.uqbar.commons.utils.Dependencies
 	}
 	@Dependencies("nombreBuscado")
 	def List<Puntuable>getElementos(){
-		administradorDePuntuables.buscar(nombreBuscado)
+		administradorDePuntuables.buscarPuntuables(nombreBuscado)
 	}
 	@Dependencies("itemSeleccionado")
 	def String getNombre(){
@@ -74,15 +80,16 @@ import org.uqbar.commons.utils.Dependencies
 	
 	@Dependencies("itemSeleccionado")
 	def void setNombre(String nuevoNombre){
-		vericarSiHayNombresDuplicados(nuevoNombre)
+		administradorDePuntuables.cambiarNombreSiPuedeDelPuntuable(itemSeleccionado,nuevoNombre)
 		itemSeleccionado.nombre = nuevoNombre
-		ObservableUtils.firePropertyChanged(this, "nombre", nombre)
+		ObservableUtils.firePropertyChanged(this,"nombre", nombre)
+		validarSiElItemSeleccionadoTieneNombre
+		
 	}
 	
-	def void vericarSiHayNombresDuplicados(String nombre){
-		administradorDePuntuables.verificarSiHayDuplicados(nombre)
+	def void validarSiElItemSeleccionadoTieneNombre(){
+		itemSeleccionado.validarSiElPuntuableTieneNombre
 	}
-
 	
 	def int inscriptos(){
 	   administradorDePuntuables.inscriptos
@@ -126,8 +133,8 @@ import org.uqbar.commons.utils.Dependencies
 	}
 	def void setPrimerParametroDeBusqueda(String nombre) {
 		itemSeleccionado=miPuntuableNull
+		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado",hayItemSeleccionado)
         nombreBuscado = nombre
-       ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado",hayItemSeleccionado)
 	}
 	
 	override String getLabelValor1() {

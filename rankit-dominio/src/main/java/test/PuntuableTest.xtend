@@ -30,7 +30,7 @@ class PuntuableTest {
 	 @Test(expected=UserException)
 	 def void testUnServicioCreadoNoTieneNombre(){
 	 	servicio1=new Puntuable
-	    servicio1.verificarSiTieneNombre
+	    servicio1.validarSiElPuntuableTieneNombre
 	 	
 	 }
 	 
@@ -41,7 +41,7 @@ class PuntuableTest {
 	  @Test
 	  def lugarConNombreAsignado(){
 	  	 lugar2.nombre="Yona"
-	  	 lugar2.verificarSiTieneNombre
+	  	 lugar2.validarSiElPuntuableTieneNombre
 	  }
 	 
 	 
