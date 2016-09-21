@@ -131,7 +131,7 @@ class testUsuario
 	{
 		val Usuario usuarioNuevo = new Usuario()
 		usuarioNuevo.setActivo(true)
-		Assert.assertTrue(usuarioNuevo.activo == true)
+		Assert.assertTrue(usuarioNuevo.activo)
 	}
 	
 	@Test

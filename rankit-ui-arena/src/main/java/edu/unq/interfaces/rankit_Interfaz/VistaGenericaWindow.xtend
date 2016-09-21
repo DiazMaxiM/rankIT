@@ -20,6 +20,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
 	new(WindowOwner parent, GenericaAppModel model) {
 		super(parent, model)
+		title = "Rank-IT"
 	}
 
 	override protected addActions(Panel actionsPanel) {

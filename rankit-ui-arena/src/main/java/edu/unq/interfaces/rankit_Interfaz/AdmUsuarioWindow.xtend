@@ -6,20 +6,16 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.widgets.Label
-import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.windows.ErrorsPanel
 import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
 import java.text.SimpleDateFormat
 import org.uqbar.arena.bindings.DateTransformer
-import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.component.LabelCheckBox
 import org.uqbar.arena.widgets.TextBox
-import java.awt.Color
 
 class AdmUsuarioWindow extends VistaGenericaWindow
 {

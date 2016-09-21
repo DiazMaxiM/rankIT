@@ -19,6 +19,7 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 	
 	new(WindowOwner parent, PuntuableAppModel model) {
 		super(parent, model)
+		title = "Rank-IT -->Administración"
 	}
 	
 	override tabla(Panel panel) {
