@@ -39,11 +39,11 @@ import org.uqbar.commons.utils.Dependencies
 	
 	@Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionado(){
-		!itemSeleccionado.equals(miPuntuableNull)
+		!itemSeleccionado.esIgualA(miPuntuableNull)
 	}
 	@Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionadoConNombre(){
-	   (!itemSeleccionado.equals(miPuntuableNull))&&(itemSeleccionado.tieneNombre)
+	   (!itemSeleccionado.esIgualA(miPuntuableNull))&&(itemSeleccionado.tieneNombre)
 	}
 	@Dependencies("itemSeleccionado")
 	def boolean getHabilitado(){
@@ -77,8 +77,6 @@ import org.uqbar.commons.utils.Dependencies
 		vericarSiHayNombresDuplicados(nuevoNombre)
 		itemSeleccionado.nombre = nuevoNombre
 		ObservableUtils.firePropertyChanged(this, "nombre", nombre)
-		verificarSiTieneNombre
-		ObservableUtils.firePropertyChanged(this, "nombre", nombre)
 	}
 	
 	def void vericarSiHayNombresDuplicados(String nombre){
@@ -98,10 +96,6 @@ import org.uqbar.commons.utils.Dependencies
 		administradorDePuntuables.deshabilitados
 	}
 	override String getLabelNombre1()
-
-	override String getLabelNombre2()
-
-	override String getLabelNombre3()
 	
 	override String tituloContenedorBusqueda()
 	
@@ -115,11 +109,7 @@ import org.uqbar.commons.utils.Dependencies
 		.filtradoObligatorioPorPuntuable(itemSeleccionado)
 		calificacionAppModel
 	}
-	
-	override void buscar(){
-		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
-	}
-	
+
 	def void avisarCambios(){
 		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado", hayItemSeleccionado)
 		ObservableUtils.firePropertyChanged(this, "inscriptos", inscriptos)
@@ -135,8 +125,9 @@ import org.uqbar.commons.utils.Dependencies
 	   nombreBuscado
 	}
 	def void setPrimerParametroDeBusqueda(String nombre) {
-	    nombreBuscado = nombre
-	    ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+		itemSeleccionado=miPuntuableNull
+        nombreBuscado = nombre
+       ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado",hayItemSeleccionado)
 	}
 	
 	override String getLabelValor1() {
@@ -150,6 +141,17 @@ import org.uqbar.commons.utils.Dependencies
 	override String getLabelValor3() {
 		deshabilitados.toString 
 	}
+	
+	
+	override String getLabelNombre2() {
+		"Habilitados: "
+	}
+	
+	
+	override String getLabelNombre3() {
+		"Deshabilitados"
+	}
+	
 	override String textoSegundoParametroDeBusqueda() {
 		""
 	}

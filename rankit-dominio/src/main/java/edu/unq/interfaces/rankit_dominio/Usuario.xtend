@@ -46,10 +46,17 @@ class Usuario
 	 * PROPÓSITO: Banea al usuario.
 	 * NOTA: Cuando se banea a un usuario, este queda inactivo.
 	 */
-	def void banearUsuario() 
+	def void setBanear(boolean bool) 
 	{
-		activo = false
-		baneado = true
+		
+		if(bool.equals(true)){
+		  baneado = true
+		  inactivarUsuario
+		}
+		else(
+		    desbanearUsuario
+				
+		)
 	}
 
 	/**
@@ -73,10 +80,16 @@ class Usuario
 	 * PROPÓSITO: Cambia el estado activo del usuario.
 	 * NOTA : Si el usuario esta baneado, automáticamente, este se desbanea.
 	 */
-	def activarUsuario() 
-	{
-		activo = true
-		desbanearUsuario
+	def setActivo(boolean bool) 
+	{   
+		if(bool.equals(true)){
+		  activo = true
+		  desbanearUsuario
+		}
+		else(
+			inactivarUsuario
+				
+		)
 	}
 
 	/**

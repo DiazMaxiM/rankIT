@@ -93,7 +93,7 @@ class AdmUsuarioWindow extends VistaGenericaWindow
         new Label(panel) => 
         [
         	bindEnabledToProperty("hayItemSeleccionado")
-			bindValueToProperty("fechaDeLaUltimaPublicacion")
+			bindValueToProperty("fechaDeLaUltimaPublicacion").transformer = new DateTransformer
 		]
 	}
     

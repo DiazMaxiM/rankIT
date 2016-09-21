@@ -32,8 +32,7 @@ interface GenericaAppModel {
 	def void eliminar()
 	
 	def CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
-	
-	def void buscar()
+
 	
 	def void blanquearContrasenha()
 	

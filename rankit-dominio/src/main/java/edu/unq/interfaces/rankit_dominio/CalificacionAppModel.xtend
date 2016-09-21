@@ -211,11 +211,7 @@ class CalificacionAppModel implements GenericaAppModel  {
 	def getHabilitadoItemBusqueda(){
 		true
 	}
-	
-	override buscar() {
-		
-	}
-	
+
 	override blanquearContrasenha() {
 		
 	}

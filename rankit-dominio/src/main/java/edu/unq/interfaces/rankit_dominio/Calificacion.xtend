@@ -21,5 +21,7 @@ class Calificacion {
 		this.puntos=0
 		this.evaluado= new PuntuableNull()
 		this.usuario = usuario
-	}	
+	}
+	
+	
 }

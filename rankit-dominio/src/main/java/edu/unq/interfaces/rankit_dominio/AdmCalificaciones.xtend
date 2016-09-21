@@ -5,6 +5,7 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import java.util.Date
 
 /**
  * @author Maximiliano Diaz
@@ -141,4 +142,26 @@ class AdmCalificaciones {
 	private def calificacionesDelPutuable(Puntuable puntuable) {
 		listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.equals(puntuable.nombre)].toList
 	}
+	
+	def Date fechaDeLaUltimaPublicacionDe (Usuario usuario) 
+	{
+		if (tienePublicaciones(usuario.nombre)) ultimaPublicacionDe(usuario.nombre).fecha
+	}
+	
+	private def boolean tienePublicaciones(String nombreDeUsuario) 
+	{
+		listaCalificaciones.exists[calificacion | calificacion.usuario.deNombre(nombreDeUsuario)]
+	}
+	
+	private def List<Calificacion> publicacionesDeUnUsuario(String nombreDeUsuario)
+	{
+		listaCalificaciones.filter[calificacion|calificacion.usuario.deNombre(nombreDeUsuario)].toList
+	}
+	
+	private def Calificacion ultimaPublicacionDe (String nombreDeUsuario)
+	{
+		publicacionesDeUnUsuario(nombreDeUsuario).findLast [calificacion | calificacion.usuario.deNombre(nombreDeUsuario)]
+	}
+	
+	
 }

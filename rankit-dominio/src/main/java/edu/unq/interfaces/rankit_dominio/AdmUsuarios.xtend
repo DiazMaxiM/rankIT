@@ -109,8 +109,12 @@ class AdmUsuarios
 		
 		else
 		{
-			usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList			
+		   usuariosDeNombre(nombreABuscar)			
 		}
+	}
+	
+	private def usuariosDeNombre(String nombreABuscar){
+		usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList	
 	}
 	
 }

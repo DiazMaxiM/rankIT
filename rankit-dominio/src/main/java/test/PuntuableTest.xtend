@@ -23,8 +23,7 @@ class PuntuableTest {
 	 	 servicio2=new Puntuable
 	 	 servicio3=new Puntuable
 	 }
-	 /** En este test pruebo que cuando creo un nuevo servicio 
-	  * este no tiene nombre 
+	 /** Verifico si un servicio tiene nombre 
 	  * 
 	  * */
 	 
@@ -36,8 +35,7 @@ class PuntuableTest {
 	 }
 	 
 	 /**
-	  * En este test pruebo que cuando a un lugar creado le cambio el 
-	  * nombre, este tiene un nombre asignado
+	  * Verifico si un  tiene nomre 
 	  */
 	  
 	  @Test
@@ -49,11 +47,11 @@ class PuntuableTest {
 	 
 	 @Test
 	 /**
-	  * En este test pruebo si un lugar 
-	  * tiene un nombre que paso como parametro  
+	  * Verifico si al cambiarle el nombre a un lugar se actualiza 
+	  * el nombre con el nuevo nombre
 	  *
 	  */
-	  def testUnLugarTieneElNombreFreddo(){
+	  def testCambioDeNombreAUnLugar(){
 	  	 lugar1.nombre="Freddo"
 	  	 assertTrue(lugar1.tieneElNombre("Freddo"))
 	
@@ -61,40 +59,48 @@ class PuntuableTest {
 	    
 	 @Test
 	 /**
-	  * En este test pruebo que un servicio no tiene el 
-	  * nombre que le paso como parametro
+	  * Verifico si al cambiarle el nombre a un servicio 
+	  * se actualiza el nombre con el nuevo nombre 
 	  */
 	  def testUnServicioNoTieneElNombreMetrogas(){
 	  	servicio3.nombre="Edesur"
 	  	assertFalse(servicio3.tieneElNombre("Edenor"))
 	  }
 
-	  
+	  /**
+	   * Verifico si un lugar es igual a otro lugar 
+	   */
 	  @Test 
 	  def testPrueboSiUnPuntuablesEsIgualAOtro(){
 	  	  lugar1.nombre="Yona"
 	  	  assertTrue(lugar1.esIgualA(lugar1))
 	  }
 	  
+	  /**
+	   * Verifico si un servicio es igual a otro servicio 
+	   */
 	  @Test
 	  def testPrueboQueUnPuntuableNoEsIgualAOtro(){
 	  	assertFalse(servicio2.esIgualA(new PuntuableNull))
 	  }
 	  
-	  @Test(expected=UserException)
-	  def testNoPuedohabilitarUnLugarqueNoTieneNombre(){
-	  	  
-	  	  lugar2.habilitado = true
-	  	
-	  }
-	    
+	   /**
+	    * Verifico que cuando habilito un lugar este queda hanilitado
+	    */ 
 	  @Test
-	  def testHabilitoUnLugarqueTieneNombre(){
-	  	  lugar2.nombre="Yona"
+	  def testHabilitoUnLugar(){
 	  	  lugar2.habilitado = true
 	  	  assertTrue(lugar2.habilitado)
 	  }
 	  
+	  /**
+	   * Verifico que cuando deshabilito un servicio este queda deshabilitado
+	   */
+	  @Test
+	  def testDeshabilitoUnServicio(){
+	  	  servicio3.habilitado=false
+	  	  assertFalse(servicio3.habilitado)
+	  }
 	  
-	  
+
 }

@@ -172,9 +172,6 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		]
 	}
 	
-	override botonBusqueda(Panel panel){
-		
-	}
 	
 	override botonParaMostrarCalificacionesDelItem(Panel panel){
 		
