@@ -17,21 +17,19 @@ class UsuarioAppModel implements GenericaAppModel
 	private Usuario itemSeleccionado=miUsuarioNull
 	private AdmCalificaciones administradorDeCalificaciones
 	private String nombreDeUsuarioABuscar = ""
-	AdmPuntuables administradorDePuntuables
+	private AdmPuntuables administradorDeLugares
+	private AdmPuntuables administradorDeServicios
+	Usuario usuarioLogeado 
 	
-	Usuario usuarioLogeado
-	
-	new (AdmUsuarios admUsuarios,AdmCalificaciones administradorDeCalificaciones,AdmPuntuables admPuntuables,Usuario usuarioLogeado)
+	new (AdmUsuarios admUsuarios,AdmCalificaciones administradorDeCalificaciones,AdmPuntuables admLugares,AdmPuntuables admServicios,Usuario usuarioLogeado)
 	{
-		this.administradorDePuntuables= admPuntuables
+		this.administradorDeLugares= admLugares
+		this.administradorDeServicios= admServicios
 		this.administradorDeUsuarios= admUsuarios
 		this.administradorDeCalificaciones= administradorDeCalificaciones
 		this.usuarioLogeado= usuarioLogeado
 	}
-	new (AdmUsuarios admUsuarios)
-	{
-		administradorDeUsuarios= admUsuarios
-	}
+
 	
 	@Dependencies("itemSeleccionado")
 	def boolean getHayItemSeleccionado()
@@ -195,7 +193,7 @@ class UsuarioAppModel implements GenericaAppModel
 	}
 	
 	override getElementosNecesariosParaAdmCalificacionWindow() {
-		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorDeCalificaciones,itemSeleccionado)
+		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorDeCalificaciones,administradorDeLugares,administradorDeServicios,itemSeleccionado)
 		.filtradoObligatorioPorUsuario(itemSeleccionado)
 		calificacionAppModel
 	}

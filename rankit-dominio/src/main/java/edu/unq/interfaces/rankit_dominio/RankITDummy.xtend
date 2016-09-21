@@ -50,19 +50,19 @@ class RankITDummy {
 		];
 		val lugarParaCalificacion1 = new Puntuable => [
 			habilitado = true
-			nombre = "Lugar 1"
+			nombre = "Abasto"
 		]
 		val lugar2 = new Puntuable => [
 			habilitado = true
-			nombre = "Lugar 2"
+			nombre = "Freddo"
 		]
 		val servicioParaCalificacion1 = new Puntuable => [
 			habilitado = true
-			nombre = "Servicio 1"
+			nombre = "Metrogas"
 		]
 		val servicio2 = new Puntuable => [
 			habilitado = true
-			nombre = "Servicio 2"
+			nombre = "Edesur"
 		]
 
 		val calificacion1 = new Calificacion(usuarioMaxi) => [

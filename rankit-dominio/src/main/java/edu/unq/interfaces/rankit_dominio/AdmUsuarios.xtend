@@ -115,7 +115,7 @@ class AdmUsuarios
 		usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList	
 	}
 	
-	def cambiarNombreSiPuede(Usuario usuario, String nombreNuevo) 
+	def void cambiarNombreSiPuede(Usuario usuario, String nombreNuevo) 
 	{
 		if (esUnNombreValido(nombreNuevo))
 		{

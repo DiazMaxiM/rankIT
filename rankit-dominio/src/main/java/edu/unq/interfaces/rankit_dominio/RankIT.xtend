@@ -12,9 +12,8 @@ class RankIT {
 	private var AdmCalificaciones admCalificaciones;
 	private var AdmPuntuables admServicios;
 	private var AdmPuntuables admLugares;
-	private var AdmPuntuables admPuntuables;
 	private var Usuario usuarioLogeado;
- //Constructor
+
 		
 	}
 			

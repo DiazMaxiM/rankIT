@@ -57,7 +57,8 @@ class Menu extends SimpleWindow<RankITAppModel> {
 				new AdmUsuarioWindow(this, new UsuarioAppModel(
 					this.modelObject.rankit.admUsuarios,
 					this.modelObject.rankit.admCalificaciones,
-					this.modelObject.rankit.admPuntuables,
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admServicios,
 					this.modelObject.rankit.usuarioLogeado
 				)).open
 			]

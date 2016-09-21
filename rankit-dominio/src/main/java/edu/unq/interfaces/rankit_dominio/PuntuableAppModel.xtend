@@ -25,13 +25,6 @@ import org.uqbar.commons.utils.Dependencies
 
 	}
 	
-	override getHabilitadoPrimerParametro() {
-	true
-	}
-	
-	override getHabilitadoSegundoParametro() {
-	}
-	
 	def void setItemSeleccionado(Puntuable puntuable){
 		 itemSeleccionado = puntuable
 		 validarNombreDelItemSeleccionado
@@ -89,8 +82,8 @@ import org.uqbar.commons.utils.Dependencies
 	def void setNombre(String nuevoNombre){
 		administradorDePuntuables.cambiarNombreSiPuedeDelPuntuable(itemSeleccionado,nuevoNombre)
 		itemSeleccionado.nombre = nuevoNombre
-		ObservableUtils.firePropertyChanged(this,"nombre", nombre)
 		validarSiElItemSeleccionadoTieneNombre
+		avisarCambios
 		
 	}
 	
@@ -118,20 +111,18 @@ import org.uqbar.commons.utils.Dependencies
 	override blanquearContrasenha() {
 	}
 	
+	override getHabilitadoPrimerParametro() {
+	true
+	}
+	
+	override getHabilitadoSegundoParametro() {
+	}
+	
+	
 	override CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow(){
 		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorCalificacion,usuarioLogeado)
 		.filtradoObligatorioPorPuntuable(itemSeleccionado)
 		calificacionAppModel
-	}
-
-	def void avisarCambios(){
-		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado", hayItemSeleccionado)
-		ObservableUtils.firePropertyChanged(this, "inscriptos", inscriptos)
-		ObservableUtils.firePropertyChanged(this, "habilitados", habilitados)
-		ObservableUtils.firePropertyChanged(this, "deshabilitados", deshabilitados)
-		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
-		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
-		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
 	}
 	
 		
@@ -140,8 +131,8 @@ import org.uqbar.commons.utils.Dependencies
 	}
 	def void setPrimerParametroDeBusqueda(String nombre) {
 		itemSeleccionado=miPuntuableNull
-		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado",hayItemSeleccionado)
         nombreBuscado = nombre
+        avisarCambios
 	}
 	
 	override String getLabelValor1() {
@@ -185,16 +176,26 @@ import org.uqbar.commons.utils.Dependencies
 	override void nuevo() {
 		var puntuable=new Puntuable
 		administradorDePuntuables.agregar(puntuable)
-		ObservableUtils.firePropertyChanged(this, "elementos", elementos)
 		avisarCambios
 	}
 	
 	override void eliminar() {
 		administradorDePuntuables.eliminar(itemSeleccionado)
 		itemSeleccionado = miPuntuableNull
-	    ObservableUtils.firePropertyChanged(this, "elementos", elementos)
         avisarCambios
 		
+	}
+	
+	def void avisarCambios(){
+	    ObservableUtils.firePropertyChanged(this, "elementos", elementos)
+		ObservableUtils.firePropertyChanged(this,"nombre", nombre)
+		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado", hayItemSeleccionado)
+		ObservableUtils.firePropertyChanged(this, "inscriptos", inscriptos)
+		ObservableUtils.firePropertyChanged(this, "habilitados", habilitados)
+		ObservableUtils.firePropertyChanged(this, "deshabilitados", deshabilitados)
+		ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
+		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
+		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
 	}
 	
 }
