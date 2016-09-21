@@ -4,6 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 import java.util.ArrayList
 import java.util.List
+import org.uqbar.commons.model.UserException
 
 @Observable
 @Accessors
@@ -11,16 +12,20 @@ class AdmUsuarios
 {
 	private List<Usuario> usuarios = new ArrayList<Usuario>()
 	
-	
 	/**
 	 * PROPÓSITO: Agrega un usuario especificado por parámetro.
 	 * @param usuarioNuevo: Es el usuario nuevo a agregar.
 	 */
-	def void agregarUsuarioNuevo(Usuario usuarioNuevo) 
+	def void agregarUsuarioNuevo() 
 	{
+		var usuarioNuevo = new Usuario
 		usuarios.add (usuarioNuevo)
 	}
 	
+	def agregarUsuarioNuevo(Usuario usuarioNuevo) 
+	{
+		usuarios.add(usuarioNuevo)
+	}
 	/**
 	 * PROPÓSITO: Elimina el usuario especificado por parámetro.
 	 * @param usuarioAEliminar: Es el usuario a eliminar.
@@ -102,19 +107,68 @@ class AdmUsuarios
 	 */
 	def buscarUsuarioDeNombre (String nombreABuscar) 
 	{
-		if (nombreABuscar.empty)
-		{
-			usuarios
-		}
-		
-		else
-		{
-		   usuariosDeNombre(nombreABuscar)			
-		}
+		if (nombreABuscar.empty) usuarios
+		else usuariosDeNombre(nombreABuscar)			
 	}
 	
 	private def usuariosDeNombre(String nombreABuscar){
 		usuarios.filter[usuario | usuario.deNombre(nombreABuscar)].toList	
 	}
+	
+	def cambiarNombreSiPuede(Usuario usuario, String nombreNuevo) 
+	{
+		if (esUnNombreValido(nombreNuevo))
+		{
+			usuario.cambiarNombre(nombreNuevo)
+		}
+	}
+	
+	private def boolean esUnNombreValido(String nombreNuevo)
+	{
+		! noEsNombreValido (nombreNuevo)
+	}
+	
+	private def boolean noEsNombreValido(String nombreNuevo) 
+	{
+		hayNombreRepetido(nombreNuevo) || nombreInvalido(nombreNuevo) || (noTieneNombre(nombreNuevo))
+	}
+	
+	private def hayNombreRepetido(String nombreAComparar) 
+	{
+		var boolean respuesta = cantidadDeUsuariosDeNombre(nombreAComparar) >= 1
+		
+		if (respuesta)
+		{
+			throw new UserException ("El nombre ya esta siendo usado")
+		}
+		respuesta
+	}
+	
+	private def int cantidadDeUsuariosDeNombre(String nombreAComparar) 
+	{
+		usuariosDeNombre(nombreAComparar).size
+	}
+	
+	private def nombreInvalido(String nombre)
+	{
+		var boolean respuesta = nombre== "NN"
+		if (respuesta)
+		{
+			throw new UserException ("El nombre ingresado no está permitido")
+		}
+		respuesta
+	}
+	
+	private def noTieneNombre(String nombre)
+	{
+		var boolean respuesta = nombre.empty
+		if (respuesta)
+		{
+			throw new UserException ("Por favor, ingrese un nombre")
+		}
+		respuesta
+	}
+	
+	
 	
 }

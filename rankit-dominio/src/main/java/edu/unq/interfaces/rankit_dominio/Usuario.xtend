@@ -49,7 +49,7 @@ class Usuario
 	def void setBanear(boolean bool) 
 	{
 		
-		if(bool.equals(true)){
+		if(bool){
 		  baneado = true
 		  inactivarUsuario
 		}
@@ -82,7 +82,7 @@ class Usuario
 	 */
 	def setActivo(boolean bool) 
 	{   
-		if(bool.equals(true)){
+		if(bool){
 		  activo = true
 		  desbanearUsuario
 		}
@@ -125,6 +125,10 @@ class Usuario
 		activo=false
 	}
 	
+	/**
+	 * PROPÓSITO: Pregunta si el usuario no tiene nombre.
+	 * NOTA: Un usuario sin nombre tiene el nombre de "NN".
+	 */
 	def isNoTieneNombre() {
 		nombre.equals("NN")
 	}

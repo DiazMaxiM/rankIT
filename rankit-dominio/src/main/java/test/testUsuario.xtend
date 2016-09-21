@@ -64,7 +64,7 @@ class testUsuario
 	def testBanearUsuarioCasoPositivo()
 	{
 		val Usuario usuarioNuevo = new Usuario()
-		usuarioNuevo.banearUsuario
+		usuarioNuevo.setBanear(true)
 		Assert.assertTrue(usuarioNuevo.baneado == true)
 	}
 	
@@ -75,7 +75,7 @@ class testUsuario
 	def testBanearUsuarioCasoNegativo()
 	{
 		val Usuario usuarioNuevo = new Usuario()
-		usuarioNuevo.banearUsuario
+		usuarioNuevo.setBanear(true)
 		Assert.assertFalse(usuarioNuevo.baneado == false)
 	}
 	
@@ -130,7 +130,7 @@ class testUsuario
 	def testActivarUsuarioCasoPositivo()
 	{
 		val Usuario usuarioNuevo = new Usuario()
-		usuarioNuevo.activarUsuario
+		usuarioNuevo.setActivo(true)
 		Assert.assertTrue(usuarioNuevo.activo == true)
 	}
 	
@@ -141,7 +141,7 @@ class testUsuario
 	def testActivarUsuarioCasoNegativo()
 	{
 		val Usuario usuarioNuevo = new Usuario()
-		usuarioNuevo.activarUsuario
+		usuarioNuevo.setActivo(true)
 		Assert.assertFalse(usuarioNuevo.activo == false)
 	}
 	
@@ -152,19 +152,20 @@ class testUsuario
 	def testEstaBaneadoCasoPositivo()
 	{
 		val Usuario usuarioNuevo = new Usuario()
-		usuarioNuevo.banearUsuario
+		usuarioNuevo.setBaneado(true)
 		Assert.assertTrue(usuarioNuevo.estaBaneado == true)
+		Assert.assertTrue(usuarioNuevo.activo == false)
 	}
 	
 	@Test
 	/**
-	 * Dado un usuario baneado, le pregunto si esta baneado es igual a False
+	 * Dado un usuario sin banear, le pregunto si esta baneado es igual a False
 	 */
 	def testEstaBaneadoCasoNegativo()
 	{
 		val Usuario usuarioNuevo = new Usuario()
-		usuarioNuevo.banearUsuario
-		Assert.assertFalse(usuarioNuevo.estaBaneado == false)
+		usuarioNuevo.setBaneado(false)
+		Assert.assertTrue(usuarioNuevo.estaBaneado == false)
 	}
 	
 	@Test

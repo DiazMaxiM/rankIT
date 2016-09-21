@@ -419,4 +419,24 @@ class testAdmUsuarios
 		Assert.assertFalse(usuariosMock.containsAll(administrador.buscarUsuarioDeNombre("")))
 		Assert.assertNotEquals(0,administrador.buscarUsuarioDeNombre("").size())
 	}
+	
+	@Test
+	/**
+	 * Dado un AdmUsuarios con 2 usuario "Liza" y "Camila", cuando le cambio el nombre a "Liza" por "Camila" no me lo permite.
+	 */
+	def void testCambiarNombreSiPuedeCasoPositivo()
+	{
+		var AdmUsuarios administrador = new AdmUsuarios()
+		var Usuario usuarioMock1 = mock(Usuario)
+		var Usuario usuarioMock2 = mock(Usuario)
+		
+		when(usuarioMock1.nombre).thenReturn("Liza")
+		when(usuarioMock2.nombre).thenReturn("Camila")
+		administrador.agregarUsuarioNuevo(usuarioMock1)
+		administrador.agregarUsuarioNuevo(usuarioMock2)
+		
+		administrador.cambiarNombreSiPuede(usuarioMock2, "Liza")
+		Assert.assertEquals("Camila", usuarioMock2.nombre)
+	}
+	
 }

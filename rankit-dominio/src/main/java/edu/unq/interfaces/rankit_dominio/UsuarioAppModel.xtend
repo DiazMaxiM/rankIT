@@ -41,7 +41,7 @@ class UsuarioAppModel implements GenericaAppModel
 	
 	
 	@Dependencies("itemSeleccionado")  
-	def boolean  getHayItemSeleccionadoConNombre(){
+	def boolean getHayItemSeleccionadoConNombre(){
 		!itemSeleccionado.isNoTieneNombre
 	}
 	
@@ -55,7 +55,8 @@ class UsuarioAppModel implements GenericaAppModel
 @Dependencies("itemSeleccionado")
 	def void setNombre(String nombreIngresado) 
 	{
-		itemSeleccionado.cambiarNombre(nombreIngresado)
+		administradorDeUsuarios.cambiarNombreSiPuede(itemSeleccionado, nombreIngresado)
+		//itemSeleccionado.cambiarNombre(nombreIngresado)
 		ObservableUtils.firePropertyChanged(this, "nombre",nombre)
 	}
 	
@@ -182,8 +183,7 @@ class UsuarioAppModel implements GenericaAppModel
 	}
 	
 	override nuevo() {
-		var usuarioNuevo = new Usuario
-		administradorDeUsuarios.agregarUsuarioNuevo(usuarioNuevo)
+		administradorDeUsuarios.agregarUsuarioNuevo()
 		avisarModificacionesDeUsuarios
 	}
 	
@@ -227,8 +227,4 @@ class UsuarioAppModel implements GenericaAppModel
 		ObservableUtils.firePropertyChanged(this, "labelValor4", labelValor4)
 	}
 	
-	
-	
-
-
 }
