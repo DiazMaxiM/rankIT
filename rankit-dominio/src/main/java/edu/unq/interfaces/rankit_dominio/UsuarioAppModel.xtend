@@ -195,7 +195,7 @@ class UsuarioAppModel implements GenericaAppModel
 	}
 	
 	override getElementosNecesariosParaAdmCalificacionWindow() {
-		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorDeCalificaciones,usuarioLogeado)
+		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorDeCalificaciones,itemSeleccionado)
 		.filtradoObligatorioPorUsuario(itemSeleccionado)
 		calificacionAppModel
 	}
@@ -226,5 +226,11 @@ class UsuarioAppModel implements GenericaAppModel
 		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
 		ObservableUtils.firePropertyChanged(this, "labelValor4", labelValor4)
 	}
+	
+	override getHabilitadoPrimerParametro() {
+	true	
+	}
+	
+	override getHabilitadoSegundoParametro() {}
 	
 }

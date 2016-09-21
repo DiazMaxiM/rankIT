@@ -36,6 +36,7 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		new LabeledTextBox(panelBusquedaParametros) => [
 			text = this.modelObject.textoSegundoParametroDeBusqueda
 			bindValueToProperty("segundoParametroDeBusqueda")
+			bindEnabledToProperty("habilitadoSegundoParametro")
 		]
 	}
 
@@ -130,19 +131,19 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 			// it es la grilla de resultados 
 			new Column<Calificacion>(it) => [
 				title = "Evaluado" // el nombre de la columna
-				// fixedSize = 150   //el tamaño que va a tener
+				 fixedSize = 100   //el tamaño que va a tener
 				bindContentsToProperty("evaluado").transformer = [Puntuable puntuable|puntuable.nombre]
 			// la propiedad que mostramos del objeto que está atrás de la fila 
 			]
 			// el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
 				title = "Ptos"
-				// fixedSize = 150
+				 fixedSize = 100
 				bindContentsToProperty("puntos")
 			]
 			new Column<Calificacion>(it) => [
 				title = "Fecha" // el nombre de la columna
-				fixedSize = 150 // el tamaño que va a tener
+				fixedSize = 100 // el tamaño que va a tener
 				bindContentsToProperty("fecha").transformer = [ fecha |
 					new SimpleDateFormat("dd/MM/YYYY HH:mm").format(fecha)
 				] // la propiedad que mostramos del objeto que está atrás de la fila 
@@ -150,12 +151,12 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 			// el numero que salió en la loteria 
 			new Column<Calificacion>(it) => [
 				title = "User"
-				fixedSize = 150
+				fixedSize = 100
 				bindContentsToProperty("usuario").transformer = [Usuario usuario|usuario.nombre]
 			]
 			new Column<Calificacion>(it) => [
 				title = "Es Ofensiva"
-				fixedSize = 150
+				fixedSize = 100
 				bindContentsToProperty("contenidoOfensivo").transformer = [esOfensivo|if(esOfensivo) "Si" else "No"]
 			]
 		]

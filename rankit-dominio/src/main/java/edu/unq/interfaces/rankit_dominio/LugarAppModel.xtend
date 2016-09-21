@@ -20,10 +20,5 @@ class LugarAppModel extends PuntuableAppModel {
 	override textoPrimerParametroDeBusqueda() {
 		"Buscar por nombre de Lugar "
 	}
-
-
-	
-
-	
-	
+		
 }

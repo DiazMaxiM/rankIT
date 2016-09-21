@@ -71,6 +71,7 @@ class CalificacionAppModel implements GenericaAppModel  {
 	}
 
 	def listaCalificacionesFiltradas() {
+		System.out.println(nombreEvaluadoBusqueda);
 		administradorCalificacion.filtrarCalificaciones(nombreEvaluadoBusqueda, nombreUsuarioBusqueda)
 	}
 
@@ -128,11 +129,13 @@ class CalificacionAppModel implements GenericaAppModel  {
 		admPuntuables.agregar(puntuable)
 		nombreEvaluadoBusqueda = puntuable.nombre
 		habilitadoEvaluadoBusqueda=false
+		ObservableUtils.firePropertyChanged(this, "segundoParametroDeBusqueda", segundoParametroDeBusqueda)
 		this
 	}
 	def  filtradoObligatorioPorUsuario(Usuario usuario) {
-		nombreEvaluadoBusqueda = usuario.nombre
+		nombreUsuarioBusqueda = usuario.nombre
 		habilitadoUsuarioBusqueda=false
+		ObservableUtils.firePropertyChanged(this, "primerParametroDeBusqueda", primerParametroDeBusqueda)
 		this
 	}
 	
@@ -182,16 +185,19 @@ class CalificacionAppModel implements GenericaAppModel  {
 	
 	def setPrimerParametroDeBusqueda(String nombre) {
 	 nombreUsuarioBusqueda=nombre
+	 actualizarEstadoSituacion
 	}
 	override textoSegundoParametroDeBusqueda(){
 		"Evaluado"
 	}
+	@Dependencies("filtradoObligatorioPorPuntuable")
 	override getSegundoParametroDeBusqueda() {
-	 nombreUsuarioBusqueda
+	 nombreEvaluadoBusqueda
 	}
 	
 	def setSegundoParametroDeBusqueda(String nombre) {
-	 nombreUsuarioBusqueda=nombre
+	 nombreEvaluadoBusqueda=nombre
+	actualizarEstadoSituacion
 	}
 	
 	override nuevo() {
@@ -205,15 +211,19 @@ class CalificacionAppModel implements GenericaAppModel  {
 	}
 	
 	override getElementosNecesariosParaAdmCalificacionWindow() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-	def getHabilitadoItemBusqueda(){
-		true
-	}
-
+	
 	override blanquearContrasenha() {
 		
+	}
+	
+	override getHabilitadoPrimerParametro() {
+		habilitadoUsuarioBusqueda
+	}
+	
+	override getHabilitadoSegundoParametro() {
+		habilitadoEvaluadoBusqueda
 	}
 	
 }

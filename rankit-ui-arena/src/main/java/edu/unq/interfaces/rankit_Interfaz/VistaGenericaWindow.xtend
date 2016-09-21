@@ -42,6 +42,7 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 	}
 
 	def contenedorBusqueda(Panel panelGeneral) {
+		tituloContenedorBusqueda(panelGeneral)
 		val panelBusqueda = new Panel(panelGeneral)
 		panelBusqueda.layout = new HorizontalLayout
 
@@ -52,13 +53,17 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		new LabeledTextBox(panelBusquedaParametros) => [
 			text = this.modelObject.textoPrimerParametroDeBusqueda
 			bindValueToProperty("primerParametroDeBusqueda")
+			bindEnabledToProperty("habilitadoPrimerParametro")
 		]
 		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)
 	}
 	
 	
 	def void tituloContenedorBusqueda(Panel panelBusqueda) {
-		new Titulo(panelBusqueda, this.modelObject.tituloContenedorBusqueda)
+	val panelTitulo=new Panel(panelBusqueda)
+	  panelTitulo.layout =new  HorizontalLayout
+	  new Label(panelTitulo) => [ text = this.modelObject.tituloContenedorBusqueda fontSize = 16]
+	  	
 	}
 
 	def contenedorParaSegundoParametroCalificacion(Panel panelBusquedaParametros) {

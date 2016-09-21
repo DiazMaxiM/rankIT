@@ -22,7 +22,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		this.title = "Rank-IT"
 		contenedorMensaje(mainPanel)
 		contenedorBotonera(mainPanel)
-	// contenedorEstado   (mainPanel)
+		contenedorEstado   (mainPanel)
 	}
 
 	def contenedorEstado(Panel mainPanel) {
@@ -31,17 +31,18 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		botoneraPanel.layout = new ColumnLayout(4)
 
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoUsuario")
+			bindValueToProperty("resumenSituacionUsuario")
 		]
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoCalificacion")
+			bindValueToProperty("resumenSituacionCalificacion")
 		]
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoServicio")
+			bindValueToProperty("resumenSituacionServicio")
 		]
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoLugar")
+			bindValueToProperty("resumenSituacionLugar")
 		]
+
 	}
 
 	private def contenedorBotonera(Panel mainPanel) {

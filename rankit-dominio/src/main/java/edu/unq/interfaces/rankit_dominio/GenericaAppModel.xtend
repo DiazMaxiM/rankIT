@@ -33,6 +33,10 @@ interface GenericaAppModel {
 	
 	def CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
 
+	def Boolean getHabilitadoPrimerParametro()
+	
+	def Boolean getHabilitadoSegundoParametro()
+	
 	
 	def void blanquearContrasenha()
 	

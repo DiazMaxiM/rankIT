@@ -28,17 +28,18 @@ class AdmCalificaciones {
 			return listaCalificaciones
 		}
 		if (!estaVacio(nombreEvaluadoBusqueda) && estaVacio(nombreUsuarioBusqueda)) {
-			return listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.equals(nombreEvaluadoBusqueda) || calificacion.evaluado.nombre.equals("") ].
+			System.out.println("entro");
+			return listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda) || calificacion.evaluado.nombre.equals("") ].
 				toList
 		}
 		if (estaVacio(nombreEvaluadoBusqueda) && !estaVacio(nombreUsuarioBusqueda)) {
-			return listaCalificaciones.filter[calificacion|calificacion.usuario.nombre.equals(nombreUsuarioBusqueda)].
+			return listaCalificaciones.filter[calificacion|calificacion.usuario.nombre.contains(nombreUsuarioBusqueda)].
 				toList
 		}
 		if (!estaVacio(nombreEvaluadoBusqueda) && !estaVacio(nombreUsuarioBusqueda)) {
 			return listaCalificaciones.filter [ calificacion |
-				calificacion.usuario.nombre.equals(nombreUsuarioBusqueda) &&
-					calificacion.evaluado.nombre.equals(nombreEvaluadoBusqueda)
+				calificacion.usuario.nombre.contains(nombreUsuarioBusqueda) &&
+				calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda)
 			].toList
 		}
 
@@ -125,7 +126,7 @@ class AdmCalificaciones {
 	private def analizarEstadoBaneado(Usuario usuario) {
 		var cantidadCalificacionesOfensivas = cantidadCalificacionesOfensivas(
 			filtrarCalificaciones(null, usuario.nombre))
-		usuario.baneado = (cantidadCalificacionesOfensivas > 5)
+		usuario.banear  = (cantidadCalificacionesOfensivas > 5)
 	}
 
 	/**
@@ -161,6 +162,10 @@ class AdmCalificaciones {
 	private def Calificacion ultimaPublicacionDe (String nombreDeUsuario)
 	{
 		publicacionesDeUnUsuario(nombreDeUsuario).findLast [calificacion | calificacion.usuario.deNombre(nombreDeUsuario)]
+	}
+	
+	def Integer cantidadDeCalificacionesNoOfensivas() {
+	this.getCalificacionesRegistradas - this.calificacionesOfensivas
 	}
 	
 	

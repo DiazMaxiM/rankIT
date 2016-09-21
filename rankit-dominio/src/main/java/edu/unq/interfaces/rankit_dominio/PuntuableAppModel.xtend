@@ -25,6 +25,13 @@ import org.uqbar.commons.utils.Dependencies
 
 	}
 	
+	override getHabilitadoPrimerParametro() {
+	true
+	}
+	
+	override getHabilitadoSegundoParametro() {
+	}
+	
 	def void setItemSeleccionado(Puntuable puntuable){
 		 itemSeleccionado = puntuable
 		 validarNombreDelItemSeleccionado

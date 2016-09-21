@@ -35,7 +35,7 @@ class RankITDummy {
 		];
 		
 		usuarioLiza => [
-			activo = true
+			activo = false
 			baneado = true
 			nombre = "Liza"
 			password = "Liza"
@@ -101,6 +101,7 @@ class RankITDummy {
 		admUsuario.agregarUsuarioNuevo(usuarioMaxi)
 		admUsuario.agregarUsuarioNuevo(usuarioLiza)
 		admUsuario.agregarUsuarioNuevo(usuarioRosali)
+		admUsuario.agregarUsuarioNuevo(admin)
 
 		rankit = new RankIT()
 		rankit.admLugares = admLugares
