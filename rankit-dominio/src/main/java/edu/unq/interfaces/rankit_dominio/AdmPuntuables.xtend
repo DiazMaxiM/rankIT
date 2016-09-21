@@ -33,9 +33,9 @@ class AdmPuntuables {
 		inscriptos() - habilitados()
 	}
 
-	def List<Puntuable> buscar(String nombre) {
+	def List<Puntuable> buscarPuntuables(String nombre) {
 		  if(!estaVacio(nombre)){
-		  	puntuables.filter[puntuable|puntuable.nombreContieneLasLetras(nombre)].toList
+		  	 puntuablesConLasLetras(nombre)
 		  }
 		  else{
 		  	puntuables
@@ -50,12 +50,37 @@ class AdmPuntuables {
 		puntuables.filter[puntuable|puntuable.tieneElNombre(nombre)].toList
 	}
 	
-	def void verificarSiHayDuplicados(String nombre) {
+	private def List<Puntuable>puntuablesConLasLetras(String nombre){
+		puntuables.filter[puntuable|puntuable.nombreContieneLasLetras(nombre)].toList
 		
-		if(!puntuablesConElNombre(nombre).empty){
-			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
-		}
+	}
+
+	
+	def void cambiarNombreSiPuedeDelPuntuable(Puntuable puntuable,String nombre) {
+		  if (puedoCambiarElNombreDelPuntuable(nombre)){
+		  	   puntuable.nombre = nombre
+		  }
 	}
 	
+	private def boolean puedoCambiarElNombreDelPuntuable(String nombre){
+		  !(esVacio(nombre)||hayUnPuntuableConElNombre(nombre))
+	}
 	
+	private def boolean esVacio(String nombre){
+		 if(estaVacio(nombre)){
+		 	throw new UserException("Por favor defina un nombre" )
+		 }
+		 estaVacio(nombre)
+	}
+	
+	private def boolean hayUnPuntuableConElNombre(String nombre){
+		if(hayPuntuableConElNombre(nombre)){
+			throw new UserException("Ya existe otro Servicio con el nombre "+ nombre)
+	    }
+		hayPuntuableConElNombre(nombre)
+	}
+	
+	private def boolean hayPuntuableConElNombre(String nombre){
+		!(puntuablesConElNombre(nombre).empty)
+	}
 }

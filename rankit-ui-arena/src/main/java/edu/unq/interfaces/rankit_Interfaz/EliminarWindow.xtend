@@ -11,11 +11,12 @@ class EliminarWindow extends Dialog<GenericaAppModel>{
 	
 	new(WindowOwner owner, GenericaAppModel model) {
 		super(owner, model)
+		title = "Eliminar de Rank-IT"
 	}
 	
 
 	override protected createFormPanel(Panel mainPanel) {
-	new Label(mainPanel)=>[text="Esta seguro que desea eliminar"]
+	new Label(mainPanel)=>[text="¿Esta seguro que desea eliminar?"]
 	new Button(mainPanel)=>[caption="Ok"
 		onClick[|this.modelObject.eliminar
 				 this.close

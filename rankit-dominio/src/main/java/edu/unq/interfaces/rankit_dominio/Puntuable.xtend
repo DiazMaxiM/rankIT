@@ -27,7 +27,7 @@ class Puntuable {
 		nombre.contains(letras)
 	}
 	 
-	def void verificarSiTieneNombre(){
+	def void validarSiElPuntuableTieneNombre(){
 		if(noTieneNombre()){
 			throw new UserException("Por favor defina un nombre" )
 			
@@ -35,9 +35,6 @@ class Puntuable {
 	}
 	
 	def void setHabilitado(boolean bool){
-//		if(noTieneNombre){
-//			throw new UserException("Por favor defina un nombre antes de habilitar" )
-//		}
 		habilitado=bool
 	}
 	
