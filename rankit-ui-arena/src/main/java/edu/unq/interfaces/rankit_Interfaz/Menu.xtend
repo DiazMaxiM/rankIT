@@ -1,16 +1,16 @@
 package edu.unq.interfaces.rankit_Interfaz
 
+import appModels.CalificacionAppModel
+import appModels.LugarAppModel
+import appModels.RankITAppModel
+import appModels.ServicioAppModel
+import appModels.UsuarioAppModel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
-import appModels.RankITAppModel
-import appModels.UsuarioAppModel
-import appModels.CalificacionAppModel
-import appModels.ServicioAppModel
-import appModels.LugarAppModel
 
 class Menu extends SimpleWindow<RankITAppModel> {
 
@@ -22,7 +22,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		this.title = "Rank-IT"
 		contenedorMensaje(mainPanel)
 		contenedorBotonera(mainPanel)
-		contenedorEstado   (mainPanel)
+		contenedorEstado(mainPanel)
 	}
 
 	def contenedorEstado(Panel mainPanel) {

@@ -1,22 +1,19 @@
 package edu.unq.interfaces.rankit_Interfaz
 
+import appModels.GenericaAppModel
 import edu.unq.interfaces.component.LabelConDatos
 import edu.unq.interfaces.component.LabeledTextBox
-import edu.unq.interfaces.component.Titulo
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
+import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
-import org.uqbar.arena.windows.ErrorsPanel
-import org.uqbar.arena.widgets.Label
-import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import java.awt.Color
-import appModels.GenericaAppModel
 
-abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
+abstract class VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
 	new(WindowOwner parent, GenericaAppModel model) {
 		super(parent, model)
@@ -34,19 +31,18 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		contenedorBusqueda(panelGeneral)
 		contenedorTablaYEdicion(panelGeneral)
 	}
-	
-	def titulo(Panel panel){
-	  val panelTitulo=new Panel(panel)
-	  panelTitulo.layout =new  HorizontalLayout
-	  new Label(panelTitulo) => [ text = "Resumen de situación:" fontSize = 20]
-	  
+
+	def titulo(Panel panel) {
+		val panelTitulo = new Panel(panel)
+		panelTitulo.layout = new HorizontalLayout
+		new Label(panelTitulo) => [text = "Resumen de situación:" fontSize = 20]
+
 	}
 
 	def contenedorBusqueda(Panel panelGeneral) {
 		tituloContenedorBusqueda(panelGeneral)
 		val panelBusqueda = new Panel(panelGeneral)
 		panelBusqueda.layout = new HorizontalLayout
-
 
 		val panelBusquedaParametros = new Panel(panelGeneral)
 		panelBusquedaParametros.layout = new HorizontalLayout
@@ -57,62 +53,59 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		]
 		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)
 	}
-	
-	
+
 	def void tituloContenedorBusqueda(Panel panelBusqueda) {
-	val panelTitulo=new Panel(panelBusqueda)
-	  panelTitulo.layout =new  HorizontalLayout
-	  new Label(panelTitulo) => [ text = this.modelObject.tituloContenedorBusqueda fontSize = 16]
-	  	
+		val panelTitulo = new Panel(panelBusqueda)
+		panelTitulo.layout = new HorizontalLayout
+		new Label(panelTitulo) => [text = this.modelObject.tituloContenedorBusqueda fontSize = 16]
+
 	}
 
 	def contenedorParaSegundoParametroCalificacion(Panel panelBusquedaParametros) {
-	
 	}
 
 	def contenedorResumenDeSituacion(Panel panelGeneral) {
 		val panelResumen = new Panel(panelGeneral)
 		panelResumen.layout = new HorizontalLayout
-		
-		dato1(panelResumen)
-		dato2(panelResumen)
-		dato3(panelResumen)
-		dato4(panelResumen)
+
+		dato1ResumenDeSituacion(panelResumen)
+		dato2ResumenDeSituacion(panelResumen)
+		dato3ResumenDeSituacion(panelResumen)
+		dato4ResumenDeSituacion(panelResumen)
 	}
-	
-	def dato1(Panel panelResumen){
+
+	def dato1ResumenDeSituacion(Panel panelResumen) {
 		new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre1")
-			bindValueToPropertyLabelValor("labelValor1")
-			datoConColorAzul
-		]
-	  }
-	def dato2(Panel panelResumen){
-		new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre2")
-			bindValueToPropertyLabelValor("labelValor2")
+			bindValueToPropertyLabelNombre("descripcionDato1ResumenDeSituacion")
+			bindValueToPropertyLabelValor("valorDato1ResumenDeSituacion")
 			datoConColorAzul
 		]
 	}
 
-    def dato3(Panel panelResumen){
-    	new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre3")
-			bindValueToPropertyLabelValor("labelValor3")
+	def dato2ResumenDeSituacion(Panel panelResumen) {
+		new LabelConDatos(panelResumen) => [
+			bindValueToPropertyLabelNombre("descripcionDato2ResumenDeSituacion")
+			bindValueToPropertyLabelValor("valorDato2ResumenDeSituacion")
+			datoConColorAzul
+		]
+	}
+
+	def dato3ResumenDeSituacion(Panel panelResumen) {
+		new LabelConDatos(panelResumen) => [
+			bindValueToPropertyLabelNombre("descripcionDato3ResumenDeSituacion")
+			bindValueToPropertyLabelValor("valorDato3ResumenDeSituacion")
 			datoConColorRojo
 		]
-    	
-    }
-    
-    def dato4(Panel panelResumen){
-    	new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre4")
-			bindValueToPropertyLabelValor("labelValor4")
+
+	}
+
+	def dato4ResumenDeSituacion(Panel panelResumen) {
+		new LabelConDatos(panelResumen) => [
+			bindValueToPropertyLabelNombre("descripcionDato4ResumenDeSituacion")
+			bindValueToPropertyLabelValor("valorDato4ResumenDeSituacion")
 			datoConColorRojo
 		]
-    }
-	
-	
+	}
 
 	def contenedorTablaYEdicion(Panel panelGeneral) {
 		val contenedorTablaYOpcionesPanel = new Panel(panelGeneral)
@@ -127,47 +120,49 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		this.mostrarNombreDelItem(contenedorOpcionPanel)
 		this.panelErrores(contenedorOpcionPanel)
 		this.mostrarInformacionDelItem(contenedorOpcionPanel)
-        this.botonParaMostrarCalificacionesDelItem(contenedorOpcionPanel)
-        this.botonParaBlanquearUsuarios(contenedorOpcionPanel)
-		this.botonParaEliminarItem(contenedorOpcionPanel) 
+		this.botonParaMostrarCalificacionesDelItem(contenedorOpcionPanel)
+		this.botonParaBlanquearUsuarios(contenedorOpcionPanel)
+		this.botonParaEliminarItem(contenedorOpcionPanel)
 	}
-	
+
 	def void mostrarNombreDelItem(Panel panel)
-	
-	def panelErrores(Panel panel){
+
+	def panelErrores(Panel panel) {
 		new ErrorsPanel(panel, "Edita la información")
 	}
-	
-	def void mostrarInformacionDelItem(Panel panel)
-     
-   def  botonParaMostrarCalificacionesDelItem(Panel panel){
-   	    new Button(panel) => [
-			caption = "Revisar Calificaciones"
- 		   bindEnabledToProperty("hayItemSeleccionadoConNombre")
 
-     		onClick [|new AdmCalificacionWindow(
-          				this,
-          				this.modelObject.elementosNecesariosParaAdmCalificacionWindow
+	def void mostrarInformacionDelItem(Panel panel)
+
+	def botonParaMostrarCalificacionesDelItem(Panel panel) {
+		new Button(panel) => [
+			caption = "Revisar Calificaciones"
+			bindEnabledToProperty("hayItemSeleccionadoConNombre")
+
+			onClick [|
+				new AdmCalificacionWindow(
+					this,
+					this.modelObject.elementosNecesariosParaAdmCalificacionWindow
 				).open
 			]
-				width = 200
+			width = 200
 		]
-   	
-   }
-   def void botonParaBlanquearUsuarios(Panel panel)
-   
-   def botonParaEliminarItem(Panel panel){
-   	   new Button(panel) => [
-   	    caption = "Eliminar"
+
+	}
+
+	def void botonParaBlanquearUsuarios(Panel panel)
+
+	def botonParaEliminarItem(Panel panel) {
+		new Button(panel) => [
+			caption = "Eliminar"
 			bindEnabledToProperty("hayItemSeleccionado")
-		 onClick[| 
-		 	val adapterAppModel = this.modelObject
-		 	new EliminarWindow(this,adapterAppModel).open
-				]
+			onClick[|
+				val adapterAppModel = this.modelObject
+				new EliminarWindow(this, adapterAppModel).open
+			]
 		]
-   	
-   }
-    
+
+	}
+
 	def contenedorTabla(Panel panel) {
 		val contenedorTablaPanel = new Panel(panel)
 		contenedorTablaPanel.layout = new VerticalLayout

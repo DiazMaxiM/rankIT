@@ -2,10 +2,10 @@ package edu.unq.interfaces.rankit_dominio
 
 import com.google.common.base.Strings
 import java.util.ArrayList
+import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
-import java.util.Date
 
 /**
  * @author Maximiliano Diaz
@@ -28,9 +28,10 @@ class AdmCalificaciones {
 			return listaCalificaciones
 		}
 		if (!estaVacio(nombreEvaluadoBusqueda) && estaVacio(nombreUsuarioBusqueda)) {
-			
-			return listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda) || calificacion.evaluado.nombre.equals("") ].
-				toList
+
+			return listaCalificaciones.filter [calificacion|
+				calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda) || calificacion.evaluado.nombre.equals("")
+			].toList
 		}
 		if (estaVacio(nombreEvaluadoBusqueda) && !estaVacio(nombreUsuarioBusqueda)) {
 			return listaCalificaciones.filter[calificacion|calificacion.usuario.nombre.contains(nombreUsuarioBusqueda)].
@@ -39,7 +40,7 @@ class AdmCalificaciones {
 		if (!estaVacio(nombreEvaluadoBusqueda) && !estaVacio(nombreUsuarioBusqueda)) {
 			return listaCalificaciones.filter [ calificacion |
 				calificacion.usuario.nombre.contains(nombreUsuarioBusqueda) &&
-				calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda)
+					calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda)
 			].toList
 		}
 
@@ -94,10 +95,9 @@ class AdmCalificaciones {
 	/**
 	 * @param calificacion Calificacion para setear si es ofensiva
 	 * @param bool Boolean
-	 *
+	 * 
 	 * setea en la calificacion si es o no ofensiva y analiza si debe estar baneado
 	 */
-	 
 	def contenidoOfensivo(Calificacion calificacion, Boolean bool) {
 		calificacion.contenidoOfensivo = bool
 		analizarEstadoBaneado(calificacion.usuario)
@@ -110,6 +110,7 @@ class AdmCalificaciones {
 	private def Integer cantidadCalificacionesOfensivas(List<Calificacion> lista) {
 		lista.filter[calificacion|calificacion.isContenidoOfensivo].toList.size
 	}
+
 	/**
 	 * @param Puntuable puntuable del que se desea saber la cantidad total de puntos en todas las calificaciones
 	 * @return Integer cantidad total del puntos
@@ -126,7 +127,7 @@ class AdmCalificaciones {
 	private def analizarEstadoBaneado(Usuario usuario) {
 		var cantidadCalificacionesOfensivas = cantidadCalificacionesOfensivas(
 			filtrarCalificaciones(null, usuario.nombre))
-		usuario.banear  = (cantidadCalificacionesOfensivas > 5)
+		usuario.banear = (cantidadCalificacionesOfensivas > 5)
 	}
 
 	/**
@@ -143,37 +144,33 @@ class AdmCalificaciones {
 	private def calificacionesDelPutuable(Puntuable puntuable) {
 		listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.equals(puntuable.nombre)].toList
 	}
-	
-	def Date fechaDeLaUltimaPublicacionDe (Usuario usuario) 
-	{
-		if (tienePublicaciones(usuario.nombre)) ultimaPublicacionDe(usuario.nombre).fecha
+
+	def Date fechaDeLaUltimaPublicacionDe(Usuario usuario) {
+		if(tienePublicaciones(usuario.nombre)) ultimaPublicacionDe(usuario.nombre).fecha
 	}
-	
-	private def boolean tienePublicaciones(String nombreDeUsuario) 
-	{
-		listaCalificaciones.exists[calificacion | calificacion.usuario.deNombre(nombreDeUsuario)]
+
+	private def boolean tienePublicaciones(String nombreDeUsuario) {
+		listaCalificaciones.exists[calificacion|calificacion.usuario.deNombre(nombreDeUsuario)]
 	}
-	
-	private def List<Calificacion> publicacionesDeUnUsuario(String nombreDeUsuario)
-	{
+
+	private def List<Calificacion> publicacionesDeUnUsuario(String nombreDeUsuario) {
 		listaCalificaciones.filter[calificacion|calificacion.usuario.deNombre(nombreDeUsuario)].toList
 	}
-	
-	private def Calificacion ultimaPublicacionDe (String nombreDeUsuario)
-	{
-		publicacionesDeUnUsuario(nombreDeUsuario).findLast [calificacion | calificacion.usuario.deNombre(nombreDeUsuario)]
+
+	private def Calificacion ultimaPublicacionDe(String nombreDeUsuario) {
+		publicacionesDeUnUsuario(nombreDeUsuario).findLast[calificacion|calificacion.usuario.deNombre(nombreDeUsuario)]
 	}
-	
+
 	def Integer cantidadDeCalificacionesNoOfensivas() {
-	this.getCalificacionesRegistradas - this.calificacionesOfensivas
+		this.getCalificacionesRegistradas - this.calificacionesOfensivas
 	}
-	
+
 	def eliminarCalificacionesDelUsuario(Usuario usuario) {
-		 listaCalificaciones.removeAll( publicacionesDeUnUsuario(usuario.nombre))
+		listaCalificaciones.removeAll(publicacionesDeUnUsuario(usuario.nombre))
 	}
-	
-	def eliminarCalificacionesDelPuntuable(Puntuable puntuable){
+
+	def eliminarCalificacionesDelPuntuable(Puntuable puntuable) {
 		listaCalificaciones.removeAll(calificacionesDelPutuable(puntuable))
 	}
-	
+
 }

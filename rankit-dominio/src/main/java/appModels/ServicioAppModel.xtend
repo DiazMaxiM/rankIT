@@ -1,25 +1,23 @@
 package appModels
 
-import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.utils.Observable
 
 @Observable
 @Accessors
-class ServicioAppModel extends PuntuableAppModel {	
-	
-	//Ventana
+class ServicioAppModel extends PuntuableAppModel {
 
-	
-	override String getLabelNombre1() {
+	// Ventana
+	override String getDescripcionDato1ResumenDeSituacion() {
 		"Servicios Inscriptos: "
 	}
-	
+
 	override tituloContenedorBusqueda() {
-	   "Servicios"
+		"Servicios"
 	}
-	
+
 	override textoPrimerParametroDeBusqueda() {
 		"Buscar por nombre de Servicio "
 	}
-	
+
 }

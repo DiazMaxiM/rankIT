@@ -1,14 +1,14 @@
 package dummyData
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.utils.Observable
 import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
-import edu.unq.interfaces.rankit_dominio.Usuario
-import edu.unq.interfaces.rankit_dominio.Puntuable
-import edu.unq.interfaces.rankit_dominio.Calificacion
 import edu.unq.interfaces.rankit_dominio.AdmUsuarios
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import edu.unq.interfaces.rankit_dominio.Puntuable
 import edu.unq.interfaces.rankit_dominio.RankIT
+import edu.unq.interfaces.rankit_dominio.Usuario
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.utils.Observable
 
 @Observable
 @Accessors
@@ -25,7 +25,7 @@ class RankITDummy {
 		val usuarioLiza = new Usuario
 		val usuarioRosali = new Usuario
 
-	var Usuario admin = new Usuario => [
+		var Usuario admin = new Usuario => [
 			activo = true
 			baneado = false
 			nombre = "Admin"
@@ -40,7 +40,7 @@ class RankITDummy {
 			password = "Maxi"
 
 		];
-		
+
 		usuarioLiza => [
 			activo = false
 			baneado = true

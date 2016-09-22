@@ -1,226 +1,199 @@
 package appModels
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.utils.Dependencies
-import org.uqbar.commons.model.ObservableUtils
-import org.uqbar.commons.utils.Observable
-import java.util.Date
-import java.util.List
-import edu.unq.interfaces.rankit_dominio.UsuarioNull
-import edu.unq.interfaces.rankit_dominio.AdmUsuarios
 import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
 import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.AdmUsuarios
 import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.UsuarioNull
+import java.util.Date
+import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.ObservableUtils
+import org.uqbar.commons.utils.Dependencies
+import org.uqbar.commons.utils.Observable
 
 @Observable
 @Accessors
-
-class UsuarioAppModel implements GenericaAppModel
-{  
-	private edu.unq.interfaces.rankit_dominio.Usuario miUsuarioNull=new UsuarioNull
-	private edu.unq.interfaces.rankit_dominio.AdmUsuarios administradorDeUsuarios
-	private edu.unq.interfaces.rankit_dominio.Usuario itemSeleccionado=miUsuarioNull
-	private edu.unq.interfaces.rankit_dominio.AdmCalificaciones administradorDeCalificaciones
+class UsuarioAppModel implements GenericaAppModel {
+	private Usuario miUsuarioNull = new UsuarioNull
+	private AdmUsuarios administradorDeUsuarios
+	private Usuario itemSeleccionado = miUsuarioNull
+	private AdmCalificaciones administradorDeCalificaciones
 	private String nombreDeUsuarioABuscar = ""
-	private edu.unq.interfaces.rankit_dominio.AdmPuntuables administradorDeLugares
-	private edu.unq.interfaces.rankit_dominio.AdmPuntuables administradorDeServicios
-	edu.unq.interfaces.rankit_dominio.Usuario usuarioLogeado 
-	
-	new (AdmUsuarios admUsuarios,AdmCalificaciones administradorDeCalificaciones,AdmPuntuables admLugares,AdmPuntuables admServicios,Usuario usuarioLogeado)
-	{
-		this.administradorDeLugares= admLugares
-		this.administradorDeServicios= admServicios
-		this.administradorDeUsuarios= admUsuarios
-		this.administradorDeCalificaciones= administradorDeCalificaciones
-		this.usuarioLogeado= usuarioLogeado
+	private AdmPuntuables administradorDeLugares
+	private AdmPuntuables administradorDeServicios
+	Usuario usuarioLogeado
+
+	new(AdmUsuarios admUsuarios, AdmCalificaciones administradorDeCalificaciones, AdmPuntuables admLugares,
+		AdmPuntuables admServicios, Usuario usuarioLogeado) {
+		this.administradorDeLugares = admLugares
+		this.administradorDeServicios = admServicios
+		this.administradorDeUsuarios = admUsuarios
+		this.administradorDeCalificaciones = administradorDeCalificaciones
+		this.usuarioLogeado = usuarioLogeado
 	}
 
-	
 	@Dependencies("itemSeleccionado")
-	def boolean getHayItemSeleccionado()
-	{
+	def boolean getHayItemSeleccionado() {
 		!itemSeleccionado.equals(miUsuarioNull)
 	}
-	
-	
-	@Dependencies("itemSeleccionado")  
-	def boolean getHayItemSeleccionadoConNombre(){
+
+	@Dependencies("itemSeleccionado")
+	def boolean getHayItemSeleccionadoConNombre() {
 		!itemSeleccionado.isNoTieneNombre
 	}
-	
-	
-@Dependencies("itemSeleccionado")
-	def String getNombre() 
-	{
-		itemSeleccionado.nombre 
+
+	@Dependencies("itemSeleccionado")
+	def String getNombre() {
+		itemSeleccionado.nombre
 	}
-	
-@Dependencies("itemSeleccionado")
-	def void setNombre(String nombreIngresado) 
-	{
+
+	@Dependencies("itemSeleccionado")
+	def void setNombre(String nombreIngresado) {
 		administradorDeUsuarios.cambiarNombreSiPuede(itemSeleccionado, nombreIngresado)
-		ObservableUtils.firePropertyChanged(this, "nombre",nombre)
+		ObservableUtils.firePropertyChanged(this, "nombre", nombre)
 	}
-	
-@Dependencies("itemSeleccionado")
-	def getActivo() 
-	{
+
+	@Dependencies("itemSeleccionado")
+	def getActivo() {
 		itemSeleccionado.activo
 	}
-	
-@Dependencies("itemSeleccionado")
-	def void setActivo(boolean bool) 
-	{
-			itemSeleccionado.activo = bool
-			
+
+	@Dependencies("itemSeleccionado")
+	def void setActivo(boolean bool) {
+		itemSeleccionado.activo = bool
+
 		avisarModificacionesDeUsuarios()
 	}
 
-@Dependencies("itemSeleccionado")
-	def getBaneado() 
-	{
-       itemSeleccionado.baneado
+	@Dependencies("itemSeleccionado")
+	def getBaneado() {
+		itemSeleccionado.baneado
 	}
-		
-@Dependencies("itemSeleccionado")
-	def void setBaneado(boolean bool) 
-	{
-	    itemSeleccionado.banear=bool
+
+	@Dependencies("itemSeleccionado")
+	def void setBaneado(boolean bool) {
+		itemSeleccionado.banear = bool
 		avisarModificacionesDeUsuarios()
 	}
 
-@Dependencies("itemSeleccionado")
-	def getFechaDeRegistroDelUsuario()
-	{
-	   itemSeleccionado.fechaDeRegistro
+	@Dependencies("itemSeleccionado")
+	def getFechaDeRegistroDelUsuario() {
+		itemSeleccionado.fechaDeRegistro
 	}
-	def setFechaDeRegistroDelUsuario(Date fecha)
-	{
-	   itemSeleccionado.fechaDeRegistro=fecha
+
+	def setFechaDeRegistroDelUsuario(Date fecha) {
+		itemSeleccionado.fechaDeRegistro = fecha
 	}
-@Dependencies("itemSeleccionado")	
-	def Date getFechaDeLaUltimaPublicacion ()
-	{
+
+	@Dependencies("itemSeleccionado")
+	def Date getFechaDeLaUltimaPublicacion() {
 		administradorDeCalificaciones.fechaDeLaUltimaPublicacionDe(itemSeleccionado)
 	}
-	
-	
-	def int getCantidadDeUsuariosRegistrados()
-	{
+
+	def int getCantidadDeUsuariosRegistrados() {
 		administradorDeUsuarios.cantidadTotalDeUsuarios
 	}
-	
-	def int getCantidadDeUsuariosActivos()
-	{
+
+	def int getCantidadDeUsuariosActivos() {
 		administradorDeUsuarios.cantidadTotalDeUsuariosActivos
 	}
-	
-	def int getCantidadDeUsuariosInactivos()
-	{
+
+	def int getCantidadDeUsuariosInactivos() {
 		administradorDeUsuarios.cantidadTotalDeUsuariosInactivos
 	}
-	
-	def int getCantidadDeUsuariosBaneados()
-	{
+
+	def int getCantidadDeUsuariosBaneados() {
 		administradorDeUsuarios.cantidadTotalDeUsuariosBaneados
 	}
-	
-	
-	//Vista
-	
-   override getLabelNombre1() {
+
+	// Vista
+	override getDescripcionDato1ResumenDeSituacion() {
 		"Usuarios Registrados:"
 	}
-	
-	override getLabelValor1() {
+
+	override getValorDato1ResumenDeSituacion() {
 		cantidadDeUsuariosRegistrados.toString
 	}
-	
-	override getLabelNombre2() {
+
+	override getDescripcionDato2ResumenDeSituacion() {
 		"Activos:"
 	}
-	
-	override getLabelValor2() {
+
+	override getValorDato2ResumenDeSituacion() {
 		cantidadDeUsuariosActivos.toString
 	}
-	
-	override getLabelNombre3() {
+
+	override getDescripcionDato3ResumenDeSituacion() {
 		"Inactivos:"
 	}
-	
-	override getLabelValor3() {
-		 cantidadDeUsuariosInactivos.toString
+
+	override getValorDato3ResumenDeSituacion() {
+		cantidadDeUsuariosInactivos.toString
 	}
-	
-	
-	override getLabelNombre4() {
+
+	override getDescripcionDato4ResumenDeSituacion() {
 		"Baneados:"
 	}
-	
-	override getLabelValor4() {
+
+	override getValorDato4ResumenDeSituacion() {
 		cantidadDeUsuariosBaneados.toString
 	}
-	
-	
+
 	override tituloContenedorBusqueda() {
 		"Usuarios:"
 	}
-	
+
 	override textoPrimerParametroDeBusqueda() {
 		"Busqueda por nombre de Usuario"
 	}
-	
+
 	override getPrimerParametroDeBusqueda() {
-		 nombreDeUsuarioABuscar
+		nombreDeUsuarioABuscar
 	}
-	
+
 	def void setPrimerParametroDeBusqueda(String nombre) {
-		itemSeleccionado=miUsuarioNull
-	    nombreDeUsuarioABuscar = nombre
-	    ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado",hayItemSeleccionado)
-	    ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
+		itemSeleccionado = miUsuarioNull
+		nombreDeUsuarioABuscar = nombre
+		ObservableUtils.firePropertyChanged(this, "hayItemSeleccionado", hayItemSeleccionado)
+		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
 	}
+
 	override getSegundoParametroDeBusqueda() {
 		""
 	}
-	
+
 	override textoSegundoParametroDeBusqueda() {
-		
 	}
-	
+
 	override nuevo() {
 		administradorDeUsuarios.agregarUsuarioNuevo()
 		avisarModificacionesDeUsuarios
 	}
-	
+
 	override eliminar() {
 		administradorDeUsuarios.eliminarUsuario(itemSeleccionado)
 		administradorDeCalificaciones.eliminarCalificacionesDelUsuario(itemSeleccionado)
-		itemSeleccionado=miUsuarioNull
+		itemSeleccionado = miUsuarioNull
 		avisarModificacionesDeUsuarios
-		
+
 	}
-	
+
 	override getElementosNecesariosParaAdmCalificacionWindow() {
-		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorDeCalificaciones,administradorDeLugares,administradorDeServicios,itemSeleccionado)
-		.filtradoObligatorioPorUsuario(itemSeleccionado)
+		var CalificacionAppModel calificacionAppModel = new CalificacionAppModel(administradorDeCalificaciones,
+			administradorDeLugares, administradorDeServicios, itemSeleccionado).
+			filtradoObligatorioPorUsuario(itemSeleccionado)
 		calificacionAppModel
 	}
-	
+
 	override blanquearContrasenha() {
-		
 	}
-	
-	def List<Usuario> getUsuarios()
-	{
-	  administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
+
+	def List<Usuario> getUsuarios() {
+		administradorDeUsuarios.buscarUsuarioDeNombre(nombreDeUsuarioABuscar)
 	}
-	
-	
-	
-	
-	def void avisarModificacionesDeUsuarios() 
-	{
+
+	def void avisarModificacionesDeUsuarios() {
 		ObservableUtils.firePropertyChanged(this, "usuarios", usuarios)
 		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosRegistrados", cantidadDeUsuariosRegistrados)
 		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosActivos", cantidadDeUsuariosActivos)
@@ -228,11 +201,10 @@ class UsuarioAppModel implements GenericaAppModel
 		ObservableUtils.firePropertyChanged(this, "cantidadDeUsuariosBaneados", cantidadDeUsuariosBaneados)
 		ObservableUtils.firePropertyChanged(this, "baneado", baneado)
 		ObservableUtils.firePropertyChanged(this, "activo", activo)
-	    ObservableUtils.firePropertyChanged(this, "labelValor1", labelValor1)
-		ObservableUtils.firePropertyChanged(this, "labelValor2", labelValor2)
-		ObservableUtils.firePropertyChanged(this, "labelValor3", labelValor3)
-		ObservableUtils.firePropertyChanged(this, "labelValor4", labelValor4)
+		ObservableUtils.firePropertyChanged(this, "labelValor1", valorDato1ResumenDeSituacion)
+		ObservableUtils.firePropertyChanged(this, "valorDato2ResumenDeSituacion", valorDato2ResumenDeSituacion)
+		ObservableUtils.firePropertyChanged(this, "valorDato3ResumenDeSituacion", valorDato3ResumenDeSituacion)
+		ObservableUtils.firePropertyChanged(this, "valorDato4ResumenDeSituacion", valorDato4ResumenDeSituacion)
 	}
-	
-	
+
 }

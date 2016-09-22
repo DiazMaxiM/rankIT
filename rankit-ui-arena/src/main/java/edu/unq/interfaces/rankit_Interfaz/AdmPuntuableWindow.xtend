@@ -1,27 +1,27 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import org.uqbar.arena.windows.WindowOwner
+import appModels.PuntuableAppModel
+import edu.unq.interfaces.component.LabelCheckBox
 import edu.unq.interfaces.rankit_dominio.Puntuable
-import org.uqbar.arena.widgets.tables.Table
-import org.uqbar.arena.widgets.Panel
-import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import org.uqbar.arena.widgets.tables.Column
 import java.text.SimpleDateFormat
 import org.uqbar.arena.layout.ColumnLayout
-import org.uqbar.arena.widgets.Label
-import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.layout.HorizontalLayout
-import edu.unq.interfaces.component.LabelCheckBox
-import appModels.PuntuableAppModel
+import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.TextBox
+import org.uqbar.arena.widgets.tables.Column
+import org.uqbar.arena.widgets.tables.Table
+import org.uqbar.arena.windows.WindowOwner
+
+import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 
 class AdmPuntuableWindow extends VistaGenericaWindow {
 
-	
 	new(WindowOwner parent, PuntuableAppModel model) {
 		super(parent, model)
 		title = "Rank-IT -->Administración"
 	}
-	
+
 	override tabla(Panel panel) {
 
 		new Table<Puntuable>(panel, typeof(Puntuable)) => [
@@ -59,8 +59,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 			]
 		]
 	}
-	
-	  override  mostrarInformacionDelItem(Panel panel) {
+
+	override mostrarInformacionDelItem(Panel panel) {
 		this.editarNombre(panel)
 		this.habilitarPuntuable(panel)
 		this.calificacionesPuntuable(panel)
@@ -91,10 +91,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 	def habilitarPuntuable(Panel panel) {
 		var panelHabilitar = new Panel(panel)
 		panelHabilitar.layout = new HorizontalLayout
-		new LabelCheckBox(panelHabilitar).setText("Habilitado")
-		    .bindEnabledToProperty("hayItemSeleccionadoConNombre").
+		new LabelCheckBox(panelHabilitar).setText("Habilitado").bindEnabledToProperty("hayItemSeleccionadoConNombre").
 			bindValueToProperty("habilitado")
-			
 
 	}
 
@@ -125,10 +123,8 @@ class AdmPuntuableWindow extends VistaGenericaWindow {
 		]
 
 	}
-	
+
 	override botonParaBlanquearUsuarios(Panel panel) {
 	}
-	
-	
 
 }

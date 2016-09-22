@@ -63,7 +63,6 @@ class CalificacionAppModel implements GenericaAppModel {
 	}
 
 	def listaCalificacionesFiltradas() {
-		System.out.println(nombreEvaluadoBusqueda);
 		administradorCalificacion.filtrarCalificaciones(nombreEvaluadoBusqueda, nombreUsuarioBusqueda)
 	}
 
@@ -127,37 +126,37 @@ class CalificacionAppModel implements GenericaAppModel {
 		this
 	}
 
-	override String getLabelNombre1() {
+	override String getDescripcionDato1ResumenDeSituacion() {
 		"Calificaciones Registradas:"
 	}
 
 	@Dependencies("calificacionesRegistradas")
-	override String getLabelValor1() {
+	override String getValorDato1ResumenDeSituacion() {
 		calificacionesRegistradas.toString
 	}
 
-	override String getLabelNombre2() {
+	override String getDescripcionDato2ResumenDeSituacion() {
 		"Ofensivas:"
 	}
 
 	@Dependencies("calificacionesOfensivas")
-	override getLabelValor2() {
+	override getValorDato2ResumenDeSituacion() {
 		calificacionesOfensivas.toString
 	}
 
-	override getLabelNombre3() {
+	override getDescripcionDato3ResumenDeSituacion() {
 		""
 	}
 
-	override getLabelValor3() {
+	override getValorDato3ResumenDeSituacion() {
 		""
 	}
 
-	override getLabelNombre4() {
+	override getDescripcionDato4ResumenDeSituacion() {
 		""
 	}
 
-	override getLabelValor4() {
+	override getValorDato4ResumenDeSituacion() {
 		""
 	}
 

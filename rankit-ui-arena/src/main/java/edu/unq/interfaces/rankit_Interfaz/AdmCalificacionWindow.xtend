@@ -164,10 +164,10 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 	/**
 	 * Cambia El Color
 	 */
-	override dato2(Panel panelResumen){
+	override dato2ResumenDeSituacion(Panel panelResumen){
 		new LabelConDatos(panelResumen) => [
-			bindValueToPropertyLabelNombre("labelNombre2")
-			bindValueToPropertyLabelValor("labelValor2")
+			bindValueToPropertyLabelNombre("descripcionDato2ResumenDeSituacion")
+			bindValueToPropertyLabelValor("valorDato2ResumenDeSituacion")
 			datoConColorRojo
 		]
 	}
