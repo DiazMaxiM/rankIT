@@ -9,7 +9,7 @@ import com.google.common.base.Strings
 @Observable
 @Accessors
 class Calificacion {
-	private int puntos
+	private Integer puntos
 	private Date fecha
 	private boolean contenidoOfensivo
 	private String detalle
