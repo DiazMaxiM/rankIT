@@ -76,7 +76,7 @@ import edu.unq.interfaces.rankit_dominio.Puntuable
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(itemSeleccionado)
 	}
 	@Dependencies("nombreBuscado")
-	def List<edu.unq.interfaces.rankit_dominio.Puntuable>getElementos(){
+	def List<Puntuable>getElementos(){
 		administradorDePuntuables.buscarPuntuables(nombreBuscado)
 	}
 	@Dependencies("itemSeleccionado")
@@ -180,6 +180,7 @@ import edu.unq.interfaces.rankit_dominio.Puntuable
 	
 	override void eliminar() {
 		administradorDePuntuables.eliminar(itemSeleccionado)
+		administradorCalificacion.eliminarCalificacionesDelPuntuable(itemSeleccionado)
 		itemSeleccionado = miPuntuableNull
         avisarCambios
 		

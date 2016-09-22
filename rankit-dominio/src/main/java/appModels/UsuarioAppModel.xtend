@@ -191,6 +191,7 @@ class UsuarioAppModel implements GenericaAppModel
 	
 	override eliminar() {
 		administradorDeUsuarios.eliminarUsuario(itemSeleccionado)
+		administradorDeCalificaciones.eliminarCalificacionesDelUsuario(itemSeleccionado)
 		itemSeleccionado=miUsuarioNull
 		avisarModificacionesDeUsuarios
 		

@@ -168,5 +168,12 @@ class AdmCalificaciones {
 	this.getCalificacionesRegistradas - this.calificacionesOfensivas
 	}
 	
+	def eliminarCalificacionesDelUsuario(Usuario usuario) {
+		 listaCalificaciones.removeAll( publicacionesDeUnUsuario(usuario.nombre))
+	}
+	
+	def eliminarCalificacionesDelPuntuable(Puntuable puntuable){
+		listaCalificaciones.removeAll(calificacionesDelPutuable(puntuable))
+	}
 	
 }
