@@ -94,6 +94,10 @@ class UsuarioAppModel implements GenericaAppModel
 	{
 	   itemSeleccionado.fechaDeRegistro
 	}
+	def setFechaDeRegistroDelUsuario(Date fecha)
+	{
+	   itemSeleccionado.fechaDeRegistro=fecha
+	}
 @Dependencies("itemSeleccionado")	
 	def Date getFechaDeLaUltimaPublicacion ()
 	{

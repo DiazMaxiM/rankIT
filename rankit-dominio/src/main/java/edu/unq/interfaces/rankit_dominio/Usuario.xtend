@@ -3,6 +3,7 @@ package edu.unq.interfaces.rankit_dominio
 import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.UserException
 
 @Observable
 @Accessors
@@ -124,6 +125,13 @@ class Usuario
 	{
 		activo=false
 	}
+	def void setFechaDeRegistro(Date fecha){
+		if (fecha == null){
+			throw new UserException("Debe Ingresar Una Fecha");
+		}
+		this.fechaDeRegistro=fecha
+		
+	} 
 	
 	/**
 	 * PROPÓSITO: Pregunta si el usuario no tiene nombre.

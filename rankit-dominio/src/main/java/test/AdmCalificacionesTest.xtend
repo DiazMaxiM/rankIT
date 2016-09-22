@@ -121,7 +121,7 @@ class AdmCalificacionesTest {
 		admCalificacion.contenidoOfensivo(calificacionMock6, true)
 
 		verify(calificacionMock6).contenidoOfensivo = true
-		verify(usuarioMock).baneado = true
+		verify(usuarioMock).banear = true
 
 	}
 

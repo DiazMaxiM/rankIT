@@ -45,8 +45,6 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		val contenedorOpciones = new Panel(panel)
 		contenedorOpciones.layout = new VerticalLayout
 
-		new ErrorsPanel(contenedorOpciones, "")
-
 		new Label(contenedorOpciones) => [
 			text = "Evaluado"
 		]

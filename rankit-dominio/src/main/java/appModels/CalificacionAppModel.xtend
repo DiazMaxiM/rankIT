@@ -53,11 +53,7 @@ class CalificacionAppModel implements GenericaAppModel  {
 	}
 
 	def void setPuntos(String numero) {
-		var Integer valor = 0;
-		if (!Strings.isNullOrEmpty(numero)) {
-			valor = Integer.parseInt(numero)
-		}
-		itemSeleccionado.puntos = valor
+		itemSeleccionado.puntos = numero
 	}
 
 	def setNombreUsuarioBusqueda(String nombre) {
