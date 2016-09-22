@@ -12,7 +12,7 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.layout.HorizontalLayout
 import edu.unq.interfaces.component.LabelCheckBox
-import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
+import appModels.PuntuableAppModel
 
 class AdmPuntuableWindow extends VistaGenericaWindow {
 

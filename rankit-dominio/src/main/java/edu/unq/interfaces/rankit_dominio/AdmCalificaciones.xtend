@@ -28,7 +28,7 @@ class AdmCalificaciones {
 			return listaCalificaciones
 		}
 		if (!estaVacio(nombreEvaluadoBusqueda) && estaVacio(nombreUsuarioBusqueda)) {
-			System.out.println("entro");
+			
 			return listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.contains(nombreEvaluadoBusqueda) || calificacion.evaluado.nombre.equals("") ].
 				toList
 		}

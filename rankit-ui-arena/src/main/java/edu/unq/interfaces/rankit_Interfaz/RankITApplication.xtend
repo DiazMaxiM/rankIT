@@ -1,8 +1,9 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.RankITAppModel
-import edu.unq.interfaces.rankit_dominio.RankITDummy
+
 import org.uqbar.arena.Application
+import dummyData.RankITDummy
+import appModels.RankITAppModel
 
 class RankITApplication extends  Application{
 	

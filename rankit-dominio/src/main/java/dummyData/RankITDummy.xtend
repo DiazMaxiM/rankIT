@@ -1,7 +1,14 @@
-package edu.unq.interfaces.rankit_dominio
+package dummyData
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.Puntuable
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import edu.unq.interfaces.rankit_dominio.AdmUsuarios
+import edu.unq.interfaces.rankit_dominio.RankIT
 
 @Observable
 @Accessors

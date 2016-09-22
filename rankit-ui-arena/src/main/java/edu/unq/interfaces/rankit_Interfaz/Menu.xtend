@@ -1,16 +1,16 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
-import edu.unq.interfaces.rankit_dominio.LugarAppModel
-import edu.unq.interfaces.rankit_dominio.RankITAppModel
-import edu.unq.interfaces.rankit_dominio.ServicioAppModel
-import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
+import appModels.RankITAppModel
+import appModels.UsuarioAppModel
+import appModels.CalificacionAppModel
+import appModels.ServicioAppModel
+import appModels.LugarAppModel
 
 class Menu extends SimpleWindow<RankITAppModel> {
 
@@ -86,6 +86,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 			onClick [|
 				val ServicioAppModel servicioAppModel = new ServicioAppModel(
 					this.modelObject.rankit.admServicios,
+					this.modelObject.rankit.admLugares,
 					this.modelObject.rankit.admCalificaciones,
 					this.modelObject.rankit.usuarioLogeado
 				)
@@ -103,6 +104,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 
 				val LugarAppModel lugarAppModel = new LugarAppModel(
 					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admServicios,
 					this.modelObject.rankit.admCalificaciones,
 					this.modelObject.rankit.usuarioLogeado
 				)

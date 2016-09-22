@@ -1,8 +1,9 @@
-package edu.unq.interfaces.rankit_dominio
+package appModels
 
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Dependencies
+import edu.unq.interfaces.rankit_dominio.RankIT
 
 @Observable
 @Accessors
@@ -10,7 +11,7 @@ class RankITAppModel {
 	
 	private RankIT rankit;
 	
-	new(RankIT it) {
+	new(edu.unq.interfaces.rankit_dominio.RankIT it) {
 	rankit = it
 	}
 	@Dependencies("cantidadTotalDeUsuariosActivos")
@@ -27,3 +28,4 @@ class RankITAppModel {
 		this.rankit.admLugares.habilitados + " / "+ this.rankit.admLugares.inscriptos
 	}
 }
+						

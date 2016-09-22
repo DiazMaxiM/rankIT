@@ -1,4 +1,4 @@
-package edu.unq.interfaces.rankit_dominio
+package appModels
 
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors

@@ -1,4 +1,4 @@
-package edu.unq.interfaces.rankit_dominio
+package appModels
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Dependencies
@@ -6,20 +6,25 @@ import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Observable
 import java.util.Date
 import java.util.List
+import edu.unq.interfaces.rankit_dominio.UsuarioNull
+import edu.unq.interfaces.rankit_dominio.AdmUsuarios
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.Usuario
 
 @Observable
 @Accessors
 
 class UsuarioAppModel implements GenericaAppModel
 {  
-	private Usuario miUsuarioNull=new UsuarioNull
-	private AdmUsuarios administradorDeUsuarios
-	private Usuario itemSeleccionado=miUsuarioNull
-	private AdmCalificaciones administradorDeCalificaciones
+	private edu.unq.interfaces.rankit_dominio.Usuario miUsuarioNull=new UsuarioNull
+	private edu.unq.interfaces.rankit_dominio.AdmUsuarios administradorDeUsuarios
+	private edu.unq.interfaces.rankit_dominio.Usuario itemSeleccionado=miUsuarioNull
+	private edu.unq.interfaces.rankit_dominio.AdmCalificaciones administradorDeCalificaciones
 	private String nombreDeUsuarioABuscar = ""
-	private AdmPuntuables administradorDeLugares
-	private AdmPuntuables administradorDeServicios
-	Usuario usuarioLogeado 
+	private edu.unq.interfaces.rankit_dominio.AdmPuntuables administradorDeLugares
+	private edu.unq.interfaces.rankit_dominio.AdmPuntuables administradorDeServicios
+	edu.unq.interfaces.rankit_dominio.Usuario usuarioLogeado 
 	
 	new (AdmUsuarios admUsuarios,AdmCalificaciones administradorDeCalificaciones,AdmPuntuables admLugares,AdmPuntuables admServicios,Usuario usuarioLogeado)
 	{
@@ -54,7 +59,6 @@ class UsuarioAppModel implements GenericaAppModel
 	def void setNombre(String nombreIngresado) 
 	{
 		administradorDeUsuarios.cambiarNombreSiPuede(itemSeleccionado, nombreIngresado)
-		//itemSeleccionado.cambiarNombre(nombreIngresado)
 		ObservableUtils.firePropertyChanged(this, "nombre",nombre)
 	}
 	
@@ -159,7 +163,7 @@ class UsuarioAppModel implements GenericaAppModel
 	}
 	
 	override textoPrimerParametroDeBusqueda() {
-		"Busqueda Por nombre de Usuario"
+		"Busqueda por nombre de Usuario"
 	}
 	
 	override getPrimerParametroDeBusqueda() {
@@ -225,10 +229,5 @@ class UsuarioAppModel implements GenericaAppModel
 		ObservableUtils.firePropertyChanged(this, "labelValor4", labelValor4)
 	}
 	
-	override getHabilitadoPrimerParametro() {
-	true	
-	}
-	
-	override getHabilitadoSegundoParametro() {}
 	
 }

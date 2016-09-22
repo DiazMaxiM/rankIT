@@ -1,26 +1,32 @@
-package edu.unq.interfaces.rankit_dominio
+package appModels
 
 import org.uqbar.commons.utils.Observable
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.List
 import org.uqbar.commons.model.ObservableUtils
 import org.uqbar.commons.utils.Dependencies
-
+import edu.unq.interfaces.rankit_dominio.PuntuableNull
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
+import edu.unq.interfaces.rankit_dominio.Usuario
+import edu.unq.interfaces.rankit_dominio.Puntuable
 
 @Observable
 @Accessors
 
  abstract class PuntuableAppModel implements GenericaAppModel {
-	val Puntuable miPuntuableNull = new PuntuableNull
+	var Puntuable miPuntuableNull = new PuntuableNull
 	Usuario usuarioLogeado
 	AdmPuntuables administradorDePuntuables
+	AdmPuntuables admPuntuablesParaLasCalificaciones
 	AdmCalificaciones administradorCalificacion
 	Puntuable itemSeleccionado = miPuntuableNull
 	String nombreBuscado
 	
-	new(AdmPuntuables adm1, AdmCalificaciones adm2, Usuario usuarioLogeado) {
-		this.administradorDePuntuables = adm1
-		this.administradorCalificacion = adm2
+	new(AdmPuntuables admPuntuables,AdmPuntuables admDePuntuablesParaLasCalificaciones,AdmCalificaciones admCalificaciones,Usuario usuarioLogeado) {
+		this.administradorDePuntuables=admPuntuables
+		this.admPuntuablesParaLasCalificaciones=admDePuntuablesParaLasCalificaciones
+		this.administradorCalificacion = admCalificaciones
 		this.usuarioLogeado = usuarioLogeado
 
 	}
@@ -70,7 +76,7 @@ import org.uqbar.commons.utils.Dependencies
 		administradorCalificacion.cantidadDeCalificacionesDelPuntuable(itemSeleccionado)
 	}
 	@Dependencies("nombreBuscado")
-	def List<Puntuable>getElementos(){
+	def List<edu.unq.interfaces.rankit_dominio.Puntuable>getElementos(){
 		administradorDePuntuables.buscarPuntuables(nombreBuscado)
 	}
 	@Dependencies("itemSeleccionado")
@@ -101,7 +107,7 @@ import org.uqbar.commons.utils.Dependencies
 	
 	def int deshabilitados(){
 		administradorDePuntuables.deshabilitados
-	}
+	} 
 	override String getLabelNombre1()
 	
 	override String tituloContenedorBusqueda()
@@ -110,17 +116,10 @@ import org.uqbar.commons.utils.Dependencies
 	
 	override blanquearContrasenha() {
 	}
-	
-	override getHabilitadoPrimerParametro() {
-	true
-	}
-	
-	override getHabilitadoSegundoParametro() {
-	}
-	
+
 	
 	override CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow(){
-		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorCalificacion,usuarioLogeado)
+		var CalificacionAppModel calificacionAppModel=new CalificacionAppModel(administradorCalificacion,administradorDePuntuables,admPuntuablesParaLasCalificaciones,usuarioLogeado)
 		.filtradoObligatorioPorPuntuable(itemSeleccionado)
 		calificacionAppModel
 	}

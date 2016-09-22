@@ -3,7 +3,6 @@ package edu.unq.interfaces.rankit_Interfaz
 import edu.unq.interfaces.component.LabelConDatos
 import edu.unq.interfaces.component.LabeledTextBox
 import edu.unq.interfaces.component.Titulo
-import edu.unq.interfaces.rankit_dominio.GenericaAppModel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.layout.VerticalLayout
@@ -15,6 +14,7 @@ import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.widgets.Label
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
 import java.awt.Color
+import appModels.GenericaAppModel
 
 abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 
@@ -54,7 +54,6 @@ abstract class  VistaGenericaWindow extends SimpleWindow<GenericaAppModel> {
 		new LabeledTextBox(panelBusquedaParametros) => [
 			text = this.modelObject.textoPrimerParametroDeBusqueda
 			bindValueToProperty("primerParametroDeBusqueda")
-			bindEnabledToProperty("habilitadoPrimerParametro")
 		]
 		contenedorParaSegundoParametroCalificacion(panelBusquedaParametros)
 	}

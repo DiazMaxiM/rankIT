@@ -21,22 +21,23 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.ErrorsPanel
 import org.uqbar.arena.windows.WindowOwner
-
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
 import edu.unq.interfaces.component.LabelConDatos
+import appModels.CalificacionAppModel
+import appModels.GenericaAppModel
 
 class AdmCalificacionWindow extends VistaGenericaWindow {
 
-	new(WindowOwner parent, CalificacionAppModel model) {
-		super(parent, model)
-	}
+	
 
+	new(WindowOwner parent, GenericaAppModel model) {
+		super(parent, model) 
+	}
+	
 	override contenedorParaSegundoParametroCalificacion(Panel panelBusquedaParametros) {
 		new LabeledTextBox(panelBusquedaParametros) => [
 			text = this.modelObject.textoSegundoParametroDeBusqueda
 			bindValueToProperty("segundoParametroDeBusqueda")
-			bindEnabledToProperty("habilitadoSegundoParametro")
 		]
 	}
 

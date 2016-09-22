@@ -1,4 +1,4 @@
-package edu.unq.interfaces.rankit_dominio
+package appModels
 
 interface GenericaAppModel {
 	def String getLabelNombre1()
@@ -32,11 +32,6 @@ interface GenericaAppModel {
 	def void eliminar()
 	
 	def CalificacionAppModel getElementosNecesariosParaAdmCalificacionWindow()
-
-	def Boolean getHabilitadoPrimerParametro()
-	
-	def Boolean getHabilitadoSegundoParametro()
-	
 	
 	def void blanquearContrasenha()
 	

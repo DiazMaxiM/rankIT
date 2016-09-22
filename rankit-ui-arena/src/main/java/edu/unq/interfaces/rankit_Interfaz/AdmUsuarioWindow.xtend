@@ -11,11 +11,11 @@ import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import static extension org.uqbar.arena.xtend.ArenaXtendExtensions.*
-import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
 import java.text.SimpleDateFormat
 import org.uqbar.arena.bindings.DateTransformer
 import edu.unq.interfaces.component.LabelCheckBox
 import org.uqbar.arena.widgets.TextBox
+import appModels.UsuarioAppModel
 
 class AdmUsuarioWindow extends VistaGenericaWindow
 {
