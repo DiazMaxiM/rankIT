@@ -1,5 +1,12 @@
-package edu.unq.interfaces.rankit_dominio
+package dummyData
 
+import edu.unq.interfaces.rankit_dominio.AdmCalificaciones
+import edu.unq.interfaces.rankit_dominio.AdmPuntuables
+import edu.unq.interfaces.rankit_dominio.AdmUsuarios
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import edu.unq.interfaces.rankit_dominio.Puntuable
+import edu.unq.interfaces.rankit_dominio.RankIT
+import edu.unq.interfaces.rankit_dominio.Usuario
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
 
@@ -18,7 +25,7 @@ class RankITDummy {
 		val usuarioLiza = new Usuario
 		val usuarioRosali = new Usuario
 
-	var Usuario admin = new Usuario => [
+		var Usuario admin = new Usuario => [
 			activo = true
 			baneado = false
 			nombre = "Admin"
@@ -33,9 +40,9 @@ class RankITDummy {
 			password = "Maxi"
 
 		];
-		
+
 		usuarioLiza => [
-			activo = true
+			activo = false
 			baneado = true
 			nombre = "Liza"
 			password = "Liza"
@@ -50,19 +57,19 @@ class RankITDummy {
 		];
 		val lugarParaCalificacion1 = new Puntuable => [
 			habilitado = true
-			nombre = "Lugar 1"
+			nombre = "Abasto"
 		]
 		val lugar2 = new Puntuable => [
 			habilitado = true
-			nombre = "Lugar 2"
+			nombre = "Freddo"
 		]
 		val servicioParaCalificacion1 = new Puntuable => [
 			habilitado = true
-			nombre = "Servicio 1"
+			nombre = "Metrogas"
 		]
 		val servicio2 = new Puntuable => [
 			habilitado = true
-			nombre = "Servicio 2"
+			nombre = "Edesur"
 		]
 
 		val calificacion1 = new Calificacion(usuarioMaxi) => [
@@ -101,6 +108,7 @@ class RankITDummy {
 		admUsuario.agregarUsuarioNuevo(usuarioMaxi)
 		admUsuario.agregarUsuarioNuevo(usuarioLiza)
 		admUsuario.agregarUsuarioNuevo(usuarioRosali)
+		admUsuario.agregarUsuarioNuevo(admin)
 
 		rankit = new RankIT()
 		rankit.admLugares = admLugares

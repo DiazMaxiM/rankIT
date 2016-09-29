@@ -1,9 +1,10 @@
 package edu.unq.interfaces.rankit_Interfaz
 
-import edu.unq.interfaces.rankit_dominio.CalificacionAppModel
-import edu.unq.interfaces.rankit_dominio.PuntuableAppModel
-import edu.unq.interfaces.rankit_dominio.RankITAppModel
-import edu.unq.interfaces.rankit_dominio.UsuarioAppModel
+import appModels.CalificacionAppModel
+import appModels.LugarAppModel
+import appModels.RankITAppModel
+import appModels.ServicioAppModel
+import appModels.UsuarioAppModel
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.VerticalLayout
 import org.uqbar.arena.widgets.Button
@@ -21,7 +22,7 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		this.title = "Rank-IT"
 		contenedorMensaje(mainPanel)
 		contenedorBotonera(mainPanel)
-	// contenedorEstado   (mainPanel)
+		contenedorEstado(mainPanel)
 	}
 
 	def contenedorEstado(Panel mainPanel) {
@@ -30,17 +31,18 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		botoneraPanel.layout = new ColumnLayout(4)
 
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoUsuario")
+			bindValueToProperty("resumenSituacionUsuario")
 		]
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoCalificacion")
+			bindValueToProperty("resumenSituacionCalificacion")
 		]
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoServicio")
+			bindValueToProperty("resumenSituacionServicio")
 		]
 		new Label(botoneraPanel) => [
-			bindValueToProperty("estadoLugar")
+			bindValueToProperty("resumenSituacionLugar")
 		]
+
 	}
 
 	private def contenedorBotonera(Panel mainPanel) {
@@ -51,11 +53,12 @@ class Menu extends SimpleWindow<RankITAppModel> {
 
 		new Button(botoneraPanel) => [
 			caption = "Adm. Usuarios"
-			onClick [ |
+			onClick [|
 				new AdmUsuarioWindow(this, new UsuarioAppModel(
 					this.modelObject.rankit.admUsuarios,
 					this.modelObject.rankit.admCalificaciones,
-					this.modelObject.rankit.admPuntuables,
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admServicios,
 					this.modelObject.rankit.usuarioLogeado
 				)).open
 			]
@@ -63,31 +66,53 @@ class Menu extends SimpleWindow<RankITAppModel> {
 		new Button(botoneraPanel) => [
 			caption = "Adm. Calificaciones"
 			onClick [|
+
+				val CalificacionAppModel calAppModel = new CalificacionAppModel(
+					this.modelObject.rankit.admCalificaciones,
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admServicios,
+					this.modelObject.rankit.usuarioLogeado
+				)
+
+				// var   nuevoAdapter = new AdapterCalificacionAppModel(calAppModel)
 				new AdmCalificacionWindow(
 					this,
-					new CalificacionAppModel(
-						this.modelObject.rankit.admCalificaciones,
-						this.modelObject.rankit.admLugares,
-						this.modelObject.rankit.admServicios,
-						this.modelObject.rankit.usuarioLogeado
-					)
+					calAppModel
 				).open
 			]
 		]
 		new Button(botoneraPanel) => [
 			caption = "Adm. Servicios"
 			onClick [|
-				new AdmServicioWindow(this,
-					new PuntuableAppModel(this.modelObject.rankit.admServicios,
-						this.modelObject.rankit.admCalificaciones, this.modelObject.rankit.usuarioLogeado)).open
+				val ServicioAppModel servicioAppModel = new ServicioAppModel(
+					this.modelObject.rankit.admServicios,
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admCalificaciones,
+					this.modelObject.rankit.usuarioLogeado
+				)
+
+				new AdmPuntuableWindow(
+					this,
+					servicioAppModel
+				).open
 			]
+
 		]
 		new Button(botoneraPanel) => [
 			caption = "Adm. Lugares"
 			onClick [|
-				new AdmLugarWindow(this,
-					new PuntuableAppModel(this.modelObject.rankit.admLugares, this.modelObject.rankit.admCalificaciones,
-						this.modelObject.rankit.usuarioLogeado)).open
+
+				val LugarAppModel lugarAppModel = new LugarAppModel(
+					this.modelObject.rankit.admLugares,
+					this.modelObject.rankit.admServicios,
+					this.modelObject.rankit.admCalificaciones,
+					this.modelObject.rankit.usuarioLogeado
+				)
+
+				new AdmPuntuableWindow(
+					this,
+					lugarAppModel
+				).open
 			]
 		]
 	}

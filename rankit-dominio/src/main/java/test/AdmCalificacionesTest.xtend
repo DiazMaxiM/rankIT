@@ -31,19 +31,26 @@ class AdmCalificacionesTest {
 	var servicio2 = mock(typeof(Puntuable))
 	var servicio3 = mock(typeof(Puntuable))
 	val usuarioMock = mock(typeof(Usuario))
+	val usuarioMock2 = mock(typeof(Usuario))
 
 	@Before
 	def void SetUp() {
 		admCalificacion = new AdmCalificaciones
 		when(usuarioMock.nombre).thenReturn("Maxi");
-
+		when(usuarioMock2.nombre).thenReturn("Rosali");
+		
+		when(usuarioMock.deNombre("Rosali")).thenReturn(false);
+		when(usuarioMock.deNombre("Maxi")).thenReturn(true);
+		
+		when(usuarioMock2.deNombre("Rosali")).thenReturn(true);
+		when(usuarioMock2.deNombre("Maxi")).thenReturn(false);
+		
+	
 		when(lugar1.nombre).thenReturn("San Cayetano");
 		when(lugar2.nombre).thenReturn("Yona");
 		when(lugar3.nombre).thenReturn("Fravega");
 
-		when(calificacionMock1.isPuntuableBuscado(lugar1)).thenReturn(true);
-		when(calificacionMock2.isPuntuableBuscado(lugar1)).thenReturn(true);
-
+	
 		when(calificacionMock1.puntos).thenReturn(15);
 		when(calificacionMock2.puntos).thenReturn(45);
 
@@ -123,7 +130,7 @@ class AdmCalificacionesTest {
 		admCalificacion.contenidoOfensivo(calificacionMock6, true)
 
 		verify(calificacionMock6).contenidoOfensivo = true
-		verify(usuarioMock).baneado = true
+		verify(usuarioMock).banear = true
 
 	}
 
@@ -178,4 +185,24 @@ class AdmCalificacionesTest {
 		Assert.assertEquals(admCalificacion.listaCalificaciones, listaConUnaSolaCalificacion)
 
 	}
+	@Test
+	def void testEliminarCalificacionDeUnUsuarioEliminado() {
+		when(calificacionMock6.usuario).thenReturn(usuarioMock2);
+		agregar6CalificacionesMockOfensivas
+		
+		admCalificacion.eliminarCalificacionesDelUsuario(usuarioMock2)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas, 5)
+		
+	}
+	@Test
+	def void testEliminarCalificacionDeUnPuntuableEliminado() {
+
+		agregar6CalificacionesMockOfensivas
+		
+		admCalificacion.eliminarCalificacionesDelPuntuable(lugar1)
+		
+		Assert.assertEquals(admCalificacion.calificacionesRegistradas, 4)
+		
+	}	
 }

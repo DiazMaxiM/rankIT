@@ -26,4 +26,9 @@ class LabeledTextBox extends AbstractLabeledWidget {
 		this
 	}
 	
+	def bindEnabledToProperty(String property) {
+		textBox.bindEnabledToProperty(property)
+		this
+	}
+	
 }

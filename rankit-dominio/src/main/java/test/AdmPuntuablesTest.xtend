@@ -3,17 +3,16 @@ import edu.unq.interfaces.rankit_dominio.AdmPuntuables
 import org.junit.Test
 import static org.junit.Assert.*;
 import edu.unq.interfaces.rankit_dominio.Puntuable
-import javassist.expr.Cast
 import org.uqbar.commons.model.UserException
 
 class AdmPuntuablesTest {
 	
 	 /**
-	  * En este test pruebo que al agregar tres lugares al admistrador de 
-	  * puntuables, se actualizan los lugares inscriptos
+	  * Pruebo que al agregar tres lugares al admistrador de 
+	  * puntuables, se actualizan la cantidad de lugares inscriptos
 	  */
 	 @Test
-	 def lugaresInscriptos(){
+	 def testCantidadDeLugaresInscriptos(){
 	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
@@ -25,45 +24,12 @@ class AdmPuntuablesTest {
 	 	
 	 }
 	 
-	 /**
-	  * En este test pruebo que al agregar tres servicios al admistrador de 
-	  * puntuables, se actualizan los servicios inscriptos
-	  */
-	 @Test
-	 def serviciosInscriptos(){
-	 	var admServicios= new AdmPuntuables()
-	 	var servicio1= new Puntuable
-	    var servicio2= new Puntuable
-	    var servicio3= new Puntuable
-	 	admServicios.agregar(servicio1)
-	 	admServicios.agregar(servicio2)
-	 	admServicios.agregar(servicio3)
-        assertEquals(admServicios.inscriptos,3)
-	 	
-	 }
-	 /**
-	  * En este test pruebo que al agregar tres lugares al admisitrador de 
-	  * puntuables, se actualizan los lugares habilitados 
-	  */
-	 @Test 
-	 def lugaresHabilitados(){
-	 	var admLugares= new AdmPuntuables()
-	 	var lugar1= new Puntuable
-	    var lugar2= new Puntuable
-	    var lugar3= new Puntuable
-	 	admLugares.agregar(lugar1)
-	 	admLugares.agregar(lugar2)
-	 	admLugares.agregar(lugar3)
-        assertEquals(admLugares.habilitados,0)
-	 	
-	 }
-	 
 	  /**
-	  * En este test pruebo que al agregar tres servicios al admistrador de 
-	  * puntuables, se actualizan los servicios habilitados
+	  * Pruebo que al eliminar un servicio al admistrador
+	  *  se actualiza la cantidad de lugares inscriptos
 	  */
 	 @Test
-	 def serviciosHabilitados(){
+	 def testCantidadDeServiciosInscriptosDespuesDeEliminarUnServicio(){
 	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
@@ -71,17 +37,22 @@ class AdmPuntuablesTest {
 	 	admServicios.agregar(servicio1)
 	 	admServicios.agregar(servicio2)
 	 	admServicios.agregar(servicio3)
-        assertEquals(admServicios.habilitados,0)
+	 	admServicios.eliminar(servicio2)
+	 	
+        assertEquals(admServicios.inscriptos,2)
+        assertTrue(admServicios.puntuables.contains(servicio1))
+	 	assertTrue(admServicios.puntuables.contains(servicio3))
+	 	assertFalse(admServicios.puntuables.contains(servicio2))
 	 	
 	 }
 	 
 	 
 	 /**
-	  * En este test pruebo que al agregar tres lugares al admisitrador de 
+	  * Pruebo que al agregar tres lugares al admisitrador de 
 	  * puntuables, se actualizan los lugares Deshabilitados 
 	  */
 	 @Test 
-	 def lugaresDeshabilitados(){
+	 def testCantidadDeLugaresDeshabilitados(){
 	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
@@ -93,29 +64,13 @@ class AdmPuntuablesTest {
 	 	
 	 }
 	 
-	  /**
-	  * En este test pruebo que al agregar tres servicios al admistrador de 
-	  * puntuables, se actualizan los servicios Deshabilitados
-	  */
-	 @Test
-	 def serviciosDeshabilitados(){
-	 	var admServicios= new AdmPuntuables()
-	 	var servicio1= new Puntuable
-	    var servicio2= new Puntuable
-	    var servicio3= new Puntuable
-	 	admServicios.agregar(servicio1)
-	 	admServicios.agregar(servicio2)
-	 	admServicios.agregar(servicio3)
-        assertEquals(admServicios.deshabilitados,3)
-	 	
-	 }
 	 
 	 /**
-	  * En este test pruebo que al agregar tres lugares al admisitrador de 
-	  * puntuables y habilitar dos, se actualizan los lugares habilitados
+	  * Pruebo que al agregar tres lugares al admisitrador de 
+	  * puntuables y al habilitar dos, se actualizan los lugares habilitados
 	  */
 	 @Test 
-	 def habilitarLugares(){
+	 def testCantidadDeLugaresHabilitados(){
 	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
@@ -123,18 +78,22 @@ class AdmPuntuablesTest {
 	 	admLugares.agregar(lugar1)
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
+	 	lugar1.nombre="Freddo"
 	 	lugar1.habilitado=true
+	 	lugar3.nombre="San Cayetano"
 	 	lugar3.habilitado=true
         assertEquals(admLugares.habilitados,2)
+ 
 	 	
 	 }
 	 
+	 
 	  /**
-	  * En este test pruebo que al agregar tres servicios al admistrador de 
-	  * puntuables y habilitar dos, se actualizan los servicios habilitados
+	  * Pruebo que al agregar tres servicios al admistrador de 
+	  * puntuables y al habilitar dos, se actualizan los servicios Deshabilitados
 	  */
 	 @Test
-	 def habilitarServicios(){
+	 def testCantidadDeServiciosDeshabilitados(){
 	 	var admServicios= new AdmPuntuables()
 	    var servicio1= new Puntuable
 	    var servicio2= new Puntuable
@@ -142,92 +101,44 @@ class AdmPuntuablesTest {
 	 	admServicios.agregar(servicio1)
 	 	admServicios.agregar(servicio2)
 	 	admServicios.agregar(servicio3)
+	 	servicio1.nombre="Metrogas"
 	 	servicio1.habilitado=true
-	 	servicio3.habilitado=true
-        assertEquals(admServicios.habilitados,2)
-	 	
-	 }
-	 
-	  /**
-	  * En este test pruebo que al agregar tres lugares al admisitrador de 
-	  * puntuables y habilitar dos, se actualizan los lugares Deshabilitados
-	  */
-	 @Test 
-	 def habilitarLugaresYSeActualizaLosLugaresDeshabilitados(){
-	 	var admLugares= new AdmPuntuables()
-	 	var lugar1= new Puntuable
-	    var lugar2= new Puntuable
-	    var lugar3= new Puntuable
-	 	admLugares.agregar(lugar1)
-	 	admLugares.agregar(lugar2)
-	 	admLugares.agregar(lugar3)
-	 	lugar1.habilitado=true
-	 	lugar3.habilitado=true
-        assertEquals(admLugares.deshabilitados,1)
-	 	
-	 }
-	 
-	 
-	  /**
-	  * En este test pruebo que al agregar tres servicios al admistrador de 
-	  * puntuables y habilitar dos, se actualizan los servicios Deshabilitados
-	  */
-	 @Test
-	 def habilitarServiciosYSeActualizanServiciosDeshabilitados(){
-	 	var admServicios= new AdmPuntuables()
-	    var servicio1= new Puntuable
-	    var servicio2= new Puntuable
-	    var servicio3= new Puntuable
-	 	admServicios.agregar(servicio1)
-	 	admServicios.agregar(servicio2)
-	 	admServicios.agregar(servicio3)
-	 	servicio1.habilitado=true
+	 	servicio3.nombre="Edesur"
 	 	servicio3.habilitado=true
         assertEquals(admServicios.deshabilitados,1)
 	 	
 	 }
 	 /**
-	  * En este test pruebo que al buscar un lugar sin enviarle datos
+	  * Pruebo que al buscar un lugar sin enviarle datos
 	  * me devuelve todos los lugares inscriptos
 	  */
 	 @Test 
-	 def buscarLugarPorNombre(){
+	 def testBuscarUnLugarPorNombre(){
 	 	var admLugares= new AdmPuntuables()
 	    var lugar1= new Puntuable
+	    lugar1.nombre="San Cayetano"
 	    var lugar2= new Puntuable
+	    lugar2.nombre="Yona"
 	    var lugar3= new Puntuable
+	    lugar3.nombre="Sushi pop"
 	 	admLugares.agregar(lugar1)
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admLugares.buscar("").size,3)
+	 	assertEquals(admLugares.buscarPuntuables("").size,3)
+	 	assertTrue(admLugares.puntuables.contains(lugar1))
+	 	assertTrue(admLugares.puntuables.contains(lugar2))
+	 	assertTrue(admLugares.puntuables.contains(lugar3))
 	 	
 	 }
 	 
-	 /**
-	  * En este test pruebo que al buscar un servicio sin enviarle datos
-	  * me devuelve todos los servicios inscriptos
-	  */
-	 @Test 
-	 def buscarServicioPorNombre(){
-	    var admServicios= new AdmPuntuables()
-	 	var servicio1= new Puntuable
-	    var servicio2= new Puntuable
-	    var servicio3= new Puntuable
-	 	admServicios.agregar(servicio1)
-	 	admServicios.agregar(servicio2)
-	 	admServicios.agregar(servicio3)
-	 	
-	 	assertEquals(admServicios.buscar("").size,3)
-	 	
-	 }
 	 
-	 	 /**
+	  /**
 	  * En este test pruebo que al buscar un lugar por sus letras
 	  * me devuelve todos los lugares que contienen las letras ingresadas
 	  */
 	 @Test 
-	 def buscarLugaresPorLetras(){
+	 def testBuscarLugaresPorLetras(){
 	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
@@ -239,60 +150,18 @@ class AdmPuntuablesTest {
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admLugares.buscar("n").size,2)
-	 	assertTrue(admLugares.buscar("n").contains(lugar2))
-	 	assertTrue(admLugares.buscar("n").contains(lugar1))
-	 	assertFalse(admLugares.buscar("n").contains(lugar3))
-	 }
-	 
-	 /**
-	  * En este test pruebo que al buscar un servicio por sus letras
-	  * me devuelve todos los servicios que contienen las letras ingresadas
-	  */
-	 @Test 
-	 def buscarServiciosPorLetras(){
-	    var admServicios= new AdmPuntuables()
-	 	var servicio1= new Puntuable
-	    var servicio2= new Puntuable
-	    var servicio3= new Puntuable
-	 	admServicios.agregar(servicio1)
-	 	admServicios.agregar(servicio2)
-	 	admServicios.agregar(servicio3)
-	 	servicio1.nombre="Metrogas"
-	 	servicio2.nombre="Edesur"
-	 	servicio3.nombre="Movistar"
-	 	
-	 	assertEquals(admServicios.buscar("e").size,2)
-	 	assertTrue(admServicios.buscar("e").contains(servicio1))
-	 	assertTrue(admServicios.buscar("e").contains(servicio2))
-	 	assertFalse(admServicios.buscar("e").contains(servicio3))
-	 }
-	 /**
-	  * En este test quiero probar que cuando busco un lugar que no esta inscripto 
-	  * no hay resultados 
-	  */
-	 @Test 
-	 def noHayLugarConElNombre(){
-	 	var admLugares= new AdmPuntuables()
-	 	var lugar1= new Puntuable
-	    var lugar2= new Puntuable
-	    var lugar3= new Puntuable
-	    lugar3.nombre="Fravega"
-	    lugar2.nombre="Yona"
-	    lugar1.nombre="San Cayetano"
-	 	admLugares.agregar(lugar1)
-	 	admLugares.agregar(lugar2)
-	 	admLugares.agregar(lugar3)
-	 	
-	 	assertEquals(admLugares.buscar("Garbarino").size,0)
+	 	assertEquals(2,admLugares.buscarPuntuables("n").size)
+	 	assertTrue(admLugares.buscarPuntuables("n").contains(lugar2))
+	 	assertTrue(admLugares.buscarPuntuables("n").contains(lugar1))
+	 	assertFalse(admLugares.buscarPuntuables("n").contains(lugar3))
 	 }
 	 
 	  /**
-	  * En este test quiero probar que cuando busco un servicio que no esta inscripto 
+	  * Pruebo que cuando busco un servicio que no esta inscripto 
 	  * no hay resultados 
 	  */
 	 @Test 
-	 def noHayServicioConElNombre(){
+	 def testNoHayServicioConElNombre(){
 	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
 	    var servicio2= new Puntuable
@@ -304,15 +173,16 @@ class AdmPuntuablesTest {
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"
 	 	
-	 	assertEquals(admServicios.buscar("Edenor").size,0)
+	 	assertEquals(admServicios.buscarPuntuables("Edenor").size,0)
+	 	
 	 }
 	 
 	  /**
-	  * En este test quiero probar que cuando busco un lugar que no esta inscripto 
+	  * Prue que al buscar un lugar que no esta inscripto 
 	  * no hay resultados 
 	  */
 	 @Test 
-	 def noHayLugaresConLasLetras(){
+	 def testNoHayLugaresConLasLetras(){
 	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
 	    var lugar2= new Puntuable
@@ -324,35 +194,14 @@ class AdmPuntuablesTest {
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
 	 	
-	 	assertEquals(admLugares.buscar("h").size,0)
-	 }
-	 
-	   /**
-	  * En este test quiero probar que cuando busco un servicio que no esta inscripto 
-	  * no hay resultados 
-	  */
-	 @Test 
-	 def noHayServiciosConElNombre(){
-	 	var admServicios= new AdmPuntuables()
-        var servicio1= new Puntuable
-	    var servicio2= new Puntuable
-	    var servicio3= new Puntuable
-	 	admServicios.agregar(servicio1)
-	 	admServicios.agregar(servicio2)
-	 	admServicios.agregar(servicio3)
-	 	servicio1.nombre="Metrogas"
-	 	servicio2.nombre="Edesur"
-	 	servicio3.nombre="Movistar"
-	 	
-	 	assertEquals(admServicios.buscar("z").size,0)
+	 	assertEquals(admLugares.buscarPuntuables("h").size,0)
 	 }
 	 
 	 /**
-	  * En este test quiero probar que cuando pregunto por un nombre que ya esta registrado 
-	  * tira una excepcion 
+	   Verifico si el nombre de un lugar ya esta usado
 	  */
 	 @Test(expected=UserException )
-	 def hayLugaresDuplicados(){
+	 def testYaExisteUnLugarConELNombreQueSeQuiereUsar(){
 	 	
 	 	var admLugares= new AdmPuntuables()
 	 	var lugar1= new Puntuable
@@ -365,17 +214,15 @@ class AdmPuntuablesTest {
 	 	admLugares.agregar(lugar2)
 	 	admLugares.agregar(lugar3)
 	 	
-	 	
-	 	
+	 	admLugares.cambiarNombreSiPuedeDelPuntuable(lugar3,"Yona")
 	 }
 	 
+	  
 	 /**
-	  * En este test quiero probar que cuando pregunto por un nombre que ya esta registrado 
-	  * tira una excepcion 
+	   Verifico si el nombre de un servicio ya esta usado
 	  */
-	 
-	 @Test 
-	 def void hayServiciosDuplicados(){
+	 @Test
+	 def testNoHayServicioConElNombreQueSeQuiereUtilizar(){
 	 	
 	 	var admServicios= new AdmPuntuables()
 	 	var servicio1= new Puntuable
@@ -387,9 +234,13 @@ class AdmPuntuablesTest {
 	 	servicio1.nombre="Metrogas"
 	 	servicio2.nombre="Edesur"
 	 	servicio3.nombre="Movistar"
-	 	// hay que tirar una excepcion
 	 	
+	 	
+	 	admServicios.cambiarNombreSiPuedeDelPuntuable(servicio3,"Edenor")
+	 	assertEquals(servicio3.nombre,"Edenor")
 	 }
+	 
+	 
 	 
 	
 }
