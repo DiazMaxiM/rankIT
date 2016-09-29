@@ -81,7 +81,7 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		]
 		new Label(contenedorFechaColumna) => [
 			bindEnabledToProperty("hayItemSeleccionado")
-			bindValueToProperty("itemSeleccionado.evaluado.nombre") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+			bindValueToProperty("itemSeleccionado.evaluado.nombre") 
 		]
 
 		new Label(contenedorOpciones) => [
@@ -96,7 +96,7 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		]
 		new TextBox(contenedorOpciones) => [
 			bindEnabledToProperty("hayItemSeleccionado")
-			bindValueToProperty("itemSeleccionado.detalle") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+			bindValueToProperty("itemSeleccionado.detalle") 
 			height = 50
 		]
 
@@ -108,7 +108,7 @@ class AdmCalificacionWindow extends VistaGenericaWindow {
 		val contenedorContOfensivoHorizontalColumna = new Panel(contenedorContOfensivoHorizontal)
 		contenedorContOfensivoHorizontalColumna.layout = new ColumnLayout(2)
 		new CheckBox(contenedorContOfensivoHorizontalColumna) => [
-			bindValueToProperty("contenidoOfensivo") // .transformer = [ fecha | new SimpleDateFormat("dd/MM/YYYY").format(fecha)]
+			bindValueToProperty("contenidoOfensivo")
 			bindEnabledToProperty("hayItemSeleccionado")
 		]
 		new Label(contenedorContOfensivoHorizontalColumna) => [
