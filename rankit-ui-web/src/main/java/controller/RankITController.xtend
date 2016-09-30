@@ -19,10 +19,27 @@ class RankITController {
        	  	this.admCalificaciones=admCalificaciones
        	  	this.admUsuarios=admUsuarios
        	  	this.admPuntuables=admPuntuables
-       	  }
+       	}
+    
     @Get("/puntuables")
      def getPuntuables() {
         response.contentType = "application/json"
         ok(this.admPuntuables.getPuntuables.toJson)
+    }
+    
+    @Get("/puntuables/:id")
+    def getLibroById() {
+        response.contentType = "application/json"
+        try {        	
+            var puntuable = this.admPuntuables.getPuntuable(Integer.valueOf(id))
+            if (puntuable == null) {
+            	notFound('{ "error": "No existe Evaluado con ese id" }')
+            } else {
+            	ok(puntuable.toJson)
+            }
+        }
+        catch (NumberFormatException ex) {
+        	badRequest('{ "error": "El id debe ser un numero entero" }')
+        }
     }
 } 
