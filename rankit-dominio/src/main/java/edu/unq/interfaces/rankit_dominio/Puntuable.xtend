@@ -10,9 +10,10 @@ import org.uqbar.commons.utils.Observable
 class Puntuable {
 
 	private var Date fechaDeRegistro
-	private var String nombre
 	private var boolean habilitado
-
+	private var int id
+	private var Tipo tipo
+    private var String nombre
 	/**
 	 * Constructor de un objeto Puntuable, por defecto cuando se crea esta deshabilitado 
 	 * y la fecha de registro es la fecha en que se creo 
@@ -21,6 +22,13 @@ class Puntuable {
 		this.fechaDeRegistro = new Date()
 		this.nombre = ""
 		this.habilitado = false
+	}
+	
+	new (int id, Tipo tipo,String nombre){
+		this.id=id
+		this.tipo=tipo
+		this.nombre=nombre
+		
 	}
 
 	def boolean nombreContieneLasLetras(String letras) {
@@ -52,6 +60,16 @@ class Puntuable {
 
 	def tieneNombre() {
 		!this.nombre.equals("")
+	}
+	def getId(){
+		id
+	}
+	
+	def getNombre(){
+		nombre
+	}
+	def getTipo(){
+		tipo
 	}
 
 }
