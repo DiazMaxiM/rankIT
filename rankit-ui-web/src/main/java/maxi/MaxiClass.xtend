@@ -1,0 +1,5 @@
+package maxi
+
+class MaxiClass {
+	
+}
