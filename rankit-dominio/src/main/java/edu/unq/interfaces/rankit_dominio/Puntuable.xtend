@@ -11,7 +11,7 @@ class Puntuable {
 
 	private var Date fechaDeRegistro
 	private var boolean habilitado
-	private var int id
+	private var Integer id
 	private var Tipo tipo
     private var String nombre
 	/**
@@ -70,6 +70,10 @@ class Puntuable {
 	}
 	def getTipo(){
 		tipo
+	}
+	
+	def boolean tieneElId(Integer integer) {
+		id.equals(integer)
 	}
 
 }

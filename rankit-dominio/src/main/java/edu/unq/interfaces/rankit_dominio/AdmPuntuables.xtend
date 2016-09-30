@@ -132,4 +132,9 @@ class AdmPuntuables {
 	private def boolean hayPuntuableConElNombre(String nombre) {
 		!(puntuablesConElNombre(nombre).empty)
 	}
+	
+	def Puntuable getPuntuable(Integer integer) {
+		puntuables.findFirst[puntuable|puntuable.tieneElId(integer)]
+	}
+	
 }
