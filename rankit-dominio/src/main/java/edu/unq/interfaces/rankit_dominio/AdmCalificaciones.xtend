@@ -16,6 +16,7 @@ import org.uqbar.commons.utils.Observable
 @Accessors
 class AdmCalificaciones {
 	List<Calificacion> listaCalificaciones = new ArrayList
+	private int secuenciaId=1
 
 	/**
 	 * @param nombreEvaluadoBusqueda nombre del evaluado por el que se desea filtrar
@@ -64,6 +65,8 @@ class AdmCalificaciones {
 	 * @param calificacion Calificacion para agregar en el admiminstrador de calificaciones
 	 */
 	def void agregarCalificacion(Calificacion calificacion) {
+		calificacion.id=secuenciaId
+		secuenciaId+=1
 		listaCalificaciones.add(calificacion)
 	}
 
@@ -153,7 +156,7 @@ class AdmCalificaciones {
 		listaCalificaciones.exists[calificacion|calificacion.usuario.deNombre(nombreDeUsuario)]
 	}
 
-	private def List<Calificacion> publicacionesDeUnUsuario(String nombreDeUsuario) {
+	def List<Calificacion> publicacionesDeUnUsuario(String nombreDeUsuario) {
 		listaCalificaciones.filter[calificacion|calificacion.usuario.deNombre(nombreDeUsuario)].toList
 	}
 
@@ -189,4 +192,23 @@ class AdmCalificaciones {
 		}
 		agregarCalificacion(calificacion)
 	}
+	
+	def eliminarCalificacionConLaId(String id) {
+		if (id.isNullOrEmpty){
+			throw new NoSeInformaCalificacionException("No se informo la calificacion a eliminar")
+		}
+		if (existeCalificacionConId(id)) {
+			var calificacionAEliminar = listaCalificaciones.findFirst[calificacion |calificacion.id.toString.equals(id)]
+			eliminarCalificacion(calificacionAEliminar)
+		}
+		else {
+			throw new NoExisteCalificacionException("No existe la calificacion a eliminar")
+		}
+	}
+	
+	def existeCalificacionConId(String id) {
+		listaCalificaciones.exists[calificacion | calificacion.id.toString.equals(id)]
+	}
+	
+	
 }
