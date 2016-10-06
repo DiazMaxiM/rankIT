@@ -145,4 +145,31 @@ class AdmUsuarios {
 		respuesta
 	}
 
+	def int validarUsuario(Usuario usuario) {
+		var usuarios = usuariosDeNombre(usuario.nombre)
+		if (!usuarios.empty) {
+			if (usuarios.get(0).password.equals(usuario.password)) {
+				return usuarios.get(0).id
+			} else {
+				throw new PasswordIncorrectoException("Password Invalido")
+			}
+		} else {
+				throw new UsuarioNoExistenteException("Usuario Invalido")
+			
+		}
+	}
+
+	
+	def int devolverIdDelUsuario(Usuario usuario) {
+		usuariosDeNombre(usuario.nombre).get(0).id
+	}
+     
+    def void crearUsuario(Usuario usuario){
+    	  var usuarios = usuariosDeNombre(usuario.nombre)
+		  if (!usuarios.empty){
+		  
+		      throw new NombreInvalidoException("Nombre invalido")
+			}
+    	  this.agregarUsuarioNuevo(usuario)
+    }
 }
