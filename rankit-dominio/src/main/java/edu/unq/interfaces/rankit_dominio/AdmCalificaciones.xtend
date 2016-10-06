@@ -181,5 +181,12 @@ class AdmCalificaciones {
 		}
 		listaDeCalificacionesResumida
 	}
-
+	
+	def void agregarNuevaCalificacionValidada(Calificacion calificacion) {
+		if (calificacion.puntos == null || calificacion.detalle.isNullOrEmpty || calificacion.evaluado == null){
+			throw new CalificacionIncompletaException("La Calificacion Esta Incompleta")
+			
+		}
+		agregarCalificacion(calificacion)
+	}
 }

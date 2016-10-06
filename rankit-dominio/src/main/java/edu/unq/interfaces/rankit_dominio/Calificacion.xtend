@@ -13,7 +13,7 @@ class Calificacion {
 	private Date fecha
 	private boolean contenidoOfensivo
 	private String detalle
-	private Puntuable evaluado
+	private PuntuableAbstracto evaluado
 	private Usuario usuario
 
 	new(Usuario usuario) {
@@ -24,8 +24,9 @@ class Calificacion {
 		this.evaluado = new PuntuableNull()
 		this.usuario = usuario
 	}
-
-	def void setPuntos(String valor) {
+	new() {
+	}
+	def void dssetPuntos(String valor) {
 		if (valor.contains(",")) {
 			throw new UserException("El puntaje debe ser un numero entero")
 		}
@@ -35,5 +36,6 @@ class Calificacion {
 		puntos = Integer.parseInt(valor)
 
 	}
+
 
 }

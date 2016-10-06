@@ -23,6 +23,8 @@ import java.util.ArrayList
 import edu.unq.interfaces.rankit_dominio.CalificacionResumida
 import edu.unq.interfaces.rankit_dominio.FiltroBusqueda
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesResumidas
+import edu.unq.interfaces.rankit_dominio.Calificacion
+import edu.unq.interfaces.rankit_dominio.CalificacionIncompletaException
 
 @Controller
 class RankITController {
@@ -34,7 +36,7 @@ class RankITController {
 		this.rankit= rankit
 	}
 
-	@Get("/puntuables")
+	@Get("/evaluados")
 	def getPuntuables() {
 		response.contentType = "application/json"
 		var List<PuntuablesBasicos> lista =this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
@@ -80,5 +82,20 @@ class RankITController {
 		admCalificacionesResumidas.agregar(this.rankit.admCalificaciones.listarCalificacionesResumidas(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO)))
 		
 		ok(admCalificacionesResumidas.filtrar(nombre,tipo,ranking,calificaciones).toJson)
+	}
+		@Post("/calificaciones")
+	def ingresarCalificacion(@Body String body) {
+		response.contentType = "application/json"
+		try {
+			var Calificacion calificacion = body.fromJson(typeof(Calificacion))
+			this.rankit.admCalificaciones.agregarNuevaCalificacionValidada(calificacion)
+			ok()
+		} catch (CalificacionIncompletaException e) {
+			badRequest('{ "error": "La Calificacion se encuentra incompleta" }')
+			}
+		 catch (UnrecognizedPropertyException exception) {
+			badRequest('{ "error": "Algo anda mal" }')
+		}
+
 	}
 }
