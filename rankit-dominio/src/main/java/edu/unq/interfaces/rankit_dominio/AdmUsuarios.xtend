@@ -10,17 +10,19 @@ import org.uqbar.commons.utils.Observable
 @Accessors
 class AdmUsuarios {
 	private List<Usuario> usuarios = new ArrayList<Usuario>()
-
+	private int secuenciaId=1
 	/**
 	 * PROPÓSITO: Agrega un usuario especificado por parámetro.
 	 * @param usuarioNuevo: Es el usuario nuevo a agregar.
 	 */
-	def void agregarUsuarioNuevo() {
+	def void agregarUsuario() {
 		var usuarioNuevo = new Usuario
-		usuarios.add(usuarioNuevo)
+		agregarUsuario(usuarioNuevo)
 	}
 
-	def agregarUsuarioNuevo(Usuario usuarioNuevo) {
+	def agregarUsuario(Usuario usuarioNuevo) {
+		usuarioNuevo.id =secuenciaId
+		secuenciaId+=1
 		usuarios.add(usuarioNuevo)
 	}
 
@@ -170,6 +172,6 @@ class AdmUsuarios {
 		  
 		      throw new NombreInvalidoException("Nombre invalido")
 			}
-    	  this.agregarUsuarioNuevo(usuario)
+    	  this.agregarUsuario(usuario)
     }
 }

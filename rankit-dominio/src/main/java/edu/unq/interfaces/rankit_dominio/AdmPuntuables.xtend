@@ -11,11 +11,13 @@ import org.uqbar.commons.utils.Observable
 @Accessors
 class AdmPuntuables {
 	List<Puntuable> puntuables = new ArrayList
-
+	private int secuenciaId=1
 	/**
 	 * @param puntuable representa al puntuable que se desea agregar a la lista de puntuables
 	 */
 	def void agregar(Puntuable puntuable) {
+		puntuable.id=secuenciaId
+		secuenciaId+=1
 		puntuables.add(puntuable)
 	}
 
@@ -135,6 +137,14 @@ class AdmPuntuables {
 	
 	def Puntuable getPuntuable(Integer integer) {
 		puntuables.findFirst[puntuable|puntuable.tieneElId(integer)]
+	}
+	
+	def getPuntuablesBasicos(TipoDePuntuable tipo) {
+		var List<PuntuablesBasicos> listaPuntuableBasico = new ArrayList
+		for(puntuable : this.puntuables){
+			listaPuntuableBasico.add(new PuntuablesBasicos(puntuable,tipo))
+		}	
+		listaPuntuableBasico		
 	}
 	
 }

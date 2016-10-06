@@ -70,7 +70,7 @@ class AdmCalificaciones {
 	/**
 	 * @param puntuable Puntuable sobre el cual se desea saber el promedio de calificaciones obtenidas
 	 */
-	def ratingPromedio(Puntuable puntuable) {
+	def ratingPromedio(PuntuableAbstracto puntuable) {
 		if (!cantidadDeCalificacionesDelPuntuable(puntuable).equals(0)) {
 			puntajeDelPuntuable(puntuable) / cantidadDeCalificacionesDelPuntuable(puntuable)
 		} else {
@@ -81,7 +81,7 @@ class AdmCalificaciones {
 	/**
 	 * @param puntuable cantidad de calificaciones de un puntuable
 	 */
-	def cantidadDeCalificacionesDelPuntuable(Puntuable puntuable) {
+	def cantidadDeCalificacionesDelPuntuable(PuntuableAbstracto puntuable) {
 		calificacionesDelPutuable(puntuable).size
 	}
 
@@ -115,7 +115,7 @@ class AdmCalificaciones {
 	 * @param Puntuable puntuable del que se desea saber la cantidad total de puntos en todas las calificaciones
 	 * @return Integer cantidad total del puntos
 	 */
-	private def Integer puntajeDelPuntuable(Puntuable puntuable) {
+	private def Integer puntajeDelPuntuable(PuntuableAbstracto puntuable) {
 		calificacionesDelPutuable(puntuable).fold(0, [acumulador, calificacion|acumulador + calificacion.puntos])
 	}
 
@@ -141,7 +141,7 @@ class AdmCalificaciones {
 	/**
 	 * @param Puntuable sobre el que se desea saber la cantidad de calificaciones que tiene
 	 */
-	private def calificacionesDelPutuable(Puntuable puntuable) {
+	private def calificacionesDelPutuable(PuntuableAbstracto puntuable) {
 		listaCalificaciones.filter[calificacion|calificacion.evaluado.nombre.equals(puntuable.nombre)].toList
 	}
 
@@ -171,6 +171,15 @@ class AdmCalificaciones {
 
 	def eliminarCalificacionesDelPuntuable(Puntuable puntuable) {
 		listaCalificaciones.removeAll(calificacionesDelPutuable(puntuable))
+	}
+	
+	def List<CalificacionResumida> listarCalificacionesResumidas(List<PuntuablesBasicos> basicos) {
+		var listaDeCalificacionesResumida = new ArrayList
+		
+		for(basico : basicos){
+			listaDeCalificacionesResumida.add(new CalificacionResumida(basico,this.ratingPromedio(basico),this.cantidadDeCalificacionesDelPuntuable(basico)))
+		}
+		listaDeCalificacionesResumida
 	}
 
 }

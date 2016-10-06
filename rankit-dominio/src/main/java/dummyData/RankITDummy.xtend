@@ -105,10 +105,10 @@ class RankITDummy {
 
 		val admUsuario = new AdmUsuarios()
 
-		admUsuario.agregarUsuarioNuevo(usuarioMaxi)
-		admUsuario.agregarUsuarioNuevo(usuarioLiza)
-		admUsuario.agregarUsuarioNuevo(usuarioRosali)
-		admUsuario.agregarUsuarioNuevo(admin)
+		admUsuario.agregarUsuario(usuarioMaxi)
+		admUsuario.agregarUsuario(usuarioLiza)
+		admUsuario.agregarUsuario(usuarioRosali)
+		admUsuario.agregarUsuario(admin)
 
 		rankit = new RankIT()
 		rankit.admLugares = admLugares

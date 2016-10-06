@@ -37,7 +37,7 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock = mock(Usuario)
 		
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		Assert.assertTrue(administrador.usuarios.contains(usuarioMock))
 	}
 	
@@ -50,8 +50,8 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
 		
 		administrador.eliminarUsuario(usuarioMock1)
 		
@@ -68,8 +68,8 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
 		
 		administrador.eliminarUsuario(usuarioMock1)
 		
@@ -85,7 +85,7 @@ class testAdmUsuarios
 	{
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 
 		administrador.blanquearContrasenha(usuarioMock)
 		
@@ -102,8 +102,8 @@ class testAdmUsuarios
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
 		
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
 
 		Assert.assertEquals(2,administrador.cantidadTotalDeUsuarios)
 	}
@@ -118,8 +118,8 @@ class testAdmUsuarios
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
 		
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
 
 		Assert.assertNotEquals(3,administrador.cantidadTotalDeUsuarios)
 	}
@@ -136,7 +136,7 @@ class testAdmUsuarios
 		
 		usuariosActivosMock.add(usuarioMock)
 		when(usuarioMock.activo).thenReturn(true)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertTrue(administrador.usuariosActivos.containsAll(usuariosActivosMock))
 		Assert.assertEquals(1,administrador.usuariosActivos.size())
@@ -154,7 +154,7 @@ class testAdmUsuarios
 		
 		usuariosActivosMock.add(usuarioMock)
 		when(usuarioMock.activo).thenReturn(false)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertFalse(administrador.usuariosActivos.containsAll(usuariosActivosMock))
 		Assert.assertNotEquals(1,administrador.usuariosActivos.size())
@@ -170,9 +170,9 @@ class testAdmUsuarios
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
 		var Usuario usuarioMock3 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
-		administrador.agregarUsuarioNuevo(usuarioMock3)		
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock3)		
 		
 		when(usuarioMock1.activo).thenReturn(false)
 		when(usuarioMock2.activo).thenReturn(true)
@@ -190,8 +190,8 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)	
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)	
 		
 		when(usuarioMock1.activo).thenReturn(false)
 		when(usuarioMock2.activo).thenReturn(false)
@@ -209,9 +209,9 @@ class testAdmUsuarios
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
 		var Usuario usuarioMock3 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
-		administrador.agregarUsuarioNuevo(usuarioMock3)		
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock3)		
 		
 		when(usuarioMock1.esInactivo).thenReturn(false)
 		when(usuarioMock2.esInactivo).thenReturn(true)
@@ -229,8 +229,8 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)	
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)	
 		
 		when(usuarioMock1.esInactivo).thenReturn(false)
 		when(usuarioMock2.esInactivo).thenReturn(false)
@@ -250,7 +250,7 @@ class testAdmUsuarios
 		
 		usuariosInactivosMock.add(usuarioMock)
 		when(usuarioMock.esInactivo).thenReturn(true)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertTrue(administrador.usuariosInactivos.containsAll(usuariosInactivosMock))
 		Assert.assertEquals(1,administrador.usuariosInactivos.size())
@@ -268,7 +268,7 @@ class testAdmUsuarios
 		
 		usuariosInactivosMock.add(usuarioMock)
 		when(usuarioMock.esInactivo).thenReturn(false)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertFalse(administrador.usuariosInactivos.containsAll(usuariosInactivosMock))
 		Assert.assertNotEquals(1,administrador.usuariosInactivos.size())
@@ -283,8 +283,8 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)	
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)	
 		
 		when(usuarioMock1.baneado).thenReturn(false)
 		when(usuarioMock2.baneado).thenReturn(true)
@@ -301,8 +301,8 @@ class testAdmUsuarios
 		var AdmUsuarios administrador = new AdmUsuarios()
 		var Usuario usuarioMock1 = mock(Usuario)
 		var Usuario usuarioMock2 = mock(Usuario)
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)	
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)	
 		
 		when(usuarioMock1.baneado).thenReturn(false)
 		when(usuarioMock2.baneado).thenReturn(false)
@@ -322,7 +322,7 @@ class testAdmUsuarios
 		
 		usuariosBaneadosMock.add(usuarioMock)
 		when(usuarioMock.baneado).thenReturn(true)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertTrue(administrador.usuariosBaneados.containsAll(usuariosBaneadosMock))
 		Assert.assertEquals(1,administrador.usuariosBaneados.size())
@@ -340,7 +340,7 @@ class testAdmUsuarios
 		
 		usuariosBaneadosMock.add(usuarioMock)
 		when(usuarioMock.baneado).thenReturn(false)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertFalse(administrador.usuariosBaneados.containsAll(usuariosBaneadosMock))
 		Assert.assertNotEquals(1,administrador.usuariosBaneados.size())
@@ -358,7 +358,7 @@ class testAdmUsuarios
 		usuariosLizaMock.add(usuarioMock)
 		
 		when(usuarioMock.deNombre("Liza")).thenReturn(true)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertTrue(administrador.buscarUsuarioDeNombre("Liza").containsAll(usuariosLizaMock))
 		Assert.assertEquals(1,administrador.buscarUsuarioDeNombre("Liza").size())
@@ -377,8 +377,8 @@ class testAdmUsuarios
 		
 		usuariosMock.add(usuarioLizaMock)
 		usuariosMock.add(usuarioMelodyMock)
-		administrador.agregarUsuarioNuevo(usuarioLizaMock)
-		administrador.agregarUsuarioNuevo(usuarioMelodyMock)
+		administrador.agregarUsuario(usuarioLizaMock)
+		administrador.agregarUsuario(usuarioMelodyMock)
 		
 		Assert.assertTrue(administrador.buscarUsuarioDeNombre("").containsAll(usuariosMock))
 		Assert.assertEquals(2,administrador.buscarUsuarioDeNombre("").size())
@@ -396,7 +396,7 @@ class testAdmUsuarios
 		
 		usuariosMelodyMock.add(usuarioMock)
 		when(usuarioMock.deNombre("Melody")).thenReturn(false)
-		administrador.agregarUsuarioNuevo(usuarioMock)
+		administrador.agregarUsuario(usuarioMock)
 		
 		Assert.assertFalse(administrador.buscarUsuarioDeNombre("Melody").containsAll(usuariosMelodyMock))
 		Assert.assertNotEquals(1,administrador.buscarUsuarioDeNombre("Melody").size())
@@ -413,8 +413,8 @@ class testAdmUsuarios
 		var Usuario usuarioMelodyMock = mock(Usuario)
 		var List<Usuario> usuariosMock = new ArrayList<Usuario>()
 		
-		administrador.agregarUsuarioNuevo(usuarioLizaMock)
-		administrador.agregarUsuarioNuevo(usuarioMelodyMock)
+		administrador.agregarUsuario(usuarioLizaMock)
+		administrador.agregarUsuario(usuarioMelodyMock)
 		
 		Assert.assertFalse(usuariosMock.containsAll(administrador.buscarUsuarioDeNombre("")))
 		Assert.assertNotEquals(0,administrador.buscarUsuarioDeNombre("").size())
@@ -432,8 +432,8 @@ class testAdmUsuarios
 		
 		when(usuarioMock1.nombre).thenReturn("Liza")
 		when(usuarioMock2.nombre).thenReturn("Camila")
-		administrador.agregarUsuarioNuevo(usuarioMock1)
-		administrador.agregarUsuarioNuevo(usuarioMock2)
+		administrador.agregarUsuario(usuarioMock1)
+		administrador.agregarUsuario(usuarioMock2)
 		
 		administrador.cambiarNombreSiPuede(usuarioMock2, "Liza")
 		Assert.assertEquals("Camila", usuarioMock2.nombre)

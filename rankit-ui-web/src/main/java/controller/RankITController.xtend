@@ -14,24 +14,32 @@ import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
 import org.uqbar.xtrest.api.annotation.Put
 import edu.unq.interfaces.rankit_dominio.NombreInvalidoException
+import edu.unq.interfaces.rankit_dominio.RankIT
+import java.util.List
+import edu.unq.interfaces.rankit_dominio.PuntuablesBasicos
+import edu.unq.interfaces.rankit_dominio.TipoDePuntuable
+import edu.unq.interfaces.rankit_dominio.Puntuable
+import java.util.ArrayList
+import edu.unq.interfaces.rankit_dominio.CalificacionResumida
+import edu.unq.interfaces.rankit_dominio.FiltroBusqueda
+import edu.unq.interfaces.rankit_dominio.AdmCalificacionesResumidas
 
 @Controller
 class RankITController {
 	extension JSONUtils = new JSONUtils
-	AdmUsuarios admUsuarios
-	AdmCalificaciones admCalificaciones
-	AdmPuntuables admPuntuables
+	
+	var RankIT rankit
 
-	new(AdmUsuarios admUsuarios, AdmCalificaciones admCalificaciones, AdmPuntuables admPuntuables) {
-		this.admCalificaciones = admCalificaciones
-		this.admUsuarios = admUsuarios
-		this.admPuntuables = admPuntuables
+	new(RankIT rankit) {
+		this.rankit= rankit
 	}
 
 	@Get("/puntuables")
 	def getPuntuables() {
 		response.contentType = "application/json"
-		ok(this.admPuntuables.getPuntuables.toJson)
+		var List<PuntuablesBasicos> lista =this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
+		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
+		ok(lista.toJson)
 	}
 
 	@Post("/usuarios")
@@ -39,7 +47,7 @@ class RankITController {
 		response.contentType = "application/json"
 		try {
 			var Usuario usuario = body.fromJson(typeof(Usuario))
-			ok(this.admUsuarios.validarUsuario(usuario).toJson)
+			ok(this.rankit.admUsuarios.validarUsuario(usuario).toJson)
 		} catch (UsuarioNoExistenteException e) {
 			notFound('{ "error": "El usuario no esta registrado en Rank-IT" }')
 		} catch (PasswordIncorrectoException e) {
@@ -55,12 +63,22 @@ class RankITController {
 		response.contentType = "application/json"
 		try {
 			var Usuario usuario = body.fromJson(typeof(Usuario))
-			this.admUsuarios.crearUsuario(usuario)
+			this.rankit.admUsuarios.crearUsuario(usuario)
 			ok()
 			
 		} catch (NombreInvalidoException e) {
 			badRequest('{ "error": "El Nombre es invalido" }')
 		}
 
+	}
+	@Get("/ranking")
+	def getRanking(String nombre,String tipo,String calificaciones,String ranking) {
+		var AdmCalificacionesResumidas admCalificacionesResumidas= new AdmCalificacionesResumidas()
+		response.contentType = "application/json"
+		
+		admCalificacionesResumidas.agregar(this.rankit.admCalificaciones.listarCalificacionesResumidas(this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)))
+		admCalificacionesResumidas.agregar(this.rankit.admCalificaciones.listarCalificacionesResumidas(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO)))
+		
+		ok(admCalificacionesResumidas.filtrar(nombre,tipo,ranking,calificaciones).toJson)
 	}
 }

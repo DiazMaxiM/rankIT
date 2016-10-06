@@ -167,7 +167,7 @@ class UsuarioAppModel implements GenericaAppModel {
 	}
 
 	override nuevo() {
-		administradorDeUsuarios.agregarUsuarioNuevo()
+		administradorDeUsuarios.agregarUsuario()
 		avisarModificacionesDeUsuarios
 	}
 

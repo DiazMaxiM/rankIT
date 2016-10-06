@@ -7,12 +7,11 @@ import org.uqbar.commons.utils.Observable
 
 @Accessors
 @Observable
-class Puntuable {
+class Puntuable implements PuntuableAbstracto {
 
 	private var Date fechaDeRegistro
 	private var boolean habilitado
 	private var Integer id
-	private var Tipo tipo
     private var String nombre
 	/**
 	 * Constructor de un objeto Puntuable, por defecto cuando se crea esta deshabilitado 
@@ -24,13 +23,7 @@ class Puntuable {
 		this.habilitado = false
 	}
 	
-	new (int id, Tipo tipo,String nombre){
-		this.id=id
-		this.tipo=tipo
-		this.nombre=nombre
-		
-	}
-
+	
 	def boolean nombreContieneLasLetras(String letras) {
 		nombre.contains(letras)
 	}
@@ -65,15 +58,8 @@ class Puntuable {
 		id
 	}
 	
-	def getNombre(){
+	override getNombre(){
 		nombre
-	}
-	def getTipo(){
-		tipo
-	}
-	
-	def boolean tieneElId(Integer integer) {
-		id.equals(integer)
 	}
 
 }
