@@ -29,6 +29,8 @@ class Calificacion {
 	}
 	
 	new(PuntuablesBasicos basicos, String puntos, String detalle) {
+	System.out.println(puntos);
+System.out.println(detalle);
 	this.evaluado = basicos
 	this.puntos= puntos
 	this.detalle = detalle
@@ -37,13 +39,13 @@ class Calificacion {
 
 	
 	def void setPuntos(String valor) {
-		if (valor.contains(",")) {
+		if (valor.contains(",") || valor.contains(".")) {
 			throw new UserException("El puntaje debe ser un numero entero")
 		}
 		if (Strings.isNullOrEmpty(valor)) {
 			throw new UserException("Complete los puntos")
 		}
-		puntos = Integer.parseInt(valor)
+		puntos = new Integer (valor.replaceAll('"',''))
 
 	}
 

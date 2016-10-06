@@ -104,9 +104,9 @@ class RankITController {
 	
 	protected def Calificacion getCalificacionFromJSON(String body) {
 		var JsonObject object = Json.parse(body).asObject();
-		var String evaluado = object.get("evaluado").asString;
-		var String puntos = object.get("puntos").asString;
-		var String detalle = object.get("detalle").asString;
+		var String evaluado = object.get("evaluado").toString
+		var String puntos = object.get("puntos").toString;
+		var String detalle = object.get("detalle").toString
 		
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
 		
