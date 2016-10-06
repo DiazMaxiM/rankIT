@@ -59,7 +59,7 @@ class RankITController {
 			ok()
 			
 		} catch (NombreInvalidoException e) {
-			badRequest('{ "error": "El Nombre es invalido" }')
+			badRequest('{ "error": "El Nombre no es valido" }')
 		}
 
 	}
