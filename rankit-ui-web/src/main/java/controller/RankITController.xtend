@@ -34,21 +34,6 @@ class RankITController {
 		ok(this.admPuntuables.getPuntuables.toJson)
 	}
 
-	@Get("/puntuables/:id")
-	def getPuntuableById() {
-		response.contentType = "application/json"
-		try {
-			var puntuable = this.admPuntuables.getPuntuable(Integer.valueOf(id))
-			if (puntuable == null) {
-				notFound('{ "error": "No existe Evaluado con ese id" }')
-			} else {
-				ok(puntuable.toJson)
-			}
-		} catch (NumberFormatException ex) {
-			badRequest('{ "error": "El id debe ser un numero entero" }')
-		}
-	}
-
 	@Post("/usuarios")
 	def ingresarUsuario(@Body String body) {
 		response.contentType = "application/json"
@@ -60,7 +45,7 @@ class RankITController {
 		} catch (PasswordIncorrectoException e) {
 			badRequest('{ "error": "La password ingresada no es correcta" }')
 		} catch (UnrecognizedPropertyException exception) {
-			badRequest('{ "error": "El body debe ser un Libro" }')
+			badRequest('{ "error": "Algo anda mal" }')
 		}
 
 	}
