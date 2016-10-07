@@ -237,7 +237,7 @@ class AdmCalificaciones {
    }
    
    def boolean esDetalleSinDatos(Calificacion calificacion){
-   	   calificacion.detalle.contains("null")||calificacion.detalle.contains("")
+   	   calificacion.detalle.contains("null")||calificacion.detalle.contains('""')
    	  
    }
 	
