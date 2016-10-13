@@ -16,6 +16,8 @@ class Calificacion {
 	private String detalle
 	private PuntuableAbstracto evaluado
 	private Usuario usuario
+	
+	String datosSinDobleComilla
 
 	new(Usuario usuario){
 		this.contenidoOfensivo = false
@@ -29,8 +31,6 @@ class Calificacion {
 	}
 	
 	new(PuntuablesBasicos basicos, String puntos, String detalle) {
-	System.out.println(puntos);
-System.out.println(detalle);
 	this.evaluado = basicos
 	this.puntos= puntos
 	this.detalle = detalle
@@ -39,13 +39,18 @@ System.out.println(detalle);
 
 	
 	def void setPuntos(String valor) {
-		if (valor.contains(",") || valor.contains(".")) {
+		
+		// TODO : preguntar si esta bien que quite las dobles comillas que vienen de objecto que armo con json.
+		var String datosSinDobleComilla = valor.replaceAll('"','');
+		
+		
+		if (datosSinDobleComilla.contains(",") || datosSinDobleComilla.contains(".")) {
 			throw new UserException("El puntaje debe ser un numero entero")
 		}
-		if (Strings.isNullOrEmpty(valor)) {
+		if (Strings.isNullOrEmpty(datosSinDobleComilla)) {
 			throw new UserException("Complete los puntos")
 		}
-		puntos = new Integer (valor.replaceAll('"',''))
+		puntos = new Integer (datosSinDobleComilla)
 
 	}
 
