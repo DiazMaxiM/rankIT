@@ -109,7 +109,6 @@ class RankITController {
 		var String detalle = object.get("detalle").toString
 		
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
-		
 		 var calificacion =new Calificacion(puntuable,puntos,detalle)
 		calificacion
 	}
