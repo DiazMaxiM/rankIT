@@ -65,7 +65,7 @@ class AdmCalificaciones {
 	 * @param calificacion Calificacion para agregar en el admiminstrador de calificaciones
 	 */
 	def void agregarCalificacion(Calificacion calificacion) {
-		calificacion.id=secuenciaId
+		calificacion.id=secuenciaId.toString
 		secuenciaId+=1
 		listaCalificaciones.add(calificacion)
 	}
@@ -197,7 +197,7 @@ class AdmCalificaciones {
 		if (id.isNullOrEmpty){
 			throw new NoSeInformaCalificacionException("No se informo la calificacion a eliminar")
 		}
-		if (existeCalificacionConId(id)) {
+		if (existeCalificacionConId(new Integer(id))){
 			var calificacionAEliminar = listaCalificaciones.findFirst[calificacion |calificacion.id.toString.equals(id)]
 			eliminarCalificacion(calificacionAEliminar)
 		}
@@ -206,9 +206,45 @@ class AdmCalificaciones {
 		}
 	}
 	
-	def existeCalificacionConId(String id) {
-		listaCalificaciones.exists[calificacion | calificacion.id.toString.equals(id)]
+	def existeCalificacionConId(Integer id) {
+		listaCalificaciones.exists[calificacion | calificacion.id.equals(id)]
+		println(listaCalificaciones.exists[calificacion | calificacion.id.equals(id)])
 	}
 	
+	def void modificarCalificacion(Calificacion calificacion) {
+		
+		if(faltanDatosDeLaCalificacion(calificacion)){
+			throw new CalificacionIncompletaException("La Calificacion esta imcompleta ")
+		}
+		if(!existeCalificacionConId(calificacion.id)){
+			throw new NoExisteCalificacionException("No se encuentra la calificacion")
+		}
+		 editarCalificacion(calificacion)
+	}
+	
+	def void editarCalificacion(Calificacion calificacion) {
+	    var calificacionAModificar= calificacionConElId(calificacion)
+	    calificacionAModificar.detalle = calificacion.detalle
+	    calificacionAModificar.evaluado = calificacion.evaluado
+	    calificacionAModificar.puntos = calificacion.puntos
+	    listaCalificaciones.add(calificacionAModificar)
+	}
+	
+	def boolean faltanDatosDeLaCalificacion(Calificacion calificacion) {
+		 var datos=calificacion.puntos==null ||  esDetalleSinDatos(calificacion)|| calificacion.evaluado == null || calificacion.id==null
+		 println(esDetalleSinDatos(calificacion))
+		 datos
+   }
+   
+   def boolean esDetalleSinDatos(Calificacion calificacion){
+   	   calificacion.detalle.contains("null")||calificacion.detalle.contains('""')
+   	  
+   }
+	
+	def Calificacion calificacionConElId(Calificacion calificacionRecibida){
+		var calificacion= listaCalificaciones.findFirst[calificacion|calificacion.id.equals(calificacionRecibida.id)]
+		eliminarCalificacion(calificacion)
+		calificacion
+	}
 	
 }

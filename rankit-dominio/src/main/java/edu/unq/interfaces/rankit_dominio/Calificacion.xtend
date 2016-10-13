@@ -9,7 +9,7 @@ import org.uqbar.commons.utils.Observable
 @Observable
 @Accessors
 class Calificacion {
-	private int id
+	private Integer id
 	private Integer puntos
 	private Date fecha
 	private boolean contenidoOfensivo
@@ -31,9 +31,19 @@ class Calificacion {
 	}
 	
 	new(PuntuablesBasicos basicos, String puntos, String detalle) {
+
 	this.evaluado = basicos
 	this.puntos= puntos
 	this.detalle = detalle
+	}
+	
+	new(PuntuablesBasicos basicos, String puntos, String detalle, String id) {
+		this.evaluado = basicos
+	    this.puntos= puntos
+	    this.detalle = detalle
+	    this.id=id
+	   
+	  
 	}
 	
 
@@ -53,6 +63,13 @@ class Calificacion {
 		puntos = new Integer (datosSinDobleComilla)
 
 	}
-
-
+    def void setId(String valor){
+    	id= new Integer (valor.replaceAll('"',''))
+    	println(id)
+    }
+    
+    def void setDetalle(String valor){
+    	detalle=valor.replaceAll('"','')
+    	println(detalle)
+    }
 }

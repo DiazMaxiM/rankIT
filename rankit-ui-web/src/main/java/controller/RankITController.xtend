@@ -108,9 +108,10 @@ class RankITController {
 		var String puntos = object.get("puntos").toString;
 		var String detalle = object.get("detalle").toString
 		
+		
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
 		 var calificacion =new Calificacion(puntuable,puntos,detalle)
-		calificacion
+		  calificacion
 	}
 
 	@Get("/calificaciones")
@@ -131,15 +132,35 @@ class RankITController {
 			notFound('{"error": "No existe la calificacion a eliminar"}')
 		}
 	}
+	
+    @Put("/calificaciones")
+	def editarCalificacion(@Body String body) {
+		response.contentType = "application/json"
+		try {
+			var calificacion =  getCalificacionFromJSONParaModificar(body)
+			this.rankit.admCalificaciones.modificarCalificacion(calificacion)
+			ok()
 
-//	@Put("/calificaciones")
-//	def void editarCalificacion(@Body String evaluado) {
-//		response.contentType = "application/json"
-//		var puntuable = evaluado.fromJson(typeof(Puntuable))
-//	//	rankit.admCalificaciones.editarCalificacion(id, puntos, detalle, puntuable)
-//
-////			var Calificacion calificacion = body.fromJson(typeof(Calificacion))
-////			this.rankit.admCalificaciones.editarCalificacion(calificacion)
-////			ok()
-//	}
+		} catch (CalificacionIncompletaException e) {
+			badRequest('{ "error": "La calificacion esta incompleta" }')
+			
+		} catch (NoExisteCalificacionException e) {
+			notFound('{ "error": "No se encuentra la calificacion" }')
+		}
+
+	}
+		protected def Calificacion getCalificacionFromJSONParaModificar(String body) {
+		var JsonObject object = Json.parse(body).asObject();
+		var String evaluado = object.get("evaluado").toString
+		var String puntos = object.get("puntos").toString
+		var String detalle = object.get("detalle").toString
+		var String id = object.get("id").toString
+		
+		
+		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
+	    var calificacion =new Calificacion(puntuable,puntos,detalle,id)
+		calificacion
+	}
+
+	
 }
