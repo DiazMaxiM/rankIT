@@ -7,8 +7,8 @@ rankitApp.config(function ($stateProvider, $urlRouterProvider) {
    url: '/',
    views: {
     'mainPanel': {
-      //templateUrl: "partials/agregar_tarea.html",
-      //controller: "AgregarTareaController as tareasCtrl"
+      templateUrl: "partials/busquedaCalificacion.html",
+      controller: "BusquedaCalificacionController as busqCalificacionCtrl"
     },
     'loginPanel': {
       templateUrl: "partials/login.html",
