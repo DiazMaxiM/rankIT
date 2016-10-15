@@ -26,14 +26,12 @@ rankitApp.controller('LoginController', function ($http,LoginService) {
 });
 rankitApp.controller('BusquedaCalificacionController', function ($http,CalificacionService) {
  self=this
- 
  this.result=[]
 
  this.nombre=""
  this.calificaciones=""
  this.ranking=""
 
- 
  this.dataTipo = {
   model: '',
   availableOptions: [

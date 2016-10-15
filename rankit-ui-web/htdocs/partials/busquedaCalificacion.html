@@ -33,18 +33,24 @@
     </div>
   </div>
 </div>
-<div class="container">
-<h1>{{busqCalificacionCtrl.result.length}} Resultados para su búsqueda</h1>
+<div>
+  <h1>{{busqCalificacionCtrl.result.length}} Resultados para su búsqueda</h1>
 </div>
-<div class="container" ng-app="myApp" ng-controller="busqCalificacionCtrl"> 
-
-<table>
-  <tr ng-repeat="result in evaluados">
-    <td>{{evaluados.puntuableBasico.nombre }}</td>
-    <td>{{evaluados.puntuableBasico.tipo }}</td>
-    <td>{{evaluados.ranking }}</td>
-    <td>{{evaluados.calificaciones }}</td>
-  </tr>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Ranking</th>
+      <th>Calificacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="evaluados in busqCalificacionCtrl.result">
+     <td>{{evaluados.puntuableBasico.nombre }}</td>
+     <td>{{evaluados.puntuableBasico.tipo }}</td>
+     <td>{{evaluados.ranking }}</td>
+     <td>{{evaluados.calificaciones }}</td>
+   </tr>
+ </tbody>
 </table>
-
-</div>
