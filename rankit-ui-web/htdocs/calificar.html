@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rankitApp">
+<head>
+   <meta charset="utf-8">
+   <title>Calificaciones</title>
+   <link rel="stylesheet" href="css/calificar.css" media="screen"/>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+     <!-- ANGULAR  -->
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <!-- UNDERSCORE -->
+    <script src="node_modules/underscore/underscore-min.js"></script>
+
+
+</head>
+<body ​ ng-controller="CalificacionController as calificacionCtrl">
+  <div class="borde">
+    <h1 class="texto">Mis Calificaciones</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6 borde" >
+         <div ng-repeat="calificacion in calificaciones">
+          <div class="row">
+              <div class="col-md-6 espacio">
+                  <h5>{{calificacion.puntuableBasico.nombre }}</h5>
+                      <h6>{{calificacion.puntuableBasico.tipo }}</h6>
+                  
+              </div>
+              <div class="col-md-4 circulo espacio">
+                <h3>{{calificacion.id}}</h3>
+              </div>
+              <div class="col-md-2">
+                 <div class="espacio">
+                  <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.borrar()">Borrar</button>
+                 </div>
+                <div class="espacio">
+                   <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.modificar()">Modificar</button>
+                
+                </div>
+              </div>
+           </div>
+          </div>
+   </div>
+
+    <div class="col-md-6">
+         <div class="borde">
+             <h2 class="texto">Nueva Calificación</h2>
+         </div>
+         <div class="completarCalificacion">
+           <div class="row">
+              <div class="col-md-6 espacio espacioALaIzquierda">
+                <p>Calificado</p>
+                  <input ng-model="calificacionCtrl.nombre" ng-change="calificacionCtrl.evaluados()" placeholder="Buscar evaluado" type="text" class="form-control"/>
+                  <ul>
+                       <li ng-repeat="tarea in tareasCtrl.evaluados | filter:EvaluadoBuscado">
+                        <a ng-click="cambiarEvaluado(evaluado.nombre)">
+                           {{ evaluado.nombre }}
+                        </a>
+                       </li>
+                  </ul>
+                </div>
+              <div class="col-md-3 espacio">
+                  <p>Puntaje</p>
+                    <input ng-model="calificacionCtrl.puntaje" type="number" class="form-control"/>
+                
+              </div>
+            </div>
+               <div class="row">
+                   <div class="col-md-9 espacio espacioALaIzquierda">
+                        <p>Motivo</p>
+                        <textarea ng-model="calificacionCtrl.motivo" type="text" class="form-control" rows="3"></textarea>
+                     
+                   </div>
+               </div>
+
+               <div class="row">
+                   <div class="col-md-9 espacio espacioALaIzquierda espacioParaAbajo">
+                     <button type="button" class="btn btn-default btn-lg btn-block" ng-click="calificacionCtrl.calificar()">Calificar</button>
+                                             
+                   </div>
+               </div>
+        
+       </div>
+       </div>
+  </div>
+  <!-- nuestra aplicacion js -->
+  <script src="js/controllers.js"></script>
+  <script src="js/service.js"></script>
+</body>
+</html>
