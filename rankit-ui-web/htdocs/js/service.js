@@ -1,8 +1,24 @@
-rankitApp.service("CalificacionService", function ($http) {
+rankitApp.service("CalificacionService", function () {
 
-      this.evaluados=function(callback){
-      	   $http.get('/evaluados').then(callback);
-      }
+  this.calificacionesIds = 0;
+  this.calificaciones = [];
 
+  this.crearCalificacion = function (nombre,puntos,motivo) {
+    var calificacion = new Calificacion(nombre,puntos,motivo);
+    calificacion.id = this.calificacionesIds++;
+    return calificacion;
+  };
+
+  this.agregarCalificacion = function (calificacion) {
+    this.calificaciones.push(calificacion);
+  };
+  
+  this.evaluados=[
+      "Freddo",
+      "Metrogas",
+      "Edesur", 
+  ];
+ 
 
 });
+

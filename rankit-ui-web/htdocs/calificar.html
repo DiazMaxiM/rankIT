@@ -4,6 +4,10 @@
    <meta charset="utf-8">
    <title>Calificaciones</title>
    <link rel="stylesheet" href="css/calificar.css" media="screen"/>
+
+     <!-- JQUERY -->
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -12,6 +16,8 @@
      <!-- ANGULAR  -->
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-touch/angular-touch.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
     <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <!-- UNDERSCORE -->
@@ -24,12 +30,14 @@
     <h1 class="texto">Mis Calificaciones</h1>
   </div>
   <div class="row">
-    <div class="col-md-6 borde" >
-         <div ng-repeat="calificacion in calificaciones">
-          <div class="row">
+    <div class="col-md-6 " >
+    <table class="table">
+    <tr data-ng-repeat="calificacion in calificacionCtrl.calificaciones">
+      <td>
+           <div class="row borde">
               <div class="col-md-6 espacio">
-                  <h5>{{calificacion.puntuableBasico.nombre }}</h5>
-                      <h6>{{calificacion.puntuableBasico.tipo }}</h6>
+                  <h5>{{calificacion.nombre }}</h5>
+                  <h6>{{calificacion.puntos }}</h6>
                   
               </div>
               <div class="col-md-4 circulo espacio">
@@ -37,7 +45,7 @@
               </div>
               <div class="col-md-2">
                  <div class="espacio">
-                  <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.borrar()">Borrar</button>
+                  <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.eliminar()">Borrar</button>
                  </div>
                 <div class="espacio">
                    <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.modificar()">Modificar</button>
@@ -45,7 +53,10 @@
                 </div>
               </div>
            </div>
-          </div>
+      </td> 
+    </tr>
+  </table>
+         
    </div>
 
     <div class="col-md-6">
@@ -56,18 +67,13 @@
            <div class="row">
               <div class="col-md-6 espacio espacioALaIzquierda">
                 <p>Calificado</p>
-                  <input ng-model="calificacionCtrl.nombre" ng-change="calificacionCtrl.evaluados()" placeholder="Buscar evaluado" type="text" class="form-control"/>
-                  <ul>
-                       <li ng-repeat="tarea in tareasCtrl.evaluados | filter:EvaluadoBuscado">
-                        <a ng-click="cambiarEvaluado(evaluado.nombre)">
-                           {{ evaluado.nombre }}
-                        </a>
-                       </li>
-                  </ul>
+                <input type="text" ng-model="calificacionCtrl.nombre" uib-typeahead="evaluado for evaluado in calificacionCtrl.evaluados | filter:$viewValue | limitTo:8" class="form-control">
+
+
                 </div>
               <div class="col-md-3 espacio">
                   <p>Puntaje</p>
-                    <input ng-model="calificacionCtrl.puntaje" type="number" class="form-control"/>
+                    <input ng-model="calificacionCtrl.puntos" type="number" class="form-control"/>
                 
               </div>
             </div>
@@ -92,5 +98,6 @@
   <!-- nuestra aplicacion js -->
   <script src="js/controllers.js"></script>
   <script src="js/service.js"></script>
+  <script src="js/calificacion.js"></script>
 </body>
 </html>
