@@ -10,19 +10,19 @@ function modalError(title,error){
 }
 
 rankitApp.controller('LoginController', function ($http,LoginService) {
-  var self = this;
-  this.logeado = false
-  this.error =""
-  this.logear =function(){LoginService.login($http,this.nombre,this.password,this.loginOk,this.errorLogin)}
+	var self = this;
+	this.logeado = false
+	this.error =""
+	this.logear =function(){LoginService.login($http,this.nombre,this.password,this.loginOk,this.errorLogin)}
 
-  this.loginOk = function (data){
-    self.logeado = true
+	this.loginOk = function (data){
+		self.logeado = true
 
-  }
-  this.errorLogin = function (data){
-    self.logeado=false
-    modalError("Error Login",data.error)
-  }
+	}
+	this.errorLogin = function (data){
+		self.logeado=false
+		modalError("Error Login",data.error)
+	}
 });
 rankitApp.controller('BusquedaCalificacionController', function ($http,CalificacionService) {
  self=this
@@ -33,21 +33,21 @@ rankitApp.controller('BusquedaCalificacionController', function ($http,Calificac
  this.ranking=""
 
  this.dataTipo = {
-  model: '',
-  availableOptions: [
-  {id: ''        , name: 'Todos'},
-  {id: 'SERVICIO', name: 'Servicio'},
-  {id: 'LUGAR'   , name: 'Lugar'}
-  ]
+	model: '',
+	availableOptions: [
+	{id: ''        , name: 'Todos'},
+	{id: 'SERVICIO', name: 'Servicio'},
+	{id: 'LUGAR'   , name: 'Lugar'}
+	]
 };
 
 this.buscar= function(){CalificacionService.buscar($http,this.nombre,this.dataTipo.model,this.calificaciones,this.ranking,this.busquedaOk,this.errorBusqueda)}
 
 this.busquedaOk = function (data){
-  self.result= data
+	self.result= data
 }
 this.errorBusqueda = function (data){
-  console.log(data)
+	console.log(data)
 }
 
 
