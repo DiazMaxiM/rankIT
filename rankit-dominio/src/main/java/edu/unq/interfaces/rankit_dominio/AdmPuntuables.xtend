@@ -143,4 +143,8 @@ class AdmPuntuables {
 		listaPuntuableBasico		
 	}
 	
+	def TipoDePuntuable tipo(PuntuableAbstracto abstracto) {
+		     abstracto.tipo
+	}
+	
 }

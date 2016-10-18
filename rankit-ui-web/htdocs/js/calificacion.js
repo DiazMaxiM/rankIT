@@ -1,6 +1,6 @@
-var Calificacion = function (nombre,puntos,motivo) {
-  this.nombre = nombre || '';
+var Calificacion = function (puntuableBasico,puntos,detalle) {
+  this.evaluado = puntuableBasico ||'';
   this.puntos = puntos || '';
-  this.motivo = motivo || '';
+  this.detalle = detalle || '';
 
 }; 

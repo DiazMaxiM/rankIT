@@ -174,4 +174,11 @@ class AdmUsuarios {
 			}
     	  this.agregarUsuario(usuario)
     }
+	
+	
+	def Usuario usuarioConElNombre(String nombreUsuario) {
+	    var usuario= usuarios.findFirst[usuario|usuario.nombre.equals(nombreUsuario)]
+		usuario
+	}
+	
 }

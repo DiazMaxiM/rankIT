@@ -117,7 +117,10 @@ class RankITController {
 	@Get("/calificaciones")
 	def getCalificacionesDelUsuario(String nombreDeUsuario) {
 		response.contentType = "application/json"
-		ok(rankit.admCalificaciones.publicacionesDeUnUsuario(nombreDeUsuario).toJson)
+		var usuarioLogeado= rankit.admUsuarios.usuarioConElNombre(nombreDeUsuario)
+		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
+		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
+		ok(rankit.admCalificaciones.calificacionesSimplificadasDelUsuario(nombreDeUsuario,lista,usuarioLogeado).toJson)
 	}
 
 	@Delete("/calificaciones")

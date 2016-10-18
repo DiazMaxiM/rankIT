@@ -32,12 +32,12 @@
   <div class="row">
     <div class="col-md-6 " >
     <table class="table">
-    <tr data-ng-repeat="calificacion in calificacionCtrl.calificaciones">
+    <tr data-ng-repeat="calificacion in calificacionCtrl.calificaciones track by $index">
       <td>
-           <div class="row borde">
+           <div class="row borde" id="{{calificacion.id}}">
               <div class="col-md-6 espacio">
-                  <h5>{{calificacion.nombre }}</h5>
-                  <h6>{{calificacion.puntos }}</h6>
+                 <strong> <h3>{{calificacion.evaluado.nombre }}</h3></strong>
+                  <strong><h6>{{calificacion.evaluado.tipo }}</h6></strong>
                   
               </div>
               <div class="col-md-4 circulo espacio">
@@ -45,10 +45,10 @@
               </div>
               <div class="col-md-2">
                  <div class="espacio">
-                  <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.eliminar()">Borrar</button>
+                  <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.eliminar(calificacion)">Borrar</button>
                  </div>
                 <div class="espacio">
-                   <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.modificar()">Modificar</button>
+                   <button type="button" class="btn btn-default botonCuadrado" ng-click="calificacionCtrl.modificar(calificacion)">Modificar</button>
                 
                 </div>
               </div>
@@ -67,20 +67,21 @@
            <div class="row">
               <div class="col-md-6 espacio espacioALaIzquierda">
                 <p>Calificado</p>
-                <input type="text" ng-model="calificacionCtrl.nombre" uib-typeahead="evaluado for evaluado in calificacionCtrl.evaluados | filter:$viewValue | limitTo:8" class="form-control">
+                <input type="text" ng-model="calificacionCtrl.nombreEvaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue | limitTo:8" class="form-control">
 
 
                 </div>
               <div class="col-md-3 espacio">
                   <p>Puntaje</p>
-                    <input ng-model="calificacionCtrl.puntos" type="number" class="form-control"/>
+                    <input type="number" name="puntos" class="form-control"
+                    ng-model="calificacionCtrl.puntos" required="true">
                 
               </div>
             </div>
                <div class="row">
                    <div class="col-md-9 espacio espacioALaIzquierda">
                         <p>Motivo</p>
-                        <textarea ng-model="calificacionCtrl.motivo" type="text" class="form-control" rows="3"></textarea>
+                        <textarea ng-model="calificacionCtrl.detalle" type="text" class="form-control" rows="3"></textarea>
                      
                    </div>
                </div>
@@ -99,5 +100,6 @@
   <script src="js/controllers.js"></script>
   <script src="js/service.js"></script>
   <script src="js/calificacion.js"></script>
+  <script src="js/puntuableBasico.js"></script>
 </body>
 </html>

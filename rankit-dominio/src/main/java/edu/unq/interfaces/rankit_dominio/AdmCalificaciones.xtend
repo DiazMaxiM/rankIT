@@ -247,4 +247,18 @@ class AdmCalificaciones {
 		calificacion
 	}
 	
+	def calificacionesSimplificadasDelUsuario(String nombreUsuario,List<PuntuablesBasicos> basicos, Usuario usuarioLogeado) {
+		 var calificacionesDelUsuario=publicacionesDeUnUsuario(nombreUsuario)
+		   var calificacionesResultantes=new ArrayList
+		   for(calificacion:calificacionesDelUsuario){
+		   	   var puntuableBasico=basicos.findFirst[puntuable|puntuable.nombre.equals(calificacion.evaluado.nombre)]
+		   	   var calificacionResultante=new Calificacion(puntuableBasico,calificacion.puntos.toString,calificacion.detalle,calificacion.id.toString)
+		   	   calificacionResultante.usuario = usuarioLogeado
+		   	   calificacionesResultantes.add(calificacionResultante)
+		   }
+		   calificacionesResultantes
+	}
+	
+ 
+	
 }
