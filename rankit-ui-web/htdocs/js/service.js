@@ -31,7 +31,7 @@ rankitApp.service("CalificacionService", function () {
 
   this.getPuntuableConElNombre=function(nombreEvaluado){
       return _.find(this.evaluados, function (puntuableBasico) {
-      return evaluado.nombre == nombreEvaluado;
+      return puntuableBasico.nombre == nombreEvaluado;
     });
   };
 
@@ -46,8 +46,14 @@ rankitApp.service("CalificacionService", function () {
     this.calificaciones.push(calificacion);
   };
 
-  this.eliminarCalificacion=function(id){
-      delete this.calificaciones[id];
+  this.eliminarCalificacion=function($http,id,callback,errorHandler){
+      
+       var estado =$http({
+       url: 'http://localhost:9000/calificaciones?idCalificacionAEliminar='+id,
+       method:"DELETE",
+       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+     }).success(callback).error(errorHandler);
+
   };
 
    this.getCalificacionById = function (id) {
@@ -56,12 +62,13 @@ rankitApp.service("CalificacionService", function () {
     });
   };
 
-  this.modificarCalificacion=function(nombreEvaluado,puntos,motivo,id){
+  this.modificarCalificacion=function($http,nombreEvaluado,puntaje,motivo,id,callback,errorHandler){
        var puntuable= this.getPuntuableConElNombre(nombreEvaluado);
-       var calificacion=this.getCalificacionById(id);
-       calificacion.evaluado=puntuable;
-       calificacion.puntos=puntos;
-       calificacion.motivo=motivo;
+       var estado =$http({
+       url: 'http://localhost:9000/calificaciones?evaluado='+puntuable+'&detalle='+motivo+'&puntos='+puntaje+'&id='+id,
+       method:"PUT",
+       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(callback).error(errorHandler);
 
 
   };

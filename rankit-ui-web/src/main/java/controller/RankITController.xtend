@@ -140,8 +140,13 @@ class RankITController {
 	def editarCalificacion(@Body String body) {
 		response.contentType = "application/json"
 		try {
-			var calificacion =  getCalificacionFromJSONParaModificar(body)
-			this.rankit.admCalificaciones.modificarCalificacion(calificacion)
+			var JsonObject object = Json.parse(body).asObject();
+		    var String evaluado = object.get("evaluado").toString
+		    var String puntos = object.get("puntos").toString
+		    var String detalle = object.get("detalle").toString
+		    var String id = object.get("id").toString
+		    var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
+			this.rankit.admCalificaciones.modificarCalificacion(puntuable,puntos,detalle,id)
 			ok()
 
 		} catch (CalificacionIncompletaException e) {
@@ -151,18 +156,6 @@ class RankITController {
 			notFound('{ "error": "No se encuentra la calificacion" }')
 		}
 
-	}
-		protected def Calificacion getCalificacionFromJSONParaModificar(String body) {
-		var JsonObject object = Json.parse(body).asObject();
-		var String evaluado = object.get("evaluado").toString
-		var String puntos = object.get("puntos").toString
-		var String detalle = object.get("detalle").toString
-		var String id = object.get("id").toString
-		
-		
-		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
-	    var calificacion =new Calificacion(puntuable,puntos,detalle,id)
-		calificacion
 	}
 
 	

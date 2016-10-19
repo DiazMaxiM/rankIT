@@ -42,7 +42,7 @@ class Calificacion {
 	    this.puntos= puntos
 	    this.detalle = detalle
 	    this.id=id
-	   
+	    println(id)
 	  
 	}
 	
