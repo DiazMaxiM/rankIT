@@ -31,7 +31,7 @@ class Calificacion {
 	}
 	
 	new(PuntuablesBasicos basicos, String puntos, String detalle) {
-
+	
 	this.evaluado = basicos
 	this.puntos= puntos
 	this.detalle = detalle
@@ -51,16 +51,15 @@ class Calificacion {
 	def void setPuntos(String valor) {
 		
 		// TODO : preguntar si esta bien que quite las dobles comillas que vienen de objecto que armo con json.
-		var String datosSinDobleComilla = valor.replaceAll('"','');
 		
 		
-		if (datosSinDobleComilla.contains(",") || datosSinDobleComilla.contains(".")) {
+		if (valor.contains(",") || valor.contains(".")) {
 			throw new UserException("El puntaje debe ser un numero entero")
 		}
-		if (Strings.isNullOrEmpty(datosSinDobleComilla)) {
+		if (Strings.isNullOrEmpty(valor)) {
 			throw new UserException("Complete los puntos")
 		}
-		puntos = new Integer (datosSinDobleComilla)
+		puntos = new Integer (valor)
 
 	}
     def void setId(String valor){
