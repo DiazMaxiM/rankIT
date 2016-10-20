@@ -57,3 +57,7 @@ input.ng-invalid {
   padding: 1em;
   vertical-align: middle;
 }
+
+.divPaddingBottom{
+	padding-bottom: 10px;
+}
