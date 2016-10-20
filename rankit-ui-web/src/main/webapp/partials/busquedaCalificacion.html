@@ -1,0 +1,94 @@
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="col-sm-6">
+						Nombre
+						<input ng-model="busqCalificacionCtrl.criterioBusqueda.nombre" type="text" class="form-control"/>
+					</div>
+					<div class="col-sm-6">
+						Tipo
+						<div>
+							 <select name="repeatSelect" id="repeatSelect" ng-model="busqCalificacionCtrl.criterioBusqueda.tipo">
+								<option ng-repeat="option in busqCalificacionCtrl.criterioBusqueda.tipoPuntuable.opciones" value="{{option.id}}">{{option.name}}</option>
+							 </select> 
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						Calificaciones
+						<input ng-model="busqCalificacionCtrl.criterioBusqueda.calificaciones" type="text" class="form-control"/>
+					</div>
+					<div class="col-sm-6">
+						Ranking
+						<input ng-model="busqCalificacionCtrl.criterioBusqueda.ranking" type="text" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<button type="submit" class="btn btn-default" ng-click="busqCalificacionCtrl.buscar()">Buscar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-body">
+	 <p>{{busqCalificacionCtrl.ranking.length}} Resultados para su búsqueda</p>
+ </div>
+</div>
+
+<div class="selector">
+	<div class="row" data-ng-repeat="evaluados in busqCalificacionCtrl.ranking" ng-if="$even">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<p>{{evaluados.puntuableBasico.nombre }}</p>
+							<p>{{evaluados.puntuableBasico.tipo }}</p>
+						</div>
+						<div class="col-sm-3 ">
+							<div class="circle">
+								<div class="circle__inner">
+									<div class="circle__wrapper">
+										<div class="circle__content">{{evaluados.ranking }}</div>
+									</div>
+								</div>
+							</div>            
+						</div>
+						<div class="col-sm-3">
+							<p>{{evaluados.calificaciones }} opiniones</p>
+						</div>         
+					</div>
+				</div>
+			</div>  
+		</div>
+		<div class="col-sm-6" ng-show="$index < busqCalificacionCtrl.ranking.length -1">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<p>{{busqCalificacionCtrl.ranking[$index +1].puntuableBasico.nombre }}</p>
+							<p>{{busqCalificacionCtrl.ranking[$index +1].puntuableBasico.tipo }}</p>
+						</div>
+						<div class="col-sm-3 ">
+							<div class="circle">
+								<div class="circle__inner">
+									<div class="circle__wrapper">
+										<div class="circle__content">{{busqCalificacionCtrl.ranking[$index +1].ranking }}</div>
+									</div>
+								</div>
+							</div>            
+						</div>
+						<div class="col-sm-3">
+							<p>{{busqCalificacionCtrl.ranking[$index +1].calificaciones }} opiniones</p>
+						</div>         
+					</div>
+				</div>
+			</div>  
+		</div>
+</div>
+</div>
