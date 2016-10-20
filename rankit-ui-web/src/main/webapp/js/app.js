@@ -1,6 +1,6 @@
 'use strict';
 
-var rankitApp = angular.module('rankitApp', ['ui.router','ngResource']);
+var rankitApp = angular.module('rankitApp', ['ui.router','ngResource','ui.bootstrap']);
 
 
  
