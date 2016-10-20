@@ -36,7 +36,7 @@
 				
 				<!-- Boton de logueo -->
 				<div class="divPaddingBottom col-xs-6">
-					<input ng-disabled="noHayNombreValido()" class="btn btn-primary btn-block" ng-click="agregarUsuario()"
+					<input class="btn btn-primary btn-block" ng-click="loguearseSiPuede()"
 					type="submit" value="Login">
 				<!--
 				<div class="alert alert-error" ng-show="registroSinContrasenha">
@@ -51,12 +51,12 @@
 			
 				<!-- Campo de ingresar contraseña -->
 				<div class="col-xs-6" ng-controller= "RegistroCtrl">
-					<input ng-change="actualizacionDeErrorContrasenha()" ng-model="contrasenha" type="password" class="form-control" placeholder=""/>
+					<input ng-change="actualizacionDeErrorContrasenha()" ng-model="contrasenha" type="password" class="form-control" placeholder="Contraseña"/>
 				</div>
 				
 				<!-- Boton de registro -->
 				<div class="divPaddingBottom col-xs-6">
-					<input class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
+					<input class="btn btn-default btn-block" ng-click="registrar()"
 					type="submit" value="Registrar">
 				</div>
 			</div>
