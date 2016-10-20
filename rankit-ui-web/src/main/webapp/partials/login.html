@@ -1,20 +1,64 @@
-<div>
-  <form>
-    <div class="col-sm-6">
-      <div class="input-group">
-        <input ng-model="loginCtrl.nombre" type="text" class="form-control"
-        placeholder="nombre del usuario"/>
-
-        <input ng-model="loginCtrl.password" type="password" class="form-control"/>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <button type="submit" class="btn btn-default" ng-click="loginCtrl.logear()">
-        Login
-      </button>
-      <button type="submit" class="btn btn-default" ng-click="loginCtrl.registrar()">
-        Registrate!
-      </button>
-    </div>
-  </form>
-</div>
+	<div>
+		<!-- Formulario de registro de usuario -->
+		<form>
+			<div class="row">
+				<div class="col-xs-6" ng-controller= "RegistroCtrl">
+				
+				<!-- Campo para ingresar nombre -->
+					<input ng-change="actualizacionDeErrorNombre()" ng-model="nombre" type="text" class="form-control"
+					placeholder="Nombre de usuario"/>
+				<!--
+				<div>
+					<div class="alert alert-error" ng-show="noHayNombreValido()">
+						<p> El nombre ingresado es invalido: </p>
+						<div> 
+							<div ng-show="elNombreYaExiste()">
+								<ul>
+									<li>El nombre ya está en uso. Por favor, ingrese un nombre distinto.</li>
+								</ul>
+							</div>
+							<div ng-show="nombreNoPermitido()">
+								<ul>
+									<li>El nombre "NN" no está permitido. Por favor, ingrese un nombre distinto.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="alert alert-error" ng-show="registroSinNombre">
+						<p> Llenar este campo es obligatorio: </p>
+						<ul>
+							<li>Por favor, ingrese un nombre.</li>
+						</ul>
+					</div>
+				</div>
+				-->
+				</div>
+				
+				<!-- Boton de logueo -->
+				<div class="divPaddingBottom col-xs-6">
+					<input ng-disabled="noHayNombreValido()" class="btn btn-primary btn-block" ng-click="agregarUsuario()"
+					type="submit" value="Login">
+				<!--
+				<div class="alert alert-error" ng-show="registroSinContrasenha">
+					<p> Llenar este campo es obligatorio: </p>
+					<ul>
+						<li>Por favor, ingrese una contraseña.</li>
+					</ul>				
+				</div>
+				-->
+				</div>
+			<div class="row">
+			
+				<!-- Campo de ingresar contraseña -->
+				<div class="col-xs-6" ng-controller= "RegistroCtrl">
+					<input ng-change="actualizacionDeErrorContrasenha()" ng-model="contrasenha" type="password" class="form-control" placeholder=""/>
+				</div>
+				
+				<!-- Boton de registro -->
+				<div class="divPaddingBottom col-xs-6">
+					<input class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
+					type="submit" value="Registrar">
+				</div>
+			</div>
+		</form>
+	</div>
