@@ -1,10 +1,4 @@
-'use strict';
-
-/* Controllers */
-var rankitApp = angular.module('rankitApp', ['ui.bootstrap']);
- 
-
-rankitApp.controller('CalificacionController', function ($http,$scope,CalificacionService) {
+rankitApp.controller('CalificacionController', function ($http,$scope,Calificacion) {
   var self=this;
   this.nombreEvaluado = null;
   this.puntos = null;
