@@ -1,13 +1,13 @@
 rankitApp.service("LoginService", function () {
 
   this.usuario ="";
-  this.password ="";
+  this.contrasenha ="";
 
-  this.login = function ($http,nombre,password,callback,errorHandler) {
+  this.login = function ($http,nombre,contrasenha,callback,errorHandler) {
     
     var data = {}
     data.nombre = nombre
-    data.password = password
+    data.contrasenha = contrasenha
 
     var estado =$http({
             url: 'http://localhost:9000/usuarios',

@@ -1,30 +1,25 @@
 rankitApp.controller('LoginController', function ($resource) 
 {
 	var app = angular.module('RegistroController', []);
+	usuarios = LoginService.usuarios;
 	
 	app.controller('RegistroCtrl', function ($scope) 
 	{	
 		$scope.nombre ="";
 		$scope.contrasenha ="";
-		
-		$scope.loguearseSiPuede = function() 
-		{
-			if (puedoLoguearme())
-			{
-				loguear()
-			}
-			else
-			{
-				noHayRegistroValido()
-			}
-		}
+		$scope.usuarioLogueado;
 		
 		$scope.loguear = function () 
 		{
-			//redirecciona a otra pagina (cambia de estado)
+			var usuarioLogueado= loginService.login($http,$scope.nombre,$scope.contrasenha,$scope.loguearUsuario(),$scope.errorDeLogueo());
 		}
 		
-		$scope.noHayRegistroValido = function () 
+		$scope.loguearUsuario = function () 
+		{
+			$state.go('logeado');
+		}
+		
+		$scope.errorDeLogueo = function () 
 		{
 			//muestra en pantalla los errores
 		}
