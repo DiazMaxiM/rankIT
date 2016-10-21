@@ -1,11 +1,6 @@
-rankitApp.controller('LoginController', function ($resource) 
+rankitApp.controller('LoginController', function ($http,$scope,$state) 
 {
-	var app = angular.module('rankitApp');
-	usuarios = LoginService.usuarios;
-	
-	app.controller('LoginCtrl', function ($scope) 
-	{	
-		$scope.nombre ="";
+	$scope.nombre ="";
 		$scope.contrasenha ="";
 		$scope.usuarioLogueado;
 		
@@ -23,19 +18,6 @@ rankitApp.controller('LoginController', function ($resource)
 		{
 			//muestra en pantalla los errores
 		}
-			
-	 //var self = this;
-	 //this.logeado = false
-	 //this.error =""
-	 //this.logear =function(){}
-
-	 //this.loginOk = function (data){
-	 //	self.logeado = true}
-	 
-	 //this.errorLogin = function (data){
-	 //	self.logeado=false
-	 //	modalError("Error Login",data.error)}
-		
-	})
+	
 });
-
+  
