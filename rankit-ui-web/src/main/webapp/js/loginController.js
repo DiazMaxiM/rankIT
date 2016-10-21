@@ -4,14 +4,10 @@ rankitApp.controller('LoginController', function ($resource)
 	
 	app.controller('RegistroCtrl', function ($scope) 
 	{	
-	    $scope.usuariosRegistrados =[{nombre:"Camila", contrasenha:"1234"}, {nombre:"Liza", contrasenha:"5678"}];
 		$scope.nombre ="";
-		$scope.cantUsuarios = function() 
-		{
-			return $scope.usuariosRegistrados.length;
-		}
+		$scope.contrasenha ="";
 		
-		scope.loguearseSiPuede = function() 
+		$scope.loguearseSiPuede = function() 
 		{
 			if (puedoLoguearme())
 			{
@@ -21,6 +17,16 @@ rankitApp.controller('LoginController', function ($resource)
 			{
 				noHayRegistroValido()
 			}
+		}
+		
+		$scope.loguear = function () 
+		{
+			//redirecciona a otra pagina (cambia de estado)
+		}
+		
+		$scope.noHayRegistroValido = function () 
+		{
+			//muestra en pantalla los errores
 		}
 			
 	 //var self = this;
@@ -35,6 +41,6 @@ rankitApp.controller('LoginController', function ($resource)
 	 //	self.logeado=false
 	 //	modalError("Error Login",data.error)}
 		
-	}
-);
+	})
+});
 
