@@ -1,23 +1,29 @@
-rankitApp.controller('LoginController', function ($http,$scope,$state) 
-{
-	    $scope.nombre ="";
-		$scope.contrasenha ="";
-		$scope.usuarioLogueado;
-		
-		$scope.loguear = function () 
-		{
-			//var usuarioLogueado= loginService.login($http,$scope.nombre,$scope.contrasenha,$scope.loguearUsuario(),$scope.errorDeLogueo());
+rankitApp.controller('LoginController', function ($scope,$resource,Logueo,$state) 
+{        
+	   this.usuario= new Object;
+
+	   this.usuario
+	   function errorHandler(error) {
+		    console.log("no loguea");
 		}
 		
-		$scope.loguearUsuario = function () 
-		{
-			$state.go('logeado');
+		this.loguearUsuario = function () 
+		{   
+			Logueo.save(this.usuario, function(data) {
+	      
+	        }, errorHandler);
+			
+		};
 		
-		
-		$scope.errorDeLogueo = function () 
-		{
-			//muestra en pantalla los errores
-		}
-	
+//		$scope.loguearUsuario = function () 
+//		{
+//			$state.go('logeado');
+//		};
+//		
+//		$scope.errorDeLogueo = function () 
+//		{
+//			//muestra en pantalla los errores
+//		};
+//	
 });
   
