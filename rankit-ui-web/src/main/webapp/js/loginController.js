@@ -4,7 +4,7 @@ rankitApp.controller('LoginController', function ($scope,$resource,Logueo,$state
 
 	   this.usuario
 	   function errorHandler(error) {
-		    console.log("no loguea");
+		    console.log(error.data);
 		}
 		
 		this.loguearUsuario = function () 
