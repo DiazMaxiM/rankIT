@@ -1,8 +1,9 @@
 	<div>
 		<!-- Formulario de registro de usuario -->
 		<form>
+		<div ng-controller= "LoginCtrl">
 			<div class="row">
-				<div class="col-xs-6" ng-controller= "RegistroCtrl">
+				<div class="col-xs-6">
 				
 				<!-- Campo para ingresar nombre -->
 					<input ng-model="nombre" type="text" class="form-control"
@@ -36,7 +37,7 @@
 				
 				<!-- Boton de logueo -->
 				<div class="divPaddingBottom col-xs-6">
-					<input class="btn btn-primary btn-block" ng-click="loguear()"
+					<input class="btn btn-primary btn-block" ng-click="loguearUsuario()"
 					type="submit" value="Login">
 				<!--
 				<div class="alert alert-error" ng-show="registroSinContrasenha">
@@ -50,7 +51,7 @@
 			<div class="row">
 			
 				<!-- Campo de ingresar contraseña -->
-				<div class="col-xs-6" ng-controller= "RegistroCtrl">
+				<div class="col-xs-6">
 					<input ng-model="contrasenha" type="password" class="form-control" placeholder="Contraseña"/>
 				</div>
 				
@@ -60,5 +61,6 @@
 					type="submit" value="Registrar">
 				</div>
 			</div>
+		</div>
 		</form>
 	</div>

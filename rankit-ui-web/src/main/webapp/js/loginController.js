@@ -1,9 +1,9 @@
 rankitApp.controller('LoginController', function ($resource) 
 {
-	var app = angular.module('RegistroController', []);
+	var app = angular.module('rankitApp');
 	usuarios = LoginService.usuarios;
 	
-	app.controller('RegistroCtrl', function ($scope) 
+	app.controller('LoginCtrl', function ($scope) 
 	{	
 		$scope.nombre ="";
 		$scope.contrasenha ="";
@@ -11,7 +11,7 @@ rankitApp.controller('LoginController', function ($resource)
 		
 		$scope.loguear = function () 
 		{
-			var usuarioLogueado= loginService.login($http,$scope.nombre,$scope.contrasenha,$scope.loguearUsuario(),$scope.errorDeLogueo());
+			//var usuarioLogueado= loginService.login($http,$scope.nombre,$scope.contrasenha,$scope.loguearUsuario(),$scope.errorDeLogueo());
 		}
 		
 		$scope.loguearUsuario = function () 
