@@ -1,17 +1,22 @@
-rankitApp.controller('LoginController', function ($http,$scope,$state) 
+rankitApp.controller('LoginController', function ($http,$scope,$state,loginService) 
 {
 	$scope.nombre ="";
 		$scope.contrasenha ="";
-		$scope.usuarioLogueado;
+		$scope.usuarioLogueado= null;
 		
 		$scope.loguear = function () 
 		{
-			//var usuarioLogueado= loginService.login($http,$scope.nombre,$scope.contrasenha,$scope.loguearUsuario(),$scope.errorDeLogueo());
+			$scope.usuarioLogueado= loginService.login($http,$scope.nombre,$scope.contrasenha,$scope.loguearUsuario(),$scope.errorDeLogueo());
 		}
 		
 		$scope.loguearUsuario = function () 
 		{
-			$state.go('logeado');
+			//$state.go('logeado');
+		}
+		
+		$scope.pepe = function () 
+		{
+			return $scope.usuarioLogueado;
 		}
 		
 		$scope.errorDeLogueo = function () 
