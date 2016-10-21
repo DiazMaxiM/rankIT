@@ -1,70 +1,73 @@
-rankitApp.controller('CalificacionController', function ($http,$scope,Calificacion) {
+rankitApp.controller('CalificacionController', function ($resource,UsuarioServicio,Evaluados,Calificacion) {
   var self=this;
-  this.nombreEvaluado = null;
-  this.puntos = null;
-  this.detalle = null;
-  this.id=null;
-
-  this.calificaciones = CalificacionService.calificaciones;
-
-  this.modificacionOk = function (data){
-       console.log("La  modificacion fue exitosa")
-  }
-  this.error = function (data){
-       console.log("NO VA AL SERVIDOR")
-  }
-
-
-  this.calificar = function () {
-
-        if(self.id==null){
-
-           var calificacion = CalificacionService.crearCalificacion(this.nombreEvaluado,this.puntos,this.detalle);
-           CalificacionService.agregarCalificacion(calificacion);
-
-       }else{
-          CalificacionService.modificarCalificacion($http,this.nombreEvaluado,this.puntos,this.detalle,this.id,this.modificacionOk,this.error);
-         
-      }
-        self.nombreEvaluado = null;
-        self.puntos = null;
-        self.detalle = null;
-        self.id=null; 
-        $scope.formu.puntos.$dirty=false;
-        $scope.formu.motivo.$dirty=false;
-        $scope.formu.calificado.$dirty=false;
-
-    };
-
-  this.evaluados=CalificacionService.evaluados;
-
-   this.eliminarOk = function (data){
-       console.log("Se elimino la calificacion")
-  }
-  this.errorEliminar = function (data){
-       console.log("No eimina")
-  }
-
-
-  this.eliminar=function(calificacion){
-       CalificacionService.eliminarCalificacion($http,calificacion.id,this.eliminarOk,this.errorEliminar);
-       var elemento=document.getElementById(calificacion.id); 
-       elemento.parentElement.removeChild(elemento);
-  };
-
-
-
-
-
-  this.modificar=function(calificacion){
-     self.nombreEvaluado=calificacion.evaluado.nombre;
-     self.puntos=calificacion.puntos;
-     self.detalle=calificacion.detalle;
-     self.id=calificacion.id;
-
-  };
-
-
+  
+  this.usuarioLogueado="Liza";
+  console.log(self.usuarioLogueado)
+  
+  self.calificaciones = [];
  
+  self.evaluados=[];
+  
+  this.evaluados = function() {
+      Evaluados.query(function(data) {
+          self.evaluados = data;
+      }, errorHandler);
+  };
+  
+
+  function errorHandler(error) {
+      console.log("todo mal");
+  }
+  
+   this.actualizarCalificaciones = function() {
+      Calificacion.query(self.usuarioLogueado,function(data) {
+          self.calificaciones = data;
+      }, errorHandler);
+   };
+  
+   this.actualizarCalificaciones();
+  
+  // Calificar
+  this.calificar = function(calificacion) {
+	  if(calificacion.id==null){
+		     self.crearCalificacion();
+		  }else{
+			  self.actualizarCalificacion();
+		  }
+	  
+	  };
+	  
+   // crear Calificacion
+	    this.crearCalificacion = function() {
+	        Calificacion.save(this.nuevaCalificacion, function(data) {
+	            self.actualizarCalificaciones();
+	            self.nuevaCalificacion = null;
+	        }, errorHandler);
+	    };
+	    
+	//actualizarCalificacion
+  
+    this.actualizarLibro = function() {
+	        Calificacion.update(this.calificacionSeleccionada, function() {
+	            self.actualizarCalificaciones();
+	        }, errorHandler);
+
+	        this.calificacionSeleccionada = null;
+
+	     };
+	   
+    // eliminar calificacion
+     this.eliminar = function(calificacion) {
+       
+	    	     Calificacion.remove(calificacion.id, function() {
+                  self.actualizarCalificaciones();
+               }, errorHandler);
+     }
+ 
+   //mostrar calificacion
+   this.modificar=function(calificacion){
+	   self.calificacionSeleccionada=calificacion; 
+   }
+    
   
 });

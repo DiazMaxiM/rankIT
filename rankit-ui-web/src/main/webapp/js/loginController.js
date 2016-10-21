@@ -1,4 +1,4 @@
-rankitApp.controller('LoginController', function ($http,$scope,$state) 
+rankitApp.controller('LoginController', function ($http,$scope,$state,LoginService) 
 {
 	$scope.nombre ="";
 		$scope.contrasenha ="";
