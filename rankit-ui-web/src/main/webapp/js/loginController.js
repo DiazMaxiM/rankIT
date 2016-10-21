@@ -1,6 +1,6 @@
-rankitApp.controller('LoginController', function ($http,$scope,$state,LoginService) 
+rankitApp.controller('LoginController', function ($http,$scope,$state) 
 {
-	$scope.nombre ="";
+	    $scope.nombre ="";
 		$scope.contrasenha ="";
 		$scope.usuarioLogueado;
 		
@@ -12,7 +12,7 @@ rankitApp.controller('LoginController', function ($http,$scope,$state,LoginServi
 		$scope.loguearUsuario = function () 
 		{
 			$state.go('logeado');
-		}
+		
 		
 		$scope.errorDeLogueo = function () 
 		{

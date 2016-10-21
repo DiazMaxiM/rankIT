@@ -12,7 +12,7 @@ rankitApp.config(function ($stateProvider, $urlRouterProvider) {
     },
     'loginPanel': {
       templateUrl: "partials/login.html",
-      controller: "BusquedaCalificacionController as busqCalificacionCtrl"
+      controller: "LoginController as loginCtrl"
     }
   }
 }

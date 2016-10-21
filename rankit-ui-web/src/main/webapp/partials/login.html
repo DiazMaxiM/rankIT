@@ -1,7 +1,7 @@
 	<div>
 		<!-- Formulario de registro de usuario -->
 		<form>
-		<div ng-controller= "LoginController">
+		<div>
 			<div class="row">
 				<div class="col-xs-6">
 				
@@ -10,7 +10,7 @@
 					placeholder="Nombre de usuario"/>
 				<!--
 				<div>
-					<div class="alert alert-error" ng-show="noHayNombreValido()">
+					<div class="alert alert-error" ng-show="loginCtrl.noHayNombreValido()">
 						<p> El nombre ingresado es invalido: </p>
 						<div> 
 							<div ng-show="elNombreYaExiste()">
@@ -18,7 +18,7 @@
 									<li>El nombre ya está en uso. Por favor, ingrese un nombre distinto.</li>
 								</ul>
 							</div>
-							<div ng-show="nombreNoPermitido()">
+							<div ng-show="loginCtrl.nombreNoPermitido()">
 								<ul>
 									<li>El nombre "NN" no está permitido. Por favor, ingrese un nombre distinto.</li>
 								</ul>
@@ -37,7 +37,7 @@
 				
 				<!-- Boton de logueo -->
 				<div class="divPaddingBottom col-xs-6">
-					<input class="btn btn-primary btn-block" ng-click="loguearUsuario()"
+					<input class="btn btn-primary btn-block" ng-click="loginCtrl.loguearUsuario()"
 					type="submit" value="Login"/>
 				<!--
 				<div class="alert alert-error" ng-show="registroSinContrasenha">
@@ -58,7 +58,7 @@
 				
 				<!-- Boton de registro -->
 				<div class="divPaddingBottom col-xs-6">
-					<input class="btn btn-default btn-block" ng-click="registrar()"
+					<input class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
 					type="submit" value="Registrar"/>
 				</div>
 			</div>
