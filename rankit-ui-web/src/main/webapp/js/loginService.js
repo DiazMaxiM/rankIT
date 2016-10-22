@@ -1,5 +1,8 @@
-rankitApp.factory('Logueo', function($resource) {
-     return $resource('/usuarios', {}, {
-    	 'save': { method: 'POST' },
-     });
+rankitApp.factory('LoginService', function($resource) 
+	{
+		return $resource('/usuarios', {}, 
+		{
+			'guardar': { method: 'POST' },
+		});
+		
 });

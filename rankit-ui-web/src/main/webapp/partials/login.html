@@ -6,7 +6,7 @@
 				<div class="col-xs-6">
 				
 				<!-- Campo para ingresar nombre -->
-					<input ng-model="loginCtrl.usuario.nombre" type="text" class="form-control"
+					<input ng-model="loginCtrl.usuarioLogueado.nombre" type="text" class="form-control"
 					placeholder="Nombre de usuario"/>
 				<!--
 				<div>
@@ -48,13 +48,12 @@
 				</div>
 				-->
 				</div>
-				{{pepe()}}
 			</div>
 			<div class="row">
 			
 				<!-- Campo de ingresar contraseña -->
 				<div class="col-xs-6">
-					<input ng-model="loginCtrl.usuario.password" type="password" class="form-control" placeholder="Contraseña"/>
+					<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder="Contraseña"/>
 				</div>
 				
 				<!-- Boton de registro -->
