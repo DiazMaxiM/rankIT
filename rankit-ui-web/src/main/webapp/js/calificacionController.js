@@ -4,13 +4,15 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
   this.idUsuarioLogueado=DataService.usuario.id;
   console.log(self.idUsuarioLogueado);
   this.calificaciones = [];
-  self.evaluados=[];
-  console.log(this.calificaciones);
-  this.evaluados = function() {
-      Evaluados.query(function(data) {
-          self.evaluados = data;
-      }, errorHandler);
-  };
+  this.evaluados=[];
+  
+  console.log(this.evaluados);
+  
+  this.evaluadosParaCalificar = function() {
+     Evaluados.query(function(data) {
+        self.evaluados = data;
+     }, errorHandler);
+ };
   
 
   function errorHandler(error) {
@@ -25,5 +27,15 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
    };
   
    this.actualizarCalificaciones();
+   this.evaluadosParaCalificar();
+   
+// eliminar calificacion
+   this.eliminar = function(calificacion) {
+     
+	    	    Calificacion.remove(calificacion, function() {
+                self.actualizarCalificaciones();
+             }, errorHandler);
+ };
+
 
 });

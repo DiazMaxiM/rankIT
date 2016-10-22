@@ -113,11 +113,11 @@ class RankITController {
 		  calificacion
 	}
 	
-	@Delete("/calificaciones")
-	def eliminarCalificacion(String idCalificacionAEliminar) {
+	@Delete("/calificaciones/:id")
+	def eliminarCalificacion() {
 		response.contentType = "application/json"
 		try {
-			val iId = Integer.valueOf(idCalificacionAEliminar)
+			val iId = Integer.valueOf(id)
 			 rankit.admCalificaciones.eliminarCalificacionConLaId(iId)
 			ok()
 		} catch (NoSeInformaCalificacionException e) {
@@ -127,8 +127,8 @@ class RankITController {
 		}
 	}
 
-	@Get("/calificaciones")
-	def getCalificacionesDelUsuario(String id) {
+	@Get("/calificaciones/:id")
+	def getCalificacionesDelUsuario() {
 		response.contentType = "application/json"
 		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario=new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
 		val iId = Integer.valueOf(id)

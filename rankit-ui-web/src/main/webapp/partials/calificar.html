@@ -40,14 +40,14 @@
    
          <div class="completarCalificacion">
             <div class="row">
-                 <div class="col-md-6 espacio espacioALaIzquierda form-group">
+                 <div class="col-md-6 espacio espacioALaIzquierda">
                      <p>Calificado</p>
-                     <input type="text" name="calificado" ng-model="calificacionCtrl.calificacion.evaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  required="true">
+                     <input type="text" name="calificado" ng-model="calificacionCtrl.calificacion.evaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  >
                 
                  </div>
                  <div class="col-md-2 espacio">
                       <p>Puntaje</p>
-                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.calificacion.puntos" required="true" id="puntos">
+                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.calificacion.puntos" id="puntos">
          
                 </div>
               </div>
@@ -61,7 +61,7 @@
 
                <div class="row">
                    <div class="col-md-8 espacio espacioALaIzquierda espacioParaAbajo">
-                     <button type="button" ng-disabled="formu.$invalid" class="btn btn-default btn-lg btn-block " ng-click="calificacionCtrl.calificar()">Calificar</button>
+                     <button type="button" class="btn btn-default btn-lg btn-block " ng-click="calificacionCtrl.calificar()">Calificar</button>
                      </div>
                </div>
       

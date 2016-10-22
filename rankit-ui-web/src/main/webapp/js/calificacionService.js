@@ -1,5 +1,5 @@
 rankitApp.factory('Calificacion', function($resource) {
-    return $resource('/calificaciones', {}, {
+    return $resource('/calificaciones/:id', {'id': '@id'}, {
     	'query': { method: 'GET', isArray: true},
         'update': { method: 'PUT' },
         'save': { method: 'POST' },
@@ -8,9 +8,11 @@ rankitApp.factory('Calificacion', function($resource) {
 });
 
 
+
+
 rankitApp.factory('Evaluados', function($resource) {
     return $resource('/evaluados', {}, {
-    	'query': { method: 'GET', isArray: true},
+    	'query': { method: 'GET', isArray:true},
 
     });
 });
