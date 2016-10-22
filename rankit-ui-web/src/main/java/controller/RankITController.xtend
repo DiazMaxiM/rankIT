@@ -54,8 +54,6 @@ class RankITController {
 			notFound('{ "error": "El usuario no esta registrado en Rank-IT" }')
 		} catch (PasswordIncorrectoException e) {
 			badRequest('{ "error": "La password ingresada no es correcta" }')
-		} catch (UnrecognizedPropertyException exception) {
-			badRequest('{ "error": "Algo anda mal" }')
 		}
 
 	}

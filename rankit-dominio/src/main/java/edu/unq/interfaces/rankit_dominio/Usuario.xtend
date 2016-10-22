@@ -22,8 +22,8 @@ class Usuario {
 		this.baneado = false
 	}
 	
-	new (String nombre,String password){
-		this.nombre=nombre
+	new (String usuario,String password){
+		this.nombre=usuario
 		this.password=password
 	}
 

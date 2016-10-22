@@ -147,11 +147,11 @@ class AdmUsuarios {
 		respuesta
 	}
 
-	def int validarUsuario(Usuario usuario) {
-		var usuarios = usuariosDeNombre(usuario.nombre)
-		if (!usuarios.empty) {
-			if (usuarios.get(0).password.equals(usuario.password)) {
-				return usuarios.get(0).id
+	def int validarUsuario(Usuario usuarioALogear) {
+		var usuario = usuarios.findFirst[usuario|usuario.nombre.equals(usuarioALogear.nombre)]
+		if (!(usuario==null)) {
+			if (usuario.password.equals(usuarioALogear.password)) {
+				return devolverIdDelUsuario(usuario)
 			} else {
 				throw new PasswordIncorrectoException("Password Invalido")
 			}
@@ -163,7 +163,7 @@ class AdmUsuarios {
 
 	
 	def int devolverIdDelUsuario(Usuario usuario) {
-		usuariosDeNombre(usuario.nombre).get(0).id
+		usuario.id
 	}
      
     def void crearUsuario(Usuario usuario){
