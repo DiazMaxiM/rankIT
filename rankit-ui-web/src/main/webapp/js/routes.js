@@ -37,7 +37,11 @@ rankitApp.config(function ($stateProvider, $urlRouterProvider) {
    'mainPanel': {
       templateUrl: "partials/calificar.html",
       controller: "CalificacionController as CalificacionCtrl"
-    }
+    },
+    'loginPanel': {
+        templateUrl: "partials/logueado.html",
+        controller: "LogueadoController as logueadoCtrl"
+      }
   }
 }
 )
