@@ -11,15 +11,16 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 		this.loguearUsuario = function () 
 		{   
 			LoginService.guardar(this.usuarioLogueado, function(data) {
-			   console.log(data);
-			   self.loguear();
+			   self.loguear(data.id);
+			   console.log(DataService)
 			   $state.go('logeado');
 	        }, errorHandler);
 			
 		};
 		
-		this.loguear = function ()
+		this.loguear = function (id)
 		{
+			DataService.usuario.id = id;
 			DataService.usuario.nombre = self.usuarioLogueado.nombre;
 		}
 		
