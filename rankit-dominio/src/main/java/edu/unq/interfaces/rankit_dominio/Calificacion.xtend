@@ -16,8 +16,7 @@ class Calificacion {
 	private String detalle
 	private PuntuableAbstracto evaluado
 	private Usuario usuario
-	
-	String datosSinDobleComilla
+
 
 	new(Usuario usuario){
 		this.contenidoOfensivo = false
@@ -37,7 +36,7 @@ class Calificacion {
 	this.detalle = detalle
 	}
 	
-	new(PuntuablesBasicos basicos, String puntos, String detalle, String id) {
+	new(PuntuableAbstracto basicos,String puntos, String detalle, Integer id) {
 		this.evaluado = basicos
 	    this.puntos= puntos
 	    this.detalle = detalle
@@ -62,13 +61,10 @@ class Calificacion {
 		puntos = new Integer (valor)
 
 	}
-    def void setId(String valor){
-    	id= new Integer (valor.replaceAll('"',''))
-    	println(id)
-    }
+   
     
-    def void setDetalle(String valor){
-    	detalle=valor.replaceAll('"','')
-    	println(detalle)
-    }
+   
+	
+
+	
 }

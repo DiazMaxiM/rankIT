@@ -65,7 +65,7 @@ class AdmCalificaciones {
 	 * @param calificacion Calificacion para agregar en el admiminstrador de calificaciones
 	 */
 	def void agregarCalificacion(Calificacion calificacion) {
-		calificacion.id=secuenciaId.toString
+		calificacion.id=secuenciaId
 		secuenciaId+=1
 		listaCalificaciones.add(calificacion)
 	}
@@ -93,6 +93,7 @@ class AdmCalificaciones {
 	 */
 	def eliminarCalificacion(Calificacion calificacion) {
 		listaCalificaciones.remove(calificacion)
+		println(listaCalificaciones.contains(calificacion))
 	}
 
 	/**
@@ -193,74 +194,54 @@ class AdmCalificaciones {
 		agregarCalificacion(calificacion)
 	}
 	
-	def eliminarCalificacionConLaId(String id) {
-		if (id.isNullOrEmpty){
+	def eliminarCalificacionConLaId(Integer id) {
+		if (id==null){
 			throw new NoSeInformaCalificacionException("No se informo la calificacion a eliminar")
 		}
 		if (existeCalificacionConId(id)){
+			
 			var calificacionAEliminar = listaCalificaciones.findFirst[calificacion |calificacion.id.toString.equals(id)]
-			eliminarCalificacion(calificacionAEliminar)
+			println(existeCalificacionConId(id))
+		    eliminarCalificacion(calificacionAEliminar)
 		}
 		else {
 			throw new NoExisteCalificacionException("No existe la calificacion a eliminar")
 		}
 	}
 	
-	def existeCalificacionConId(String id) {
-		listaCalificaciones.exists[calificacion | calificacion.id.toString.equals(id)]
+	def existeCalificacionConId(Integer id) {
+		listaCalificaciones.exists[calificacion | calificacion.id.equals(id)]
 	}
 	
 	
-	def void editarCalificacion(PuntuableAbstracto puntuable, String puntaje,String motivo,String id) {
-	    var calificacion= calificacionConElId(id)
-	    calificacion.detalle =motivo
-	    calificacion.evaluado=puntuable
-	    calificacion.puntos =puntaje
+	def void editarCalificacion(Calificacion modificada) {
+	    var calificacion= calificacionConElId(modificada.id)
+	    calificacion.detalle=modificada.detalle
+	    calificacion.evaluado=modificada.evaluado
+	    calificacion.puntos =modificada.puntos
 	}
-	
-	def boolean faltanDatosDeLaCalificacion(PuntuablesBasicos evaluado, String puntos, String detalle, String id) {
-		 esConPuntos(puntos) ||  esDetalleSinDatos(detalle)|| evaluado == null || esIdValido(id)
-	
-   }
+
    
-   def boolean esConPuntos(String puntos){
-   	  puntos.contains("null")|| puntos.contains('""')
-   }
-   
-   def boolean esIdValido(String id){
-   	  id.contains("null")|| id.contains('""')
-   }
-   def boolean esDetalleSinDatos(String detalle){
-   	   detalle.contains("null")||detalle.contains('""')
-   	  
-   }
 	
-	def Calificacion calificacionConElId(String id){
-		var calificacion= listaCalificaciones.findFirst[calificacion|calificacion.id.toString.equals(id)]
+	def Calificacion calificacionConElId(Integer id){
+		var calificacion= listaCalificaciones.findFirst[calificacion|calificacion.id.equals(id)]
 		calificacion
 	}
 	
-	def calificacionesSimplificadasDelUsuario(String nombreUsuario,List<PuntuablesBasicos> basicos, Usuario usuarioLogeado) {
-		 var calificacionesDelUsuario=publicacionesDeUnUsuario(nombreUsuario)
-		   var calificacionesResultantes=new ArrayList
-		   for(calificacion:calificacionesDelUsuario){
-		   	   var puntuableBasico=basicos.findFirst[puntuable|puntuable.nombre.equals(calificacion.evaluado.nombre)]
-		   	   var calificacionResultante=new Calificacion(puntuableBasico,calificacion.puntos.toString,calificacion.detalle,calificacion.id.toString)
-		   	   calificacionResultante.usuario = usuarioLogeado
-		   	   calificacionesResultantes.add(calificacionResultante)
-		   }
-		   calificacionesResultantes
-	}
 	
-	def modificarCalificacion(PuntuablesBasicos basicos, String puntos, String detalle, String id) {
-		if(faltanDatosDeLaCalificacion(basicos,puntos,detalle,id)){
+	def modificarCalificacion(Calificacion modificada) {
+		if(faltanDatosDeLaCalificacion(modificada.evaluado,modificada.puntos,modificada.detalle,modificada.id)){
 			throw new CalificacionIncompletaException("La Calificacion esta imcompleta ")
 		}
-		if(!existeCalificacionConId(id)){
+		if(!existeCalificacionConId(modificada.id)){
 			throw new NoExisteCalificacionException("No se encuentra la calificacion")
 		}
-		 editarCalificacion(basicos,puntos,detalle,id)
+		 editarCalificacion(modificada)
 		
+	}
+	
+	def boolean faltanDatosDeLaCalificacion(PuntuableAbstracto evaluado, Integer puntos, String detalle, Integer id) {
+		puntos == null || detalle.isNullOrEmpty || evaluado == null || id == null
 	}
 	
  

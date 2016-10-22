@@ -24,6 +24,7 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.json.JSONUtils
+import edu.unq.interfaces.rankit_dominio.AdmCalificacionesParaElUsuario
 
 @Controller
 class RankITController {
@@ -117,17 +118,19 @@ class RankITController {
 	@Get("/calificaciones")
 	def getCalificacionesDelUsuario(String nombreDeUsuario) {
 		response.contentType = "application/json"
+		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario= new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
 		var usuarioLogeado= rankit.admUsuarios.usuarioConElNombre(nombreDeUsuario)
 		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
 		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
-		ok(rankit.admCalificaciones.calificacionesSimplificadasDelUsuario(nombreDeUsuario,lista,usuarioLogeado).toJson)
+		ok(admCalificacionesParaElUsuario.calificaciones(lista,usuarioLogeado).toJson)
 	}
 
 	@Delete("/calificaciones")
 	def eliminarCalificacion(String idCalificacionAEliminar) {
 		response.contentType = "application/json"
 		try {
-			rankit.admCalificaciones.eliminarCalificacionConLaId(idCalificacionAEliminar)
+			val iId = Integer.valueOf(idCalificacionAEliminar)
+			rankit.admCalificaciones.eliminarCalificacionConLaId(iId)
 			ok()
 		} catch (NoSeInformaCalificacionException e) {
 			badRequest('{"error": "No se informo la calificacion a eliminar"}')
@@ -136,17 +139,27 @@ class RankITController {
 		}
 	}
 	
+	
+	
+	protected def Calificacion getCalificacionActualizadaFromJSON(String body) {
+		var JsonObject object = Json.parse(body).asObject();
+		var String evaluado = object.get("evaluado").toString
+		var String puntos = object.get("puntos").asString;
+		var String detalle = object.get("detalle").asString;
+		 var String id = object.get("id").asString
+		
+		val iId = Integer.valueOf(id)
+		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
+		 var calificacion =new Calificacion(puntuable,puntos,detalle,iId)
+		  calificacion
+	}
+	
     @Put("/calificaciones")
 	def editarCalificacion(@Body String body) {
 		response.contentType = "application/json"
 		try {
-			var JsonObject object = Json.parse(body).asObject();
-		    var String evaluado = object.get("evaluado").toString
-		    var String puntos = object.get("puntos").toString
-		    var String detalle = object.get("detalle").toString
-		    var String id = object.get("id").toString
-		    var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
-			this.rankit.admCalificaciones.modificarCalificacion(puntuable,puntos,detalle,id)
+			var calificacion = getCalificacionActualizadaFromJSON(body);
+			this.rankit.admCalificaciones.modificarCalificacion(calificacion)
 			ok()
 
 		} catch (CalificacionIncompletaException e) {
