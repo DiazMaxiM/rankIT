@@ -1,9 +1,9 @@
-rankitApp.controller('LogueadoController', function ($resource,DataService,$state) 
+rankitApp.controller('LogueadoController', function (DataService,$state) 
 {
 	 this.nombre = DataService.usuario.nombre;
 	 
 	 this.calificar= function ($state){
-	 	console.log("no pasa")
+	 	console.log("no pasa");
 	 	$state.go('calificar');
 	 }
 	 

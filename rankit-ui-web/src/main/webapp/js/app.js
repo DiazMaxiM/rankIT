@@ -5,7 +5,7 @@ var rankitApp = angular.module('rankitApp', ['ui.router','ngResource','ui.bootst
 rankitApp.factory('DataService', function()
 {
 		return	{
-					usuario:{}
-				};
+					usuario:{},
+	  };
 });
 

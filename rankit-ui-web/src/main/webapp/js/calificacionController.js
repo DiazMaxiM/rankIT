@@ -1,4 +1,4 @@
-rankitApp.controller('CalificacionController', function ($resource,UsuarioServicio,Evaluados,Calificacion,$state) {
+rankitApp.controller('CalificacionController', function ($resource,Evaluados,Calificacion,$state) {
   var self=this;
   
   this.usuarioLogueado="Liza";

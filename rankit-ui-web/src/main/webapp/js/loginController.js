@@ -10,7 +10,7 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 		
 		this.loguearUsuario = function () 
 		{   
-			LoginService.guardar(this.LoginService, function(data) {
+			LoginService.guardar(this.usuarioLogueado, function(data) {
 			   console.log(data);
 			   self.loguear();
 			   $state.go('logeado');
