@@ -13,7 +13,7 @@ class Usuario {
 	private var String password
 	private boolean activo
 	private boolean baneado
-	private int id
+	private Integer id
 	new() {
 		this.fechaDeRegistro = new Date
 		this.nombre = "NN"

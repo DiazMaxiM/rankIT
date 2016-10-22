@@ -128,10 +128,11 @@ class RankITController {
 	}
 
 	@Get("/calificaciones")
-	def getCalificacionesDelUsuario(String nombreDeUsuario) {
+	def getCalificacionesDelUsuario(String id) {
 		response.contentType = "application/json"
 		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario=new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
-		var usuarioLogeado= rankit.admUsuarios.usuarioConElNombre(nombreDeUsuario)
+		val iId = Integer.valueOf(id)
+		var usuarioLogeado= rankit.admUsuarios.usuarioConElID(iId)
 		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
 		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
 		admCalificacionesParaElUsuario.crearCalificaciones(lista,usuarioLogeado)

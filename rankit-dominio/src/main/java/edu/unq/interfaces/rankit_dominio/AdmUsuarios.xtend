@@ -181,4 +181,9 @@ class AdmUsuarios {
 		usuario
 	}
 	
+	def usuarioConElID(Integer idUsuario) {
+		var usuario= usuarios.findFirst[usuario|usuario.id.equals(idUsuario)]
+		usuario
+	}
+	
 }

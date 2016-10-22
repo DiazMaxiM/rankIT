@@ -1,11 +1,9 @@
-rankitApp.controller('CalificacionController', function ($resource,Evaluados,Calificacion,$state) {
+rankitApp.controller('CalificacionController', function ($resource,Evaluados,Calificacion,$state,DataService) {
+  
   var self=this;
-  
-  this.usuarioLogueado="Liza";
-  console.log(self.usuarioLogueado)
-  
-  self.calificaciones = [];
- 
+  this.idUsuarioLogueado=DataService.usuario.id;
+  console.log(self.idUsuarioLogueado);
+  self.calificaciones = [{"evaluado":{"id":2,"nombre":"Abasto","tipo":"LUGAR"},"promedio":15,"puntos":15,"detalle":"Detalle Calififcacion Lugar 1","id":1},{"evaluado":{"id":1,"nombre":"Metrogas","tipo":"SERVICIO"},"promedio":10,"puntos":15,"detalle":"Detalle Calififcacion Servicio 1","id":2}];
   self.evaluados=[];
   
   this.evaluados = function() {
@@ -20,7 +18,8 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
   }
   
    this.actualizarCalificaciones = function() {
-      Calificacion.query(self.usuarioLogueado,function(data) {
+	   console.log(DataService);
+      Calificacion.query(DataService.usuario,function(data) {
           self.calificaciones = data;
       }, errorHandler);
    };
@@ -39,16 +38,16 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
 	  
    // crear Calificacion
 	    this.crearCalificacion = function() {
-	        Calificacion.save(this.nuevaCalificacion, function(data) {
+	        Calificacion.save(this.calificacion, function(data) {
 	            self.actualizarCalificaciones();
-	            self.nuevaCalificacion = null;
+	            self.calificacion = null;
 	        }, errorHandler);
 	    };
 	    
 	//actualizarCalificacion
   
     this.actualizarLibro = function() {
-	        Calificacion.update(this.calificacionSeleccionada, function() {
+	        Calificacion.update(this.calificacionSeleccionado, function() {
 	            self.actualizarCalificaciones();
 	        }, errorHandler);
 
@@ -65,8 +64,11 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
      }
  
    //mostrar calificacion
-   this.modificar=function(calificacion){
-	   self.calificacionSeleccionada=calificacion; 
+   this.modificar=function(calificacionActualizada){
+	   self.calificacion.evaluado=calificacionActualizada.evaluado;
+	   self.calificacion.puntos=calificacionActualizada.puntos;
+	   self.calificacion.detalle=calificacionActualizada.detalle;
+	   self.calificacionSeleccionada=calificacionActualizada; 
    }
     
   
