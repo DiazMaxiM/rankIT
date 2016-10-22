@@ -200,7 +200,7 @@ class AdmCalificaciones {
 		}
 		if (existeCalificacionConId(id)){
 			
-			var calificacionAEliminar = listaCalificaciones.findFirst[calificacion |calificacion.id.toString.equals(id)]
+			var calificacionAEliminar = listaCalificaciones.findFirst[calificacion |calificacion.id.equals(id)]
 			println(existeCalificacionConId(id))
 		    eliminarCalificacion(calificacionAEliminar)
 		}

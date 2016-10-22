@@ -21,6 +21,11 @@ class Usuario {
 		this.activo = false
 		this.baneado = false
 	}
+	
+	new (String nombre,String password){
+		this.nombre=nombre
+		this.password=password
+	}
 
 	/** 
 	 * PROPÓSITO: Cambia el nombre del usuario.

@@ -2,18 +2,22 @@ package edu.unq.interfaces.rankit_dominio
 
 import java.util.List
 import java.util.ArrayList
+import org.uqbar.commons.utils.Observable
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Observable
+@Accessors
 class AdmCalificacionesParaElUsuario {
 	
 	AdmCalificaciones admCalificaciones
-	
+	List<CalificacionDelUsuario>calificaciones=new ArrayList
 	new(AdmCalificaciones calificaciones) {
 		this.admCalificaciones=calificaciones
 	}
 	
 	
 	
-	def calificaciones(List<PuntuablesBasicos> basicos, Usuario usuario) {
+	def void crearCalificaciones(List<PuntuablesBasicos> basicos, Usuario usuario) {
 		  var calificacionesDelUsuario=admCalificaciones.publicacionesDeUnUsuario(usuario.nombre)
 		  var calificacionesResultantes=new ArrayList
 		   for(calificacion:calificacionesDelUsuario){
@@ -22,10 +26,8 @@ class AdmCalificacionesParaElUsuario {
 		   	   var calificacionResultante=new CalificacionDelUsuario(puntuableBasico,promedioDelPuntuable,calificacion.detalle,calificacion.puntos,calificacion.id)
 		   	   calificacionesResultantes.add(calificacionResultante)
 		   }
-		     calificacionesResultantes
+		      calificaciones=calificacionesResultantes
 		   }
-	
-	
 	
 		
 }

@@ -31,9 +31,9 @@ class RankITController {
 	extension JSONUtils = new JSONUtils
 
 	var RankIT rankit
-
 	new(RankIT rankit) {
 		this.rankit = rankit
+	
 	}
 
 	@Get("/evaluados")
@@ -114,23 +114,13 @@ class RankITController {
 		 var calificacion =new Calificacion(puntuable,puntos,detalle)
 		  calificacion
 	}
-
-	@Get("/calificaciones")
-	def getCalificacionesDelUsuario(String nombreDeUsuario) {
-		response.contentType = "application/json"
-		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario= new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
-		var usuarioLogeado= rankit.admUsuarios.usuarioConElNombre(nombreDeUsuario)
-		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
-		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
-		ok(admCalificacionesParaElUsuario.calificaciones(lista,usuarioLogeado).toJson)
-	}
-
+	
 	@Delete("/calificaciones")
 	def eliminarCalificacion(String idCalificacionAEliminar) {
 		response.contentType = "application/json"
 		try {
 			val iId = Integer.valueOf(idCalificacionAEliminar)
-			rankit.admCalificaciones.eliminarCalificacionConLaId(iId)
+			 rankit.admCalificaciones.eliminarCalificacionConLaId(iId)
 			ok()
 		} catch (NoSeInformaCalificacionException e) {
 			badRequest('{"error": "No se informo la calificacion a eliminar"}')
@@ -138,6 +128,18 @@ class RankITController {
 			notFound('{"error": "No existe la calificacion a eliminar"}')
 		}
 	}
+
+	@Get("/calificaciones")
+	def getCalificacionesDelUsuario(String nombreDeUsuario) {
+		response.contentType = "application/json"
+		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario=new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
+		var usuarioLogeado= rankit.admUsuarios.usuarioConElNombre(nombreDeUsuario)
+		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
+		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
+		admCalificacionesParaElUsuario.crearCalificaciones(lista,usuarioLogeado)
+		ok(admCalificacionesParaElUsuario.calificaciones.toJson)
+	}
+
 	
 	
 	
