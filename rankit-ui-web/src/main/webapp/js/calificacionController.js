@@ -2,8 +2,8 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
   
   var self=this;
   this.idUsuarioLogueado=DataService.usuario.id;
-  
-  self.calificaciones = [];
+  console.log(self.idUsuarioLogueado);
+  self.calificaciones = [{"evaluado":{"id":2,"nombre":"Abasto","tipo":"LUGAR"},"promedio":15,"puntos":15,"detalle":"Detalle Calififcacion Lugar 1","id":1},{"evaluado":{"id":1,"nombre":"Metrogas","tipo":"SERVICIO"},"promedio":10,"puntos":15,"detalle":"Detalle Calififcacion Servicio 1","id":2}];
   self.evaluados=[];
   
   this.evaluados = function() {
@@ -18,7 +18,8 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
   }
   
    this.actualizarCalificaciones = function() {
-      Calificacion.query(self.usuarioLogueado,function(data) {
+	   console.log(DataService);
+      Calificacion.query(DataService.usuario,function(data) {
           self.calificaciones = data;
       }, errorHandler);
    };

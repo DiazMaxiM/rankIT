@@ -5,7 +5,13 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6 ">
-          <ul ng-repeat="calificacion in calificacionCtrl.calificaciones" class="list-unstyled">
+      <div class="row" data-ng-repeat="cal in CalificacionController.calificaciones">
+      <div class="col-md-12">
+                 <strong><h5>{{cal.evaluado.nombre }}</h5></strong>
+                  
+      </div>
+	  </div>
+       <!--     <ul ng-repeat="calificacion in calificacionCtrl.calificaciones" class="list-unstyled">
             <li>
                <div class="row borde espacioALaIzquierda" id="{{calificacion.id}}">
                <div class="col-md-4 espacio">
@@ -30,7 +36,7 @@
           </li>
           
        </ul>
-      
+      -->
       </div>
       <div class="col-md-6 ">
           <div class="borde cabecera">
