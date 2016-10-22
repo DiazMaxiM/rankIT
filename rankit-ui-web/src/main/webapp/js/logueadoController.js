@@ -8,9 +8,9 @@ rankitApp.controller('LogueadoController', function (DataService,$state)
 	 };
 	 
 	 this.desloguear= function (){
-		 	console.log("usuario deslogueado");
+		 	console.log("Deslogueo");
+		 	DataService.usuario.nombre=""
 		 	$state.go('inicio');
-		 	nombre = null;
 		 };
 	 
 });

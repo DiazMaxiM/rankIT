@@ -49,7 +49,7 @@ class RankITController {
 		response.contentType = "application/json"
 		try {
 			var Usuario usuario = body.fromJson(typeof(Usuario))
-			ok(this.rankit.admUsuarios.validarUsuario(usuario).toJson)
+			ok('{"id":' + this.rankit.admUsuarios.validarUsuario(usuario)+'}')
 		} catch (UsuarioNoExistenteException e) {
 			notFound('{ "error": "El usuario no esta registrado en Rank-IT" }')
 		} catch (PasswordIncorrectoException e) {
