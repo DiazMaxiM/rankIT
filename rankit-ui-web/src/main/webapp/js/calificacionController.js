@@ -1,11 +1,9 @@
-rankitApp.controller('CalificacionController', function ($resource,Evaluados,Calificacion,$state) {
-  var self=this;
+rankitApp.controller('CalificacionController', function ($resource,Evaluados,Calificacion,$state,DataService) {
   
-  this.usuarioLogueado="Liza";
-  console.log(self.usuarioLogueado)
+  var self=this;
+  this.idUsuarioLogueado=DataService.usuario.id;
   
   self.calificaciones = [];
- 
   self.evaluados=[];
   
   this.evaluados = function() {
@@ -39,16 +37,16 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
 	  
    // crear Calificacion
 	    this.crearCalificacion = function() {
-	        Calificacion.save(this.nuevaCalificacion, function(data) {
+	        Calificacion.save(this.calificacion, function(data) {
 	            self.actualizarCalificaciones();
-	            self.nuevaCalificacion = null;
+	            self.calificacion = null;
 	        }, errorHandler);
 	    };
 	    
 	//actualizarCalificacion
   
     this.actualizarLibro = function() {
-	        Calificacion.update(this.calificacionSeleccionada, function() {
+	        Calificacion.update(this.calificacionSeleccionado, function() {
 	            self.actualizarCalificaciones();
 	        }, errorHandler);
 
@@ -65,8 +63,11 @@ rankitApp.controller('CalificacionController', function ($resource,Evaluados,Cal
      }
  
    //mostrar calificacion
-   this.modificar=function(calificacion){
-	   self.calificacionSeleccionada=calificacion; 
+   this.modificar=function(calificacionActualizada){
+	   self.calificacion.evaluado=calificacionActualizada.evaluado;
+	   self.calificacion.puntos=calificacionActualizada.puntos;
+	   self.calificacion.detalle=calificacionActualizada.detalle;
+	   self.calificacionSeleccionada=calificacionActualizada; 
    }
     
   

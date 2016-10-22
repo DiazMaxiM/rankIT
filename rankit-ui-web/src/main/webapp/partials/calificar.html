@@ -34,26 +34,26 @@
       </div>
       <div class="col-md-6 ">
           <div class="borde cabecera">
-             <h2 class="texto">Nueva Calificación</h2>
+             <h2 class="texto">Nueva Calificaci&oacuten</h2>
           </div>
    
          <div class="completarCalificacion">
             <div class="row">
                  <div class="col-md-6 espacio espacioALaIzquierda form-group">
                      <p>Calificado</p>
-                     <input type="text" name="calificado" ng-model="calificacionCtrl.nombreEvaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  required="true">
+                     <input type="text" name="calificado" ng-model="calificacionCtrl.calificacion.evaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  required="true">
                 
                  </div>
                  <div class="col-md-2 espacio">
                       <p>Puntaje</p>
-                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.puntos" required="true" id="puntos">
+                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.calificacion.puntos" required="true" id="puntos">
          
                 </div>
               </div>
               <div class="row">
                   <div class="col-md-8 espacio">
                         <p class="espacioALaIzquierda">Motivo</p>
-                        <textarea ng-model="calificacionCtrl.detalle" name="motivo" type="text" class="form-control espacioALaIzquierda" rows="3" required="true"></textarea>
+                        <textarea ng-model="calificacionCtrl.calificacion.detalle" name="motivo" type="text" class="form-control espacioALaIzquierda" rows="3" required="true"></textarea>
                   </div>
 
                </div>
