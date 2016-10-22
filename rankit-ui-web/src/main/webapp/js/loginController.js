@@ -4,18 +4,13 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 	   this.usuarioLogueado= new Object;
        this.idUsuario=null;
 	   
-	   function errorHandler(error) {
-		    console.log(error.data);
-		}
-		
-		this.loguearUsuario = function () 
+	   this.loguearUsuario = function () 
 		{   
 			LoginService.guardar(this.usuarioLogueado, function(data) {
 			   self.loguear(data.id);
 			   console.log(DataService)
 			   $state.go('logeado');
 	        }, errorHandler);
-			
 		};
 		
 		this.loguear = function (id)
@@ -24,14 +19,20 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 			DataService.usuario.nombre = self.usuarioLogueado.nombre;
 		}
 		
-//		$scope.loguearUsuario = function () 
-//		{
-//			$state.go('logeado');
-//		};
-
-//		$scope.errorDeLogueo = function () 
-//		{
-//			//muestra en pantalla los errores
-//		};
+		function errorHandler(error)
+		{
+			console.log(error.data);
+			switch (error.status)
+			{
+				case 404: 
+				//this.usuarioNoRegistrado();
+				console.log("usuario no registrado");
+				break;
+				case 401: 
+				//this.contrasenhaIncorrecta();
+				console.log("contrasenha incorrecta"); //No entra aqui
+				break;
+			}
+		}
 });
   
