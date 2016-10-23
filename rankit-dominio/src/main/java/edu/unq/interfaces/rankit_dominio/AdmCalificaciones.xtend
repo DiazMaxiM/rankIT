@@ -209,7 +209,7 @@ class AdmCalificaciones {
 		}
 	}
 	
-	def existeCalificacionConId(Integer id) {
+	def boolean existeCalificacionConId(Integer id) {
 		listaCalificaciones.exists[calificacion | calificacion.id.equals(id)]
 	}
 	

@@ -29,11 +29,12 @@ class Calificacion {
 	new() {
 	}
 	
-	new(PuntuablesBasicos basicos, String puntos, String detalle) {
+	new(PuntuablesBasicos basicos, String puntos, String detalle,Usuario usuario) {
 	
 	this.evaluado = basicos
 	this.puntos= puntos
 	this.detalle = detalle
+	this.usuario=usuario
 	}
 	
 	new(PuntuableAbstracto basicos,String puntos, String detalle, Integer id) {
@@ -41,7 +42,6 @@ class Calificacion {
 	    this.puntos= puntos
 	    this.detalle = detalle
 	    this.id=id
-	    println(id)
 	  
 	}
 	

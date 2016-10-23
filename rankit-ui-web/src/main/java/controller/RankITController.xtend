@@ -25,6 +25,7 @@ import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.json.JSONUtils
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesParaElUsuario
+import edu.unq.interfaces.rankit_dominio.AdmPuntuablesBasicos
 
 @Controller
 class RankITController {
@@ -96,21 +97,20 @@ class RankITController {
 			ok()
 		} catch (CalificacionIncompletaException e) {
 			badRequest('{ "error": "La Calificacion se encuentra incompleta" }')
-		} catch (UnrecognizedPropertyException exception) {
-			badRequest('{ "error": "Algo anda mal" }')
-		}
+		} 
 	}
 	
 	protected def Calificacion getCalificacionFromJSON(String body) {
 		var JsonObject object = Json.parse(body).asObject();
-		var String evaluado = object.get("evaluado").toString
-		var String puntos = object.get("puntos").asString;
+		var String evaluado = object.get("evaluado").toString;
+		var String puntos = object.get("puntos").toString;
 		var String detalle = object.get("detalle").asString;
-		
-		
+		var String usuario=object.get("usuario").toString;
+		val id = Integer.valueOf(usuario);
+		var Usuario usuarioLogeado=rankit.admUsuarios.usuarioConElID(id);
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
-		 var calificacion =new Calificacion(puntuable,puntos,detalle)
-		  calificacion
+		var calificacion =new Calificacion(puntuable,puntos,detalle,usuarioLogeado)
+		calificacion
 	}
 	
 	@Delete("/calificaciones/:id")
@@ -145,14 +145,14 @@ class RankITController {
 	protected def Calificacion getCalificacionActualizadaFromJSON(String body) {
 		var JsonObject object = Json.parse(body).asObject();
 		var String evaluado = object.get("evaluado").toString
-		var String puntos = object.get("puntos").asString;
+		var String puntos = object.get("puntos").toString;
 		var String detalle = object.get("detalle").asString;
-		 var String id = object.get("id").asString
+		var String id = object.get("id").toString
 		
 		val iId = Integer.valueOf(id)
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
-		 var calificacion =new Calificacion(puntuable,puntos,detalle,iId)
-		  calificacion
+		var calificacion =new Calificacion(puntuable,puntos,detalle,iId)
+		calificacion
 	}
 	
     @Put("/calificaciones")

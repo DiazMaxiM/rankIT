@@ -1,12 +1,17 @@
 rankitApp.factory('Calificacion', function($resource) {
     return $resource('/calificaciones/:id', {'id': '@id'}, {
     	'query': { method: 'GET', isArray: true},
-        'update': { method: 'PUT' },
-        'save': { method: 'POST' },
         'remove': { method:'DELETE' }
     });
 });
 
+
+rankitApp.factory('ActualizarCalificacion', function($resource) {
+    return $resource('/calificaciones', {}, {
+         'save': { method: 'POST' },
+         'update': { method: 'PUT' }
+    });
+});
 
 
 

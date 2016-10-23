@@ -42,19 +42,19 @@
             <div class="row">
                  <div class="col-md-6 espacio espacioALaIzquierda">
                      <p>Calificado</p>
-                     <input type="text" name="calificado" ng-model="calificacionCtrl.calificacion.evaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  >
+                     <input type="text" name="calificado" ng-model="calificacionCtrl.nombreEvaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  >
                 
                  </div>
                  <div class="col-md-2 espacio">
                       <p>Puntaje</p>
-                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.calificacion.puntos" id="puntos">
+                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.nuevaCalificacion.puntos" id="puntos">
          
                 </div>
               </div>
               <div class="row">
                   <div class="col-md-8 espacio">
                         <p class="espacioALaIzquierda">Motivo</p>
-                        <textarea ng-model="calificacionCtrl.calificacion.detalle" name="motivo" type="text" class="form-control espacioALaIzquierda" rows="3" required="true"></textarea>
+                        <textarea ng-model="calificacionCtrl.nuevaCalificacion.detalle" name="motivo" type="text" class="form-control espacioALaIzquierda" rows="3" required="true"></textarea>
                   </div>
 
                </div>
