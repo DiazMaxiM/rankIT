@@ -181,8 +181,12 @@ class AdmUsuarios {
 		usuario
 	}
 	
-	def usuarioConElID(Integer idUsuario) {
-		var usuario= usuarios.findFirst[usuario|usuario.id.equals(idUsuario)]
+	def usuarioConElID(String idUsuario) {
+		if(idUsuario.contains("null")){
+		   throw new UserException("Debe indicar el id del usuario")
+		}
+		val id= new Integer(idUsuario)
+		var usuario= usuarios.findFirst[usuario|usuario.id.equals(id)]
 		usuario
 	}
 	

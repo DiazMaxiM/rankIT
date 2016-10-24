@@ -29,7 +29,7 @@ class Calificacion {
 	new() {
 	}
 	
-	new(PuntuablesBasicos basicos, String puntos, String detalle,Usuario usuario) {
+	new(PuntuablesBasicos basicos, String puntos, String detalle, Usuario usuario) {
 	
 	this.evaluado = basicos
 	this.puntos= puntos
@@ -37,7 +37,7 @@ class Calificacion {
 	this.usuario=usuario
 	}
 	
-	new(PuntuableAbstracto basicos,String puntos, String detalle, Integer id) {
+	new(PuntuableAbstracto basicos,String puntos, String detalle, String id) {
 		this.evaluado = basicos
 	    this.puntos= puntos
 	    this.detalle = detalle
@@ -45,17 +45,22 @@ class Calificacion {
 	  
 	}
 	
-
+   def void setId(String id){
+   	   if(id.contains("null")){
+   	   	 throw new UserException("Debe indicar la el id de la calificacion")
+   	   }
+   	   this.id=new Integer(id)
+   }
 	
 	def void setPuntos(String valor) {
 		
 		// TODO : preguntar si esta bien que quite las dobles comillas que vienen de objecto que armo con json.
 		
-		
+	
 		if (valor.contains(",") || valor.contains(".")) {
 			throw new UserException("El puntaje debe ser un numero entero")
 		}
-		if (Strings.isNullOrEmpty(valor)) {
+		if (Strings.isNullOrEmpty(valor)|| valor.contains("null")) {
 			throw new UserException("Complete los puntos")
 		}
 		puntos = new Integer (valor)
