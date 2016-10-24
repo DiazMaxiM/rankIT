@@ -1,20 +1,3 @@
-<!doctype html>
-<html lang="en" ng-app="RegistroController">
-<head>
-  <meta charset="utf-8">
-  <title>Registro de usuario</title>
-  <!-- import JQuery -->
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <!-- import Angular -->
-  <script src="node_modules/angular/angular.min.js"></script>
-  <!-- import Bootstrap -->
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!-- import App -->
-  <script src="js/controllerRegistrar.js"></script>
-</head>
-<body>
 	<div>
 		<!-- Titulo del formulario-->
 		<div> Registrate </div>
@@ -27,19 +10,19 @@
 			<div class="input-group" id="nameInput">
 				Nombre
 				<input ng-change="actualizacionDeErrorNombre()" ng-model="nombre" type="text" class="form-control"
-				placeholder="Ingrese un nombre aqu√≠"/>
+				placeholder="Ingrese un nombre aquÌ"/>
 				<div>
 					<div class="alert alert-error" ng-show="noHayNombreValido()">
 						<p> El nombre ingresado es invalido: </p>
 						<div> 
 							<div ng-show="elNombreYaExiste()">
 								<ul>
-									<li>El nombre ya est√° en uso. Por favor, ingrese un nombre distinto.</li>
+									<li>El nombre ya est· en uso. Por favor, ingrese un nombre distinto.</li>
 								</ul>
 							</div>
 							<div ng-show="nombreNoPermitido()">
 								<ul>
-									<li>El nombre "NN" no est√° permitido. Por favor, ingrese un nombre distinto.</li>
+									<li>El nombre "NN" no est· permitido. Por favor, ingrese un nombre distinto.</li>
 								</ul>
 							</div>
 						</div>
@@ -52,15 +35,15 @@
 					</div>
 				</div>
 			</div>
-			<!-- Campo para ingresar la contrase√±a -->
+			<!-- Campo para ingresar la contraseÒa -->
 			<div>
-				Contrase√±a
+				ContraseÒa
 				<input ng-change="actualizacionDeErrorContrasenha()" ng-model="contrasenha" type="password" class="form-control"
-				placeholder= "Ingrese una contrase√±a aqu√≠"/>
+				placeholder= "Ingrese una contraseÒa aquÌ"/>
 				<div class="alert alert-error" ng-show="registroSinContrasenha">
 					<p> Llenar este campo es obligatorio: </p>
 					<ul>
-						<li>Por favor, ingrese una contrase√±a.</li>
+						<li>Por favor, ingrese una contraseÒa.</li>
 					</ul>				
 				</div>
 			</div>
@@ -73,7 +56,7 @@
 				
 				<!--
 				<input ng-model="captcha" type="text" class="form-control"
-				placeholder="Ingrese el c√≥digo"/>
+				placeholder="Ingrese el cÛdigo"/>
 				-->
 			</div>
 			
@@ -95,5 +78,3 @@
         	</li>
 		</form>
 	</div>
-</body>
-</html>

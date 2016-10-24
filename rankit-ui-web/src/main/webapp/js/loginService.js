@@ -2,7 +2,9 @@ rankitApp.factory('LoginService', function($resource)
 	{
 		return $resource('/usuarios', {}, 
 		{
-			'guardar': { method: 'POST' },
+			'login': { method: 'POST' },
+			'guardar': { method: 'PUT' },
 		});
+		
 		
 });

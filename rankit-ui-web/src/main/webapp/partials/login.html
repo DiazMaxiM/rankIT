@@ -1,6 +1,6 @@
-	<div>
-		<!-- Formulario de registro de usuario -->
-		<form>
+<div>
+	<!-- Formulario de registro de usuario -->
+	<form>
 		<div>
 			<div class="row">
 				<div class="col-xs-6">
@@ -51,17 +51,100 @@
 			</div>
 			<div class="row">
 			
-				<!-- Campo de ingresar contraseÃ±a -->
+				<!-- Campo de ingresar contraseña -->
 				<div class="col-xs-6">
 					<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder="ContraseÃ±a"/>
 				</div>
 				
 				<!-- Boton de registro -->
 				<div class="divPaddingBottom col-xs-6">
-					<input class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
+					<input data-toggle="modal" data-target="#myModal" class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
 					type="submit" value="Registrar"/>
+					<!--  MODAL DE REGISTRO -->
+				
+					<div id="myModal" class="modal fade" role="dialog">
+  						<div class="modal-dialog">
+						
+						<!-- Modal content-->
+    						<div class="modal-content">
+      							
+      							<div class="modal-header">
+        							<button type="button" class="close" data-dismiss="modal">&times;</button>
+        							<h4 class="modal-title">Registrate</h4>
+      							</div>
+      							
+      							<div class="modal-body">
+      								<!-- Titulo del formulario y presentacion-->
+        							<p> &iexcl;Bienvenidos a RankIt! </p>
+        							<p>Por favor, complete los siguientes campos, los mismo son necesarios para su registro.</p>
+									
+									<!-- Formulario de registro de usuario -->
+									<form>
+									<div class= "row">
+										<div class="col-xs-12 paddingCuestionario">
+											{{pepe()}}
+											{{cantUsuarios()}}
+										
+											<!-- Campo para ingresar el nombre -->
+											<div class="input-group" id="nameInput">
+												Nombre:
+												<input ng-model="nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+												<div>
+													<div class="alert alert-error" ng-show="esNombreValido">
+														<p> El nombre ingresado es invalido: </p>
+														<div> 
+															<div ng-show="elNombreYaExiste()">
+																<ul>
+																	<li>El nombre ya est&aacute; en uso. Por favor, ingrese un nombre distinto.</li>
+																</ul>
+															</div>
+															<div ng-show="nombreNoPermitido()">
+																<ul>
+																	<li>El nombre "NN" no est&aacute; permitido. Por favor, ingrese un nombre distinto.</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+													<div class="alert alert-error" ng-show="registroSinNombre">
+														<p> Llenar este campo es obligatorio: </p>
+														<ul>
+															<li>Por favor, ingrese un nombre.</li>
+														</ul>
+													</div>
+												</div>
+												<!-- Campo para ingresar la contraseña -->
+												Contrase&ntilde;a:
+												<input ng-model="contrasenha" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+												<div class="alert alert-error" ng-show="registroSinContrasenha">
+													<p> Llenar este campo es obligatorio: </p>
+													<ul>
+														<li>Por favor, ingrese una contrase&ntilde;a.</li>
+													</ul>				
+												</div>
+											</div>
+											<!-- NO SE QUE ESTABA HACIENDO ACA -->
+											<li  ng-repeat="usuario in usuariosRegistrados ">
+							        			<a> {{usuario.nombre}}</a>	
+							        		</li>
+							        	</div>
+							        </div>
+									</form>
+      							</div>
+      						
+      							<!-- Botones interactivos del formulario-->
+      							<div class="modal-footer">
+	      							<div class="divPaddingBottom">
+										<input ng-disabled="noHayNombreValido()" class="btn btn-default" ng-click="registrarUsuarioSiPuede()"
+											type="submit" value="Registrar">
+									
+	        							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar registro</button>
+	      							</div>
+      							</div>
+    						</div>
+  						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		</form>
-	</div>
+	</form>
+</div>
