@@ -2,7 +2,6 @@ package controller
 
 import com.eclipsesource.json.Json
 import com.eclipsesource.json.JsonObject
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
 import com.google.gson.Gson
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesResumidas
 import edu.unq.interfaces.rankit_dominio.Calificacion
@@ -25,7 +24,7 @@ import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.json.JSONUtils
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesParaElUsuario
-import edu.unq.interfaces.rankit_dominio.AdmPuntuablesBasicos
+import org.uqbar.commons.model.UserException
 
 @Controller
 class RankITController {
@@ -92,12 +91,14 @@ class RankITController {
 	def ingresarCalificacion(@Body String body) {
 		response.contentType = "application/json"
 		try {
-			var calificacion = getCalificacionFromJSON(body);
+			 var calificacion = getCalificacionFromJSON(body);
 			 this.rankit.admCalificaciones.agregarNuevaCalificacionValidada(calificacion)
 			ok()
 		} catch (CalificacionIncompletaException e) {
 			badRequest('{ "error": "La Calificacion se encuentra incompleta" }')
-		} 
+		}catch (UserException e) {
+			badRequest('{ "error": "La Calificacion se encuentra incompleta" }')
+		}
 	}
 	
 	protected def Calificacion getCalificacionFromJSON(String body) {
@@ -106,8 +107,7 @@ class RankITController {
 		var String puntos = object.get("puntos").toString;
 		var String detalle = object.get("detalle").asString;
 		var String usuario=object.get("usuario").toString;
-		val id = Integer.valueOf(usuario);
-		var Usuario usuarioLogeado=rankit.admUsuarios.usuarioConElID(id);
+		var Usuario usuarioLogeado=rankit.admUsuarios.usuarioConElID(usuario);
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
 		var calificacion =new Calificacion(puntuable,puntos,detalle,usuarioLogeado)
 		calificacion
@@ -131,8 +131,8 @@ class RankITController {
 	def getCalificacionesDelUsuario() {
 		response.contentType = "application/json"
 		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario=new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
-		val iId = Integer.valueOf(id)
-		var usuarioLogeado= rankit.admUsuarios.usuarioConElID(iId)
+		
+		var usuarioLogeado= rankit.admUsuarios.usuarioConElID(id)
 		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
 		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
 		admCalificacionesParaElUsuario.crearCalificaciones(lista,usuarioLogeado)
@@ -148,10 +148,8 @@ class RankITController {
 		var String puntos = object.get("puntos").toString;
 		var String detalle = object.get("detalle").asString;
 		var String id = object.get("id").toString
-		
-		val iId = Integer.valueOf(id)
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));
-		var calificacion =new Calificacion(puntuable,puntos,detalle,iId)
+		var calificacion =new Calificacion(puntuable,puntos,detalle,id)
 		calificacion
 	}
 	
@@ -168,6 +166,9 @@ class RankITController {
 			
 		} catch (NoExisteCalificacionException e) {
 			notFound('{ "error": "No se encuentra la calificacion" }')
+		
+		}catch (UserException e) {
+			badRequest('{ "error": "La Calificacion se encuentra incompleta" }')
 		}
 
 	}
