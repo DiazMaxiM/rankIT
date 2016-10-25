@@ -53,11 +53,8 @@
 			
 				<!-- Campo de ingresar contrase�a -->
 				<div class="col-xs-6">
-<<<<<<< HEAD
-					<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder="Contrase&ntilde;a"/>
-=======
 					<input ng-model="loginCtrl.usuarioLogueado.password" tabindex="2" type="password" class="form-control" placeholder="Contraseña"/>
->>>>>>> b52b04798edd7a9c8a8dc8501062d40f21e43aee
+
 				</div>
 				
 				<!-- Boton de registro -->
@@ -86,30 +83,24 @@
 									<form>
 									<div class= "row">
 										<div class="col-xs-12 paddingCuestionario">
-											{{pepe()}}
-											{{cantUsuarios()}}
 										
 											<!-- Campo para ingresar el nombre -->
 											<div class="input-group" id="nameInput">
 												Nombre:
-												<input ng-model="nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+												<input ng-model="loginCtrl.usuarioARegistrar.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
 												<div>
-													<div class="alert alert-error" ng-show="noEsNombreValido">
+													<div class="alert alert-error" ng-show="loginCtrl.errorDeNombreVacio">
 														<p> El nombre ingresado es invalido: </p>
 														<div> 
-															<div ng-show="elNombreYaExiste()">
+															<div ng-show="loginCtrl.noEsNombreValido">
 																<ul>
 																	<li>El nombre ya est&aacute; en uso. Por favor, ingrese un nombre distinto.</li>
 																</ul>
 															</div>
-															<div ng-show="nombreNoPermitido()">
-																<ul>
-																	<li>El nombre "NN" no est&aacute; permitido. Por favor, ingrese un nombre distinto.</li>
-																</ul>
-															</div>
+								
 														</div>
 													</div>
-													<div class="alert alert-error" ng-show="registroSinNombre">
+													<div class="alert alert-error" ng-show="loginCtrl.errorDeNombreVacio">
 														<p> Llenar este campo es obligatorio: </p>
 														<ul>
 															<li>Por favor, ingrese un nombre.</li>
@@ -118,8 +109,8 @@
 												</div>
 												<!-- Campo para ingresar la contrase�a -->
 												Contrase&ntilde;a:
-												<input ng-model="contrasenha" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
-												<div class="alert alert-error" ng-show="registroSinContrasenha">
+												<input ng-model="loginCtrl.usuarioARegistrar.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+												<div class="alert alert-error" ng-show="loginCtrl.errorDeContrasenhaVacia">
 													<p> Llenar este campo es obligatorio: </p>
 													<ul>
 														<li>Por favor, ingrese una contrase&ntilde;a.</li>
@@ -134,7 +125,7 @@
       							<!-- Botones interactivos del formulario-->
       							<div class="modal-footer">
 	      							<div class="divPaddingBottom">
-										<input class="btn btn-default" ng-click="registrar()"
+										<input class="btn btn-default" ng-click="loginCtrl.registrar()"
 											type="submit" value="Registrar"/>
 									
 	        							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar registro</button>

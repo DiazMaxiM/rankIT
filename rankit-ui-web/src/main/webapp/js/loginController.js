@@ -47,10 +47,9 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 			console.log("usuario no registrado");
 		}
 		
-		this.nombre ="";
-		this.contrasenha="";
 		this.noEsNombreValido=false;
-		this.registroSinContrasenha=false;
+		this.errorDeNombreVacio = false;
+		this.errorDeContrasenhaVacia = false;
 		
 		function errorDeRegistro(error)
 		{
@@ -66,26 +65,62 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 		
 		this.registrar = function ()
 		{
-			if (this.contrasenha=="")
+			if (! this.registroNoValido())
 			{
-				LoginService.guardar(this.usuarioARegistrar, function() 
+				LoginService.guardar(this.usuarioARegistrar, function(data) 
 					{
-					this.usuarioARegistrar.nombre = this.nombre;
-					this.usuarioARegistrar.password=this.contrasenha;
-						this.notificarRegistro();
+						this.notificarRegistro('El usuario' + this.usuarioARegistrar.nombre + 'ha sido registrado con exito');
+						this.usuarioARegistrar = null;
 						console.log("Usuario registrado sin problemas")
 					}, errorDeRegistro);
 			}
 			else 
 			{
-				registroSinContrasenha = true;
+				this.mostrarErrores();
 			}
 			
 		}
 		
-		this.notificarRegistro = function() 
+		this.mostrarErrores = function () 
 		{
-			// abrir un nuevo modal y cerrar el anterior;
+			if (this.noHayUnNombreIngresado)
+			{
+				this.errorDeNombreVacio = true;
+			}
+			else 
+			{
+				this.errorDeContrasenhaVacia = true;
+			}
+		}
+		
+		this.registroNoValido = function () 
+		{
+			return this.noHayNombreIngresado || this.noHayContrasenhaIngresada;
+		}
+		
+		this.noHayUnNombreIngresado = function()
+		{
+			return this.usuarioARegistrar.nombre == "" ;
+		}
+		
+		this.noHayContrasenhaIngresada = function () 
+		{
+			return this.usuarioARegistrar.password=="";
+		}
+		
+		
+		this.msgs = [];
+		
+		this.notificarRegistro = function(mensaje) {
+	        this.msgs.push(mensaje);
+	        this.notificar(this.msgs);
+	    };
+		
+		this.notificar = function(mensajes) 
+		{
+			$timeout(function() {
+	            while (mensajes.length > 0) mensajes.pop();
+	        }, 3000);
 		}
 		
 });
