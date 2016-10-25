@@ -1,8 +1,9 @@
-package edu.unq.interfaces.rankit_dominio
+package excepciones
+
 
 import org.uqbar.commons.model.UserException
 
-class NombreInvalidoException extends UserException{
+class UsuarioNoExistenteException extends UserException {
 	
 	new(String message) {
 		super(message)

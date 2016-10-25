@@ -6,6 +6,9 @@ import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
+import excepciones.CalificacionIncompletaException
+import excepciones.NoSeInformaCalificacionException
+import excepciones.NoExisteCalificacionException
 
 /**
  * @author Maximiliano Diaz

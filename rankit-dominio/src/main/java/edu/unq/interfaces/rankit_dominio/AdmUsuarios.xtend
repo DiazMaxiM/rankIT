@@ -5,6 +5,10 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.UserException
 import org.uqbar.commons.utils.Observable
+import excepciones.PasswordIncorrectoException
+import excepciones.UsuarioNoExistenteException
+import excepciones.UsuarioInvalidoException
+import excepciones.NombreInvalidoException
 
 @Observable
 @Accessors

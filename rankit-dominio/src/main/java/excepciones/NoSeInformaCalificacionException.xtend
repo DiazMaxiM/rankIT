@@ -1,4 +1,4 @@
-package edu.unq.interfaces.rankit_dominio
+package excepciones
 
 import org.uqbar.commons.model.UserException
 

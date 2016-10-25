@@ -5,16 +5,10 @@ import com.eclipsesource.json.JsonObject
 import com.google.gson.Gson
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesResumidas
 import edu.unq.interfaces.rankit_dominio.Calificacion
-import edu.unq.interfaces.rankit_dominio.CalificacionIncompletaException
-import edu.unq.interfaces.rankit_dominio.NoExisteCalificacionException
-import edu.unq.interfaces.rankit_dominio.NoSeInformaCalificacionException
-import edu.unq.interfaces.rankit_dominio.NombreInvalidoException
-import edu.unq.interfaces.rankit_dominio.PasswordIncorrectoException
 import edu.unq.interfaces.rankit_dominio.PuntuablesBasicos
 import edu.unq.interfaces.rankit_dominio.RankIT
 import edu.unq.interfaces.rankit_dominio.TipoDePuntuable
 import edu.unq.interfaces.rankit_dominio.Usuario
-import edu.unq.interfaces.rankit_dominio.UsuarioNoExistenteException
 import java.util.List
 import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
@@ -25,7 +19,13 @@ import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.json.JSONUtils
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesParaElUsuario
 import org.uqbar.commons.model.UserException
-import edu.unq.interfaces.rankit_dominio.UsuarioInvalidoException
+import excepciones.UsuarioNoExistenteException
+import excepciones.PasswordIncorrectoException
+import excepciones.NombreInvalidoException
+import excepciones.UsuarioInvalidoException
+import excepciones.CalificacionIncompletaException
+import excepciones.NoSeInformaCalificacionException
+import excepciones.NoExisteCalificacionException
 
 @Controller
 class RankITController {
