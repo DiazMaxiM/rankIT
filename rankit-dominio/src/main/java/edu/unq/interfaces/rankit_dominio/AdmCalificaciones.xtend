@@ -93,7 +93,6 @@ class AdmCalificaciones {
 	 */
 	def eliminarCalificacion(Calificacion calificacion) {
 		listaCalificaciones.remove(calificacion)
-		println(listaCalificaciones.contains(calificacion))
 	}
 
 	/**

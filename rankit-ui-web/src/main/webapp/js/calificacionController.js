@@ -30,7 +30,7 @@ rankitApp.controller('CalificacionController', function ($resource,$timeout,Eval
 			self.notificarError("La calificación se encuenta incompleta");
 			break;
 			case 404:
-			self.notificarError("No se encuentra la calificación a modificar");
+			self.notificarError("No se encuentra la calificación a modificar.Cree una nueva calificación");
 			self.nuevaCalificacion=new Object;
 			break;
 		   default:

@@ -179,7 +179,6 @@ class AdmUsuarios {
     }
 	
 	def boolean usuarioSinDatos(Usuario usuario) {
-		println(usuario.nombre.nullOrEmpty|| usuario.password.nullOrEmpty)
 		usuario.nombre.nullOrEmpty|| usuario.password.nullOrEmpty
 	}
 	
@@ -192,10 +191,11 @@ class AdmUsuarios {
 	def usuarioConElID(String idUsuario) {
 		if(idUsuario.contains("null")){
 		   throw new UserException("Debe indicar el id del usuario")
+		}else{
+			val id= new Integer(idUsuario)
+		    var usuario= usuarios.findFirst[usuario|usuario.id.equals(id)]
+		    usuario
 		}
-		val id= new Integer(idUsuario)
-		var usuario= usuarios.findFirst[usuario|usuario.id.equals(id)]
-		usuario
 	}
 	
 }
