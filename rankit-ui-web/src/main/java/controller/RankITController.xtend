@@ -70,7 +70,7 @@ class RankITController {
 		} catch (NombreInvalidoException e) {
 			badRequest('{ "error": "El Nombre no es valido" }')
 		} catch (UsuarioInvalidoException e) {
-			badRequest('{ "error": "El usuario no es valido" }')
+			notFound('{ "error": "El usuario no es valido" }')
 		}
 
 	}

@@ -2,10 +2,8 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 {      
        var self=this;
 	   this.usuarioLogueado= new Object;
-	   this.usuarioARegistrar= new Object;
-       this.idUsuario=null;
-       this.nombre=null;
-       this.password=null;
+	   this.idUsuario=null;
+
 	   
 	   this.loguearUsuario = function () 
 		{   
@@ -16,31 +14,35 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 	        }, errorDeLogueo);
 		};
 		
+		function errorDeLogueo(error){
+			 switch(error.status){
+			 case 400:
+				 self.notificarErrorLogueo("La password ingresada no es correcta");
+			 case 404:
+				 self.notificarErrorLogueo("No estás registrado en Rank-IT, Registrate ;)");
+			 default:
+			 }
+		}
+		
 		this.loguear = function (id)
 		{
 			DataService.usuario.id = id;
 			DataService.usuario.nombre = self.usuarioLogueado.nombre;
 		};
 		
-		function errorDeLogueo(error)
-		{
-			console.log(error.data);
-			switch (error.status)
-			{
-				case 404: 
-					this.errorUsuarioNoRegistrado();
-					break;
-				case 400: 
-					this.errorContrasenhaIncorrecta();
-					console.log("contrasenha incorrecta");
-					break;
-			}
-		};
-		
 		
 		function errorDeRegistro(error)
 		{   
-			self.notificarError(error.data);
+			switch (error.status){
+			case 400: 
+				self.notificarError("Ya existe un usuario con el mismo nombre");
+				break;
+			case 404:
+				self.notificarError("Complete los campos");
+				break;
+				default:
+			    
+			}
 		
 			
 		};
@@ -49,15 +51,10 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 			 $("#myModal").modal({});
 		}
 		
-		this.registrarUsuario = function ()
-		{       self.usuarioARegistrar.nombre=self.nombre;
-		        self.usuarioARegistrar.password=self.password;
-				LoginService.guardar(self.usuarioARegistrar, function(data) 
-					{
-						self.notificarMensaje('El usuario' + this.usuarioARegistrar.nombre + 'ha sido registrado con exito');
-                        self.nombre=null;
-                        self.password=null;
-						self.usuarioARegistrar = new Object;
+		this.registrarUsuario = function (){   
+				LoginService.update(this.usuarioLogueado, function(data) {
+						self.notificarMensaje('El usuario'+ " "+ self.usuarioLogueado.nombre+ " "+ 'ha sido registrado con exito');
+						self.usuarioLogueado=new object;
 					}, errorDeRegistro);
 
 		};
@@ -75,7 +72,13 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 	        this.errors.push(mensaje);
 	        this.notificar(this.errors);
 	    };
-		
+	    
+	    this.errorsLogueo = [];
+	    this.notificarErrorLogueo = function(mensaje) {
+	        this.errorsLogueo.push(mensaje);
+	        this.notificar(this.errorsLogueo);
+	    };
+	    
 		this.notificar = function(mensajes) 
 		{
 			$timeout(function() {

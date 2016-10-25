@@ -2,6 +2,11 @@
 	<!-- Formulario de registro de usuario -->
 	<form>
 		<div>
+		          <div>
+					 <ul class="example-animate-container list-unstyled">
+					   <li class="alert alert-danger animate-repeat texto" data-ng-repeat="error in loginCtrl.errorsLogueo">{{error}}</li>
+					  </ul>
+				   </div>
 			<div class="row">
 				<div class="col-xs-6">
 				
@@ -71,11 +76,11 @@
 									<!-- Campo para ingresar el nombre -->
 								     <div class="input-group" id="nameInput">
 								      Nombre:
-								     <input ng-model="loginCtrl.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+								     <input ng-model="loginCtrl.usuarioLogueado.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
 								    
 									  <!-- Campo para ingresar la contrase�a -->
 									Contrase&ntilde;a:
-									<input ng-model="loginCtrl.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+									<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
 												
 									   </div>
 							        </div>
