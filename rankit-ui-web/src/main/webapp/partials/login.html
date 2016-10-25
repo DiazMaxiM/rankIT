@@ -72,21 +72,25 @@
 					   <form>
 							<div class= "row">
 								<div class="col-xs-12 paddingCuestionario">
+									<div class="input-group" id="nameInput">
+									
+										<!-- Campo para ingresar el nombre -->
+								      	<p>
+								      		Nombre:
+								     		<input ng-model="loginCtrl.usuarioLogueado.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+										</p>
 										
-									<!-- Campo para ingresar el nombre -->
-								     <div class="input-group" id="nameInput">
-								      Nombre:
-								     <input ng-model="loginCtrl.usuarioLogueado.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
-								    
-									  <!-- Campo para ingresar la contrase�a -->
-									Contrase&ntilde;a:
-									<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
-												
-									   </div>
-							        </div>
-							        </div>
-							</form>
-      			       </div>
+									  	<!-- Campo para ingresar la contrase�a -->
+										<p>
+											Contrase&ntilde;a:
+											<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+										</p>
+										
+									</div>
+								</div>
+							</div>
+						</form>
+      			  	</div>
       						
       							<!-- Botones interactivos del formulario-->
       							<div class="modal-footer">
