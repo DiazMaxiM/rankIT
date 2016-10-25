@@ -45,10 +45,14 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 			
 		};
 		
-		this.registrar = function ()
+		this.registrar=function(){
+			 $("#myModal").modal({});
+		}
+		
+		this.registrarUsuario = function ()
 		{       self.usuarioARegistrar.nombre=self.nombre;
 		        self.usuarioARegistrar.password=self.password;
-				LoginService.guardar(this.usuarioARegistrar, function(data) 
+				LoginService.guardar(self.usuarioARegistrar, function(data) 
 					{
 						self.notificarMensaje('El usuario' + this.usuarioARegistrar.nombre + 'ha sido registrado con exito');
                         self.nombre=null;

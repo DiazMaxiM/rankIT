@@ -8,46 +8,13 @@
 				<!-- Campo para ingresar nombre -->
 					<input ng-model="loginCtrl.usuarioLogueado.nombre" tabindex="1" type="text" class="form-control"
 					placeholder="Nombre de usuario"/>
-				<!--
-				<div>
-					<div class="alert alert-error" ng-show="loginCtrl.noHayNombreValido()">
-						<p> El nombre ingresado es invalido: </p>
-						<div> 
-							<div ng-show="elNombreYaExiste()">
-								<ul>
-									<li>El nombre ya esta en uso. Por favor, ingrese un nombre distinto.</li>
-								</ul>
-							</div>
-							<div ng-show="loginCtrl.nombreNoPermitido()">
-								<ul>
-									<li>El nombre "NN" no esta permitido. Por favor, ingrese un nombre distinto.</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="alert alert-error" ng-show="registroSinNombre">
-						<p> Llenar este campo es obligatorio: </p>
-						<ul>
-							<li>Por favor, ingrese un nombre.</li>
-						</ul>
-					</div>
-				</div>
-				-->
 				</div>
 				
 				<!-- Boton de logueo -->
 				<div class="divPaddingBottom col-xs-6">
 					<input class="btn btn-primary btn-block" tabindex="3" ng-click="loginCtrl.loguearUsuario()"
 					type="submit" value="Login"/>
-				<!--
-				<div class="alert alert-error" ng-show="registroSinContrasenha">
-					<p> Llenar este campo es obligatorio: </p>
-					<ul>
-						<li>Por favor, ingrese una contrase&ntilde;a.</li>
-					</ul>				
-				</div>
-				-->
-				</div>
+			    </div>
 			</div>
 			<div class="row">
 			
@@ -59,85 +26,67 @@
 				
 				<!-- Boton de registro -->
 				<div class="divPaddingBottom col-xs-6">
-					<input data-toggle="modal" data-target="#myModal" tabindex="4" class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
+				    <input  tabindex="4" class="btn btn-default btn-block" ng-click="loginCtrl.registrar()"
 					type="submit" value="Registrar"/>
-					<!--  MODAL DE REGISTRO -->
-				
-					<div id="myModal" class="modal fade" role="dialog">
-  						<div class="modal-dialog">
+
+                </div>
+              </div>
+
+
+
+
+
+<!-- MODEL WINDOW PARA REGISTRAR-->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-target="#myModal">
+     <div class="modal-dialog">
 						
-						<!-- Modal content-->
-    						<div class="modal-content">
+		<!-- Modal content-->
+    	<div class="modal-content">
       							
-      							<div class="modal-header">
-        							<button type="button" class="close" data-dismiss="modal">&times;</button>
-        							<h4 class="modal-title">Registrate</h4>
-      							</div>
+      		<div class="modal-header">
+        		 <button type="button" class="close" data-dismiss="modal">&times;</button>
+        			<h4 class="modal-title">Registrate</h4>
+      		</div>
       							
-      							<div class="modal-body">
-      								<!-- Titulo del formulario y presentacion-->
-        							<p> &iexcl;Bienvenidos a RankIt! </p>
-        							<p>Por favor, complete los siguientes campos, los mismo son necesarios para su registro.</p>
-        							<div>
-					                    <ul class="example-animate-container list-unstyled">
-						                     <li class="alert alert-success animate-repeat texto"
-							                     data-ng-repeat="msg in loginCtrl.msgs">{{msg}}</li>
-					                      </ul>
-				                     </div>
-				                      <div>
-					                       <ul class="example-animate-container list-unstyled">
-						                   <li class="alert alert-danger animate-repeat texto"
-							                  data-ng-repeat="error in loginCtrl.errors">{{error}}</li>
-					                       </ul>
-				                       </div>
-									
-									<!-- Formulario de registro de usuario -->
-									<form>
-									<div class= "row">
-										<div class="col-xs-12 paddingCuestionario">
+      		<div class="modal-body">
+      				<!-- Titulo del formulario y presentacion-->
+        		    <p> &iexcl;Bienvenido a RankIt! </p>
+        			<p>Por favor, complete los siguientes campos, los mismo son necesarios para su registro.</p>
+	        	<div>
+				    <ul class="example-animate-container list-unstyled">
+					    <li class="alert alert-success animate-repeat texto"
+						    data-ng-repeat="msg in loginCtrl.msgs">{{msg}}</li>
+				   </ul>
+			     </div>
+				  <div>
+					 <ul class="example-animate-container list-unstyled">
+					   <li class="alert alert-danger animate-repeat texto" data-ng-repeat="error in loginCtrl.errors">{{error}}</li>
+					  </ul>
+				     </div>
+					<!-- Formulario de registro de usuario -->
+					   <form>
+							<div class= "row">
+								<div class="col-xs-12 paddingCuestionario">
 										
-											<!-- Campo para ingresar el nombre -->
-											<div class="input-group" id="nameInput">
-												Nombre:
-												<input ng-model="loginCtrl.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
-												<div>
-													<div class="alert alert-error" ng-show="loginCtrl.errorDeNombreVacio">
-														<p> El nombre ingresado es invalido: </p>
-														<div> 
-															<div ng-show="loginCtrl.noEsNombreValido">
-																<ul>
-																	<li>El nombre ya est&aacute; en uso. Por favor, ingrese un nombre distinto.</li>
-																</ul>
-															</div>
-								
-														</div>
-													</div>
-													<div class="alert alert-error" ng-show="loginCtrl.errorDeNombreVacio">
-														<p> Llenar este campo es obligatorio: </p>
-														<ul>
-															<li>Por favor, ingrese un nombre.</li>
-														</ul>
-													</div>
-												</div>
-												<!-- Campo para ingresar la contrase�a -->
-												Contrase&ntilde;a:
-												<input ng-model="loginCtrl.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
-												<div class="alert alert-error" ng-show="loginCtrl.errorDeContrasenhaVacia">
-													<p> Llenar este campo es obligatorio: </p>
-													<ul>
-														<li>Por favor, ingrese una contrase&ntilde;a.</li>
-													</ul>				
-												</div>
-											</div>
-							        	</div>
+									<!-- Campo para ingresar el nombre -->
+								     <div class="input-group" id="nameInput">
+								      Nombre:
+								     <input ng-model="loginCtrl.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+								    
+									  <!-- Campo para ingresar la contrase�a -->
+									Contrase&ntilde;a:
+									<input ng-model="loginCtrl.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+												
+									   </div>
 							        </div>
-									</form>
-      							</div>
+							        </div>
+							</form>
+      			       </div>
       						
       							<!-- Botones interactivos del formulario-->
       							<div class="modal-footer">
 	      							<div class="divPaddingBottom">
-										<input class="btn btn-default" ng-click="loginCtrl.registrar()"
+										<input class="btn btn-default" ng-click="loginCtrl.registrarUsuario()"
 											type="submit" value="Registrar"/>
 									
 	        							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar registro</button>
@@ -146,8 +95,7 @@
     						</div>
   						</div>
 					</div>
-				</div>
-			</div>
-		</div>
+
+		       </div>
 	</form>
 </div>
