@@ -8,10 +8,10 @@
 					  </ul>
 				   </div>
 			<div class="row">
+			
 				<div class="col-xs-6">
-				
 				<!-- Campo para ingresar nombre -->
-					<input ng-model="loginCtrl.usuarioLogueado.nombre" tabindex="1" type="text" class="form-control"
+					<input data-toggle="tooltip-top" title="Ingrese aqui su nombre de usuario" ng-model="loginCtrl.usuarioLogueado.nombre" tabindex="1" type="text" class="form-control"
 					placeholder="Nombre de usuario"/>
 				</div>
 				
@@ -19,14 +19,15 @@
 				<div class="divPaddingBottom col-xs-6">
 					<input class="btn btn-primary btn-block" tabindex="3" ng-click="loginCtrl.loguearUsuario()"
 					type="submit" value="Login"/>
+					
 			    </div>
 			</div>
 			<div class="row">
 			
 				<!-- Campo de ingresar contrase�a -->
 				<div class="col-xs-6">
-					<input ng-model="loginCtrl.usuarioLogueado.password" tabindex="2" type="password" class="form-control" placeholder="Contraseña"/>
-
+					<input data-toggle="tooltip" title="Ingrese aqui su contrase&ntilde;a" ng-model="loginCtrl.usuarioLogueado.password" tabindex="2" type="password" class="form-control" placeholder="Contrase&ntilde;a"/>
+					
 				</div>
 				
 				<!-- Boton de registro -->
@@ -55,8 +56,8 @@
       							
       		<div class="modal-body">
       				<!-- Titulo del formulario y presentacion-->
-        		    <p> &iexcl;Bienvenido a RankIt! </p>
-        			<p>Por favor, complete los siguientes campos, los mismo son necesarios para su registro.</p>
+        		    <p text-aling="center"> &iexcl;Bienvenido a RankIt! </p>
+        			<p>Por favor, complete los siguientes campos ya que son necesarios para su registro.</p>
 	        	<div>
 				    <ul class="example-animate-container list-unstyled">
 					    <li class="alert alert-success animate-repeat texto"
