@@ -1,19 +1,19 @@
 <div>
-	<form ng>
-		<div class="row">
-			<div class="col-sm-3">
-			<p>Hola</p>
+	<form class="form-group">
+		<div class="row" style="margin-bottom: 1%;">
+			<div class="col-sm-6">
+			<h5>Hola</h5>
 			</div>
-			<div class="col-sm-3">
-			<p >{{logueadoCtrl.nombre}}</p>
-			</div>
-			<div class="col-sm-3">
-			<button ng-click="logueadoCtrl.desloguear()">Salir</button>
+			<div class="col-sm-6">
+			<button ng-click="logueadoCtrl.desloguear()" class="btn btn-default">Salir</button>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12">
-			<button ng-click="logueadoCtrl.calificar()">Calificar</button>
+			<div class="col-sm-6">
+			<h4><strong><i>{{logueadoCtrl.nombre}}</i></strong></h4>
+			</div>
+			<div class="col-sm-6">
+			<button ng-click="logueadoCtrl.calificar()" class="btn btn-default">Calificar</button>
 			</div>
 		</div>
 	</form>
