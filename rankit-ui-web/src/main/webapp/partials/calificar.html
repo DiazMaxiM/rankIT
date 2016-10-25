@@ -1,101 +1,100 @@
 
 <div class="panel panel-default">
-   <div class="cabecera">
-       <h1 class="texto">Mis Calificaciones</h1>
-   </div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-6 ">
-         <ul ng-repeat="calificacion in calificacionCtrl.calificaciones" class="list-unstyled">
-            <li>
-               <div class="row borde espacioALaIzquierda">
-               <div class="col-md-4 espacio">
-                 <strong><h5>{{calificacion.evaluado.nombre }}</h3></strong>
-                  <strong><h6>{{calificacion.evaluado.tipo }}</h6></strong>
-                  
-              </div>
-              <div class="col-md-3">
-                 <div class="circle">
-						<div class="circle__inner">
-							<div class="circle__wrapper">
-								<div class="circle__content">{{calificacion.promedio}}</div>
+	<div class="panel-body">
+		<h1 class="texto">Mis Calificaciones</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 ">
+		<div class="panel panel-default"
+			ng-repeat="calificacion in calificacionCtrl.calificaciones">
+			<div class="panel-body">
+
+				<div class="row espacioALaIzquierda">
+					<div class="col-md-4 espacio">
+						<strong><h5>{{calificacion.evaluado.nombre }}</h5></strong> <strong><h6>{{calificacion.evaluado.tipo
+								}}</h6></strong>
+
+					</div>
+					<div class="col-md-3">
+						<div class="circle">
+							<div class="circle__inner">
+								<div class="circle__wrapper">
+									<div class="circle__content">{{calificacion.promedio}}</div>
+								</div>
 							</div>
 						</div>
-				 </div>  
-    
-              </div>
-              <div class="col-md-4 espacioALaIzquierda espacio">
-                 <div>
-                  <button type="button" class="btn btn-default botonCuadrado espacioAlaIzquierda" ng-click="calificacionCtrl.eliminar(calificacion)">Borrar</button>
-                 </div>
-                <div>
-                   <button type="button" class="btn btn-default botonCuadrado espacioAlaIzquierda espacio" ng-click="calificacionCtrl.modificar(calificacion)">Modificar</button>
-                
-                  </div>
-               </div>
-             </div>
-            
-          </li>
-          
-       </ul>
-      
-      </div>
-      <div class="col-md-6 ">
-          <div class="borde cabecera">
-             <h2 class="texto">Nueva Calificaci&oacuten</h2>
-          </div>
-           <!-- Mensajes -->
-             <div>
-                <ul class="example-animate-container list-unstyled">
-			        <li class="alert alert-success animate-repeat texto" data-ng-repeat="msg in calificacionCtrl.msgs">{{msg}}</li>
-		            </ul>
-                </div>
-             <div>  
-              <ul class="example-animate-container list-unstyled">
-              	<li class="alert alert-danger animate-repeat texto" data-ng-repeat="error in calificacionCtrl.errors">{{error}}</li>
-              </ul>
-             </div>
-   
-         <div class="completarCalificacion">
-           <form name="ingresoDeDatos">
-            <div class="row">
-                 <div class="col-md-6 espacio espacioALaIzquierda">
-                     <p>Calificado</p>
-                     <input type="text" name="calificado" ng-model="calificacionCtrl.nombreEvaluado" uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue " class="form-control"  >
-                
-                 </div>
-                 <div class="col-md-4 espacio form-group">
-                      <p>Puntaje</p>
-                      <input type="number" name="puntos" class="form-control" ng-model="calificacionCtrl.puntos" id="puntos">
-                       <div ng-show="ingresoDeDatos.puntos.$error.number" class="alert alert-danger" role="alert">Solo n&uacutemeros </div>
-                      
-         
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-8 espacio">
-                        <p class="espacioALaIzquierda">Motivo</p>
-                        <textarea ng-model="calificacionCtrl.detalle" name="motivo" type="text" class="form-control espacioALaIzquierda" rows="3" required="true"></textarea>
-                  </div>
 
-               </div>
-               </form>
+					</div>
+					<div class="col-md-4 espacioALaIzquierda espacio">
+						<div>
+							<button type="button"
+								class="btn btn-default botonCuadrado espacioAlaIzquierda"
+								ng-click="calificacionCtrl.eliminar(calificacion)">Borrar</button>
+						</div>
+						<div>
+							<button type="button"
+								class="btn btn-default botonCuadrado espacioAlaIzquierda espacio"
+								ng-click="calificacionCtrl.modificar(calificacion)">Modificar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 ">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h2 class="texto">Nueva Calificaci&oacuten</h2>
+				<div>
+					<ul class="example-animate-container list-unstyled">
+						<li class="alert alert-success animate-repeat texto"
+							data-ng-repeat="msg in calificacionCtrl.msgs">{{msg}}</li>
+					</ul>
+				</div>
+				<div>
+					<ul class="example-animate-container list-unstyled">
+						<li class="alert alert-danger animate-repeat texto"
+							data-ng-repeat="error in calificacionCtrl.errors">{{error}}</li>
+					</ul>
+				</div>
+				<div class="completarCalificacion">
+					<form name="ingresoDeDatos">
+						<div class="row">
+							<div class="col-md-6 espacio espacioALaIzquierda">
+								<p>Calificado</p>
+								<input type="text" name="calificado"
+									ng-model="calificacionCtrl.nombreEvaluado"
+									uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue "
+									class="form-control">
+							</div>
+							<div class="col-md-4 espacio form-group">
+								<p>Puntaje</p>
+								<input type="number" name="puntos" class="form-control"
+									ng-model="calificacionCtrl.puntos" id="puntos">
+								<div ng-show="ingresoDeDatos.puntos.$error.number"
+									class="alert alert-danger" role="alert">Solo
+									n&uacutemeros</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8 espacio">
+								<p class="espacioALaIzquierda">Motivo</p>
+								<textarea ng-model="calificacionCtrl.detalle" name="motivo"
+									type="text" class="form-control espacioALaIzquierda" rows="3"
+									required="true"></textarea>
+							</div>
 
-               <div class="row">
-                   <div class="col-md-8 espacio espacioALaIzquierda espacioParaAbajo">
-                     <button type="button" class="btn btn-default btn-lg btn-block " ng-click="calificacionCtrl.calificar()">Calificar</button>
-                     </div>
-                     
-               </div>
-	     </div>
-	     
-    
-    </div>
-  
-   
-  
-  
-  </div>
-
-</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-md-8 espacio espacioALaIzquierda espacioParaAbajo">
+							<button type="button" class="btn btn-default btn-lg btn-block "
+								ng-click="calificacionCtrl.calificar()">Calificar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
