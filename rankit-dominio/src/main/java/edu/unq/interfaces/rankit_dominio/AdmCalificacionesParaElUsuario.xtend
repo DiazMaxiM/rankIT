@@ -21,13 +21,19 @@ class AdmCalificacionesParaElUsuario {
 		  var calificacionesDelUsuario=admCalificaciones.publicacionesDeUnUsuario(usuario.nombre)
 		  var calificacionesResultantes=new ArrayList
 		   for(calificacion:calificacionesDelUsuario){
-		   	   var puntuableBasico=basicos.findFirst[puntuable|puntuable.nombre.equals(calificacion.evaluado.nombre)]
-		   	   var promedioDelPuntuable= admCalificaciones.ratingPromedio(puntuableBasico)
+		   	   var puntuableBasico=this.devolverPuntuableBasico(basicos,calificacion.evaluado)
+		   	   var promedioDelPuntuable= this.promedioPuntuable(puntuableBasico)
 		   	   var calificacionResultante=new CalificacionDelUsuario(puntuableBasico,promedioDelPuntuable,calificacion.detalle,calificacion.puntos,calificacion.id)
 		   	   calificacionesResultantes.add(calificacionResultante)
 		   }
 		      calificaciones=calificacionesResultantes
 		   }
-	
+	   
+	  def PuntuablesBasicos devolverPuntuableBasico(List<PuntuablesBasicos> basicos,PuntuableAbstracto evaluado){
+	  	   basicos.findFirst[puntuable|puntuable.nombre.equals(evaluado.nombre)]
+	  }
 		
+	 def int promedioPuntuable(PuntuableAbstracto puntuable){
+	 	 admCalificaciones.ratingPromedio(puntuable)
+	 }
 }
