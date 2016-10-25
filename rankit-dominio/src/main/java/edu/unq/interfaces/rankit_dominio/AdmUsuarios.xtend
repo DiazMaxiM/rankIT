@@ -167,6 +167,9 @@ class AdmUsuarios {
 	}
      
     def void crearUsuario(Usuario usuario){
+    	  if(usuarioSinDatos(usuario)){
+    	  	 throw new UsuarioInvalidoException("Usuario invalido")
+    	  }
     	  var usuarios = usuariosDeNombre(usuario.nombre)
 		  if (!usuarios.empty){
 		  
@@ -174,6 +177,11 @@ class AdmUsuarios {
 			}
     	  this.agregarUsuario(usuario)
     }
+	
+	def boolean usuarioSinDatos(Usuario usuario) {
+		println(usuario.nombre.nullOrEmpty|| usuario.password.nullOrEmpty)
+		usuario.nombre.nullOrEmpty|| usuario.password.nullOrEmpty
+	}
 	
 	
 	def Usuario usuarioConElNombre(String nombreUsuario) {

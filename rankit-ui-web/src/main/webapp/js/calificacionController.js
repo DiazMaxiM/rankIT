@@ -27,10 +27,11 @@ rankitApp.controller('CalificacionController', function ($resource,$timeout,Eval
 		
 		switch (error.status){
 			case 400: 
-			self.notificarError("La calificacion se encuenta incompleta");
+			self.notificarError("La calificación se encuenta incompleta");
 			break;
 			case 404:
-			self.notificarError("No se encuentra la calificacion a modificar");
+			self.notificarError("No se encuentra la calificación a modificar");
+			self.nuevaCalificacion=new Object;
 			break;
 		   default:
 		}
@@ -40,10 +41,10 @@ rankitApp.controller('CalificacionController', function ($resource,$timeout,Eval
 		
 		switch (error.status){
 		case 400: 
-		self.notificarError("No se informo la calificacion a eliminar");
+		self.notificarError("No se informó la calificación a eliminar");
 		break;
 		case 404:
-		self.notificarError("No se encuentra la calificacion a eliminar");
+		self.notificarError("No existe la calificación a eliminar");
 		break;
 	    default:
 	}
@@ -63,7 +64,7 @@ rankitApp.controller('CalificacionController', function ($resource,$timeout,Eval
    
 // eliminar calificacion
    this.eliminar = function(calificacion) {
-	   var mensaje = "¿Está seguro que quiere eliminar la calificacion?";
+	   var mensaje = "¿Está seguro que quiere eliminar la calificación?";
 	   bootbox.confirm(mensaje, function(confirma) {
 	         if (confirma) {
 	        	 Calificacion.remove(calificacion, function() {

@@ -25,6 +25,7 @@ import org.uqbar.xtrest.api.annotation.Put
 import org.uqbar.xtrest.json.JSONUtils
 import edu.unq.interfaces.rankit_dominio.AdmCalificacionesParaElUsuario
 import org.uqbar.commons.model.UserException
+import edu.unq.interfaces.rankit_dominio.UsuarioInvalidoException
 
 @Controller
 class RankITController {
@@ -68,6 +69,8 @@ class RankITController {
 
 		} catch (NombreInvalidoException e) {
 			badRequest('{ "error": "El Nombre no es valido" }')
+		} catch (UsuarioInvalidoException e) {
+			badRequest('{ "error": "El usuario no es valido" }')
 		}
 
 	}
