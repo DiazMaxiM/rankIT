@@ -18,8 +18,10 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 			 switch(error.status){
 			 case 400:
 				 self.notificarErrorLogueo("La password ingresada no es correcta");
+				 break;
 			 case 404:
 				 self.notificarErrorLogueo("No estás registrado en Rank-IT, Registrate ;)");
+				 break;
 			 default:
 			 }
 		}
