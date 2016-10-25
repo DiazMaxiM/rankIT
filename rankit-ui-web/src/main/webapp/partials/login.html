@@ -15,12 +15,12 @@
 						<div> 
 							<div ng-show="elNombreYaExiste()">
 								<ul>
-									<li>El nombre ya está en uso. Por favor, ingrese un nombre distinto.</li>
+									<li>El nombre ya esta en uso. Por favor, ingrese un nombre distinto.</li>
 								</ul>
 							</div>
 							<div ng-show="loginCtrl.nombreNoPermitido()">
 								<ul>
-									<li>El nombre "NN" no está permitido. Por favor, ingrese un nombre distinto.</li>
+									<li>El nombre "NN" no esta permitido. Por favor, ingrese un nombre distinto.</li>
 								</ul>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 				<div class="alert alert-error" ng-show="registroSinContrasenha">
 					<p> Llenar este campo es obligatorio: </p>
 					<ul>
-						<li>Por favor, ingrese una contraseña.</li>
+						<li>Por favor, ingrese una contrase&ntilde;a.</li>
 					</ul>				
 				</div>
 				-->
@@ -53,7 +53,7 @@
 			
 				<!-- Campo de ingresar contrase�a -->
 				<div class="col-xs-6">
-					<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder="Contraseña"/>
+					<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder="Contrase&ntilde;a"/>
 				</div>
 				
 				<!-- Boton de registro -->
@@ -90,7 +90,7 @@
 												Nombre:
 												<input ng-model="nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
 												<div>
-													<div class="alert alert-error" ng-show="esNombreValido">
+													<div class="alert alert-error" ng-show="noEsNombreValido">
 														<p> El nombre ingresado es invalido: </p>
 														<div> 
 															<div ng-show="elNombreYaExiste()">
@@ -122,10 +122,6 @@
 													</ul>				
 												</div>
 											</div>
-											<!-- NO SE QUE ESTABA HACIENDO ACA -->
-											<li  ng-repeat="usuario in usuariosRegistrados ">
-							        			<a> {{usuario.nombre}}</a>	
-							        		</li>
 							        	</div>
 							        </div>
 									</form>
@@ -134,8 +130,8 @@
       							<!-- Botones interactivos del formulario-->
       							<div class="modal-footer">
 	      							<div class="divPaddingBottom">
-										<input ng-disabled="noHayNombreValido()" class="btn btn-default" ng-click="registrarUsuarioSiPuede()"
-											type="submit" value="Registrar">
+										<input class="btn btn-default" ng-click="registrar()"
+											type="submit" value="Registrar"/>
 									
 	        							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar registro</button>
 	      							</div>

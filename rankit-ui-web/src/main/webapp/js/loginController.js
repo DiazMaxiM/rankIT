@@ -2,6 +2,7 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 {      
        var self=this;
 	   this.usuarioLogueado= new Object;
+	   this.usuarioARegistrar= new Object;
        this.idUsuario=null;
 	   
 	   this.loguearUsuario = function () 
@@ -10,7 +11,7 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 			   self.loguear(data.id);
 			   console.log(DataService)
 			   $state.go('logeado');
-	        }, errorHandler);
+	        }, errorDeLogueo);
 		};
 		
 		this.loguear = function (id)
@@ -19,7 +20,7 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 			DataService.usuario.nombre = self.usuarioLogueado.nombre;
 		}
 		
-		function errorHandler(error)
+		function errorDeLogueo(error)
 		{
 			console.log(error.data);
 			switch (error.status)
@@ -30,10 +31,6 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 				case 400: 
 					this.errorContrasenhaIncorrecta();
 					console.log("contrasenha incorrecta");
-					break;
-				case 401:
-					this.esNombreValido = true;
-					console.log("Nombre de usuario inválido");
 					break;
 			}
 		}
@@ -52,17 +49,44 @@ rankitApp.controller('LoginController', function ($scope,$resource,LoginService,
 		
 		this.nombre ="";
 		this.contrasenha="";
-		this.esNombreValido=false;
+		this.noEsNombreValido=false;
 		this.registroSinContrasenha=false;
+		
+		function errorDeRegistro(error)
+		{
+			console.log(error.data);
+			switch (error.status)
+			{
+				case 400: 
+					this.noEsNombreValido = true;
+					console.log("Nombre de usuario inválido");
+					break;
+			}
+		}
 		
 		this.registrar = function ()
 		{
-			LoginService.guardar()
-			DataService.usuario.id = id;
-			DataService.usuario.nombre = self.usuarioLogueado.nombre;
+			if (this.contrasenha=="")
+			{
+				LoginService.guardar(this.usuarioARegistrar, function() 
+					{
+					this.usuarioARegistrar.nombre = this.nombre;
+					this.usuarioARegistrar.password=this.contrasenha;
+						this.notificarRegistro();
+						console.log("Usuario registrado sin problemas")
+					}, errorDeRegistro);
+			}
+			else 
+			{
+				registroSinContrasenha = true;
+			}
+			
 		}
 		
-		
+		this.notificarRegistro = function() 
+		{
+			// abrir un nuevo modal y cerrar el anterior;
+		}
 		
 });
   
