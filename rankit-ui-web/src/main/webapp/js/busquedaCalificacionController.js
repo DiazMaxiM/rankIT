@@ -1,38 +1,43 @@
-rankitApp.controller('BusquedaCalificacionController', function ($resource,Busqueda,$state) {
-  self=this
-  this.ranking=[];
+rankitApp.controller('BusquedaCalificacionController', function($resource,
+		Busqueda, $state) {
+	self = this
+	this.ranking = [];
 
- this.criterioBusqueda= new Object
+	this.criterioBusqueda = new Object
 
+	this.criterioBusqueda
 
-  this.criterioBusqueda
+	this.tipoPuntuable = {
+		opciones : [ {
+			id : '',
+			name : 'Todos'
+		}, {
+			id : 'SERVICIO',
+			name : 'Servicio'
+		}, {
+			id : 'LUGAR',
+			name : 'Lugar'
+		} ]
+	};
+	this.buscar = function() {
 
-  this.tipoPuntuable = {
- 	opciones: [
- 	{id: ''        , name: 'Todos'},
- 	{id: 'SERVICIO', name: 'Servicio'},
- 	{id: 'LUGAR'   , name: 'Lugar'}
- 	]
- };
- // this.buscar= function(){
- 	 
- // 	 Busqueda.query(self.criterioBusqueda,function(data) {
-	//  self.ranking=data
-	//  }, errorBusqueda);
-	 
- // }
- 
-this.buscar= function(){$state.go('logeado');}
+		Busqueda.query(self.criterioBusqueda, function(data) {
+			self.ranking = data
+		}, errorBusqueda);
 
+	}
 
-function errorBusqueda(error) {
-       console.log(error.data);
-}
+	function errorBusqueda(error) {
+		console.log(error.data);
+	}
 
 });
 
 rankitApp.factory('Busqueda', function($resource) {
-     return $resource('http://localhost:9000/ranking', {}, {
-     	'query': { method: 'GET', isArray: true}
-     });
+	return $resource('/ranking', {}, {
+		'query' : {
+			method : 'GET',
+			isArray : true
+		}
+	});
 });
