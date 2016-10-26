@@ -4,7 +4,7 @@
 		<div>
 		          <div>
 					 <ul class="example-animate-container list-unstyled">
-					   <li class="alert alert-danger animate-repeat texto" data-ng-repeat="errorLogueo in loginCtrl.errorsLogueo">{{errorLogueo}}</li>
+					   <li class="alert alert-danger animate-repeat texto" data-ng-repeat="errorLogueo in loginCtrl.errorsLogueo track by $index"">{{errorLogueo}}</li>
 					  </ul>
 				   </div>
 			<div class="row">
@@ -78,13 +78,13 @@
 										<!-- Campo para ingresar el nombre -->
 								      	<p>
 								      		Nombre:
-								     		<input ng-model="loginCtrl.usuarioLogueado.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+								     		<input ng-model="loginCtrl.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
 										</p>
 										
 									  	<!-- Campo para ingresar la contrase�a -->
 										<p>
 											Contrase&ntilde;a:
-											<input ng-model="loginCtrl.usuarioLogueado.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+											<input ng-model="loginCtrl.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
 										</p>
 										
 									</div>

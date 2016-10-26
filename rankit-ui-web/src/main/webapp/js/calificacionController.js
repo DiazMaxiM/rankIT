@@ -143,7 +143,6 @@ rankitApp.controller('CalificacionController', function ($resource,$timeout,Eval
 	    
 	   //resultados y errores al  calificar
 	    this.msgs = [];
-	    console.log(self.msgs);
 	    this.notificarMensaje = function(mensaje) {
 	        this.msgs.push(mensaje);
 	        this.notificar(this.msgs);

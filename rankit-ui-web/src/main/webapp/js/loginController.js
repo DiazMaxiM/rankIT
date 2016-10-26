@@ -1,7 +1,9 @@
 rankitApp.controller('LoginController', function ($scope,$timeout,$resource,LoginService,$state, DataService) 
 {      
        var self=this;
-	   this.usuarioLogueado= new Object;
+       this.usuarioLogueado=new Object;
+       this.nombre='';
+       this.password='';
 	   this.idUsuario=null;
 
 	   
@@ -9,7 +11,7 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 		{   
 			LoginService.login(this.usuarioLogueado, function(data) {
 			   self.loguear(data.id);
-			   console.log(DataService)
+			   self.usuarioLogueado=new Object;
 			   $state.go('logeado');
 	        }, errorDeLogueo);
 		};
@@ -29,7 +31,7 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 		this.loguear = function (id)
 		{
 			DataService.usuario.id = id;
-			DataService.usuario.nombre = self.usuarioLogueado.nombre;
+			DataService.usuario.nombre = this.usuarioLogueado.nombre;
 		};
 		
 		
@@ -53,10 +55,14 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 			 $("#myModal").modal({});
 		}
 		
-		this.registrarUsuario = function (){   
-				LoginService.update(this.usuarioLogueado, function(data) {
-						self.notificarMensaje('El usuario'+ " "+ self.usuarioLogueado.nombre+ " "+ 'ha sido registrado con exito');
-						self.usuarioLogueado=new object;
+		this.registrarUsuario = function (){ 
+			     this.usuarioARegistrar=new Object;
+			     this.usuarioARegistrar.nombre=self.nombre;
+			     this.usuarioARegistrar.password=self.password;
+				LoginService.update(this.usuarioARegistrar, function(data) {
+						self.notificarMensaje('El usuario'+ " "+ self.nombre+ " "+ 'ha sido registrado con exito');
+						self.nombre='';
+						self.password='';
 					}, errorDeRegistro);
 
 		};
