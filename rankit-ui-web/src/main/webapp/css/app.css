@@ -66,3 +66,8 @@ input.ng-invalid {
 	padding-left: 140px;
 	padding-right: 140px;
 }
+
+.backgroundImage{
+	border-bottom:none;
+	background-image:url("/images/fondo.jpg");
+}
