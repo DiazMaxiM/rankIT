@@ -7,6 +7,10 @@ rankitApp.controller('BusquedaCalificacionController', function($resource,
 
 	this.criterioBusqueda
 
+	this.limpiar= function (){
+		this.criterioBusqueda={};
+	}
+	
 	this.tipoPuntuable = {
 		opciones : [ {
 			id : '',

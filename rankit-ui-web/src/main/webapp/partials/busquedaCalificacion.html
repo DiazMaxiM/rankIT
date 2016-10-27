@@ -20,16 +20,17 @@
 				<div class="row">
 					<div class="col-sm-6">
 						Calificaciones
-						<input ng-model="busqCalificacionCtrl.criterioBusqueda.calificaciones" type="text" class="form-control"/>
+						<input ng-model="busqCalificacionCtrl.criterioBusqueda.calificaciones" type="text" class="form-control" only-digits/>
 					</div>
 					<div class="col-sm-6">
 						Ranking
-						<input ng-model="busqCalificacionCtrl.criterioBusqueda.ranking" type="text" class="form-control"/>
+						<input ng-model="busqCalificacionCtrl.criterioBusqueda.ranking" type="text" class="form-control" only-digits/>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-3">
 				<button type="submit" class="btn btn-default" ng-click="busqCalificacionCtrl.buscar()">Buscar</button>
+				<button type="submit" class="btn btn-default" ng-click="busqCalificacionCtrl.limpiar()">Limpiar</button>
 			</div>
 		</div>
 	</div>
