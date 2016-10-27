@@ -9,11 +9,11 @@
 		<div class="panel panel-default"
 			ng-repeat="calificacion in calificacionCtrl.calificaciones">
 			<div class="panel-body">
-
-				<div class="row espacioALaIzquierda">
+ 
+				<div class="row margenIzquierdo">
 					<div class="col-md-4 espacio">
-						<strong><h5>{{calificacion.evaluado.nombre }}</h5></strong> <strong><h6>{{calificacion.evaluado.tipo
-								}}</h6></strong>
+						<h5 class="nombreEvaluado"><strong>{{calificacion.evaluado.nombre }}</strong></h5>
+						<h6>{{calificacion.evaluado.tipo}}</h6>
 
 					</div>
 					<div class="col-md-3">
@@ -26,15 +26,15 @@
 						</div>
 
 					</div>
-					<div class="col-md-4 espacioALaIzquierda espacio">
+					<div class="col-md-4 margenIzquierdo margenTop">
 						<div>
 							<button type="button"
-								class="btn btn-default botonCuadrado espacioAlaIzquierda"
+								class="btn btn-default botonCuadrado margenIzquierdo"
 								ng-click="calificacionCtrl.eliminar(calificacion)">Borrar</button>
 						</div>
 						<div>
 							<button type="button"
-								class="btn btn-default botonCuadrado espacioAlaIzquierda espacio"
+								class="btn btn-default botonCuadrado margenIzquierdo margenTop"
 								ng-click="calificacionCtrl.modificar(calificacion)">Modificar</button>
 						</div>
 					</div>
@@ -61,14 +61,14 @@
 				<div class="completarCalificacion">
 					<form name="ingresoDeDatos">
 						<div class="row">
-							<div class="col-md-6 espacio espacioALaIzquierda">
+							<div class="col-md-6 margenTop margenIzquierdo">
 								<p>Calificado</p>
 								<input type="text" name="calificado"
 									ng-model="calificacionCtrl.nombreEvaluado"
 									uib-typeahead="evaluado.nombre for evaluado in calificacionCtrl.evaluados | filter:$viewValue "
 									class="form-control">
 							</div>
-							<div class="col-md-4 espacio form-group">
+							<div class="col-md-4 margenTop form-group">
 								<p>Puntaje</p>
 								<input type="number" name="puntos" class="form-control"
 									ng-model="calificacionCtrl.puntos" id="puntos">
@@ -78,17 +78,17 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-8 espacio">
-								<p class="espacioALaIzquierda">Motivo</p>
+							<div class="col-md-10 margenTop">
+								<p class="margenIzquierdo">Motivo</p>
 								<textarea ng-model="calificacionCtrl.detalle" name="motivo"
-									type="text" class="form-control espacioALaIzquierda" rows="3"
+									type="text" class="form-control margenIzquierdo" rows="3"
 									required="true"></textarea>
 							</div>
 
 						</div>
 					</form>
 					<div class="row">
-						<div class="col-md-8 espacio espacioALaIzquierda espacioParaAbajo">
+						<div class="col-md-10 margenTop margenIzquierdo margenBottom">
 							<button type="button" class="btn btn-default btn-lg btn-block "
 								ng-click="calificacionCtrl.calificar()">Calificar</button>
 						</div>

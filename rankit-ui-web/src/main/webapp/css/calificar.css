@@ -13,21 +13,23 @@
 	margin-top:40px;
 }
 
-.espacio{
+.margenTop{
 	   margin-top: 20px;
 	   margin-bottom: 10px;
 }
 
-.espacioALaIzquierda{
+.margenIzquierdo{
 	margin-left: 20px;
 }
-
+.nombreEvaluado{
+	font-size: large;
+}
 .texboxPuntaje{
 	width: 30px;
 	height: 10px;
 }
 
-.espacioParaAbajo{
+.margenBottom{
 	margin-bottom: 20px;
 }
 

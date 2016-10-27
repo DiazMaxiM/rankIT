@@ -40,11 +40,10 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 		{   
 			switch (error.status){
 			case 400: 
-				//self.notificarError("Ya existe un usuario con el mismo nombre");
-				this.elNombreDeUsuarioYaExiste = true;
+				self.notificarError("Ya existe un usuario con el nombre" + " "+ self.nombre);
 				break;
 			case 404:
-				self.notificarError("Complete los campos");
+				self.notificarError("Registro incompleto");
 				break;
 				default:
 			    
