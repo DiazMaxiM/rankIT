@@ -63,7 +63,6 @@ input.ng-invalid {
 }
 
 .paddingCuestionario {
-	width: 170px;
-	padding-left: auto;
-	padding-right: auto;
+	padding-left: 140px;
+	padding-right: 140px;
 }

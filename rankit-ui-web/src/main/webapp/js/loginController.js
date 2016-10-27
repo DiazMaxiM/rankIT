@@ -34,12 +34,14 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 			DataService.usuario.nombre = this.usuarioLogueado.nombre;
 		};
 		
+		this.elNombreDeUsuarioYaExiste = false;
 		
 		function errorDeRegistro(error)
 		{   
 			switch (error.status){
 			case 400: 
-				self.notificarError("Ya existe un usuario con el mismo nombre");
+				//self.notificarError("Ya existe un usuario con el mismo nombre");
+				this.elNombreDeUsuarioYaExiste = true;
 				break;
 			case 404:
 				self.notificarError("Complete los campos");

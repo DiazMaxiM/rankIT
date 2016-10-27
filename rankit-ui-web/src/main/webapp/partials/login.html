@@ -49,14 +49,14 @@
 		<!-- Modal content-->
     	<div class="modal-content">
       							
-      		<div class="modal-header">
+      		<div class="modal-header" style="background-color:#F6CEEC;">
         		 <button type="button" class="close" data-dismiss="modal">&times;</button>
-        			<h4 class="modal-title">Registrate</h4>
+        			<h3 style="text-align:center;" class="modal-title">Reg&iacute;strate</h3>
       		</div>
       							
       		<div class="modal-body">
       				<!-- Titulo del formulario y presentacion-->
-        		    <p text-aling="center"> &iexcl;Bienvenido a RankIt! </p>
+        		    <p><b> &iexcl;Bienvenido a RankIt! </b></p>
         			<p>Por favor, complete los siguientes campos ya que son necesarios para su registro.</p>
 	        	<div>
 				    <ul class="example-animate-container list-unstyled">
@@ -71,24 +71,30 @@
 				     </div>
 					<!-- Formulario de registro de usuario -->
 					   <form>
-							<div class= "row">
-								<div class="col-xs-12 paddingCuestionario">
-									<div class="input-group" id="nameInput">
+							<div class= "row container-fluid">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8">
+									<div>
 									
 										<!-- Campo para ingresar el nombre -->
 								      	<p>
-								      		Nombre:
-								     		<input ng-model="loginCtrl.nombre" type="text" class="form-control" placeholder="Ingrese un nombre aqui"/>
+								      		Nombre: <input ng-model="loginCtrl.nombre" type="text" class="form-control input-sm" placeholder="Ingrese un nombre aqu&iacute;"/>
 										</p>
+										
+										<div>
+				   						 	<ul class="example-animate-container list-unstyled">
+					    						<li class="alert alert-success animate-repeat texto" data-ng-repeat="msg in loginCtrl.msgs">{{msg}}</li>
+				  							</ul>
+			     						</div>
 										
 									  	<!-- Campo para ingresar la contrase�a -->
 										<p>
 											Contrase&ntilde;a:
-											<input ng-model="loginCtrl.password" type="password" class="form-control" placeholder= "Ingrese una contrase&ntilde;a aqui"/>
+											<input ng-model="loginCtrl.password" type="password" class="form-control input-sm" placeholder= "Ingrese una contrase&ntilde;a aqu&iacute;"/>
 										</p>
-										
 									</div>
 								</div>
+								<div class="col-xs-2"></div>
 							</div>
 						</form>
       			  	</div>
@@ -99,7 +105,7 @@
 										<input class="btn btn-default" ng-click="loginCtrl.registrarUsuario()"
 											type="submit" value="Registrar"/>
 									
-	        							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar registro</button>
+	        							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar registro</button>
 	      							</div>
       							</div>
     						</div>
