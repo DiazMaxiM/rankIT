@@ -26,23 +26,24 @@ import excepciones.UsuarioInvalidoException
 import excepciones.CalificacionIncompletaException
 import excepciones.NoSeInformaCalificacionException
 import excepciones.NoExisteCalificacionException
+import java.util.ArrayList
 
 @Controller
 class RankITController {
 	extension JSONUtils = new JSONUtils
 
 	var RankIT rankit
+	var List<PuntuablesBasicos>lista=new ArrayList
 	new(RankIT rankit) {
 		this.rankit = rankit
-	
+	    this.lista=this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
+		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
 	}
 
 	@Get("/evaluados")
 	def getPuntuables() {
 		response.contentType = "application/json"
-		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
-		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
-		ok(lista.toJson)
+		ok(this.lista.toJson)
 	}
 
 	@Post("/usuarios")
@@ -136,9 +137,7 @@ class RankITController {
 		var AdmCalificacionesParaElUsuario admCalificacionesParaElUsuario=new AdmCalificacionesParaElUsuario(rankit.admCalificaciones)
 		
 		var usuarioLogeado= rankit.admUsuarios.usuarioConElID(id)
-		var List<PuntuablesBasicos> lista = this.rankit.admLugares.getPuntuablesBasicos(TipoDePuntuable.LUGAR)
-		lista.addAll(this.rankit.admServicios.getPuntuablesBasicos(TipoDePuntuable.SERVICIO))
-		admCalificacionesParaElUsuario.crearCalificaciones(lista,usuarioLogeado)
+		admCalificacionesParaElUsuario.crearCalificaciones(this.lista,usuarioLogeado)
 		ok(admCalificacionesParaElUsuario.calificaciones.toJson)
 	}
 
