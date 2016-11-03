@@ -17,15 +17,17 @@ rankitApp.controller('LoginController', function ($scope,$timeout,$resource,Logi
 		};
 		
 		function errorDeLogueo(error){
-			 switch(error.status){
-			 case 400:
-				 self.notificarErrorLogueo("La password ingresada no es correcta");
-				 break;
-			 case 404:
-				 self.notificarErrorLogueo("No estás registrado en Rank-IT, Registrate ;)");
-				 break;
-			 default:
-			 }
+//			 switch(error.status){
+//			 case 400:
+//				 self.notificarErrorLogueo("La password ingresada no es correcta");
+//				 break;
+//			 case 404:
+//				 self.notificarErrorLogueo("No estás registrado en Rank-IT, Registrate ;)");
+//				 break;
+		//	 default:
+			
+			 self.notificarErrorLogueo(error.data.error);
+		}
 		}
 		
 		this.loguear = function (id)

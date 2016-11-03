@@ -127,7 +127,6 @@ rankitApp.controller('CalificacionController', function ($resource,$timeout,Eval
 				 self.actualizarCalificaciones();
 				 self.actualizarCalificaciones();
 				 self.nombreEvaluado='';
-				 self.puntos=0;
 				 self.detalle='';
 				 self.nuevaCalificacion=new Object;
 			    },errorAlAgregar);  

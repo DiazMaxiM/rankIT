@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">rankit-mobile</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_usuario">Usuario</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Ingresar</string>
+    <string name="action_sign_in_short">Ingresar</string>
+    <string name="error_invalid_email">El Usuario es Invalido</string>
+    <string name="error_invalid_password">La password es invalida</string>
+    <string name="error_incorrect_password">La password es incorrecta</string>
+    <string name="error_field_required">El campo es obligatorio</string>
+    <string name="permission_rationale">"Problema de permisos."
+    </string>
+</resources>
