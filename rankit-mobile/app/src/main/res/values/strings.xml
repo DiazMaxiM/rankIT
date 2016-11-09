@@ -10,6 +10,15 @@
     <string name="error_invalid_password">La password es invalida</string>
     <string name="error_incorrect_password">La password es incorrecta</string>
     <string name="error_field_required">El campo es obligatorio</string>
+    <string name="puntos">Puntaje</string>
+    <string name="motivo">Motivo</string>
+    <string name="pnombre">nombre</string>
+    <string name="ppuntos">puntos</string>
+    <string name="pdetalle">detalle</string>
+    <string name="tituloCalicaciones">Mis calificaciones</string>
     <string name="permission_rationale">"Problema de permisos."
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
