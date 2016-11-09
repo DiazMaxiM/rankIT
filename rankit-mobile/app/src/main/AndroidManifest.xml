@@ -24,9 +24,19 @@
         </activity>
         <activity android:name=".EliminarCalificacionActivity" />
         <activity android:name=".CrearCalificacionActivity" />
-        <activity android:name=".EditarCalificacionActivity" />
         <activity android:name=".CalificacionesDelUsuarioActivity" />
-        <activity android:name=".DetalleCalificacionActivity"></activity>
+        <activity android:name=".DetalleCalificacionActivity"
+            android:parentActivityName=".CalificacionesDelUsuarioActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalificacionesDelUsuarioActivity" /> />
+        <activity android:name=".EditarCalificacionActivity"
+            android:parentActivityName=".CalificacionesDelUsuarioActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalificacionesDelUsuarioActivity" />
+        </activity>
+
     </application>
 
 </manifest>
