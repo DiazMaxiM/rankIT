@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 public class DetalleCalificacionActivity extends AppCompatActivity {
+    String nombre;
+    String puntos;
+    String motivo;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -16,9 +19,9 @@ public class DetalleCalificacionActivity extends AppCompatActivity {
             ActionBar actionBar=getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             Bundle parametros=getIntent().getExtras();
-            String nombre=parametros.getString(getResources().getString(R.string.pnombre));
-            String puntos=parametros.getString(getResources().getString(R.string.ppuntos));
-            String motivo=parametros.getString(getResources().getString(R.string.pdetalle));
+             nombre=parametros.getString("nombre");
+             puntos=parametros.getString("puntos");
+             motivo=parametros.getString("motivo");
             TextView tvNombreCalificado=(TextView) findViewById(R.id.tvNombreCalificado);
             TextView tvPuntaje=(TextView) findViewById(R.id.tvPuntaje);
             TextView tvdetalle=(TextView) findViewById(R.id.tvDetalle);
@@ -32,6 +35,8 @@ public class DetalleCalificacionActivity extends AppCompatActivity {
 
         public void editarCalificacion(View view){
             Intent intent=new Intent(this,EditarCalificacionActivity.class);
+            intent.putExtra("puntos",puntos);
+            intent.putExtra("motivo",motivo);
             startActivity(intent);
         }
 

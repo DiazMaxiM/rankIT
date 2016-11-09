@@ -9,10 +9,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="grupo_5.unq.edu.ar.rankit_mobile.CalificacionesDelUsuarioActivity">
+    <Button
+        android:text="Nueva Calificación"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nuevaCalificacion"
+        android:onClick="nuevaCalificacion"
+        android:layout_weight="0.03" />
+
     <fragment
         android:id="@+id/frgCalificaciones"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/nuevaCalificacion"
         android:name="grupo_5.unq.edu.ar.rankit_mobile.RVCalificacionesFragment"/>
 
 </RelativeLayout>
