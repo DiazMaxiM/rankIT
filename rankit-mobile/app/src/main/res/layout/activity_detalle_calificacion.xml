@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="grupo_5.unq.edu.ar.rankit_mobile.DetalleCalificacionActivity">
-
+    <include android:id="@+id/miActionBar"
+        layout="@layout/toolbar_calificaciones"
+        />
 
     <LinearLayout
         android:orientation="horizontal"
