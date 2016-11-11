@@ -21,7 +21,14 @@ import retrofit.client.Response;
  */
 
 public class CalificacionListFragment extends ListFragment {
-    private static final String STATE_ACTIVATED_POSITION = "activated_position";
+
+    /**
+     * The fragment argument representing the item ID that this fragment
+     * represents.
+     */
+    public static final String ARG_ITEM_ID = "item_id";
+
+     static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     /**
      * The fragment's current callback object, which is notified of list item
@@ -66,7 +73,10 @@ public class CalificacionListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        obtenerCalificaciones();
+        if (getArguments().containsKey(ARG_ITEM_ID)) {
+            String itemID = getArguments().getString(ARG_ITEM_ID);
+            obtenerCalificaciones(itemID);
+        }
     }
 
     @Override
@@ -141,10 +151,10 @@ public class CalificacionListFragment extends ListFragment {
         mActivatedPosition = position;
     }
 
-    private CalificacionService obtenerCalificaciones() {
+    private CalificacionService createLibrosService() {
         //MMM código repetido, habría que modificar esto no?
         String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "10.12.3.40";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
+        String SERVER_IP_GENY = "192.168.1.33";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
         String API_URL = "http://"+ SERVER_IP_GENY +":9001";
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
@@ -154,4 +164,26 @@ public class CalificacionListFragment extends ListFragment {
     }
 
 
+
+
+    private void obtenerCalificaciones(String usuarioId) {
+        CalificacionService calificacionService = createLibrosService();
+        calificacionService.getCalificaciones(usuarioId, new Callback<List<Calificacion>>() {
+            @Override
+            public void success(List<Calificacion> calificaciones, Response response) {
+                agregarCalificaciones(calificaciones);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("", error.getMessage());
+                error.printStackTrace();
+            }
+        });
+    }
+
+
+    private void agregarCalificaciones(List<Calificacion> calificaciones) {
+        setListAdapter(new CalificacionAdapter(getActivity(),calificaciones));
+    }
 }

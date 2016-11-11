@@ -11,6 +11,6 @@ import retrofit.http.GET;
  */
 
 public interface CalificacionService {
-    @GET("/calificaciones")
-    void getLibros(Callback<List<Calificacion>> callback);
+    @GET("/calificaciones/{UsuarioId}")
+    void getCalificaciones(@retrofit.http.Body() String id,Callback<List<Calificacion>> callback);
 }

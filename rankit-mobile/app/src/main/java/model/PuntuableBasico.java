@@ -5,21 +5,21 @@ package model;
  */
 
 public class PuntuableBasico {
-    Long id;
+    int id;
 
     String nombre;
     String tipo;
 
-    public PuntuableBasico(String nombre,String tipo) {
-
+    public PuntuableBasico(int id,String nombre,String tipo) {
+        this.id=id;
         this.nombre = nombre;
         this.tipo=tipo;
     }
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

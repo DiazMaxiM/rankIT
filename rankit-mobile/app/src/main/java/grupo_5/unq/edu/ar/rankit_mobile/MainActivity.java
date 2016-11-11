@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.UsuarioService;
 import model.Usuario;
@@ -19,6 +20,7 @@ import retrofit.client.Response;
  */
 
 public class MainActivity extends Activity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +29,13 @@ public class MainActivity extends Activity {
 
     public void ingresar(View view){
         Usuario loginUsuario = new Usuario();
-       AutoCompleteTextView usuarioText= (AutoCompleteTextView)findViewById(R.id.usuario);
+        AutoCompleteTextView usuarioText= (AutoCompleteTextView)findViewById(R.id.usuario);
         loginUsuario.setNombre(usuarioText.getText().toString());
 
         EditText passwordText= (EditText)findViewById(R.id.password);
         loginUsuario.setPassword(passwordText.getText().toString());
 
-       validarUsuario(loginUsuario);
-
-        Intent intent=new Intent(this,CalificacionListActivity.class);
-        startActivity(intent);
+        validarUsuario(loginUsuario);
 
 
     }
@@ -59,7 +58,8 @@ public class MainActivity extends Activity {
         });
     }
     private void cambiarAPantallaTanto() {
-        Intent intent=new Intent(this,CalificacionListActivity.class);
+        Intent intent = new Intent(this, CalificacionListActivity.class);
+      //   intent.putExtra("usuarioId", usuario.getId());
         startActivity(intent);
     }
 

@@ -5,15 +5,18 @@ package model;
  */
 
 public class Calificacion {
-        Long id;
+        int id;
         PuntuableBasico evaluado;
-        String puntos;
+        int puntos;
+        int promedio;
         String detalle;
 
-        public Calificacion(PuntuableBasico evaluado, String puntos, String detalle) {
+        public Calificacion(PuntuableBasico evaluado,int promedio,int puntos, String detalle,int id) {
             this.evaluado = evaluado;
+            this.promedio=promedio;
             this.puntos = puntos;
             this.detalle = detalle;
+            this.id=id;
         }
         public Calificacion(){
 
@@ -27,11 +30,20 @@ public class Calificacion {
             this.evaluado = evaluado;
         }
 
-        public Long getId() {
+        public int getPromedio() {
+        return promedio;
+    }
+
+        public void setPromedio(int promedio) {
+        this.promedio = promedio;
+    }
+
+
+    public int getId() {
             return id;
         }
 
-        public void setId(Long id) {
+        public void setId(int id) {
             this.id = id;
         }
 
@@ -43,11 +55,11 @@ public class Calificacion {
             this.detalle = detalle;
         }
 
-        public String getPuntos() {
+        public int getPuntos() {
             return  puntos;
         }
 
-        public void setPuntos(String puntos){this.puntos = puntos;
+        public void setPuntos(int puntos){this.puntos = puntos;
         }
 
 
