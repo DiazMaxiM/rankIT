@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.UsuarioService;
 import model.Usuario;
@@ -24,7 +26,6 @@ public class MainActivity extends Activity {
     }
 
     public void ingresar(View view){
-      /**
         Usuario loginUsuario = new Usuario();
        AutoCompleteTextView usuarioText= (AutoCompleteTextView)findViewById(R.id.usuario);
         loginUsuario.setNombre(usuarioText.getText().toString());
@@ -33,7 +34,7 @@ public class MainActivity extends Activity {
         loginUsuario.setPassword(passwordText.getText().toString());
 
        validarUsuario(loginUsuario);
-      */
+
         Intent intent=new Intent(this,CalificacionListActivity.class);
         startActivity(intent);
 
@@ -65,7 +66,7 @@ public class MainActivity extends Activity {
     private UsuarioService crearUsuarioService() {
         //MMM código repetido, habría que modificar esto no?
         String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "10.12.3.40";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
+        String SERVER_IP_GENY = "192.168.1.33";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
         String API_URL = "http://"+ SERVER_IP_GENY +":9001";
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
