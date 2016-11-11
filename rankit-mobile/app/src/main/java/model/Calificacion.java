@@ -1,4 +1,4 @@
-package calificaciones;
+package model;
 
 /**
  * Created by Yo on 9/11/2016.
@@ -14,6 +14,9 @@ public class Calificacion {
             this.evaluado = evaluado;
             this.puntos = puntos;
             this.detalle = detalle;
+        }
+        public Calificacion(){
+
         }
 
         public PuntuableBasico getEvaluado() {

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,22 +25,22 @@
         </activity>
         <activity android:name=".EliminarCalificacionActivity" />
         <activity android:name=".CrearCalificacionActivity"
-            android:parentActivityName=".CalificacionesDelUsuarioActivity"/>
+            android:parentActivityName=".CalificacionListActivity"/>
          <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value=".CalificacionesDelUsuarioActivity" />
+            android:value=".CalificacionListActivity" />
         />
-        <activity android:name=".CalificacionesDelUsuarioActivity" />
+        <activity android:name=".CalificacionListActivity" />
         <activity android:name=".DetalleCalificacionActivity"
-            android:parentActivityName=".CalificacionesDelUsuarioActivity"/>
+            android:parentActivityName=".CalificacionListActivity"/>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CalificacionesDelUsuarioActivity" /> />
+                android:value=".CalificacionListActivity" /> />
         <activity android:name=".EditarCalificacionActivity"
-            android:parentActivityName=".CalificacionesDelUsuarioActivity">
+            android:parentActivityName=".CalificacionListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CalificacionesDelUsuarioActivity" />
+                android:value=".CalificacionListActivity" />
         </activity>
 
     </application>

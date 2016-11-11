@@ -4,7 +4,7 @@
      xmlns:tools="http://schemas.android.com/tools"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
-     tools:context="grupo_5.unq.edu.ar.rankit_mobile.CalificacionesDelUsuarioActivity">
+     tools:context="grupo_5.unq.edu.ar.rankit_mobile.CalificacionListActivity">
     <item
         android:id="@+id/buscardor"
         android:title="buscar"

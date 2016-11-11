@@ -1,4 +1,4 @@
-package calificaciones;
+package model;
 
 /**
  * Created by Yo on 9/11/2016.
