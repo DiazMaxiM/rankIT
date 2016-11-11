@@ -17,5 +17,19 @@
         android:onClick="nuevaCalificacion"
         android:layout_weight="0.03" />
 
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/libro_list"
+        android:name="grupo_5.unq.edu.ar.rankit_mobile.CalificacionListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        tools:context=".CalificacionListActivity"
+        tools:layout="@android:layout/list_content"/>
+
+
+
+
 
 </RelativeLayout>
