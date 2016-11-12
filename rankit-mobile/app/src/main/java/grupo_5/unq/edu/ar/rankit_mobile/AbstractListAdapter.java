@@ -10,9 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by Yo on 10/11/2016.
+ * Created by estefaniamiguel on 17/6/15. Enjoy!
  */
-
 public abstract class AbstractListAdapter<T> extends BaseAdapter {
     private Context context;
     private List<T> objects;

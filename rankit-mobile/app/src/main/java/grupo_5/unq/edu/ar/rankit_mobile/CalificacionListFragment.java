@@ -1,34 +1,39 @@
 package grupo_5.unq.edu.ar.rankit_mobile;
 
 import android.app.Activity;
-import android.app.ListFragment;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
+import model.PuntuableBasico;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by Yo on 10/11/2016.
+ * A list fragment representing a list of Libros. This fragment
+ * also supports tablet devices by allowing list items to be given an
+ * 'activated' state upon selection. This helps indicate which item is
+ * currently being viewed in a {@link CalificacionDetailFragment}.
+ * <p/>
+ * Activities containing this fragment MUST implement the {@link Callbacks}
+ * interface.
  */
-
 public class CalificacionListFragment extends ListFragment {
 
     /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
+     * The serialization (saved instance state) Bundle key representing the
+     * activated item position. Only used on tablets.
      */
-    public static final String ARG_ITEM_ID = "item_id";
-
-     static final String STATE_ACTIVATED_POSITION = "activated_position";
+    private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     /**
      * The fragment's current callback object, which is notified of list item
@@ -50,7 +55,7 @@ public class CalificacionListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(Calificacion calificacion);
+        public void onItemSelected(Calificacion id);
     }
 
     /**
@@ -59,7 +64,7 @@ public class CalificacionListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(Calificacion calificacion) {
+        public void onItemSelected(Calificacion id) {
         }
     };
 
@@ -73,10 +78,9 @@ public class CalificacionListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            String itemID = getArguments().getString(ARG_ITEM_ID);
-            obtenerCalificaciones(itemID);
-        }
+        Bundle parametros=this.getActivity().getIntent().getExtras();
+
+        obtenerCalificaciones(parametros.getInt(CalificacionDetailFragment.ID));
     }
 
     @Override
@@ -116,7 +120,7 @@ public class CalificacionListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        Calificacion  calificacion = (Calificacion) listView.getAdapter().getItem(position);
+        Calificacion calificacion = (Calificacion) listView.getAdapter().getItem(position);
         mCallbacks.onItemSelected(calificacion);
     }
 
@@ -151,27 +155,18 @@ public class CalificacionListFragment extends ListFragment {
         mActivatedPosition = position;
     }
 
-    private CalificacionService createLibrosService() {
-        //MMM código repetido, habría que modificar esto no?
-        String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.1.33";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
-        String API_URL = "http://"+ SERVER_IP_GENY +":9001";
-
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        CalificacionService calificacionService = restAdapter.create(CalificacionService.class);
-        return calificacionService;
-
-    }
+    private void obtenerCalificaciones(Integer idUsuario) {
+        CalificacionService calificacionService = createCalificacionService();
+        calificacionService.getCalificaciones(idUsuario.toString(),new Callback<List<Calificacion>>() {
+        @Override
+        public void success(List<Calificacion> calificaciones, Response response) {
+        //List<Calificacion> calificaciones=new ArrayList<Calificacion>();
+        //calificaciones.add(new Calificacion(new PuntuableBasico(1,"Freddo","LUGAR"),5,4,"helado feo",1));
+        //calificaciones.add(new Calificacion(new PuntuableBasico(2,"Freddo","LUGAR"),5,4,"helado feo",2));
+        //calificaciones.add(new Calificacion(new PuntuableBasico(3,"Freddo","LUGAR"),5,4,"helado feo",3));
 
 
-
-
-    private void obtenerCalificaciones(String usuarioId) {
-        CalificacionService calificacionService = createLibrosService();
-        calificacionService.getCalificaciones(usuarioId, new Callback<List<Calificacion>>() {
-            @Override
-            public void success(List<Calificacion> calificaciones, Response response) {
-                agregarCalificaciones(calificaciones);
+        agregarCalificaciones(calificaciones);
             }
 
             @Override
@@ -182,8 +177,18 @@ public class CalificacionListFragment extends ListFragment {
         });
     }
 
+    private void agregarCalificaciones(List<Calificacion> calificacion) {
+        setListAdapter(new CalificacionAdapter(getActivity(), calificacion));
+    }
 
-    private void agregarCalificaciones(List<Calificacion> calificaciones) {
-        setListAdapter(new CalificacionAdapter(getActivity(),calificaciones));
+    private CalificacionService createCalificacionService() {
+        //MMM código repetido, habría que modificar esto no?
+        String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
+        String SERVER_IP_GENY = "192.168.0.67";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
+        String API_URL = "http://"+ SERVER_IP_GENY +":9001";
+
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
+        CalificacionService calificacionService = restAdapter.create(CalificacionService.class);
+        return calificacionService;
     }
 }

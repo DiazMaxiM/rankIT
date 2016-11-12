@@ -15,6 +15,8 @@ public class PuntuableBasico {
         this.nombre = nombre;
         this.tipo=tipo;
     }
+    public PuntuableBasico(){
+    }
     public int getId() {
         return id;
     }

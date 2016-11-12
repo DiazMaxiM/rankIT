@@ -23,26 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EliminarCalificacionActivity" />
-        <activity android:name=".CrearCalificacionActivity"
-            android:parentActivityName=".CalificacionListActivity"/>
-         <meta-data
+        <activity android:name=".CalificacionListActivity" />
+        <activity
+            android:name=".CalificacionDetailActivity"
+            android:parentActivityName=".CalificacionListActivity" />
+
+        <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".CalificacionListActivity" />
         />
-        <activity android:name=".CalificacionListActivity" />
-        <activity android:name=".DetalleCalificacionActivity"
-            android:parentActivityName=".CalificacionListActivity"/>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CalificacionListActivity" /> />
-        <activity android:name=".EditarCalificacionActivity"
-            android:parentActivityName=".CalificacionListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CalificacionListActivity" />
-        </activity>
-
+        <activity android:name=".EditarCalificacionActivity" />
+        <activity android:name=".NuevaCalificacion"></activity>
     </application>
 
 </manifest>

@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="grupo_5.unq.edu.ar.rankit_mobile.EditarCalificacionActivity">
-    <include android:id="@+id/miActionBar"
-        layout="@layout/toolbar_calificaciones"
-        />
-    <TextView
+      <TextView
         android:text="Puntaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
