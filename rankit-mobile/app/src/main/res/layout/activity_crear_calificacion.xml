@@ -9,7 +9,6 @@
         android:text="Calificado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/miActionBar"
         android:id="@+id/textoCalificado" />
 
     <AutoCompleteTextView
@@ -64,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/calificar"
+        android:onClick="calificar"
         android:layout_below="@+id/motivo"
         android:layout_alignStart="@+id/motivo"
         android:layout_marginTop="60dp"

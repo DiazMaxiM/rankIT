@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getBaseContext(),error.getMessage(),Toast.LENGTH_SHORT);
+                Toast.makeText(getBaseContext(),error.getBody().toString(),Toast.LENGTH_SHORT);
             }
         });
     }
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
     private UsuarioService crearUsuarioService() {
         //MMM código repetido, habría que modificar esto no?
         String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.1.36";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
+        String SERVER_IP_GENY = "192.168.44.124";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
         String API_URL = "http://"+ SERVER_IP_GENY +":9001";
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
