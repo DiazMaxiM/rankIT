@@ -5,23 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="grupo_5.unq.edu.ar.rankit_mobile.CrearCalificacionActivity">
-    <include android:id="@+id/miActionBar"
-        layout="@layout/toolbar_calificaciones"
-        />
     <TextView
         android:text="Calificado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/miActionBar"
-        android:id="@+id/textView2" />
+        android:id="@+id/textoCalificado" />
 
     <AutoCompleteTextView
-        android:text=""
-        android:layout_width="wrap_content"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/calificado"
-        android:layout_below="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
+        android:id="@+id/nombresAEvaluar"
+        android:layout_below="@+id/textoCalificado"
+        android:layout_toEndOf="@+id/textoCalificado"
         android:layout_marginTop="13dp" />
 
 
@@ -30,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/puntaje"
-        android:layout_below="@+id/calificado"
+        android:layout_below="@+id/nombresAEvaluar"
         android:layout_alignParentStart="true"
         android:layout_marginTop="32dp" />
 

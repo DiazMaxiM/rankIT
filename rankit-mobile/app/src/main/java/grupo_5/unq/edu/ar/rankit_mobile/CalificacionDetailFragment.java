@@ -54,6 +54,7 @@ public class CalificacionDetailFragment extends Fragment {
         calificacionSeleccionada.setEvaluado(new PuntuableBasico());
         calificacionSeleccionada.getEvaluado().setNombre(parametros.getString(NOMBRE));
 
+
     }
 
     private CalificacionService createCalificacionService() {

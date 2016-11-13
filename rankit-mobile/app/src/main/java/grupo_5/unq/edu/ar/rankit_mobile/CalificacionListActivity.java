@@ -2,9 +2,12 @@ package grupo_5.unq.edu.ar.rankit_mobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import model.Calificacion;
 
@@ -38,6 +41,7 @@ public class CalificacionListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_libro_list);
+        this.crearNuevaCalificacion();
 
         if (findViewById(R.id.libro_detail_container) != null) {
             // The detail container view will be present only in the
@@ -94,5 +98,19 @@ public class CalificacionListActivity extends FragmentActivity
         }
     }
 
+    public void crearNuevaCalificacion(){
+        FloatingActionButton botonCrearCalificacion=(FloatingActionButton) findViewById(R.id.ccc);
+        botonCrearCalificacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               nuevaCalificacion();
+            }
+        });
 
+    }
+
+    public void nuevaCalificacion(){
+        Intent intent=new Intent(this,CrearCalificacionActivity.class);
+        startActivity(intent);
+    }
 }

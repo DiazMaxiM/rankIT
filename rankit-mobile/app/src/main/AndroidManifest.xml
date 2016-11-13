@@ -33,7 +33,7 @@
             android:value=".CalificacionListActivity" />
         />
         <activity android:name=".EditarCalificacionActivity" />
-        <activity android:name=".NuevaCalificacion"></activity>
+        <activity android:name=".CrearCalificacionActivity"></activity>
     </application>
 
 </manifest>

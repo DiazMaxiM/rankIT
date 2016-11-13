@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +30,7 @@ public class CalificacionDetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_libro_detail);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Show the Up button in the action bar.
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -64,7 +65,18 @@ public class CalificacionDetailActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        switch (item.getItemId()){
+            case R.id.home:
+                NavUtils.navigateUpTo(this, new Intent(this, CalificacionListActivity.class));
+                break;
+            case R.id.editarCalificacion:
+                this.editarCalificacionSeleccionada();
+                break;
+            case R.id.eliminarCalificacion:
+                break;
+
+        }
+       /* int id = item.getItemId();
         if (id == android.R.id.home) {
             // This ID represents the Home or Up button. In the case of this
             // activity, the Up button is shown. Use NavUtils to allow users
@@ -76,10 +88,11 @@ public class CalificacionDetailActivity extends ActionBarActivity {
             NavUtils.navigateUpTo(this, new Intent(this, CalificacionListActivity.class));
             return true;
         }
+        */
         return super.onOptionsItemSelected(item);
     }
 
-    public void editarCalificacionSeleccionada(View view){
+    public void editarCalificacionSeleccionada(){
 
 
         Intent detailIntent = new Intent(this, EditarCalificacionActivity.class);

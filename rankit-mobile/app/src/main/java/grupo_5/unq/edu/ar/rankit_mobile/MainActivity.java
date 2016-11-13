@@ -2,10 +2,13 @@ package grupo_5.unq.edu.ar.rankit_mobile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.UsuarioService;
 import model.Usuario;
@@ -55,10 +58,12 @@ public class MainActivity extends Activity {
 
             @Override
             public void failure(RetrofitError error) {
-
+                Toast.makeText(getBaseContext(),error.getMessage(),Toast.LENGTH_SHORT);
             }
         });
     }
+
+
     private void pantallaCalificacionDelUsuario(Usuario usuarioLogeado) {
         Intent intent=new Intent(this,CalificacionListActivity.class);
         intent.putExtra(CalificacionDetailFragment.ID,usuarioLogeado.getId());
@@ -68,7 +73,7 @@ public class MainActivity extends Activity {
     private UsuarioService crearUsuarioService() {
         //MMM código repetido, habría que modificar esto no?
         String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.0.67";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
+        String SERVER_IP_GENY = "192.168.1.36";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
         String API_URL = "http://"+ SERVER_IP_GENY +":9001";
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
