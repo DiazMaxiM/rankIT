@@ -57,17 +57,6 @@ public class CalificacionDetailFragment extends Fragment {
 
     }
 
-    private CalificacionService createCalificacionService() {
-        //MMM código repetido, habría que modificar esto no?
-        String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.0.67";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
-        String API_URL = "http://"+ SERVER_IP_GENY +":9001";
-
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        CalificacionService calificacionService = restAdapter.create(CalificacionService.class);
-        return calificacionService;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -12,6 +12,7 @@ import java.util.List;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
+import model.IServiceFactory;
 import model.PuntuableBasico;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -28,6 +29,8 @@ import retrofit.client.Response;
  * interface.
  */
 public class CalificacionListFragment extends ListFragment {
+
+    private Integer idUsuario;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -78,9 +81,18 @@ public class CalificacionListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle parametros=this.getActivity().getIntent().getExtras();
 
-        obtenerCalificaciones(parametros.getInt(CalificacionDetailFragment.ID));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle parametros=this.getActivity().getIntent().getExtras();
+        if (null != parametros){
+            idUsuario=parametros.getInt(CalificacionDetailFragment.ID);
+        }
+
+        obtenerCalificaciones(idUsuario);
     }
 
     @Override
@@ -156,17 +168,10 @@ public class CalificacionListFragment extends ListFragment {
     }
 
     private void obtenerCalificaciones(Integer idUsuario) {
-        CalificacionService calificacionService = createCalificacionService();
-        calificacionService.getCalificaciones(idUsuario.toString(),new Callback<List<Calificacion>>() {
+        new IServiceFactory().getServiceFactoryFor(CalificacionService.class).getCalificaciones(idUsuario.toString(),new Callback<List<Calificacion>>() {
         @Override
         public void success(List<Calificacion> calificaciones, Response response) {
-        //List<Calificacion> calificaciones=new ArrayList<Calificacion>();
-        //calificaciones.add(new Calificacion(new PuntuableBasico(1,"Freddo","LUGAR"),5,4,"helado feo",1));
-        //calificaciones.add(new Calificacion(new PuntuableBasico(2,"Freddo","LUGAR"),5,4,"helado feo",2));
-        //calificaciones.add(new Calificacion(new PuntuableBasico(3,"Freddo","LUGAR"),5,4,"helado feo",3));
-
-
-        agregarCalificaciones(calificaciones);
+             agregarCalificaciones(calificaciones);
             }
 
             @Override
@@ -181,14 +186,5 @@ public class CalificacionListFragment extends ListFragment {
         setListAdapter(new CalificacionAdapter(getActivity(), calificacion));
     }
 
-    private CalificacionService createCalificacionService() {
-        //MMM código repetido, habría que modificar esto no?
-        String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.43.124";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
-        String API_URL = "http://"+ SERVER_IP_GENY +":9001";
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        CalificacionService calificacionService = restAdapter.create(CalificacionService.class);
-        return calificacionService;
-    }
 }

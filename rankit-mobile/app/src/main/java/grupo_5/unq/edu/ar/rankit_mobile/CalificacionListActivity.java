@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import model.Calificacion;
 
@@ -43,7 +41,7 @@ public class CalificacionListActivity extends FragmentActivity
         setContentView(R.layout.activity_libro_list);
         this.crearNuevaCalificacion();
 
-        if (findViewById(R.id.libro_detail_container) != null) {
+        if (findViewById(R.id.calificacion_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
             // res/values-sw600dp). If this view is present, then the
@@ -83,7 +81,7 @@ public class CalificacionListActivity extends FragmentActivity
             arguments.putInt(CalificacionDetailFragment.ID, id.getId());
             arguments.putString(CalificacionDetailFragment.NOMBRE, id.getEvaluado().getNombre());
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.libro_detail_container, fragment)
+                    .replace(R.id.calificacion_detail_container, fragment)
                     .commit();
 
         } else {

@@ -21,6 +21,7 @@ import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import grupo_5.unq.edu.ar.rankit_mobile.service.EvaluadosService;
 import grupo_5.unq.edu.ar.rankit_mobile.service.UsuarioService;
 import model.Calificacion;
+import model.IServiceFactory;
 import model.PuntuableBasico;
 import model.Usuario;
 import retrofit.Callback;
@@ -42,8 +43,7 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         evaluados.setAdapter(this.getNombreEvaluados(this,nombreEvaluados));
     }
     private  void obtenerEvaluados(){
-        EvaluadosService librosService = createEvaluadosService();
-        librosService.getEvaluados(new Callback<List<PuntuableBasico>>() {
+        new IServiceFactory().getServiceFactoryFor(EvaluadosService.class).getEvaluados(new Callback<List<PuntuableBasico>>() {
             @Override
             public void success(List<PuntuableBasico> evaluados, Response response) {
                 agregarEvaluados(evaluados);
@@ -66,16 +66,6 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         this.nombreEvaluados=resultado;
 
     }
-    private EvaluadosService createEvaluadosService() {
-        //MMM código repetido, habría que modificar esto no?
-        String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.56.1";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
-        String API_URL = "http://"+ SERVER_IP_GENY +":9000";
-
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        EvaluadosService evaluadosService = restAdapter.create(EvaluadosService.class);
-        return evaluadosService;
-    }
 
     private ArrayAdapter<String>getNombreEvaluados(Context context,List<String>evaluados) {
        return new ArrayAdapter<String>(context,android.R.layout.simple_dropdown_item_1line,evaluados);
@@ -97,8 +87,7 @@ public class CrearCalificacionActivity extends AppCompatActivity {
     }
 
     private void enviarCalificacion(Calificacion calificacion){
-        CalificacionService calificacionService = creaCalificacionService();
-        calificacionService.getCalificacion(calificacion,new Callback<Response>() {
+        new IServiceFactory().getServiceFactoryFor(CalificacionService.class).getCalificacion(calificacion,new Callback<Response>() {
 
             @Override
             public void success(Response respuesta, Response response) {
@@ -112,16 +101,7 @@ public class CrearCalificacionActivity extends AppCompatActivity {
             }
         });
     }
-    private  CalificacionService creaCalificacionService(){
-        //MMM código repetido, habría que modificar esto no?
-        String SERVER_IP = "10.0.2.2"; //esta ip se usa para comunicarse con mi localhost en el emulador de Android Studio
-        String SERVER_IP_GENY = "192.168.56.1";//esta ip se usa para comunicarse con mi localhost en el emulador de Genymotion
-        String API_URL = "http://"+ SERVER_IP_GENY +":9000";
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        CalificacionService calificacionService = restAdapter.create(CalificacionService.class);
-        return calificacionService;
-    }
     private PuntuableBasico devolverEvaluado(String nombreEvaluado){
         PuntuableBasico evaluado=null;
         for(int i=0;i<this.evaluados.size();i++){

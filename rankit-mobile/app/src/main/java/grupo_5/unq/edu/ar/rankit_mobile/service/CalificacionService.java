@@ -9,8 +9,10 @@ import model.Usuario;
 import retrofit.Callback;
 import retrofit.client.Response;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 
 /**
  * Created by Yo on 10/11/2016.
@@ -22,4 +24,11 @@ public interface CalificacionService {
 
  @POST("/calificaciones")
  public void getCalificacion(@retrofit.http.Body Calificacion calificacion,Callback<Response>callback);
+
+ @DELETE("/calificaciones/{id}")
+ public void deleteCalificacion(@retrofit.http.Path("id") int id , Callback<Response> callback);
+
+ @PUT("/calificaciones")
+ public void updateCalificacion(@retrofit.http.Body Calificacion calificacion,Callback<Response>callback);
+
 }

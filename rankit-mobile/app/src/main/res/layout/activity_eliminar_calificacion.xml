@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="grupo_5.unq.edu.ar.rankit_mobile.EliminarCalificacionActivity">
+    >
     <TextView
         android:text="¿Estás seguro que deseas eliminar la calificación?"
         android:layout_width="wrap_content"
@@ -16,22 +16,23 @@
         android:id="@+id/textView" />
 
     <Button
-        android:text="Cancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cancelar"
-        android:layout_alignBaseline="@+id/aceptar"
-        android:layout_alignBottom="@+id/aceptar"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginEnd="26dp" />
-
-    <Button
         android:text="Aceptar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/aceptar"
+        android:id="@+id/aceptarEliminacionDialog"
         android:layout_marginTop="19dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="44dp" />
+        android:layout_marginStart="44dp"
+         />
+
+    <Button
+        android:text="Cancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelarEliminacionDialog"
+        android:layout_alignBaseline="@+id/aceptarEliminacionDialog"
+        android:layout_alignBottom="@+id/aceptarEliminacionDialog"
+        android:layout_toEndOf="@+id/aceptarEliminacionDialog"
+        android:layout_marginStart="42dp" />
 </RelativeLayout>

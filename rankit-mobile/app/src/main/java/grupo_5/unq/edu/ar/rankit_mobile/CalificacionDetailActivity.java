@@ -2,16 +2,19 @@ package grupo_5.unq.edu.ar.rankit_mobile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
-import model.Calificacion;
-
+import android.support.v4.app.DialogFragment;
+import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
+import model.IServiceFactory;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * An activity representing a single Libro detail screen. This
@@ -22,27 +25,23 @@ import model.Calificacion;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link CalificacionDetailFragment}.
  */
-public class CalificacionDetailActivity extends ActionBarActivity {
+public class CalificacionDetailActivity extends AppCompatActivity {
 
 
     CalificacionDetailFragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_libro_detail);
+        setContentView(R.layout.activity_calificacion_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // Show the Up button in the action bar.
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
+
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -52,10 +51,12 @@ public class CalificacionDetailActivity extends ActionBarActivity {
              fragment = new CalificacionDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.libro_detail_container, fragment)
+                    .add(R.id.calificacion_detail_container, fragment)
                     .commit();
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -73,6 +74,7 @@ public class CalificacionDetailActivity extends ActionBarActivity {
                 this.editarCalificacionSeleccionada();
                 break;
             case R.id.eliminarCalificacion:
+                this.ConfirmacionEliminar();
                 break;
 
         }
@@ -92,6 +94,12 @@ public class CalificacionDetailActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void ConfirmacionEliminar() {
+            DialogFragment newFragment = new ConfirmacionEliminarCalificacion();
+            newFragment.show(getSupportFragmentManager(), "missiles");
+
+    }
+
     public void editarCalificacionSeleccionada(){
 
 
@@ -101,9 +109,20 @@ public class CalificacionDetailActivity extends ActionBarActivity {
         detailIntent.putExtra(CalificacionDetailFragment.PUNTOS, fragment.calificacionSeleccionada.getPuntos());
         detailIntent.putExtra(CalificacionDetailFragment.MOTIVO, fragment.calificacionSeleccionada.getDetalle());
         startActivity(detailIntent);
-
-
-
     }
+    public void eliminarCalificacionActual(){
+       new IServiceFactory().getServiceFactoryFor(CalificacionService.class).deleteCalificacion(fragment.calificacionSeleccionada.getId(), new Callback<Response>() {
+            @Override
+            public void success(Response response, Response response2) {
+                finish();
+            }
 
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("", error.getMessage());
+                error.printStackTrace();
+            }
+        });
+    }
 }
