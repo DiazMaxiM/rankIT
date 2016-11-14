@@ -28,7 +28,7 @@ import model.Calificacion;
  */
 public class CalificacionListActivity extends FragmentActivity
         implements CalificacionListFragment.Callbacks {
-
+    Integer idUsuario;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -40,6 +40,10 @@ public class CalificacionListActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_libro_list);
         this.crearNuevaCalificacion();
+        Bundle parametros= getIntent().getExtras();
+        if (null != parametros){
+            idUsuario=parametros.getInt(CalificacionDetailFragment.ID);
+        }
 
         if (findViewById(R.id.calificacion_detail_container) != null) {
             // The detail container view will be present only in the
@@ -68,7 +72,7 @@ public class CalificacionListActivity extends FragmentActivity
      * indicating that the item with the given ID was selected.
      */
     @Override
-    public void onItemSelected(Calificacion id) {
+    public void onItemSelected(Calificacion calificacion) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -76,10 +80,10 @@ public class CalificacionListActivity extends FragmentActivity
             Bundle arguments = new Bundle();
             CalificacionDetailFragment fragment = new CalificacionDetailFragment();
             fragment.setArguments(arguments);
-            arguments.putString(CalificacionDetailFragment.MOTIVO, id.getDetalle());
-            arguments.putInt(CalificacionDetailFragment.PUNTOS, id.getPuntos());
-            arguments.putInt(CalificacionDetailFragment.ID, id.getId());
-            arguments.putString(CalificacionDetailFragment.NOMBRE, id.getEvaluado().getNombre());
+            arguments.putString(CalificacionDetailFragment.MOTIVO, calificacion.getDetalle());
+            arguments.putInt(CalificacionDetailFragment.PUNTOS, calificacion.getPuntos());
+            arguments.putInt(CalificacionDetailFragment.ID, calificacion.getId());
+            arguments.putString(CalificacionDetailFragment.NOMBRE, calificacion.getEvaluado().getNombre());
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.calificacion_detail_container, fragment)
                     .commit();
@@ -88,10 +92,10 @@ public class CalificacionListActivity extends FragmentActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, CalificacionDetailActivity.class);
-            detailIntent.putExtra(CalificacionDetailFragment.NOMBRE, id.getEvaluado().getNombre());
-            detailIntent.putExtra(CalificacionDetailFragment.ID, id.getId());
-            detailIntent.putExtra(CalificacionDetailFragment.PUNTOS, id.getPuntos());
-            detailIntent.putExtra(CalificacionDetailFragment.MOTIVO, id.getDetalle());
+            detailIntent.putExtra(CalificacionDetailFragment.NOMBRE, calificacion.getEvaluado().getNombre());
+            detailIntent.putExtra(CalificacionDetailFragment.ID, calificacion.getId());
+            detailIntent.putExtra(CalificacionDetailFragment.PUNTOS, calificacion.getPuntos());
+            detailIntent.putExtra(CalificacionDetailFragment.MOTIVO, calificacion.getDetalle());
             startActivity(detailIntent);
         }
     }
@@ -109,6 +113,7 @@ public class CalificacionListActivity extends FragmentActivity
 
     public void nuevaCalificacion(){
         Intent intent=new Intent(this,CrearCalificacionActivity.class);
+        intent.putExtra("idUsuario",idUsuario);
         startActivity(intent);
     }
 }

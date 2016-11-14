@@ -2,7 +2,7 @@ package grupo_5.unq.edu.ar.rankit_mobile.service;
 
 import java.util.List;
 
-import model.PuntuableBasico;
+import model.PuntuablesBasico;
 import retrofit.Callback;
 import retrofit.http.GET;
 
@@ -12,5 +12,5 @@ import retrofit.http.GET;
 
 public interface EvaluadosService {
     @GET("/evaluados")
-    void getEvaluados(Callback<List<PuntuableBasico>> callback);
+    public void getEvaluados(Callback<List<PuntuablesBasico>> callback);
 }

@@ -6,12 +6,13 @@ package model;
 
 public class Calificacion {
     int id;
-    PuntuableBasico evaluado;
+    PuntuablesBasico evaluado;
     int puntos;
     int promedio;
     String detalle;
+    int idUsuario;
 
-    public Calificacion(PuntuableBasico evaluado,int promedio,int puntos, String detalle,int id) {
+    public Calificacion(PuntuablesBasico evaluado, int promedio, int puntos, String detalle, int id) {
         this.evaluado = evaluado;
         this.promedio=promedio;
         this.puntos = puntos;
@@ -22,15 +23,15 @@ public class Calificacion {
 
     }
 
-    public PuntuableBasico getEvaluado() {
+    public PuntuablesBasico getEvaluado() {
         return evaluado;
     }
 
-    public void setEvaluado(PuntuableBasico evaluado) {
+    public void setEvaluado(PuntuablesBasico evaluado) {
         this.evaluado= evaluado;
     }
 
-    public void setGenero(PuntuableBasico evaluado) {
+    public void setGenero(PuntuablesBasico evaluado) {
         this.evaluado = evaluado;
     }
 
@@ -42,6 +43,13 @@ public class Calificacion {
         this.promedio = promedio;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int id) {
+        this.idUsuario = id;
+    }
 
     public int getId() {
         return id;

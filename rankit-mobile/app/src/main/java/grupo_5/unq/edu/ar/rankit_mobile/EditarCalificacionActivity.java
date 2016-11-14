@@ -9,9 +9,8 @@ import android.widget.TextView;
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
 import model.IServiceFactory;
-import model.PuntuableBasico;
+import model.PuntuablesBasico;
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -42,7 +41,7 @@ public class EditarCalificacionActivity extends AppCompatActivity {
 
         calificacionEditada.setPuntos(new Integer(puntos));
         calificacionEditada.setDetalle(detalleAEditar.getText().toString());
-        PuntuableBasico evaluado = new PuntuableBasico();
+        PuntuablesBasico evaluado = new PuntuablesBasico();
         evaluado.setNombre(parametros.getString(CalificacionDetailFragment.NOMBRE));
         calificacionEditada.setEvaluado(evaluado);
 

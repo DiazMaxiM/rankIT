@@ -7,15 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
 import model.IServiceFactory;
-import model.PuntuableBasico;
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -30,7 +27,7 @@ import retrofit.client.Response;
  */
 public class CalificacionListFragment extends ListFragment {
 
-    private Integer idUsuario;
+    Integer idUsuario;
 
     /**
      * The serialization (saved instance state) Bundle key representing the

@@ -13,5 +13,5 @@ import retrofit.http.POST;
 public interface UsuarioService {
 
     @POST("/usuarios")
-    void getUsuarioId(@retrofit.http.Body Usuario usuario, Callback<Usuario> callback);
+   public void getUsuarioId(@retrofit.http.Body Usuario usuario, Callback<Usuario> callback);
 }

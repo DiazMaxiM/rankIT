@@ -1,22 +1,14 @@
 package grupo_5.unq.edu.ar.rankit_mobile;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
-import model.PuntuableBasico;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import model.PuntuablesBasico;
 
 /**
  * A fragment representing a single Libro detail screen.
@@ -51,7 +43,7 @@ public class CalificacionDetailFragment extends Fragment {
         calificacionSeleccionada.setId(parametros.getInt(ID));
         calificacionSeleccionada.setDetalle(parametros.getString(MOTIVO));
         calificacionSeleccionada.setPuntos(parametros.getInt(PUNTOS));
-        calificacionSeleccionada.setEvaluado(new PuntuableBasico());
+        calificacionSeleccionada.setEvaluado(new PuntuablesBasico());
         calificacionSeleccionada.getEvaluado().setNombre(parametros.getString(NOMBRE));
 
 

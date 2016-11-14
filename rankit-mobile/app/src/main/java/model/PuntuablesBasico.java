@@ -4,18 +4,16 @@ package model;
  * Created by Yo on 9/11/2016.
  */
 
-public class PuntuableBasico {
+public class PuntuablesBasico {
     int id;
-
     String nombre;
-    String tipo;
+    TipoDePuntuable tipo;
 
-    public PuntuableBasico(int id,String nombre,String tipo) {
-        this.id=id;
+    public PuntuablesBasico(String nombre, TipoDePuntuable tipo) {
         this.nombre = nombre;
         this.tipo=tipo;
     }
-    public PuntuableBasico(){
+    public PuntuablesBasico(){
     }
     public int getId() {
         return id;
@@ -25,7 +23,6 @@ public class PuntuableBasico {
         this.id = id;
     }
 
-
     public String getNombre() {
         return nombre;
     }
@@ -34,11 +31,11 @@ public class PuntuableBasico {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
+    public TipoDePuntuable getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoDePuntuable tipo) {
         this.tipo = tipo;
     }
 }
