@@ -23,8 +23,7 @@ import retrofit.client.Response;
 
 public class CrearCalificacionActivity extends AppCompatActivity {
     Integer idUsuario;
-    List<String> nombreEvaluados=new ArrayList<>();
-    List<PuntuablesBasico>evaluados=new ArrayList<>();
+    List<PuntuablesBasico>puntuablesBasicos=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +34,17 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         }
         //pide los puntuables basicos al servidor
         this.obtenerEvaluados();
-        //Es como el autocomplete del segundo tp
-        AutoCompleteTextView evaluados=(AutoCompleteTextView) findViewById(R.id.nombresAEvaluar);
-        evaluados.setAdapter(this.getNombreEvaluados(this,nombreEvaluados));
+
+    }
+
+    public void setPuntuablesBasicos(List<PuntuablesBasico>puntuables){
+        this.puntuablesBasicos=puntuables;
     }
     private  void obtenerEvaluados(){
         new IServiceFactory().getServiceFactoryFor(EvaluadosService.class).getEvaluados(new Callback<List<PuntuablesBasico>>() {
             @Override
             public void success(List<PuntuablesBasico> evaluados, Response response) {
+                setPuntuablesBasicos(evaluados);
                 agregarEvaluados(evaluados);
             }
 
@@ -54,13 +56,15 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         });
     }
 
-    private  void agregarEvaluados(List<PuntuablesBasico>evaluados){
+    private  void agregarEvaluados(List<PuntuablesBasico>puntuablesBasicos){
         List<String> resultado=new ArrayList<String>();
-        for(int i=0;i<evaluados.size();i++){
-            resultado.add(evaluados.get(i).getNombre());
+        for(int i=0;i<puntuablesBasicos.size();i++){
+            resultado.add(puntuablesBasicos.get(i).getNombre());
         }
-        this.evaluados=evaluados;
-        this.nombreEvaluados=resultado;
+        //Es como el autocomplete del segundo tp
+        AutoCompleteTextView evaluados=(AutoCompleteTextView) findViewById(R.id.nombresAEvaluar);
+        evaluados.setAdapter(this.getNombreEvaluados(this,resultado));
+
 
     }
 
@@ -104,9 +108,9 @@ public class CrearCalificacionActivity extends AppCompatActivity {
 
     private PuntuablesBasico devolverEvaluado(String nombreEvaluado){
         PuntuablesBasico evaluado=null;
-        for(int i=0;i<this.evaluados.size();i++){
-            if(nombreEvaluado.equals(this.evaluados.get(i).getNombre())){
-                    evaluado=this.evaluados.get(i);
+        for(int i=0;i<this.puntuablesBasicos.size();i++){
+            if(nombreEvaluado.equals(this.puntuablesBasicos.get(i).getNombre())){
+                    evaluado=this.puntuablesBasicos.get(i);
             }
         }
 
