@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
 import model.IServiceFactory;
 import model.PuntuablesBasico;
+import model.UserException;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -53,8 +55,8 @@ public class EditarCalificacionActivity extends AppCompatActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("", error.getMessage());
-                error.printStackTrace();
+                Toast.makeText(getBaseContext(),new UserException().obtenerError(error), Toast.LENGTH_SHORT).show();
+
             }
         });
     }

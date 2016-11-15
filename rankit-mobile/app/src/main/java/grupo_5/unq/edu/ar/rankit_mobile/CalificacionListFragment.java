@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
 import model.Calificacion;
 import model.IServiceFactory;
+import model.UserException;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -212,8 +214,8 @@ public class CalificacionListFragment extends ListFragment{
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e("", error.getMessage());
-                error.printStackTrace();
+                Toast.makeText(getContext(),new UserException().obtenerError(error), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
