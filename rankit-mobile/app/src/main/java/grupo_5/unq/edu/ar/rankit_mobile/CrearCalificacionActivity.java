@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import grupo_5.unq.edu.ar.rankit_mobile.service.EvaluadosService;
 import model.Calificacion;
 import model.IServiceFactory;
 import model.PuntuablesBasico;
+import model.UserException;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -104,13 +106,13 @@ public class CrearCalificacionActivity extends AppCompatActivity {
 
             @Override
             public void failure(RetrofitError error) {
-              //  Toast.makeText(getBaseContext(),error.getMessage(),Toast.LENGTH_SHORT);
+                Toast.makeText(getBaseContext(),new UserException().obtenerError(error), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private PuntuablesBasico devolverEvaluado(String nombreEvaluado){
-        PuntuablesBasico evaluado=null;
+        PuntuablesBasico evaluado= new PuntuablesBasico();
         for(int i=0;i<this.puntuablesBasicos.size();i++){
             if(nombreEvaluado.equals(this.puntuablesBasicos.get(i).getNombre())){
                     evaluado=this.puntuablesBasicos.get(i);

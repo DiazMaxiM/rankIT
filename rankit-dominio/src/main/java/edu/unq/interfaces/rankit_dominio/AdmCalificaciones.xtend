@@ -189,7 +189,7 @@ class AdmCalificaciones {
 	}
 	
 	def void agregarNuevaCalificacionValidada(Calificacion calificacion) {
-		if (calificacion.puntos == null || calificacion.detalle.isNullOrEmpty || calificacion.evaluado == null){
+		if (calificacion.puntos == null || calificacion.detalle.isNullOrEmpty || calificacion.evaluado == null || calificacion.evaluado.nombre == null){
 			throw new CalificacionIncompletaException("La Calificacion Esta Incompleta")
 			
 		}
