@@ -36,6 +36,9 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         this.obtenerEvaluados();
 
     }
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
 
     public void setPuntuablesBasicos(List<PuntuablesBasico>puntuables){
         this.puntuablesBasicos=puntuables;
@@ -72,11 +75,11 @@ public class CrearCalificacionActivity extends AppCompatActivity {
        return new ArrayAdapter<String>(context,android.R.layout.simple_dropdown_item_1line,evaluados);
     }
 
-    public void calificar(View view){
+    public void guardarCalificacionNueva(View view){
         Calificacion nuevaCalificacion = new Calificacion();
         AutoCompleteTextView nombreEvaluado= (AutoCompleteTextView)findViewById(R.id.nombresAEvaluar);
         PuntuablesBasico evaluado= devolverEvaluado(nombreEvaluado.getText().toString());
-        nuevaCalificacion.setEvaluado(null);
+        nuevaCalificacion.setEvaluado(evaluado);
 
         EditText puntosText= (EditText)findViewById(R.id.puntos);
         nuevaCalificacion.setPuntos(puntosText.getInputType());
@@ -84,7 +87,7 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         EditText motivoText=(EditText) findViewById(R.id.detalle);
         nuevaCalificacion.setDetalle(motivoText.getText().toString());
 
-        nuevaCalificacion.setIdUsuario(idUsuario);
+        nuevaCalificacion.setUsuario((getIdUsuario()));
 
         enviarCalificacion(nuevaCalificacion);
 

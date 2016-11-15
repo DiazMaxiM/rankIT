@@ -52,7 +52,7 @@ public class CalificacionDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_libro_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_calificacion_detail, container, false);
         String puntos = this.calificacionSeleccionada.getPuntos().toString();
         ((TextView) rootView.findViewById(R.id.puntosDeLaCalifSeleccionada)).setText(puntos);
         ((TextView) rootView.findViewById(R.id.motivoDeLaCalifSeleccionada)).setText(this.calificacionSeleccionada.getDetalle());

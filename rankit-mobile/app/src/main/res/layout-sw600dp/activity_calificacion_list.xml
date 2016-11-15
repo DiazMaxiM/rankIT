@@ -17,8 +17,8 @@
     -->
 
     <fragment
-        android:id="@+id/libro_list"
-        android:name="uqbar.librosconrest.LibroListFragment"
+        android:id="@+id/calificacion_list"
+        android:name="grupo_5.unq.edu.ar.rankit_mobile.CalificacionListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

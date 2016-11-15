@@ -38,7 +38,7 @@ public class CalificacionListActivity extends FragmentActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_libro_list);
+        setContentView(R.layout.activity_calificacion_list);
         this.crearNuevaCalificacion();
         Bundle parametros= getIntent().getExtras();
         if (null != parametros){
@@ -55,7 +55,7 @@ public class CalificacionListActivity extends FragmentActivity
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
             ((CalificacionListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.libro_list))
+                    .findFragmentById(R.id.calificacion_list))
                     .setActivateOnItemClick(true);
         }
 

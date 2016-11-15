@@ -17,10 +17,7 @@ public class DetalleCalificacionActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_detalle_calificacion);
-            Toolbar miActionBar=(Toolbar) findViewById(R.id.miActionBar);
-            setSupportActionBar(miActionBar);
-            ActionBar actionBar=getSupportActionBar();
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             Bundle parametros=getIntent().getExtras();
              nombre=parametros.getString("nombre");
              puntos=parametros.getString("puntos");

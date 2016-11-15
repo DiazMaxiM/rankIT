@@ -10,14 +10,15 @@ public class Calificacion {
     int puntos;
     int promedio;
     String detalle;
-    int idUsuario;
+    int usuario;
 
-    public Calificacion(PuntuablesBasico evaluado, int promedio, int puntos, String detalle, int id) {
+    public Calificacion(PuntuablesBasico evaluado, int promedio, int puntos, String detalle, int id,int usuario) {
         this.evaluado = evaluado;
         this.promedio=promedio;
         this.puntos = puntos;
         this.detalle = detalle;
         this.id=id;
+        this.usuario=usuario;
     }
     public Calificacion(){
 
@@ -43,12 +44,12 @@ public class Calificacion {
         this.promedio = promedio;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int id) {
-        this.idUsuario = id;
+    public void setUsuario(int id) {
+        this.usuario = id;
     }
 
     public int getId() {
