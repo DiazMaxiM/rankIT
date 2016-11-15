@@ -3,10 +3,16 @@ package grupo_5.unq.edu.ar.rankit_mobile;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import grupo_5.unq.edu.ar.rankit_mobile.service.CalificacionService;
@@ -25,9 +31,10 @@ import retrofit.client.Response;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class CalificacionListFragment extends ListFragment {
+public class CalificacionListFragment extends ListFragment{
 
     Integer idUsuario;
+    List<Calificacion>calificaciones;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -45,6 +52,11 @@ public class CalificacionListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    public void setCalificaciones(List<Calificacion> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -90,6 +102,34 @@ public class CalificacionListFragment extends ListFragment {
         }
 
         obtenerCalificaciones(idUsuario);
+        EditText nombreBuscado= (EditText) getActivity().findViewById(R.id.nombreBuscado);
+        nombreBuscado.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filtrarCalificaciones(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
+    private void filtrarCalificaciones(CharSequence charSequence) {
+        List<Calificacion>calificacionesResultantes=new ArrayList<>();
+        for(int i=0;i<calificaciones.size();i++) {
+            if (calificaciones.get(i).getEvaluado().getNombre().contains(charSequence)) {
+                calificacionesResultantes.add(calificaciones.get(i));
+            }
+        }
+        agregarCalificaciones(calificacionesResultantes);
+
     }
 
     @Override
@@ -168,6 +208,7 @@ public class CalificacionListFragment extends ListFragment {
         new IServiceFactory().getServiceFactoryFor(CalificacionService.class).getCalificaciones(idUsuario.toString(),new Callback<List<Calificacion>>() {
         @Override
         public void success(List<Calificacion> calificaciones, Response response) {
+             setCalificaciones(calificaciones);
              agregarCalificaciones(calificaciones);
             }
 

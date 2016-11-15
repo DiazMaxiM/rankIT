@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_crear_calificacion"
     android:layout_width="match_parent"
@@ -58,14 +59,16 @@
         android:layout_below="@+id/motivo"
         android:layout_alignStart="@+id/puntos" />
 
-    <Button
-        android:text="Calificar"
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/calificar"
-        android:onClick="calificar"
-        android:layout_below="@+id/motivo"
-        android:layout_alignStart="@+id/motivo"
-        android:layout_marginTop="60dp"
-        android:layout_alignParentEnd="true" />
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="23dp"
+        android:onClick="guardarCalificacionNueva"
+        android:id="@+id/guardarCalificacionNueva" />
 </RelativeLayout>
