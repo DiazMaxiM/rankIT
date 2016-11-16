@@ -69,6 +69,38 @@ public class MainLoginActivity extends Activity {
 
     }
 
+    public void registrar(View view){
+
+        EditText usuarioText = (EditText) findViewById(R.id.usuario);
+        EditText passText = (EditText) findViewById(R.id.password);
+
+        Usuario registrarUsuario = new Usuario();
+        registrarUsuario.setNombre(usuarioText.getText().toString());
+
+        EditText passwordText = (EditText) findViewById(R.id.password);
+        registrarUsuario.setPassword(passwordText.getText().toString());
+
+        this.registrarUsuario(registrarUsuario);
+
+    }
+
+    private void registrarUsuario(Usuario miUsuario) {
+
+        new IServiceFactory().getServiceFactoryFor(UsuarioService.class).setRegistroUsuario(miUsuario, new Callback<Response>() {
+
+            @Override
+            public void success(Response respuesta, Response response) {
+                Toast.makeText(getBaseContext(),"Ya podes ingresar a Rank-IT ;)",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getBaseContext(),new UserException().obtenerError(error), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     private void validarUsuario(Usuario miUsuario) {
 
 
