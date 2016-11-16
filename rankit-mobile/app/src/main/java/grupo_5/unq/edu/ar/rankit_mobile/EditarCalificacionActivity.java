@@ -22,7 +22,7 @@ public class EditarCalificacionActivity extends AppCompatActivity {
     String puntos;
     String detalle;
     PuntuablesBasico evaluado;
-
+int ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,8 @@ public class EditarCalificacionActivity extends AppCompatActivity {
         Bundle parametros= getIntent().getExtras();
         String puntos=parametros.getString(CalificacionDetailFragment.PUNTOS);
         String motivo=parametros.getString(CalificacionDetailFragment.MOTIVO);
+        this.ID =parametros.getInt(CalificacionDetailFragment.ID);
+
         TextView puntosAEditar=(TextView) findViewById(R.id.puntosAEditar);
         TextView detalleAEditar=(TextView) findViewById(R.id.detalleAEditar);
         puntosAEditar.setText(puntos);
@@ -72,6 +74,7 @@ public class EditarCalificacionActivity extends AppCompatActivity {
         intent.putExtra(CalificacionDetailFragment.NOMBRE,this.evaluado.getNombre());
         intent.putExtra(CalificacionDetailFragment.MOTIVO,this.detalle);
         intent.putExtra(CalificacionDetailFragment.PUNTOS,this.puntos);
+        intent.putExtra(CalificacionDetailFragment.ID,this.ID);
 
 
         startActivity(intent);
