@@ -83,14 +83,16 @@ public class CrearCalificacionActivity extends AppCompatActivity {
         PuntuablesBasico evaluado= devolverEvaluado(nombreEvaluado.getText().toString());
         nuevaCalificacion.setEvaluado(evaluado);
 
+
         EditText puntosText= (EditText)findViewById(R.id.puntos);
-        nuevaCalificacion.setPuntos(puntosText.getInputType());
+        String puntos= puntosText.getText().toString();
+        nuevaCalificacion.setPuntos(puntos);
 
         EditText motivoText=(EditText) findViewById(R.id.detalle);
-        nuevaCalificacion.setDetalle(motivoText.getText().toString());
+        String motivo=motivoText.getText().toString();
+        nuevaCalificacion.setDetalle(motivo);
 
-        nuevaCalificacion.setUsuario((getIdUsuario()));
-
+        nuevaCalificacion.setUsuario(getIdUsuario());
         enviarCalificacion(nuevaCalificacion);
 
     }
@@ -100,7 +102,7 @@ public class CrearCalificacionActivity extends AppCompatActivity {
 
             @Override
             public void success(Response respuesta, Response response) {
-               // Toast.makeText(getBaseContext(),"La calificacion fue agregada",Toast.LENGTH_SHORT);
+                finish();
 
             }
 

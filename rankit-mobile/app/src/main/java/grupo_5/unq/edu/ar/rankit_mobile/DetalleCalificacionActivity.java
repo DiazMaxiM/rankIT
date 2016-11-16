@@ -12,6 +12,7 @@ public class DetalleCalificacionActivity extends AppCompatActivity {
     String nombre;
     String puntos;
     String motivo;
+    int idCalificacion;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class DetalleCalificacionActivity extends AppCompatActivity {
 
         public void editarCalificacion(View view){
             Intent intent=new Intent(this,EditarCalificacionActivity.class);
+            intent.putExtra("id",idCalificacion);
             intent.putExtra("puntos",puntos);
             intent.putExtra("motivo",motivo);
             startActivity(intent);

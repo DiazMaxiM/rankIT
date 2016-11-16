@@ -28,6 +28,8 @@ import model.Calificacion;
  */
 public class CalificacionListActivity extends FragmentActivity
         implements CalificacionListFragment.Callbacks {
+
+
     Integer idUsuario;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -61,7 +63,10 @@ public class CalificacionListActivity extends FragmentActivity
 
     }
 
-    @Override
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+        @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_opciones,menu);
         return  true;
@@ -81,7 +86,7 @@ public class CalificacionListActivity extends FragmentActivity
             CalificacionDetailFragment fragment = new CalificacionDetailFragment();
             fragment.setArguments(arguments);
             arguments.putString(CalificacionDetailFragment.MOTIVO, calificacion.getDetalle());
-            arguments.putInt(CalificacionDetailFragment.PUNTOS, calificacion.getPuntos());
+            arguments.putString(CalificacionDetailFragment.PUNTOS, calificacion.getPuntos());
             arguments.putInt(CalificacionDetailFragment.ID, calificacion.getId());
             arguments.putString(CalificacionDetailFragment.NOMBRE, calificacion.getEvaluado().getNombre());
             getSupportFragmentManager().beginTransaction()
@@ -101,7 +106,7 @@ public class CalificacionListActivity extends FragmentActivity
     }
 
     public void crearNuevaCalificacion(){
-        FloatingActionButton botonCrearCalificacion=(FloatingActionButton) findViewById(R.id.ccc);
+        FloatingActionButton botonCrearCalificacion=(FloatingActionButton) findViewById(R.id.nuevaCalificacion);
         botonCrearCalificacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +118,7 @@ public class CalificacionListActivity extends FragmentActivity
 
     public void nuevaCalificacion(){
         Intent intent=new Intent(this,CrearCalificacionActivity.class);
-        intent.putExtra("idUsuario",idUsuario);
+        intent.putExtra(CalificacionDetailFragment.ID,getIdUsuario());
         startActivity(intent);
     }
 }

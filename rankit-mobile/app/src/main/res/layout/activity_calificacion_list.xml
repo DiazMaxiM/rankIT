@@ -20,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="buscar...."
+            android:hint="buscar...."
+            android:textColorHint="@color/colorAccent"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:id="@+id/nombreBuscado" />
@@ -34,7 +35,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ccc"
+        android:id="@+id/nuevaCalificacion"
         android:layout_width="117dp"
         app:srcCompat="@android:drawable/ic_input_add"
         android:layout_gravity="bottom|right"

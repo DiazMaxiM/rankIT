@@ -1,9 +1,11 @@
 package grupo_5.unq.edu.ar.rankit_mobile;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,17 +19,20 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class EditarCalificacionActivity extends AppCompatActivity {
+    String puntos;
+    String detalle;
+    PuntuablesBasico evaluado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_calificacion);;
         Bundle parametros= getIntent().getExtras();
-        Integer puntos=parametros.getInt(CalificacionDetailFragment.PUNTOS);
+        String puntos=parametros.getString(CalificacionDetailFragment.PUNTOS);
         String motivo=parametros.getString(CalificacionDetailFragment.MOTIVO);
         TextView puntosAEditar=(TextView) findViewById(R.id.puntosAEditar);
         TextView detalleAEditar=(TextView) findViewById(R.id.detalleAEditar);
-        puntosAEditar.setText(puntos.toString());
+        puntosAEditar.setText(puntos);
         detalleAEditar.setText(motivo);
     }
     public  void guardarCalificacionModificada(View view){
@@ -39,18 +44,19 @@ public class EditarCalificacionActivity extends AppCompatActivity {
 
         Bundle parametros=getIntent().getExtras();
         calificacionEditada.setId(parametros.getInt(CalificacionDetailFragment.ID));
-        String puntos =  puntosAEditar.getText().toString();
+        this.puntos =  puntosAEditar.getText().toString();
 
-        calificacionEditada.setPuntos(new Integer(puntos));
-        calificacionEditada.setDetalle(detalleAEditar.getText().toString());
-        PuntuablesBasico evaluado = new PuntuablesBasico();
-        evaluado.setNombre(parametros.getString(CalificacionDetailFragment.NOMBRE));
-        calificacionEditada.setEvaluado(evaluado);
+        calificacionEditada.setPuntos(this.puntos);
+        this.detalle=detalleAEditar.getText().toString();
+        calificacionEditada.setDetalle(this.detalle);
+        this.evaluado = new PuntuablesBasico();
+        this.evaluado.setNombre(parametros.getString(CalificacionDetailFragment.NOMBRE));
+        calificacionEditada.setEvaluado(this.evaluado);
 
         new IServiceFactory().getServiceFactoryFor(CalificacionService.class).updateCalificacion(calificacionEditada,new Callback<Response>() {
             @Override
             public void success(Response calificaciones, Response response) {
-                finish();
+                volverALaPantallaDetalleCalificacion();
             }
 
             @Override
@@ -61,4 +67,13 @@ public class EditarCalificacionActivity extends AppCompatActivity {
         });
     }
 
+    public void volverALaPantallaDetalleCalificacion(){
+        Intent intent = new Intent(this, CalificacionDetailActivity.class);
+        intent.putExtra(CalificacionDetailFragment.NOMBRE,this.evaluado.getNombre());
+        intent.putExtra(CalificacionDetailFragment.MOTIVO,this.detalle);
+        intent.putExtra(CalificacionDetailFragment.PUNTOS,this.puntos);
+
+
+        startActivity(intent);
+    }
 }

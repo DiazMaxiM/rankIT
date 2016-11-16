@@ -108,7 +108,7 @@ class RankITController {
 	protected def Calificacion getCalificacionFromJSON(String body) {
 		var JsonObject object = Json.parse(body).asObject();
 		var String evaluado = object.get("evaluado").toString;
-		var String puntos = object.get("puntos").toString;
+		var String puntos = object.get("puntos").asString;
 		var String detalle = object.get("detalle").asString;
 		var String usuario=object.get("usuario").toString;
 		var Usuario usuarioLogeado=rankit.admUsuarios.usuarioConElID(usuario);
@@ -147,7 +147,7 @@ class RankITController {
 	protected def Calificacion getCalificacionActualizadaFromJSON(String body) {
 		var JsonObject object = Json.parse(body).asObject();
 		var String evaluado = object.get("evaluado").toString
-		var String puntos = object.get("puntos").toString;
+		var String puntos = object.get("puntos").asString;
 		var String detalle = object.get("detalle").asString;
 		var String id = object.get("id").toString
 		var PuntuablesBasicos puntuable = new Gson().fromJson(evaluado, typeof(PuntuablesBasicos));

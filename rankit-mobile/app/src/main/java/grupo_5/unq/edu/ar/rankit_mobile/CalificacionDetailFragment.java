@@ -42,7 +42,7 @@ public class CalificacionDetailFragment extends Fragment {
         calificacionSeleccionada = new Calificacion();
         calificacionSeleccionada.setId(parametros.getInt(ID));
         calificacionSeleccionada.setDetalle(parametros.getString(MOTIVO));
-        calificacionSeleccionada.setPuntos(parametros.getInt(PUNTOS));
+        calificacionSeleccionada.setPuntos(parametros.getString(PUNTOS));
         calificacionSeleccionada.setEvaluado(new PuntuablesBasico());
         calificacionSeleccionada.getEvaluado().setNombre(parametros.getString(NOMBRE));
 
