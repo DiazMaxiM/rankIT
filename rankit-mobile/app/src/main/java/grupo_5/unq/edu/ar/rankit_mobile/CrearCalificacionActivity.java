@@ -1,6 +1,7 @@
 package grupo_5.unq.edu.ar.rankit_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,14 +31,28 @@ public class CrearCalificacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_calificacion);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle parametros= getIntent().getExtras();
         if (null != parametros){
-            idUsuario=parametros.getInt(CalificacionDetailFragment.ID);
+            idUsuario=parametros.getInt(CalificacionDetailFragment.IDUSUARIO);
         }
         //pide los puntuables basicos al servidor
         this.obtenerEvaluados();
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        irALaPantallaCalificacionesDelUsuario();
+        return false;
+    }
+
+    private void irALaPantallaCalificacionesDelUsuario() {
+        Intent intent = new Intent(this, CalificacionListActivity.class);
+        intent.putExtra(CalificacionDetailFragment.IDUSUARIO,getIdUsuario());
+        startActivity(intent);
+    }
+
     public Integer getIdUsuario() {
         return idUsuario;
     }

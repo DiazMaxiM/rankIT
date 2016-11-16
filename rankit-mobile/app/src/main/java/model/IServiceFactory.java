@@ -13,7 +13,7 @@ public class IServiceFactory {
 
     public <T> T getServiceFactoryFor(Class<T> clases){
 
-        String SERVER_IP_GENY = "10.12.0.88";
+        String SERVER_IP_GENY = "192.168.166.1";
         String API_URL = "http://"+ SERVER_IP_GENY +":9001";
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();

@@ -20,9 +20,9 @@ public class CalificacionAdapter extends AbstractListAdapter<Calificacion> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Calificacion libro = (Calificacion) getItem(position);
+        Calificacion calificacion = (Calificacion) getItem(position);
         View row = generateRow(R.layout.calificacion_row, parent);
-        setColumnTextView(row, R.id.nombreCalificado, libro.getEvaluado().getNombre());
+        setColumnTextView(row, R.id.nombreCalificado, calificacion.getEvaluado().getNombre());
 
         return row;
     }

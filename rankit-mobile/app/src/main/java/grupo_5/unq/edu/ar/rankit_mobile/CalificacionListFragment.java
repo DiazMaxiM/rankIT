@@ -98,7 +98,7 @@ public class CalificacionListFragment extends ListFragment{
         super.onResume();
         Bundle parametros=this.getActivity().getIntent().getExtras();
         if (null != parametros){
-            idUsuario=parametros.getInt(CalificacionDetailFragment.ID);
+            idUsuario=parametros.getInt(CalificacionDetailFragment.IDUSUARIO);
         }
 
         obtenerCalificaciones(idUsuario);

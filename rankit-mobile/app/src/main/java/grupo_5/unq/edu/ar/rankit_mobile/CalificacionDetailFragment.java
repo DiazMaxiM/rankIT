@@ -23,6 +23,7 @@ public class CalificacionDetailFragment extends Fragment {
      */
     public Calificacion calificacionSeleccionada;
     public static final String ID = "id";
+    public static final String IDUSUARIO = "idUsuario";
     public static final String PUNTOS = "puntos";
     public static final String MOTIVO = "motivo";
     public static final String NOMBRE = "nombre";

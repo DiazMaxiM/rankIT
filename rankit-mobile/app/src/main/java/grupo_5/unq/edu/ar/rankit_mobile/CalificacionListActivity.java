@@ -44,7 +44,7 @@ public class CalificacionListActivity extends FragmentActivity
         this.crearNuevaCalificacion();
         Bundle parametros= getIntent().getExtras();
         if (null != parametros){
-            idUsuario=parametros.getInt(CalificacionDetailFragment.ID);
+            idUsuario=parametros.getInt(CalificacionDetailFragment.IDUSUARIO);
         }
 
         if (findViewById(R.id.calificacion_detail_container) != null) {
@@ -85,6 +85,7 @@ public class CalificacionListActivity extends FragmentActivity
             Bundle arguments = new Bundle();
             CalificacionDetailFragment fragment = new CalificacionDetailFragment();
             fragment.setArguments(arguments);
+            arguments.putInt(CalificacionDetailFragment.IDUSUARIO,idUsuario);
             arguments.putString(CalificacionDetailFragment.MOTIVO, calificacion.getDetalle());
             arguments.putString(CalificacionDetailFragment.PUNTOS, calificacion.getPuntos());
             arguments.putInt(CalificacionDetailFragment.ID, calificacion.getId());
@@ -97,6 +98,7 @@ public class CalificacionListActivity extends FragmentActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, CalificacionDetailActivity.class);
+            detailIntent.putExtra(CalificacionDetailFragment.IDUSUARIO,idUsuario);
             detailIntent.putExtra(CalificacionDetailFragment.NOMBRE, calificacion.getEvaluado().getNombre());
             detailIntent.putExtra(CalificacionDetailFragment.ID, calificacion.getId());
             detailIntent.putExtra(CalificacionDetailFragment.PUNTOS, calificacion.getPuntos());
@@ -118,7 +120,7 @@ public class CalificacionListActivity extends FragmentActivity
 
     public void nuevaCalificacion(){
         Intent intent=new Intent(this,CrearCalificacionActivity.class);
-        intent.putExtra(CalificacionDetailFragment.ID,getIdUsuario());
+        intent.putExtra(CalificacionDetailFragment.IDUSUARIO,getIdUsuario());
         startActivity(intent);
     }
 }

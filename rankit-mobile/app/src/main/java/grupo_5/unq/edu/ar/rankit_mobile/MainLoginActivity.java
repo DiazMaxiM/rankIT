@@ -90,7 +90,7 @@ public class MainLoginActivity extends Activity {
 
     private void pantallaCalificacionDelUsuario(Usuario usuarioLogeado) {
         Intent intent = new Intent(this, CalificacionListActivity.class);
-        intent.putExtra(CalificacionDetailFragment.ID, usuarioLogeado.getId());
+        intent.putExtra(CalificacionDetailFragment.IDUSUARIO, usuarioLogeado.getId());
         startActivity(intent);
     }
 

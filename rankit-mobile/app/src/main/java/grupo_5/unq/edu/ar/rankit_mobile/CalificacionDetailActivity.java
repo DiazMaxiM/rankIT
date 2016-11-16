@@ -27,19 +27,17 @@ import retrofit.client.Response;
  */
 public class CalificacionDetailActivity extends AppCompatActivity {
 
-
+    Integer idUsuario;
     CalificacionDetailFragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calificacion_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Bundle parametros= getIntent().getExtras();
+        if (null != parametros){
+            idUsuario=parametros.getInt(CalificacionDetailFragment.IDUSUARIO);
         }
-
 
 
         if (savedInstanceState == null) {
@@ -56,6 +54,18 @@ public class CalificacionDetailActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp(){
+        irALaPantallaCalificacionesDelUsuario();
+        return false;
+    }
+
+    private void irALaPantallaCalificacionesDelUsuario() {
+        Intent intent = new Intent(this, CalificacionListActivity.class);
+        intent.putExtra(CalificacionDetailFragment.IDUSUARIO,this.idUsuario);
+        startActivity(intent);
+    }
+
 
 
     @Override
@@ -68,7 +78,7 @@ public class CalificacionDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.home:
-                NavUtils.navigateUpTo(this, new Intent(this, CalificacionListActivity.class));
+                //NavUtils.navigateUpTo(this, new Intent(this, CalificacionListActivity.class));
                 break;
             case R.id.editarCalificacion:
                 this.editarCalificacionSeleccionada();
@@ -100,10 +110,12 @@ public class CalificacionDetailActivity extends AppCompatActivity {
 
     }
 
+
     public void editarCalificacionSeleccionada(){
 
 
         Intent detailIntent = new Intent(this, EditarCalificacionActivity.class);
+        detailIntent.putExtra(CalificacionDetailFragment.IDUSUARIO,idUsuario);
         detailIntent.putExtra(CalificacionDetailFragment.NOMBRE, fragment.calificacionSeleccionada.getEvaluado().getNombre());
         detailIntent.putExtra(CalificacionDetailFragment.ID, fragment.calificacionSeleccionada.getId());
         detailIntent.putExtra(CalificacionDetailFragment.PUNTOS, fragment.calificacionSeleccionada.getPuntos());

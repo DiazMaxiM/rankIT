@@ -22,16 +22,18 @@ public class EditarCalificacionActivity extends AppCompatActivity {
     String puntos;
     String detalle;
     PuntuablesBasico evaluado;
-int ID;
+    int idUsuario;
+    int ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_calificacion);;
+        setContentView(R.layout.activity_editar_calificacion);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle parametros= getIntent().getExtras();
         String puntos=parametros.getString(CalificacionDetailFragment.PUNTOS);
         String motivo=parametros.getString(CalificacionDetailFragment.MOTIVO);
         this.ID =parametros.getInt(CalificacionDetailFragment.ID);
-
+        this.idUsuario=parametros.getInt(CalificacionDetailFragment.IDUSUARIO);
         TextView puntosAEditar=(TextView) findViewById(R.id.puntosAEditar);
         TextView detalleAEditar=(TextView) findViewById(R.id.detalleAEditar);
         puntosAEditar.setText(puntos);
@@ -58,7 +60,8 @@ int ID;
         new IServiceFactory().getServiceFactoryFor(CalificacionService.class).updateCalificacion(calificacionEditada,new Callback<Response>() {
             @Override
             public void success(Response calificaciones, Response response) {
-                volverALaPantallaDetalleCalificacion();
+                //volverALaPantallaDetalleCalificacion();
+                irALaPantallaCalificacionesDelUsuario();
             }
 
             @Override
@@ -67,6 +70,19 @@ int ID;
 
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        // irALaPantallaCalificacionesDelUsuario();
+        finish();
+        return false;
+    }
+
+    private void irALaPantallaCalificacionesDelUsuario() {
+        Intent intent = new Intent(this, CalificacionListActivity.class);
+        intent.putExtra(CalificacionDetailFragment.IDUSUARIO,idUsuario);
+        startActivity(intent);
     }
 
     public void volverALaPantallaDetalleCalificacion(){

@@ -24,14 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalificacionListActivity" />
-        <activity
-            android:name=".CalificacionDetailActivity"
-            android:parentActivityName=".CalificacionListActivity" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".CalificacionListActivity" />
-        />
+        <activity android:name=".CalificacionDetailActivity"/>
         <activity android:name=".EditarCalificacionActivity" />
         <activity android:name=".CrearCalificacionActivity"></activity>
     </application>

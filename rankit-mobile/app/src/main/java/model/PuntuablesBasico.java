@@ -7,9 +7,9 @@ package model;
 public class PuntuablesBasico {
     int id;
     String nombre;
-    TipoDePuntuable tipo;
+     String tipo;
 
-    public PuntuablesBasico(String nombre, TipoDePuntuable tipo) {
+    public PuntuablesBasico(String nombre, String tipo) {
         this.nombre = nombre;
         this.tipo=tipo;
     }
@@ -31,11 +31,11 @@ public class PuntuablesBasico {
         this.nombre = nombre;
     }
 
-    public TipoDePuntuable getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoDePuntuable tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }
